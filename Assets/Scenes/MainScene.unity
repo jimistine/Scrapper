@@ -216,7 +216,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1106422486}
   - component: {fileID: 1106422487}
+  - component: {fileID: 1106422490}
   - component: {fileID: 1106422488}
+  - component: {fileID: 1106422489}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -250,11 +252,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72cf3e5fa3a27df4cadda562c72350b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPos: {x: 0, y: 0, z: 0}
   pointClicked: {x: 0, y: 0, z: 0}
-  speed: 0.05
+  speed: 0.005
+  currentSpeed: 0
   startTime: 0
-  journeyLength: 0
+  journeyLength: 0.01
   fractionOfJourney: 0
+  distanceToEnd: 0
   lerpTime: 1
   currentLerpTime: 0
   isMoving: 0
@@ -309,6 +314,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &1106422489
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106422485}
+  m_BodyType: 1
+  m_Simulated: 0
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &1106422490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106422485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d5c1ccd2a3c1946a603b393082df39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  click_To_Move: {fileID: 1106422487}
+  currentSpeed: 0
+  currentFuelLevel: 1000
+  fuelEfficiency: 0.5
 --- !u!1 &1479074963
 GameObject:
   m_ObjectHideFlags: 0
