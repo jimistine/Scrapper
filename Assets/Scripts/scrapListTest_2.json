@@ -1,0 +1,47 @@
+{
+  "allScrap":
+  [
+    {
+      "scrapName": "Cordona Land Speeder",
+      "description": "Fastest on Talacan",
+      "image": 1,
+      "size": 10,
+      "value": 100000,
+      "material": "Cordonite",
+      "zoneA_rarity": 0,
+      "zoneB_rarity": 0,
+      "zoneC_rarity": 8,
+      "zoneD_rarity": 10,
+      "carriesComponents": true,
+      "isBuried": true
+    },
+    {
+      "scrapName": "Paranti Ecco Drone",
+      "description": "Big ears",
+      "image": 23,
+      "size": 2,
+      "value": 10000,
+      "material": "Titanium",
+      "zoneA_rarity": 5,
+      "zoneB_rarity": 5,
+      "zoneC_rarity": 5,
+      "zoneD_rarity": 5,
+      "carriesComponents": false,
+      "isBuried": false
+    },
+    {
+      "scrapName": "Frustrum Gargantuan 36D",
+      "description": "How is this even possible?",
+      "image": 36,
+      "size": 10000,
+      "value": 500000,
+      "material": "Titanium",
+      "zoneA_rarity": 0,
+      "zoneB_rarity": 5,
+      "zoneC_rarity": 7,
+      "zoneD_rarity": 8.5,
+      "carriesComponents": true,
+      "isBuried": false
+    }
+  ]
+}
