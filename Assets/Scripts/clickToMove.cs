@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class click_to_move : MonoBehaviour
+public class clickToMove : MonoBehaviour
 {
 
 public Vector3 startPos;

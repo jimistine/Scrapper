@@ -5,7 +5,7 @@ using UnityEngine;
 public class fuel : MonoBehaviour
 {
 
-public click_to_move click_To_Move;
+public clickToMove ClickToMove;
 
 public float currentSpeed;
 public float currentFuelLevel;
@@ -18,10 +18,10 @@ public float fuelEfficiency;
 
     void Update()
     {
-        currentSpeed = click_To_Move.currentSpeed;
+        currentSpeed = ClickToMove.currentSpeed;
         float fuelLossRate = fuelEfficiency * currentSpeed;
 
-        if(click_To_Move.isMoving && float.IsNaN(fuelLossRate) == false){
+        if(ClickToMove.isMoving && float.IsNaN(fuelLossRate) == false){
             currentFuelLevel -= fuelLossRate * .01f;
         }
     }
