@@ -6,11 +6,15 @@ using UnityEngine;
 public class scrapPlacer : MonoBehaviour
 {
 
-   
+   public ScrapObject[] spawnedScrap;
+   public JsonReader JsonReader;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach (Scrap scrap in JsonReader.scrapInJson.allScrap){
+            Debug.Log("Found scrap: " + scrap.scrapName + ". With description: " + scrap.description);
+        }
         
         
     }

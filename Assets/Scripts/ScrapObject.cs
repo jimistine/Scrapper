@@ -1,6 +1,8 @@
-﻿
-[System.Serializable]
-public class Scrap
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ScrapObject : MonoBehaviour
 {
     public string scrapName;
     public string description;
