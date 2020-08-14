@@ -12,10 +12,9 @@ public class JsonReader : MonoBehaviour
     {
        scrapInJson = JsonUtility.FromJson<AllScrap>(jsonFile.text);
 
-
-        foreach (Scrap scrap in scrapInJson.allScrap){
-            Debug.Log("Found scrap: " + scrap.scrapName + ". With description: " + scrap.description);
-        }
+        // foreach (Scrap scrap in scrapInJson.allScrap){
+        //     Debug.Log("Found scrap: " + scrap.scrapName + ". With description: " + scrap.description);
+        //}
     }
 
 }
