@@ -237,7 +237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &689344895
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -301,7 +301,7 @@ Transform:
   m_LocalScale: {x: 0.6876008, y: 0.6876008, z: 0.6876008}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1005310149
 GameObject:
@@ -313,6 +313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1005310150}
   - component: {fileID: 1005310151}
+  - component: {fileID: 1005310152}
   m_Layer: 0
   m_Name: Scrap Placer
   m_TagString: Untagged
@@ -347,6 +348,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jsonFile: {fileID: 4900000, guid: bb15fb0a768f45c47b97af17e791f59c, type: 3}
+  scrapInJson:
+    allScrap: []
+--- !u!114 &1005310152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005310149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8249c484dfb4d264cbc5ebcdb9c97b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JsonReader: {fileID: 1005310151}
+  spawning: 1
+  placing: 1
+  sampleScrap: {fileID: 5283757986021271520, guid: 563599bed92065c458ee03a298bfbefd, type: 3}
+  totalSpawnableScrap: 10
+  minDistance: 0.25
 --- !u!1 &1106422485
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +571,7 @@ Transform:
   m_LocalScale: {x: 0.795237, y: 0.795237, z: 0.795237}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2017435982
 GameObject:
@@ -632,5 +653,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
