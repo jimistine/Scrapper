@@ -5,11 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public class PlayerMaster : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
 
     public fuel Fuel;
     public clickToMove ClickToMove;
+    public UIManager UIManager;
 
     public float currentSpeed;
     public float fuelLevel;
@@ -39,8 +40,9 @@ public class PlayerMaster : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         if(other.tag == "Scrap"){
             ScrapObject newScrap = other.GetComponent<ScrapObject>();
+            UIManager.ShowScrap(newScrap);
             Debug.Log("Found: " + newScrap.scrapName);
-            other.GetComponent<SpriteRenderer>().enabled = true;
+            //other.GetComponent<SpriteRenderer>().enabled = true;
             playerScrap.Add(newScrap);
             currentHaul += newScrap.size;
             haulText.text = "Current Haul: " + currentHaul.ToString() + " m<sup>3</sup>";
