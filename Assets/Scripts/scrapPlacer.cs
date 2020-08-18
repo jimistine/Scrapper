@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 [System.Serializable]
 
 public class scrapPlacer : MonoBehaviour
@@ -14,6 +15,7 @@ public class scrapPlacer : MonoBehaviour
     [x] spawn multiples of each scrap to cover all of map
     [x] pick a random piece of scrap to spawn each time we instantiate
     [] spawn based on seed and rarity
+    [] move all that mess in start to a function
     [] distribute according to zone rarity
     [] don't place scrap anywhere the player can't get to
     */
@@ -30,29 +32,30 @@ public class scrapPlacer : MonoBehaviour
    int counter = 0;
    float totalSpawningWeight;
    float randomScrapPick;
+   Scrap incomingScrap;
 
     // Start is called before the first frame update
     void Start()
     {
+        SpawnAllScrap();
+        
+    }
+
+    void SpawnAllScrap(){
         for(int j = 0; j < totalSpawnableScrap; j++){
-            // pick a random number within the total number of scrap in our list
-            // ** This is where we look at all their weights first and then picked based on that
-            //    Or do we want to bring all the scrap in as GameObjects first before we do any of this?
+            // find the highest weight of all scrap, that is, the most common
+            int maxWeight = JsonReader.scrapInJson.allScrap.Max(x => x.zoneD_rarity);
+            // pick a number somwhere inbetween that max and 0
+            randomScrapPick = Random.Range(0, maxWeight);
+            // iterate through all the scrap in our list and pick the first one that's weighted higher than 
+            //   our random value and exit the loop.
             foreach(Scrap scrap in JsonReader.scrapInJson.allScrap){
-                totalSpawningWeight += scrap.zoneD_rarity;
+                if(scrap.zoneD_rarity > randomScrapPick){
+                    incomingScrap = scrap;
+                    Debug.Log("Incoming Scrap: " + incomingScrap.scrapName);
+                    break;
+                }
             }
-
-            randomScrapPick = Random.Range(0, Mathf.Max(JsonReader.scrapInJson.allScrap.zoneD_rarity));
-
-            foreach(Scrap scrap in JsonReader.scrapInJson.allScrap){
-
-            }
-
-
-
-            int scrapToPick = Random.Range(0, JsonReader.scrapInJson.allScrap.Length);
-            // grab the scrap at that position 
-            Scrap incomingScrap = JsonReader.scrapInJson.allScrap[scrapToPick];
             // transfer that sweet sweet data to prefab
             sampleScrap.GetComponent<ScrapObject>().scrapName = incomingScrap.scrapName;
             sampleScrap.GetComponent<ScrapObject>().description = incomingScrap.description;
@@ -66,7 +69,6 @@ public class scrapPlacer : MonoBehaviour
             sampleScrap.GetComponent<ScrapObject>().zoneD_rarity = incomingScrap.zoneD_rarity;
             sampleScrap.GetComponent<ScrapObject>().carriesComponents = incomingScrap.carriesComponents;
             sampleScrap.GetComponent<ScrapObject>().isBuried = incomingScrap.isBuried;
-
             // generate a position within the bounds of the map
             Vector3 position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), 0);
             // get location of everything with tag scrap

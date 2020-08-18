@@ -10,8 +10,8 @@
       "material": "Cordonite",
       "zoneA_rarity": 0,
       "zoneB_rarity": 0,
-      "zoneC_rarity": 8,
-      "zoneD_rarity": 10,
+      "zoneC_rarity": 1,
+      "zoneD_rarity": 2,
       "carriesComponents": true,
       "isBuried": true
     },
@@ -39,7 +39,7 @@
       "zoneA_rarity": 0,
       "zoneB_rarity": 5,
       "zoneC_rarity": 7,
-      "zoneD_rarity": 8.5,
+      "zoneD_rarity": 10,
       "carriesComponents": true,
       "isBuried": false
     }

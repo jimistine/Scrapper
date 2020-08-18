@@ -21,7 +21,6 @@ If weighting values are used, the Random.Range function would be from 1 to the s
   weighted values.(?)
 */
     // Start is called before the first frame update
-
     public int[] items = {0,1,5,10,20};
     public int total;
     public int max;
@@ -42,11 +41,7 @@ If weighting values are used, the Random.Range function would be from 1 to the s
     }
 
     public void PickItem(){
-        // add up the total of all weights
-        foreach(int itemWeight in items){
-            total =+ itemWeight;
-        }
-
+        
         // pick a random number between 0 and the highest weight
         randomPick = Random.Range(0, Mathf.Max(items));
 

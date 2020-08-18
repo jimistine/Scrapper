@@ -17,48 +17,45 @@ public float distanceToEnd;
 
 public float lerpTime = 1f;
 public float currentLerpTime;
+    float distCovered;
 
 public bool isMoving;
 
     // Start is called before the first frame update
     void Start()
     {       
-        
+        currentSpeed = speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         if (Input.GetMouseButtonDown(0)){
-            //Debug.Log("clicked");
             startPos = transform.position;
             startTime = Time.time;
-            isMoving = true;
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = Camera.main.nearClipPlane;
             pointClicked = Camera.main.ScreenToWorldPoint(mousePos);
-            //Debug.Log("Point Clicked: " + pointClicked);
             journeyLength = Vector3.Distance(transform.position, pointClicked);
-
         }
-
     //Classic Lerp
-        float distCovered = (Time.time - startTime) * speed;
+        distCovered = (Time.time - startTime) * speed;
         fractionOfJourney = distCovered / journeyLength;
         transform.position = Vector3.Lerp(transform.position, pointClicked, fractionOfJourney);
+        isMoving = true;
 
         currentSpeed = Vector3.Distance(startPos, transform.position) / (Time.time - startTime);
-        
-        
-
-
         distanceToEnd = Vector3.Distance(transform.position, pointClicked);
+
         if(distanceToEnd < .1f){
             // Debug.Log(Vector3.Distance(transform.position, pointClicked));
             isMoving = false;
         }
+
+       
             
+
+
     //Easeing
             // if (Input.GetMouseButtonDown(0)) {
             //     currentLerpTime = 0f;
@@ -80,8 +77,6 @@ public bool isMoving;
             //transform.position = Vector3.Lerp(transform.position, pointClicked, t);
 
     // Constant Speed
-            //transform.position = Vector3.MoveTowards(transform.position, pointClicked, Time.deltaTime * speed); 
-
-    
+        //transform.position = Vector3.MoveTowards(transform.position, pointClicked, Time.deltaTime * speed); 
     }
 }
