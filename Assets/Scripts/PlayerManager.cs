@@ -20,8 +20,6 @@ public class PlayerManager : MonoBehaviour
     public float maxHaul;
     public float playerCredits;
     public List<ScrapObject> playerScrap = new List<ScrapObject>();
-    public TextMeshProUGUI haulText;
-
 
 
     // Start is called before the first frame update
@@ -33,20 +31,42 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Keeping an eye on fuel and speed
         fuelLevel = Fuel.currentFuelLevel;
         currentSpeed = ClickToMove.currentSpeed;
+
+        // INTERACTIONS
+        if (Input.GetMouseButtonDown(0)) {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+
+            // If player clicked something, and that something was scrap, show the readout panel
+            if(hit.collider != null){
+                if (hit.collider.tag == "Scrap") {
+                    ScrapObject newScrap = hit.collider.GetComponent<ScrapObject>();
+                    Debug.Log(hit.collider.gameObject.name);
+                    UIManager.ShowReadout(newScrap);
+                }
+            }    
+        }
     }
 
+    // Pop goes the scrap!
     void OnTriggerEnter2D(Collider2D other){
         if(other.tag == "Scrap"){
             ScrapObject newScrap = other.GetComponent<ScrapObject>();
+            Debug.Log("Player found: " + newScrap.scrapName);
+            
             UIManager.ShowScrap(newScrap);
-            Debug.Log("Found: " + newScrap.scrapName);
-            //other.GetComponent<SpriteRenderer>().enabled = true;
-            playerScrap.Add(newScrap);
-            currentHaul += newScrap.size;
-            haulText.text = "Current Haul: " + currentHaul.ToString() + " m<sup>3</sup>";
-            Destroy(newScrap.gameObject);
         }
+    }
+
+    public ScrapObject TakeScrap(ScrapObject newScrap){
+        playerScrap.Add(newScrap);
+        currentHaul += newScrap.size;
+        Destroy(newScrap.gameObject);
+        
+        return newScrap;
     }
 }

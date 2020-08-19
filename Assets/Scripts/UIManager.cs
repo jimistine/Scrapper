@@ -24,10 +24,14 @@ public class UIManager : MonoBehaviour
 
 
     public ScrapObject ShowScrap(ScrapObject newScrap){
-        Debug.Log("Found: " + newScrap.scrapName);
+        Debug.Log("Showing: " + newScrap.scrapName);
         newScrap.GetComponent<SpriteRenderer>().enabled = true;
         haulText.text = "Current Haul: " + PlayerManager.currentHaul.ToString() + " m<sup>3</sup>";
         Destroy(newScrap.gameObject);
+        return newScrap;
+    }
+
+    public ScrapObject ShowReadout(ScrapObject newScrap){
         return newScrap;
     }
     
