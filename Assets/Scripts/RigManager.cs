@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class RigManager : MonoBehaviour
 {
+
+    /*
+        What might belong to the Rig?
+        - Search radius
+        - Speed
+        - Fuel
+        - Health
+    */
+
     // Start is called before the first frame update
     void Start()
     {

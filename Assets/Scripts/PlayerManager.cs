@@ -41,31 +41,30 @@ public class PlayerManager : MonoBehaviour
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
             RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
 
-            // If player clicked something, and that something was scrap, show the readout panel
+            // 2. If player clicked something, and that something was scrap, show the readout panel
             if(hit.collider != null){
                 if (hit.collider.tag == "Scrap") {
                     ScrapObject newScrap = hit.collider.GetComponent<ScrapObject>();
-                    Debug.Log(hit.collider.gameObject.name);
+                    Debug.Log("Player clicked: " + hit.collider.gameObject.name);
                     UIManager.ShowReadout(newScrap);
                 }
             }    
         }
     }
 
-    // Pop goes the scrap!
+    // 1. Pop goes the scrap!
     void OnTriggerEnter2D(Collider2D other){
         if(other.tag == "Scrap"){
             ScrapObject newScrap = other.GetComponent<ScrapObject>();
-            Debug.Log("Player found: " + newScrap.scrapName);
             
             UIManager.ShowScrap(newScrap);
         }
     }
-
+    // 3. If they clicked Take, take it
     public ScrapObject TakeScrap(ScrapObject newScrap){
         playerScrap.Add(newScrap);
         currentHaul += newScrap.size;
-        Destroy(newScrap.gameObject);
+        //Destroy(newScrap.gameObject);
         
         return newScrap;
     }

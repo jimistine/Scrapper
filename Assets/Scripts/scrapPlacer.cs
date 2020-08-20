@@ -15,7 +15,8 @@ public class scrapPlacer : MonoBehaviour
     [x] spawn multiples of each scrap to cover all of map
     [x] pick a random piece of scrap to spawn each time we instantiate
     [x] move all that mess in start to a function
-    [] spawn based on seed and rarity
+    [x] spawn based on rarity
+    [] spawn based on seed
     [] distribute according to zone rarity
     [] don't place scrap anywhere the player can't get to
     */
@@ -71,10 +72,10 @@ public class scrapPlacer : MonoBehaviour
             Vector3 position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), 0);
             // get location of everything with tag scrap
             GameObject[] spawnedScrap = GameObject.FindGameObjectsWithTag("Scrap");
-            // if distance between position and any other piece is < minimum distance, generate a new position
+            // if distance between position and any other scrap or obstacle is < minimum distance, generate a new position
                 for(int i = 0; i < spawnedScrap.Length; i++){
                     if(Vector3.Distance(position, spawnedScrap[i].transform.position) <= minDistance){
-                        position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), 0);
+                        position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), -5f);
                         i = 0;
                     }   
                 }
