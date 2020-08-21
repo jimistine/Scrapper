@@ -19,6 +19,9 @@ public float lerpTime = 1f;
 public float currentLerpTime;
 float distCovered;
 
+[Range(0.0f, 0.1f)]
+public float outOfFuelSlowRate;
+
 public bool isMoving;
 
     // Start is called before the first frame update
@@ -32,13 +35,13 @@ public bool isMoving;
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)){
-           
+        if (Input.GetMouseButtonDown(0)){           
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
             RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
 
             if(hit.collider != null){
+                // if they clicked on something navigable, let em go!
                 if(hit.collider.tag == "Terrain"){
                     Debug.Log("Clicked: " + hit.collider.transform.name);
                     startPos = transform.position;
@@ -58,7 +61,7 @@ public bool isMoving;
         while(isMoving){
             distCovered = (Time.time - startTime) * speed;
             fractionOfJourney = distCovered / journeyLength;
-
+            // move is here
             transform.position = Vector3.Lerp(transform.position, pointClicked, fractionOfJourney);
 
             currentSpeed = Vector3.Distance(startPos, transform.position) / (Time.time - startTime);
@@ -68,6 +71,18 @@ public bool isMoving;
             }
             yield return null;
         }
+    }
+
+    public IEnumerator OutOfFuel(){
+        // once they run out, slow them down for ~drama~
+        for (float i = speed; speed > 0; speed -=.00005f){
+            Debug.Log("Running out!");
+            yield return new WaitForSeconds(outOfFuelSlowRate);
+            continue;
+        }
+        isMoving = false;
+        this.enabled = false;
+        //Debug.Log("Stopped");
     }
 }
 //Easeing

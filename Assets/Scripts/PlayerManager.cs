@@ -7,19 +7,24 @@ using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
-
-    public fuel Fuel;
+    [Header("Scripts")]
+    [Space(5)]
+    public fuel fuelManager;
     public clickToMove ClickToMove;
     public UIManager UIManager;
 
+    [Header("Rig Stats")]
+    [Space(5)]
     public float currentSpeed;
     public float fuelLevel;
+    public Collider2D searchRadius;
 
-    // Invetory
+    [Header("Player Inventory")]
+    [Space(5)]
     public float currentHaul;
     public float maxHaul;
     public float playerCredits;
-    public List<GameObject> playerScrap = new List<GameObject>();
+    public List<ScrapObject> playerScrap = new List<ScrapObject>();
 
 
     // Start is called before the first frame update
@@ -32,7 +37,7 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         // Keeping an eye on fuel and speed
-        fuelLevel = Fuel.currentFuelLevel;
+        fuelLevel = fuelManager.currentFuelUnits;
         currentSpeed = ClickToMove.currentSpeed;
 
         // INTERACTIONS
@@ -45,24 +50,36 @@ public class PlayerManager : MonoBehaviour
             if(hit.collider != null){
                 if (hit.collider.tag == "Scrap") {
                     ScrapObject newScrap = hit.collider.GetComponent<ScrapObject>();
-                    Debug.Log("Player clicked: " + hit.collider.gameObject.name);
                     UIManager.ShowReadout(newScrap);
                 }
             }    
         }
     }
 
-    // 1. Pop goes the scrap!
+    
     void OnTriggerEnter2D(Collider2D other){
-        if(other.tag == "Scrap"){
-            ScrapObject newScrap = other.GetComponent<ScrapObject>();
-            
+        // 1. Pop goes the scrap!
+        if(other.gameObject.tag == "Scrap"){
+            ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
             UIManager.ShowScrap(newScrap);
         }
+        if(other.gameObject.name == "Town"){
+            UIManager.OfferTown();
+        }
     }
+    // void OnCollisionEnter2D(Collision2D other){
+    //     if(other.gameObject.tag == "Scrap"){
+    //         ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
+    //         UIManager.ShowScrap(newScrap);
+    //     }
+    
     // 3. If they clicked Take, take it
     public ScrapObject TakeScrap(ScrapObject takenScrap){
-        playerScrap.Add(takenScrap.gameObject);
+        playerScrap.Add(takenScrap);
+        foreach(ScrapObject scrap in playerScrap){
+            Debug.Log("Player has: " + scrap.GetComponent<ScrapObject>().scrapName);
+        }
+        
         takenScrap.gameObject.SetActive(false);
         currentHaul += takenScrap.size;
         

@@ -23,10 +23,16 @@ public class UIManager : MonoBehaviour
             - 
     
     */
+    [Header("Scripts")]
+    [Space(5)]
+    public PlayerManager PlayerManager;
+    public fuel fuleManager;
+
     [Header("Statbar")]
     [Space(5)]
     public TextMeshProUGUI haulText;
-    public PlayerManager PlayerManager;
+    public TextMeshProUGUI fuelText;
+    public TextMeshProUGUI creditText;
     public GameObject scrapTick;
     public GameObject scrapTickSlots;
 
@@ -40,6 +46,11 @@ public class UIManager : MonoBehaviour
     public Button readoutTakeButt;
     public Button readoutLeaveButt;
     
+    [Header("Other")]
+    [Space(5)]
+    public Button townButton;
+
+
     ScrapObject scrapToTake;
     
 
@@ -52,10 +63,10 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        fuelText.text = "Fuel: " + fuleManager.currentFuelPercent.ToString("N0") + "%";
     }
 
-    // 1. Player finds scrap
+    // 1. PlayerManager has found scrap 
     public ScrapObject ShowScrap(ScrapObject newScrap){
         Debug.Log("Showing: " + newScrap.scrapName);
         newScrap.GetComponent<SpriteRenderer>().enabled = true;
@@ -68,7 +79,6 @@ public class UIManager : MonoBehaviour
         scrapToTake = newScrap;
         readoutName.text = newScrap.scrapName;
         readoutDesc.text = newScrap.description;
-        //readoutSize.text = newScrap.size.ToString();
         readoutSize.text = string.Format("Size: {0:#,#}", newScrap.size + " m<sup>3</sup>");
         readoutValue.text = newScrap.value.ToString("Value: " + "#,#" + " cr.");
         readoutPanel.SetActive(true);
@@ -80,17 +90,23 @@ public class UIManager : MonoBehaviour
     // 3. Player clicks "take" or "leave" and we do what they tell us
     public void TakeScrap(){
         PlayerManager.TakeScrap(scrapToTake);
-        haulText.text = "Current Haul: " + PlayerManager.currentHaul.ToString() + " m<sup>3</sup>";
+        haulText.text = "Current Haul: " + PlayerManager.currentHaul.ToString("#,#") + " m<sup>3</sup>";
         scrapTick = Instantiate(scrapTick) as GameObject;
         scrapTick.transform.SetParent(scrapTickSlots.transform, false);
         readoutPanel.SetActive(false);
-        //Destroy(scrapToTake.gameObject);
         PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
     }
     public void LeaveScrap(){
         readoutPanel.SetActive(false);
         PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
 
+    }
+
+    public void OfferTown(){
+        townButton.gameObject.SetActive(true);
+    }
+    public void EnterTown(){
+        townButton.gameObject.SetActive(false);
     }
     
 }

@@ -46,17 +46,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Paranti Ecco Drone
-  description: Big ears
-  image: 23
-  size: 2
-  value: 10000
+  scrapName: Frustrum Gargantuan 36D
+  description: How is this even possible?
+  image: 36
+  size: 10000
+  value: 500000
   material: Titanium
-  zoneA_rarity: 5
+  zoneA_rarity: 0
   zoneB_rarity: 5
-  zoneC_rarity: 5
-  zoneD_rarity: 5
-  carriesComponents: 0
+  zoneC_rarity: 7
+  zoneD_rarity: 10
+  carriesComponents: 1
   isBuried: 0
 --- !u!212 &617055198158216929
 SpriteRenderer:
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.025
 --- !u!50 &8219202195195036959
 Rigidbody2D:
   serializedVersion: 4
