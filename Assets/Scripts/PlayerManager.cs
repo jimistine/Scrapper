@@ -19,7 +19,7 @@ public class PlayerManager : MonoBehaviour
     public float currentHaul;
     public float maxHaul;
     public float playerCredits;
-    public List<ScrapObject> playerScrap = new List<ScrapObject>();
+    public List<GameObject> playerScrap = new List<GameObject>();
 
 
     // Start is called before the first frame update
@@ -61,11 +61,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
     // 3. If they clicked Take, take it
-    public ScrapObject TakeScrap(ScrapObject newScrap){
-        playerScrap.Add(newScrap);
-        currentHaul += newScrap.size;
-        //Destroy(newScrap.gameObject);
+    public ScrapObject TakeScrap(ScrapObject takenScrap){
+        playerScrap.Add(takenScrap.gameObject);
+        takenScrap.gameObject.SetActive(false);
+        currentHaul += takenScrap.size;
         
-        return newScrap;
+        return null;
     }
 }

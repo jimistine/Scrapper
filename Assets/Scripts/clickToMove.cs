@@ -17,46 +17,60 @@ public float distanceToEnd;
 
 public float lerpTime = 1f;
 public float currentLerpTime;
-    float distCovered;
+float distCovered;
 
 public bool isMoving;
 
     // Start is called before the first frame update
     void Start()
     {       
-        currentSpeed = speed;
+
     }
+
+   
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0)){
-            startPos = transform.position;
-            startTime = Time.time;
-            Vector3 mousePos = Input.mousePosition;
-            mousePos.z = Camera.main.nearClipPlane;
-            pointClicked = Camera.main.ScreenToWorldPoint(mousePos);
-            journeyLength = Vector3.Distance(transform.position, pointClicked);
-        }
-    //Classic Lerp
-        distCovered = (Time.time - startTime) * speed;
-        fractionOfJourney = distCovered / journeyLength;
-        transform.position = Vector3.Lerp(transform.position, pointClicked, fractionOfJourney);
+           
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+
+            if(hit.collider != null){
+                if(hit.collider.tag == "Terrain"){
+                    Debug.Log("Clicked: " + hit.collider.transform.name);
+                    startPos = transform.position;
+                    startTime = Time.time;
+                    pointClicked = mousePos;
+                    pointClicked.z = 0;
+                    journeyLength = Vector3.Distance(transform.position, pointClicked);
+                    StartCoroutine("MovePlayer");
+                }
+            }            
+        }  
+    }
+
+    IEnumerator MovePlayer(){
         isMoving = true;
+    //Classic Lerp
+        while(isMoving){
+            distCovered = (Time.time - startTime) * speed;
+            fractionOfJourney = distCovered / journeyLength;
 
-        currentSpeed = Vector3.Distance(startPos, transform.position) / (Time.time - startTime);
-        distanceToEnd = Vector3.Distance(transform.position, pointClicked);
+            transform.position = Vector3.Lerp(transform.position, pointClicked, fractionOfJourney);
 
-        if(distanceToEnd < .1f){
-            // Debug.Log(Vector3.Distance(transform.position, pointClicked));
-            isMoving = false;
+            currentSpeed = Vector3.Distance(startPos, transform.position) / (Time.time - startTime);
+            distanceToEnd = Vector3.Distance(transform.position, pointClicked);
+            if(distanceToEnd < .1f){
+                isMoving = false;
+            }
+            yield return null;
         }
-
-       
-            
-
-
-    //Easeing
+    }
+}
+//Easeing
             // if (Input.GetMouseButtonDown(0)) {
             //     currentLerpTime = 0f;
             // }
@@ -78,5 +92,4 @@ public bool isMoving;
 
     // Constant Speed
         //transform.position = Vector3.MoveTowards(transform.position, pointClicked, Time.deltaTime * speed); 
-    }
-}
+
