@@ -8,7 +8,11 @@ public class cameraFollow : MonoBehaviour
      private Vector3 velocity = Vector3.zero;
      public Transform player;
  
-     // Update is called once per frame
+    void Start(){
+        player = PlayerManager.PM.gameObject.transform;
+    }
+
+
      void Update () 
      {
          if (player)

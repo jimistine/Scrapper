@@ -23,6 +23,9 @@ public class UIManager : MonoBehaviour
             - 
     
     */
+
+    public static UIManager UIM;
+
     [Header("Scripts")]
     [Space(5)]
     public PlayerManager PlayerManager;
@@ -53,11 +56,15 @@ public class UIManager : MonoBehaviour
 
     ScrapObject scrapToTake;
     
+    void Awake(){
+        UIM = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        fuleManager = PlayerManager.PM.GetComponent<fuel>();
+        PlayerManager = PlayerManager.PM;
     }
 
     // Update is called once per frame

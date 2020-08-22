@@ -7,6 +7,9 @@ using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
+
+    public static PlayerManager PM;
+
     [Header("Scripts")]
     [Space(5)]
     public fuel fuelManager;
@@ -28,9 +31,12 @@ public class PlayerManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
+        PM = this;
+    }
+    void Start(){
+        UIManager = UIManager.UIM;
     }
 
     // Update is called once per frame
