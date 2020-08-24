@@ -6,7 +6,16 @@ public class MerchantManager : MonoBehaviour
 {
     public PlayerManager PlayerManager;
     public UIManager UIManager;
+
+    [Header("Scrap Buyer")]
+    [Space(5)]
     public float scrapValue;
+
+    [Header("Fuel Merchant")]
+    [Space(5)]
+    public float fuelPrice;
+    public float fuelToAdd;
+    public float creditsToTakeFuel;
 
     void Awake(){
         
@@ -36,6 +45,23 @@ public class MerchantManager : MonoBehaviour
         }
         else{
             UIManager.cantSellScrap();
+        }
+    }
+    public void FillFuel(){
+        // How much is it to fill up?
+        fuelToAdd = PlayerManager.fuelManager.maxFuel - PlayerManager.fuelManager.currentFuelUnits;
+        creditsToTakeFuel = fuelToAdd * fuelPrice;
+        // Can they afford a fill?
+        if(PlayerManager.playerCredits >= creditsToTakeFuel){
+            PlayerManager.playerCredits -= creditsToTakeFuel;
+            PlayerManager.fuelManager.currentFuelUnits = PlayerManager.fuelManager.maxFuel;
+            UIManager.BoughtFuel();
+        }
+        else{
+            fuelToAdd = PlayerManager.playerCredits / fuelPrice;
+            PlayerManager.fuelManager.currentFuelUnits += fuelToAdd;
+            PlayerManager.playerCredits = 0;
+            UIManager.CantAffordFill();
         }
     }
 }

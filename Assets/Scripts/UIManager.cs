@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI fuelText;
     public TextMeshProUGUI creditText;
     public GameObject scrapTick;
+    public GameObject scrapTickBackup;
     public GameObject scrapTickSlots;
 
     [Header("Readout")]
@@ -78,6 +79,7 @@ public class UIManager : MonoBehaviour
         fuleManager = PlayerManager.PM.GetComponent<fuel>();
         PlayerManager = PlayerManager.PM;
         SceneController = SceneController.SC;
+        scrapTickBackup = scrapTick;
     }
 
 // OVERWORLD AND GAMEPLAY
@@ -120,6 +122,18 @@ public class UIManager : MonoBehaviour
         readoutPanel.SetActive(false);
         PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
     }
+    public int OnTickHover(int tickIndex){
+        ScrapObject tickScrap = PlayerManager.playerScrap[tickIndex];
+        readoutName.text = tickScrap.scrapName;
+        readoutDesc.text = tickScrap.description;
+        readoutSize.text = string.Format("Size: {0:#,#}", tickScrap.size + " m<sup>3</sup>");
+        readoutValue.text = tickScrap.value.ToString("Value: " + "#,#" + " cr.");
+        readoutPanel.SetActive(true);
+        return tickIndex;
+    }
+    public void OnTickHoverExit(){
+        readoutPanel.SetActive(false);
+    }
 
 // TOWN AND MERCHANTS
     public void OfferTown(){
@@ -145,18 +159,24 @@ public class UIManager : MonoBehaviour
         scrapMerchantReadout.text = "\"You two ah, don't have any scrap.\"";
     }
     public void SoldScrap(){
-        scrapMerchantReadout.text = "\"It's yours\"\n <font=\"Futura Book SDF\">You made: " + 
-            "<color=#D44900>" + MerchantManager.scrapValue.ToString("#,#") + " credits.</font>";
+        scrapMerchantReadout.text = "\"It's yours\"\nYou made: " + 
+            "<color=#D44900>" + MerchantManager.scrapValue.ToString("#,#") + " credits.";
         creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#");
         haulText.text = "Current Haul: " + "0" + " m<sup>3</sup>";
         for(int i = scrapTickSlots.transform.childCount - 1; i >= 0; i--){
             GameObject.Destroy(scrapTickSlots.transform.GetChild(i).gameObject);
         }
+        scrapTick = scrapTickBackup;
     }
 
     // FUEL MERCHANT
     public void BoughtFuel(){
-
+        fuelMerchantReadout.text = "\"That'll be " + MerchantManager.creditsToTakeFuel.ToString("#,#") + " credits.\"";
+        creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#");
+    }
+    public void CantAffordFill(){
+        fuelMerchantReadout.text = "\"I am sorry, friend, but that is only enough for a partial fuel refill. I will provide for you what I can.\"";
+        creditText.text = "Credits: 0 cr.";
     }
     
 }
