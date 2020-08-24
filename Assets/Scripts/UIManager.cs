@@ -29,10 +29,13 @@ public class UIManager : MonoBehaviour
     [Header("Scripts")]
     [Space(5)]
     public PlayerManager PlayerManager;
+    public SceneController SceneController;
     public fuel fuleManager;
+    public MerchantManager MerchantManager;
 
     [Header("Statbar")]
     [Space(5)]
+    public GameObject statBar;
     public TextMeshProUGUI haulText;
     public TextMeshProUGUI fuelText;
     public TextMeshProUGUI creditText;
@@ -49,25 +52,35 @@ public class UIManager : MonoBehaviour
     public Button readoutTakeButt;
     public Button readoutLeaveButt;
     
+    [Header("Town")]
+    [Space(5)]
+    public GameObject TownUI;
+    public Button enterTownButton;
+    public TextMeshProUGUI scrapMerchantWelcome;
+    public TextMeshProUGUI scrapMerchantReadout;
+    public TextMeshProUGUI fuelMerchantWelcome;
+    public TextMeshProUGUI fuelMerchantReadout;
+
+    //public Button exitTownButton;
+
+
     [Header("Other")]
     [Space(5)]
-    public Button townButton;
-
-
     ScrapObject scrapToTake;
     
+
     void Awake(){
         UIM = this;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         fuleManager = PlayerManager.PM.GetComponent<fuel>();
         PlayerManager = PlayerManager.PM;
+        SceneController = SceneController.SC;
     }
 
-    // Update is called once per frame
+// OVERWORLD AND GAMEPLAY
     void Update()
     {
         fuelText.text = "Fuel: " + fuleManager.currentFuelPercent.ToString("N0") + "%";
@@ -106,14 +119,44 @@ public class UIManager : MonoBehaviour
     public void LeaveScrap(){
         readoutPanel.SetActive(false);
         PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
-
     }
 
+// TOWN AND MERCHANTS
     public void OfferTown(){
-        townButton.gameObject.SetActive(true);
+        enterTownButton.gameObject.SetActive(true);
     }
     public void EnterTown(){
-        townButton.gameObject.SetActive(false);
+        enterTownButton.gameObject.SetActive(false);
+        haulText.color = (Color.white);
+        fuelText.color = (Color.white);
+        creditText.color = (Color.white);
+        TownUI.SetActive(true);
+    }
+    public void LeaveTown(){
+        haulText.color = (Color.black);
+        fuelText.color = (Color.black);
+        creditText.color = (Color.black);
+        TownUI.SetActive(false);
+        scrapMerchantReadout.text = "\"Back again?\"";
+    }
+
+    // SCRAP BUYER
+    public void cantSellScrap(){
+        scrapMerchantReadout.text = "\"You two ah, don't have any scrap.\"";
+    }
+    public void SoldScrap(){
+        scrapMerchantReadout.text = "\"It's yours\"\n <font=\"Futura Book SDF\">You made: " + 
+            "<color=#D44900>" + MerchantManager.scrapValue.ToString("#,#") + " credits.</font>";
+        creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#");
+        haulText.text = "Current Haul: " + "0" + " m<sup>3</sup>";
+        for(int i = scrapTickSlots.transform.childCount - 1; i >= 0; i--){
+            GameObject.Destroy(scrapTickSlots.transform.GetChild(i).gameObject);
+        }
+    }
+
+    // FUEL MERCHANT
+    public void BoughtFuel(){
+
     }
     
 }

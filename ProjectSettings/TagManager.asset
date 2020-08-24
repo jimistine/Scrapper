@@ -8,6 +8,7 @@ TagManager:
   - UI
   - Obstacle
   - Terrain
+  - OverworldParent
   layers:
   - Default
   - TransparentFX

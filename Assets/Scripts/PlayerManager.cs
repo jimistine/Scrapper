@@ -13,7 +13,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Scripts")]
     [Space(5)]
     public fuel fuelManager;
-    public clickToMove ClickToMove;
+    public clickToMove clickToMove;
     public UIManager UIManager;
 
     [Header("Rig Stats")]
@@ -28,6 +28,11 @@ public class PlayerManager : MonoBehaviour
     public float maxHaul;
     public float playerCredits;
     public List<ScrapObject> playerScrap = new List<ScrapObject>();
+
+    [Header("Other")]
+    [Space(5)]
+    bool canPlayerMove = true;
+    float playerSpeedTemp;
 
 
     // Start is called before the first frame update
@@ -44,7 +49,7 @@ public class PlayerManager : MonoBehaviour
     {
         // Keeping an eye on fuel and speed
         fuelLevel = fuelManager.currentFuelUnits;
-        currentSpeed = ClickToMove.currentSpeed;
+        currentSpeed = clickToMove.currentSpeed;
 
         // INTERACTIONS
         if (Input.GetMouseButtonDown(0)) {
@@ -90,5 +95,20 @@ public class PlayerManager : MonoBehaviour
         currentHaul += takenScrap.size;
         
         return null;
+    }
+
+    // For whenever we need to stop em in their tracks
+    public void TogglePlayerMovement(){
+        if(canPlayerMove){
+            playerSpeedTemp = clickToMove.speed;
+            clickToMove.speed = 0;
+            Debug.Log("Stopped at: " + playerSpeedTemp);
+            canPlayerMove = false;
+        }
+        else{
+            clickToMove.speed = playerSpeedTemp;
+            Debug.Log("Started at: " + clickToMove.speed);
+            canPlayerMove = true;
+        }
     }
 }
