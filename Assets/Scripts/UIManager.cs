@@ -155,6 +155,10 @@ public class UIManager : MonoBehaviour
     }
 
     // SCRAP BUYER
+    public void enterScrapBuyer(){
+        // turn off the rest of town
+        // turn on scrap buyer stuff
+    }
     public void cantSellScrap(){
         scrapMerchantReadout.text = "\"You two ah, don't have any scrap.\"";
     }
@@ -168,8 +172,14 @@ public class UIManager : MonoBehaviour
         }
         scrapTick = scrapTickBackup;
     }
+    public void BoughtEngineUpgrade(){
+        scrapMerchantReadout.text = "You bought a nice new engine, kiddo!";
+    }
 
     // FUEL MERCHANT
+    public void enterFuelMerchant(){
+
+    }
     public void BoughtFuel(){
         fuelMerchantReadout.text = "\"That'll be " + MerchantManager.creditsToTakeFuel.ToString("#,#") + " credits.\"";
         creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#");
