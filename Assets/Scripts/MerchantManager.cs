@@ -53,7 +53,7 @@ public class MerchantManager : MonoBehaviour
 
     public PlayerManager PlayerManager;
     public UIManager UIManager;
-    public UpgradeCalculator UpgradeCalculator;
+    public UpgradeManager UpgradeManager;
 
     [Header("Scrap Buyer")]
     [Space(5)]
@@ -92,13 +92,13 @@ public class MerchantManager : MonoBehaviour
     {
         PlayerManager = PlayerManager.PM;
         UIManager = UIManager.UIM;
-        UpgradeCalculator = this.GetComponent<UpgradeCalculator>();
+        UpgradeManager = this.GetComponent<UpgradeManager>();
     }
 
     void Update(){
-        if (Input.GetMouseButtonDown(0)){
-            BuyUpgrade(UpgradeCalculator.upgrades.Find(x => x.upgradeName == EventSystem.current.currentSelectedGameObject.name));
-        }
+        // if (Input.GetMouseButtonDown(0)){
+        //     BuyUpgrade(UpgradeCalculator.upgrades.Find(x => x.upgradeName == EventSystem.current.currentSelectedGameObject.name));
+        // }
     }
 
 // SCRAP BUYER
@@ -119,10 +119,11 @@ public class MerchantManager : MonoBehaviour
     }
 
     // Upgrades
-    public Upgrade BuyUpgrade(Upgrade upgrade){
-        PlayerManager.playerCredits -= upgrade.upgradePriceOffered;
-        UpgradeCalculator.CalculateUpgrade(upgrade);
-        return null;
+    public void BuyUpgrade(string upgrade){
+        Upgrade upgradeToCalculate = UpgradeManager.upgrades.Contains(new Upgrade {type = upgrade.type, uName = ""});//(x => x.type == upgrade);
+        Debug.Log(UpgradeManager.upgrades);
+        PlayerManager.playerCredits -= upgradeToCalculate.priceOffered;
+        UpgradeManager.CalculateUpgrade(upgradeToCalculate);
     }
 
     public void BuyEngineUpgrade(){
@@ -145,7 +146,7 @@ public class MerchantManager : MonoBehaviour
             speedUpgradeOffered += speedUpgradeOffered * Random.Range(speedRangeBottom, speedRangeTop);
         }
         // merchant says something about it and the engine name changes
-        UIManager.BoughtEngineUpgrade();
+        
     }
     public void BuyFuelUpgrade(){
         PlayerManager.fuelManager.maxFuel += maxFuelUpgradeOffered;
@@ -159,7 +160,7 @@ public class MerchantManager : MonoBehaviour
             fuelTankPriceOffered += fuelTankPriceOffered * Random.Range(fuelTankPriceBottom, fuelTankPriceTop);
             maxFuelUpgradeOffered += maxFuelUpgradeOffered * Random.Range(maxFuelRangeBottom, maxFuelRangeTop);
         }
-        UIManager.BoughtFuelTankUpgrade();
+        
     }
 
     public void BuyHaulSizeUpgrade(){

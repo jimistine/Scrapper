@@ -97,6 +97,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI droneStat;
     public TextMeshProUGUI dronePrice;
     public Button upgradeDroneButt;
+    [Space(10)]
+    public List<GameObject> upgradePanels = new List<GameObject>();
+    public int panelIndex;
+    public string effectSuffix;
 
     //public Button exitTownButton;
 
@@ -205,12 +209,23 @@ public class UIManager : MonoBehaviour
         }
         scrapTick = scrapTickBackup;
     }
-    public void BoughtEngineUpgrade(){
-        scrapMerchantReadout.text = "You bought a nice new engine, kiddo!";
+    public void BoughtUpgrade(Upgrade upgrade){
+        if(upgrade.type == "engine"){
+            panelIndex = 0;
+            effectSuffix = " kph";
+            scrapMerchantReadout.text = "You bought a nice new engine, kiddo!";
+        }
+        if(upgrade.type == "reactor"){
+            panelIndex = 1;
+            effectSuffix = " deuterium cassets";
+            scrapMerchantReadout.text = "You bought a nice new fusion reactor, kiddo!";
+        }
+        upgradePanels[panelIndex].transform.Find("Name").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorName;
+        upgradePanels[panelIndex].transform.Find("Desc.").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorDesc;
+        upgradePanels[panelIndex].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = upgrade.priceOffered.ToString("#,#") + " cr.";
+        upgradePanels[panelIndex].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = "+" + upgrade.effectOffered.ToString() + effectSuffix;
     }
-    public void BoughtFuelTankUpgrade(){
-        scrapMerchantReadout.text = "You bought a nice new fuel tank, kiddo!";
-    }
+    
 
     // FUEL MERCHANT
     public void enterFuelMerchant(){

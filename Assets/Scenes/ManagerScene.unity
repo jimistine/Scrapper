@@ -184,7 +184,7 @@ MonoBehaviour:
     of the layout properties. Enable the checkbox for a property you want to override
     and then specify dddddddd
 
-    
+
 
 '
   m_isRightToLeft: 0
@@ -262,10 +262,10 @@ MonoBehaviour:
     textComponent: {fileID: 55329693}
     characterCount: 184
     spriteCount: 0
-    spaceCount: 32
+    spaceCount: 33
     wordCount: 31
     linkCount: 0
-    lineCount: 4
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -3770,7 +3770,7 @@ MonoBehaviour:
     of the layout properties. Enable the checkbox for a property you want to override
     and then specify dddddddd
 
-    
+
 
 '
   m_isRightToLeft: 0
@@ -3848,10 +3848,10 @@ MonoBehaviour:
     textComponent: {fileID: 668949684}
     characterCount: 184
     spriteCount: 0
-    spaceCount: 32
+    spaceCount: 33
     wordCount: 31
     linkCount: 0
-    lineCount: 4
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -4609,7 +4609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerManager: {fileID: 0}
   UIManager: {fileID: 0}
-  UpgradeCalculator: {fileID: 0}
+  UpgradeManager: {fileID: 0}
   scrapValue: 0
   enginePriceBottom: 0
   enginePriceTop: 0
@@ -4641,23 +4641,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 765283187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a67a5be428936c4dbf2eac86e91f05f, type: 3}
+  m_Script: {fileID: 11500000, guid: 15236b388319afb46a8067aaeca247ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   upgrades:
   - {fileID: 2138112889753627213, guid: 0e9554cd20a288c4b9d4453da59da1b6, type: 3}
   - {fileID: 7845922076151763037, guid: 5e39091332f86b1479c3d4853efcc2c9, type: 3}
   UIM: {fileID: 0}
-  upgradePriceBottom: 0
-  upgradePriceTop: 0
-  upgradePriceModifier: 0
-  upgradePriceOffered: 0
-  effectRangeBottom: 0
-  effectRangeTop: 0
-  effectOffered: 0
-  effectModifier: 0
-  statAffected: 0
-  upgradeLevel: 0
+  PlayerManager: {fileID: 0}
+  priceModApplied: 0
+  effectModApplied: 0
 --- !u!1 &782997676
 GameObject:
   m_ObjectHideFlags: 0
@@ -5079,7 +5072,7 @@ MonoBehaviour:
     of the layout properties. Enable the checkbox for a property you want to override
     and then specify dddddddd
 
-    
+
 
 '
   m_isRightToLeft: 0
@@ -5157,10 +5150,10 @@ MonoBehaviour:
     textComponent: {fileID: 912174786}
     characterCount: 184
     spriteCount: 0
-    spaceCount: 32
+    spaceCount: 33
     wordCount: 31
     linkCount: 0
-    lineCount: 4
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -6841,16 +6834,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 765283187}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 765283189}
+        m_TargetAssemblyTypeName: MerchantManager, Assembly-CSharp
+        m_MethodName: BuyUpgrade
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: engine
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1232558646
@@ -7133,7 +7126,7 @@ MonoBehaviour:
     of the layout properties. Enable the checkbox for a property you want to override
     and then specify dddddddd
 
-    
+
 
 '
   m_isRightToLeft: 0
@@ -7211,10 +7204,10 @@ MonoBehaviour:
     textComponent: {fileID: 1317053289}
     characterCount: 184
     spriteCount: 0
-    spaceCount: 32
+    spaceCount: 33
     wordCount: 31
     linkCount: 0
-    lineCount: 4
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -7924,7 +7917,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1572852852}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 765283189}
+        m_TargetAssemblyTypeName: MerchantManager, Assembly-CSharp
+        m_MethodName: BuyUpgrade
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: reactor
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1572852852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8628,7 +8633,7 @@ MonoBehaviour:
     of the layout properties. Enable the checkbox for a property you want to override
     and then specify dddddddd
 
-    
+
 
 '
   m_isRightToLeft: 0
@@ -8706,10 +8711,10 @@ MonoBehaviour:
     textComponent: {fileID: 1690408511}
     characterCount: 184
     spriteCount: 0
-    spaceCount: 32
+    spaceCount: 33
     wordCount: 31
     linkCount: 0
-    lineCount: 4
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
