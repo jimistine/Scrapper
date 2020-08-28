@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     public SceneController SceneController;
     public fuel fuleManager;
     public MerchantManager MerchantManager;
+    public ReadoutManager ReadoutManager;
 
     [Header("Statbar")]
     [Space(5)]
@@ -47,9 +48,11 @@ public class UIManager : MonoBehaviour
     [Space(5)]
     public GameObject readoutPanel;
     public TextMeshProUGUI readoutName;
+    public TextMeshProUGUI readoutMat;
     public TextMeshProUGUI readoutDesc;
     public TextMeshProUGUI readoutSize;
     public TextMeshProUGUI readoutValue;
+    public Image readoutImage;
     public Button readoutTakeButt;
     public Button readoutLeaveButt;
     
@@ -67,7 +70,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Other")]
     [Space(5)]
-    ScrapObject scrapToTake;
+    public ScrapObject scrapToTake;
     
 
     void Awake(){
@@ -80,6 +83,7 @@ public class UIManager : MonoBehaviour
         PlayerManager = PlayerManager.PM;
         SceneController = SceneController.SC;
         scrapTickBackup = scrapTick;
+        ReadoutManager = this.GetComponent<ReadoutManager>();
     }
 
 // OVERWORLD AND GAMEPLAY
@@ -98,11 +102,7 @@ public class UIManager : MonoBehaviour
 
     // 2. Player has clicked on scrap
     public ScrapObject ShowReadout(ScrapObject newScrap){
-        scrapToTake = newScrap;
-        readoutName.text = newScrap.scrapName;
-        readoutDesc.text = newScrap.description;
-        readoutSize.text = string.Format("Size: {0:#,#}", newScrap.size + " m<sup>3</sup>");
-        readoutValue.text = newScrap.value.ToString("Value: " + "#,#" + " cr.");
+        ReadoutManager.UpdateReadout(newScrap);
         readoutPanel.SetActive(true);
         // stop the player from moving because how the hell do you actually get UI to block a raycast???
         PlayerManager.GetComponentInParent<clickToMove>().enabled = false;
@@ -174,6 +174,9 @@ public class UIManager : MonoBehaviour
     }
     public void BoughtEngineUpgrade(){
         scrapMerchantReadout.text = "You bought a nice new engine, kiddo!";
+    }
+    public void BoughtFuelTankUpgrade(){
+        scrapMerchantReadout.text = "You bought a nice new fuel tank, kiddo!";
     }
 
     // FUEL MERCHANT

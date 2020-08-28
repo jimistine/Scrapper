@@ -56,16 +56,27 @@ public class MerchantManager : MonoBehaviour
     [Header("Scrap Buyer")]
     [Space(5)]
     public float scrapValue;
-    public float creditsToTakeScrap;
 
     // for slightly randomizeing the price and effectiveness the upgrades
     public float enginePriceBottom;
     public float enginePriceTop;
+    public float enginePriceModifier;
+    public float enginePriceOffered;
     public float speedRangeBottom;
     public float speedRangeTop;
     public float speedUpgradeOffered;
-    public float enginePriceOffered;
+    public float speedUpgradeModifier;
     public int engineUpgradeLevel = 0;
+
+    public float fuelTankPriceBottom;
+    public float fuelTankPriceTop;
+    public float fuelTankPriceModifier;
+    public float fuelTankPriceOffered;
+    public float maxFuelRangeBottom;
+    public float maxFuelRangeTop;
+    public float maxFuelUpgradeOffered;
+    public float maxFuelUpgradeModifier;
+    public int fuelTankUpgradeLevel = 0;
 
 
     [Header("Fuel Merchant")]
@@ -100,16 +111,17 @@ public class MerchantManager : MonoBehaviour
 
     // Inventory
     public void BuyEngineUpgrade(){
-        // initial values for speed and price offered are entered by jimi
+        // initial values for speed and price offered are entered by jimi, maybe calculated on average scrap selling price
         // increase speed
         PlayerManager.clickToMove.speed += speedUpgradeOffered;
         // take their money
-        PlayerManager.playerCredits -= creditsToTakeScrap;
+        PlayerManager.playerCredits -= enginePriceOffered;
         // keep track of upgrade progressoin with int?
-        engineUpgradeLevel += 1;
-        // every time it's divisible by 5, the increments are bigger, other stuff happens
+        engineUpgradeLevel++;
+        // every time it's divisible by 5, the increments are bigger
         if (engineUpgradeLevel % 5 == 0){
-
+            enginePriceOffered += enginePriceModifier * (enginePriceOffered * Random.Range(enginePriceBottom, enginePriceTop));
+            speedUpgradeOffered += speedUpgradeModifier * (speedUpgradeOffered * Random.Range(speedRangeBottom, speedRangeTop));
         }
         else{
             // increment price per level
@@ -117,14 +129,29 @@ public class MerchantManager : MonoBehaviour
             // increment effect per level
             speedUpgradeOffered += speedUpgradeOffered * Random.Range(speedRangeBottom, speedRangeTop);
         }
-        // merchant says something about it
+        // merchant says something about it and the engine name changes
         UIManager.BoughtEngineUpgrade();
     }
     public void BuyFuelUpgrade(){
         // increase max fuel
+        PlayerManager.fuelManager.maxFuel += maxFuelUpgradeOffered;
         // take their money
+        PlayerManager.playerCredits -= fuelTankPriceOffered;
         // keep track of upgrade progressoin with int?
-            // every time it's divisible by 5, the increment is bigger, other stuff happens
+        fuelTankUpgradeLevel++;
+        // every time it's divisible by 5, the increment is bigger, other stuff happens
+        if (fuelTankUpgradeLevel % 5 == 0){
+            fuelTankPriceOffered += fuelTankPriceModifier * (fuelTankPriceOffered * Random.Range(fuelTankPriceBottom, fuelTankPriceTop));
+            maxFuelUpgradeOffered += maxFuelUpgradeModifier * (maxFuelUpgradeOffered * Random.Range(maxFuelRangeBottom, maxFuelRangeTop));
+        }
+        else{
+            // increment price per level
+            fuelTankPriceOffered += fuelTankPriceOffered * Random.Range(fuelTankPriceBottom, fuelTankPriceTop);
+            // increment effect per level
+            maxFuelUpgradeOffered += maxFuelUpgradeOffered * Random.Range(maxFuelRangeBottom, maxFuelRangeTop);
+        }
+        // merchant says something about it and the fuelTank name changes
+        UIManager.BoughtFuelTankUpgrade();
                 // increment price per level
                 // increment effect per level
         // merchant says something about it

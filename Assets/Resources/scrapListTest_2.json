@@ -4,7 +4,7 @@
     {
       "scrapName": "Cordona Land Speeder",
       "description": "Fastest on Talacan",
-      "image": 1,
+      "image": 0,
       "size": 10,
       "value": 100000,
       "material": "Cordonite",
@@ -18,8 +18,8 @@
     {
       "scrapName": "Paranti Ecco Drone",
       "description": "Big ears",
-      "image": 23,
-      "size": 2,
+      "image": 0,
+      "size": 1,
       "value": 10000,
       "material": "Titanium",
       "zoneA_rarity": 5,
@@ -32,7 +32,7 @@
     {
       "scrapName": "Frustrum Gargantuan 36D",
       "description": "How is this even possible?",
-      "image": 36,
+      "image": 1,
       "size": 10000,
       "value": 500000,
       "material": "Titanium",

@@ -46,18 +46,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Frustrum Gargantuan 36D
-  description: How is this even possible?
-  image: 36
-  size: 10000
-  value: 500000
-  material: Titanium
+  scrapName: Cordona Land Speeder
+  description: Fastest on Talacan
+  image: 0
+  size: 10
+  value: 100000
+  material: Cordonite
   zoneA_rarity: 0
-  zoneB_rarity: 5
-  zoneC_rarity: 7
-  zoneD_rarity: 10
+  zoneB_rarity: 0
+  zoneC_rarity: 1
+  zoneD_rarity: 2
   carriesComponents: 1
-  isBuried: 0
+  isBuried: 1
 --- !u!212 &617055198158216929
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5283757986021271520}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
