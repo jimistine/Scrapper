@@ -120,7 +120,7 @@ public class MerchantManager : MonoBehaviour
 
     // Upgrades
     public void BuyUpgrade(string upgrade){
-        Upgrade upgradeToCalculate = UpgradeManager.upgrades.Contains(new Upgrade {type = upgrade.type, uName = ""});//(x => x.type == upgrade);
+        Upgrade upgradeToCalculate = UpgradeManager.upgrades.Find(x => x.type == upgrade); //UpgradeManager.upgrades.Contains(new Upgrade {type = upgrade.type, uName = ""});
         Debug.Log(UpgradeManager.upgrades);
         PlayerManager.playerCredits -= upgradeToCalculate.priceOffered;
         UpgradeManager.CalculateUpgrade(upgradeToCalculate);

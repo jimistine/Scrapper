@@ -7050,6 +7050,14 @@ MonoBehaviour:
   droneStat: {fileID: 1157867652}
   dronePrice: {fileID: 2066993836}
   upgradeDroneButt: {fileID: 2061212908}
+  upgradePanels:
+  - {fileID: 742864024}
+  - {fileID: 547224988}
+  - {fileID: 70280278}
+  - {fileID: 190254285}
+  - {fileID: 1949900172}
+  panelIndex: 0
+  effectSuffix: 
   scrapToTake: {fileID: 0}
 --- !u!114 &1270326782
 MonoBehaviour:
