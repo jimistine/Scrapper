@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MerchantManager : MonoBehaviour
 {
@@ -52,6 +53,7 @@ public class MerchantManager : MonoBehaviour
 
     public PlayerManager PlayerManager;
     public UIManager UIManager;
+    public UpgradeCalculator UpgradeCalculator;
 
     [Header("Scrap Buyer")]
     [Space(5)]
@@ -90,6 +92,13 @@ public class MerchantManager : MonoBehaviour
     {
         PlayerManager = PlayerManager.PM;
         UIManager = UIManager.UIM;
+        UpgradeCalculator = this.GetComponent<UpgradeCalculator>();
+    }
+
+    void Update(){
+        if (Input.GetMouseButtonDown(0)){
+            BuyUpgrade(UpgradeCalculator.upgrades.Find(x => x.upgradeName == EventSystem.current.currentSelectedGameObject.name));
+        }
     }
 
 // SCRAP BUYER
@@ -109,7 +118,13 @@ public class MerchantManager : MonoBehaviour
         }
     }
 
-    // Inventory
+    // Upgrades
+    public Upgrade BuyUpgrade(Upgrade upgrade){
+        PlayerManager.playerCredits -= upgrade.upgradePriceOffered;
+        UpgradeCalculator.CalculateUpgrade(upgrade);
+        return null;
+    }
+
     public void BuyEngineUpgrade(){
         // initial values for speed and price offered are entered by jimi, maybe calculated on average scrap selling price
         // increase speed
@@ -133,29 +148,20 @@ public class MerchantManager : MonoBehaviour
         UIManager.BoughtEngineUpgrade();
     }
     public void BuyFuelUpgrade(){
-        // increase max fuel
         PlayerManager.fuelManager.maxFuel += maxFuelUpgradeOffered;
-        // take their money
         PlayerManager.playerCredits -= fuelTankPriceOffered;
-        // keep track of upgrade progressoin with int?
         fuelTankUpgradeLevel++;
-        // every time it's divisible by 5, the increment is bigger, other stuff happens
         if (fuelTankUpgradeLevel % 5 == 0){
             fuelTankPriceOffered += fuelTankPriceModifier * (fuelTankPriceOffered * Random.Range(fuelTankPriceBottom, fuelTankPriceTop));
             maxFuelUpgradeOffered += maxFuelUpgradeModifier * (maxFuelUpgradeOffered * Random.Range(maxFuelRangeBottom, maxFuelRangeTop));
         }
         else{
-            // increment price per level
             fuelTankPriceOffered += fuelTankPriceOffered * Random.Range(fuelTankPriceBottom, fuelTankPriceTop);
-            // increment effect per level
             maxFuelUpgradeOffered += maxFuelUpgradeOffered * Random.Range(maxFuelRangeBottom, maxFuelRangeTop);
         }
-        // merchant says something about it and the fuelTank name changes
         UIManager.BoughtFuelTankUpgrade();
-                // increment price per level
-                // increment effect per level
-        // merchant says something about it
     }
+
     public void BuyHaulSizeUpgrade(){
         
     }

@@ -60,10 +60,43 @@ public class UIManager : MonoBehaviour
     [Space(5)]
     public GameObject TownUI;
     public Button enterTownButton;
-    public TextMeshProUGUI scrapMerchantWelcome;
-    public TextMeshProUGUI scrapMerchantReadout;
-    public TextMeshProUGUI fuelMerchantWelcome;
     public TextMeshProUGUI fuelMerchantReadout;
+
+    [Header("Scrap Buyer")]
+    [Space(5)]
+    public TextMeshProUGUI scrapMerchantReadout;
+    public TextMeshProUGUI scrapMerchantWelcome;
+    public TextMeshProUGUI fuelMerchantWelcome;
+    [Space(10)]
+    public TextMeshProUGUI engineName;
+    public TextMeshProUGUI engineDesc;
+    public TextMeshProUGUI engineStat;
+    public TextMeshProUGUI enginePrice;
+    public Button upgradeEngineButt;
+    [Space(10)]
+    public TextMeshProUGUI reactorName;
+    public TextMeshProUGUI reactorDesc;
+    public TextMeshProUGUI reactorStat;
+    public TextMeshProUGUI reactorPrice;
+    public Button upgradeReactorButt;
+    [Space(10)]
+    public TextMeshProUGUI haulerName;
+    public TextMeshProUGUI haulerDesc;
+    public TextMeshProUGUI haulerStat;
+    public TextMeshProUGUI haulerPrice;
+    public Button upgradeHaulerButt;
+    [Space(10)]
+    public TextMeshProUGUI searchName;
+    public TextMeshProUGUI searchDesc;
+    public TextMeshProUGUI searcgStat;
+    public TextMeshProUGUI searchPrice;
+    public Button upgradeSearchButt;
+    [Space(10)]
+    public TextMeshProUGUI droneName;
+    public TextMeshProUGUI droneDesc;
+    public TextMeshProUGUI droneStat;
+    public TextMeshProUGUI dronePrice;
+    public Button upgradeDroneButt;
 
     //public Button exitTownButton;
 
