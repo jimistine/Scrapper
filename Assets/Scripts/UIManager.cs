@@ -220,11 +220,20 @@ public class UIManager : MonoBehaviour
             effectSuffix = " deuterium cassets";
             scrapMerchantReadout.text = "You bought a nice new fusion reactor, kiddo!";
         }
+        Debug.Log("Panel index: " + panelIndex);
         upgradePanels[panelIndex].transform.Find("Name").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorName;
         upgradePanels[panelIndex].transform.Find("Desc.").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorDesc;
         upgradePanels[panelIndex].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = upgrade.priceOffered.ToString("#,#") + " cr.";
-        upgradePanels[panelIndex].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = "+" + upgrade.effectOffered.ToString() + effectSuffix;
+        if(upgrade.type == "engine"){
+            upgrade.effectOffered *= 1000;
+            upgradePanels[panelIndex].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = "+" + upgrade.effectOffered.ToString("F") + effectSuffix;
+            upgrade.effectOffered /= 1000;
+        }
+        else{
+            upgradePanels[panelIndex].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = "+" + upgrade.effectOffered.ToString("F") + effectSuffix;
+        }
     }
+    
     
 
     // FUEL MERCHANT

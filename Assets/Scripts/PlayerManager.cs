@@ -86,13 +86,17 @@ public class PlayerManager : MonoBehaviour
     
     // 3. If they clicked Take, take it
     public ScrapObject TakeScrap(ScrapObject takenScrap){
-        playerScrap.Add(takenScrap);
-        foreach(ScrapObject scrap in playerScrap){
-            Debug.Log("Player has: " + scrap.GetComponent<ScrapObject>().scrapName);
+        if((currentHaul + takenScrap.size) < maxHaul){
+            takenScrap.gameObject.SetActive(false);
+            currentHaul += takenScrap.size;
+            playerScrap.Add(takenScrap);
+            foreach(ScrapObject scrap in playerScrap){
+                Debug.Log("Player has: " + scrap.GetComponent<ScrapObject>().scrapName);
+            }
         }
-        
-        takenScrap.gameObject.SetActive(false);
-        currentHaul += takenScrap.size;
+        else{
+            //character says something
+        }
         
         return null;
     }

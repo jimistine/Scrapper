@@ -27,7 +27,7 @@ public bool isMoving;
     // Start is called before the first frame update
     void Start()
     {       
-
+        
     }
 
    
@@ -56,6 +56,7 @@ public bool isMoving;
     }
 
     IEnumerator MovePlayer(){
+        //speed /= 10000;
         isMoving = true;
     //Classic Lerp
         while(isMoving){
@@ -68,6 +69,7 @@ public bool isMoving;
             distanceToEnd = Vector3.Distance(transform.position, pointClicked);
             if(distanceToEnd < .1f){
                 isMoving = false;
+                //speed *= 1000;
             }
             yield return null;
         }

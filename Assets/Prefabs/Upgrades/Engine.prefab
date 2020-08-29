@@ -48,21 +48,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872d5006793e62e4cb25046872caafa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 
-  uName: 
-  desc: 
-  priceBottom: 0
-  priceTop: 0
-  priceModifier: 0
-  priceOffered: 0
-  effectRangeBottom: 9
-  effectRangeTop: 12
-  effectOffered: 0.007
+  type: engine
+  priceIncreasePercentBottom: 0.09
+  priceIncreasePercentTop: 0.12
+  priceModifier: 3
+  priceOffered: 100
+  effectRangeBottom: 0.09
+  effectRangeTop: 0.12
+  effectOffered: 0.002
   effectModifier: 2
   statAffected: speed
   upgradeLevel: 0
-  FlavorTexts:
+  flavorTexts:
   - flavorName: Engine I
-    flavorDesc: This is the first engine.
+    flavorDesc: It's the first engine
   - flavorName: Engine II
-    flavorDesc: This is the second engine.
+    flavorDesc: It's the second engine
