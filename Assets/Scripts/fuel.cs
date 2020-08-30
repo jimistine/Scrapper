@@ -38,4 +38,7 @@ public bool hasFuel;
         
 
     }
+    public void UpdateFuelPercent(){
+        currentFuelPercent = (currentFuelUnits/maxFuel) * 100;
+    }
 }

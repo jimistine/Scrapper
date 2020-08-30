@@ -15,26 +15,6 @@ public class UpgradeManager : MonoBehaviour
 
     public float priceModApplied;
     public float effectModApplied; 
-    // public float upgradePriceTop;
-    // public float upgradePriceModifier;
-    // public float upgradePriceOffered;
-    // public float effectRangeBottom;
-    // public float effectRangeTop;
-    // public float effectOffered;
-    // public float effectModifier;
-    // public float statAffected;
-    // public int upgradeLevel;
-
-    /*
-        - we need dictionaries for each upgrade type with name and desc as entries
-        - if we keep a dictionary of dictionaries it would be upgrade type and the relevant dic
-        - then we look at the main dic, find the matching type, and apply the name and desc from the
-            index according to the upgrade level
-
-        or each upgrade has dictionary with names and descs
-        then we match the upgrade level to the index of that dic and go from there
-    */
-
    
     void Start()
     {
@@ -48,13 +28,10 @@ public class UpgradeManager : MonoBehaviour
     public Upgrade CalculateUpgrade(Upgrade upgrade){
         if(upgrade.type == "engine"){
             PlayerManager.gameObject.GetComponent<clickToMove>().speed += upgrade.effectOffered;
-            // maybe the UI update gets called here too?
         }
         if(upgrade.type == "reactor"){
             PlayerManager.gameObject.GetComponent<fuel>().maxFuel += upgrade.effectOffered;
         }
-        
-        //upgrade.statAffected += upgrade.effectOffered;
         upgrade.upgradeLevel++;
         // every time it's divisible by 5, the increments are bigger
         if (upgrade.upgradeLevel % 5 == 0){

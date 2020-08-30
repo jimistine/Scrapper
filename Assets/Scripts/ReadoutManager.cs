@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ReadoutManager : MonoBehaviour
 {
@@ -26,6 +27,16 @@ public class ReadoutManager : MonoBehaviour
         UIM.readoutValue.text = newScrap.value.ToString("Value: " + "#,#" + " cr.");
         Debug.Log("scprap image value: " + newScrap.image);
         UIM.readoutImage.sprite = (Sprite)scrapImages[newScrap.image];
+        return null;
+    }
+    public ScrapObject ShowTickReadout(ScrapObject tickScrap){
+        UIM.tickReadout.transform.Find("Name").gameObject.GetComponent<TextMeshProUGUI>().text = tickScrap.scrapName;
+        UIM.tickReadout.transform.Find("Material").gameObject.GetComponent<TextMeshProUGUI>().text = tickScrap.material;
+        UIM.tickReadout.transform.Find("Image").gameObject.GetComponent<Image>().sprite = (Sprite)scrapImages[tickScrap.image];
+        UIM.tickReadout.transform.Find("Description").gameObject.GetComponent<TextMeshProUGUI>().text = tickScrap.description;
+        UIM.tickReadout.transform.Find("Size").gameObject.GetComponent<TextMeshProUGUI>().text = string.Format("Size: {0:#,#}", tickScrap.size + " m<sup>3</sup>");
+        UIM.tickReadout.transform.Find("Value").gameObject.GetComponent<TextMeshProUGUI>().text = tickScrap.value.ToString("Value: " + "#,#" + " cr.");
+        UIM.tickReadout.SetActive(true);
         return null;
     }
 }

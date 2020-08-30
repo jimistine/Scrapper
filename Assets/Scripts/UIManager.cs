@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
     public GameObject scrapTickBackup;
     public GameObject scrapTickSlots;
 
-    [Header("Readout")]
+    [Header("Overworld Readouts")]
     [Space(5)]
     public GameObject readoutPanel;
     public TextMeshProUGUI readoutName;
@@ -53,62 +53,30 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI readoutSize;
     public TextMeshProUGUI readoutValue;
     public Image readoutImage;
-    public Button readoutTakeButt;
-    public Button readoutLeaveButt;
+    public GameObject tickReadout;
+    public ScrapObject tickScrap;
+
     
     [Header("Town")]
     [Space(5)]
     public GameObject TownUI;
+    public GameObject townHub;
     public Button enterTownButton;
-    public TextMeshProUGUI fuelMerchantReadout;
+    public string playerLocation;
 
     [Header("Scrap Buyer")]
+    [Space(10)]
+    public GameObject scrapBuyer;
+    public TextMeshProUGUI scrapBuyerReadout;
+    public ScrapObject scrapToTake;
     [Space(5)]
-    public TextMeshProUGUI scrapMerchantReadout;
-    public TextMeshProUGUI scrapMerchantWelcome;
-    public TextMeshProUGUI fuelMerchantWelcome;
-    [Space(10)]
-    public TextMeshProUGUI engineName;
-    public TextMeshProUGUI engineDesc;
-    public TextMeshProUGUI engineStat;
-    public TextMeshProUGUI enginePrice;
-    public Button upgradeEngineButt;
-    [Space(10)]
-    public TextMeshProUGUI reactorName;
-    public TextMeshProUGUI reactorDesc;
-    public TextMeshProUGUI reactorStat;
-    public TextMeshProUGUI reactorPrice;
-    public Button upgradeReactorButt;
-    [Space(10)]
-    public TextMeshProUGUI haulerName;
-    public TextMeshProUGUI haulerDesc;
-    public TextMeshProUGUI haulerStat;
-    public TextMeshProUGUI haulerPrice;
-    public Button upgradeHaulerButt;
-    [Space(10)]
-    public TextMeshProUGUI searchName;
-    public TextMeshProUGUI searchDesc;
-    public TextMeshProUGUI searcgStat;
-    public TextMeshProUGUI searchPrice;
-    public Button upgradeSearchButt;
-    [Space(10)]
-    public TextMeshProUGUI droneName;
-    public TextMeshProUGUI droneDesc;
-    public TextMeshProUGUI droneStat;
-    public TextMeshProUGUI dronePrice;
-    public Button upgradeDroneButt;
-    [Space(10)]
     public List<GameObject> upgradePanels = new List<GameObject>();
     public int panelIndex;
     public string effectSuffix;
-
-    //public Button exitTownButton;
-
-
-    [Header("Other")]
-    [Space(5)]
-    public ScrapObject scrapToTake;
-    
+    [Header("Fuel Merchant")]
+    [Space(10)]
+    public GameObject fuelMerchant;
+    public TextMeshProUGUI fuelMerchantReadout;
 
     void Awake(){
         UIM = this;
@@ -148,28 +116,48 @@ public class UIManager : MonoBehaviour
 
     // 3. Player clicks "take" or "leave" and we do what they tell us
     public void TakeScrap(){
-        PlayerManager.TakeScrap(scrapToTake);
-        haulText.text = "Current Haul: " + PlayerManager.currentHaul.ToString("#,#") + " m<sup>3</sup>";
-        scrapTick = Instantiate(scrapTick) as GameObject;
-        scrapTick.transform.SetParent(scrapTickSlots.transform, false);
-        readoutPanel.SetActive(false);
-        PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
+        if((PlayerManager.currentHaul + scrapToTake.size) < PlayerManager.maxHaul){
+            PlayerManager.TakeScrap(scrapToTake);
+            haulText.text = "Current Haul: " + PlayerManager.currentHaul.ToString("#,#") + " m<sup>3</sup>";
+            scrapTick = Instantiate(scrapTick) as GameObject;
+            scrapTick.transform.SetParent(scrapTickSlots.transform, false);
+            readoutPanel.SetActive(false);
+            PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
+        }
+        else{
+            StartCoroutine(CantFitScrap());
+        }
     }
     public void LeaveScrap(){
         readoutPanel.SetActive(false);
         PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
     }
+    public IEnumerator CantFitScrap(){
+        int characterToTalk = Random.Range(1,3);
+        Debug.Log("Character int: " + characterToTalk);
+        if(characterToTalk == 1){
+            PlayerManager.hasronCallout.SetActive(true);
+            PlayerManager.hasronCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"Doesn't look like that's gonna fit...\"";
+            yield return new WaitForSeconds(3);
+            PlayerManager.hasronCallout.SetActive(false);
+        }
+        else{
+            PlayerManager.chipCallout.SetActive(true);
+            PlayerManager.chipCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"No way we're taking that right now.\"";
+            yield return new WaitForSeconds(3);
+            PlayerManager.chipCallout.SetActive(false);
+        }
+    }
+
     public int OnTickHover(int tickIndex){
-        ScrapObject tickScrap = PlayerManager.playerScrap[tickIndex];
-        readoutName.text = tickScrap.scrapName;
-        readoutDesc.text = tickScrap.description;
-        readoutSize.text = string.Format("Size: {0:#,#}", tickScrap.size + " m<sup>3</sup>");
-        readoutValue.text = tickScrap.value.ToString("Value: " + "#,#" + " cr.");
-        readoutPanel.SetActive(true);
+        tickScrap = PlayerManager.playerScrap[tickIndex];
+        PlayerManager.tickReadoutIndex = tickIndex;
+        ReadoutManager.ShowTickReadout(tickScrap);
         return tickIndex;
     }
     public void OnTickHoverExit(){
-        readoutPanel.SetActive(false);
+        tickReadout.SetActive(false);
+        PlayerManager.tickReadoutIndex = PlayerManager.playerScrap.Count + 1;
     }
 
 // TOWN AND MERCHANTS
@@ -177,48 +165,44 @@ public class UIManager : MonoBehaviour
         enterTownButton.gameObject.SetActive(true);
     }
     public void EnterTown(){
+        PlayerManager.TogglePlayerMovement();
         enterTownButton.gameObject.SetActive(false);
         haulText.color = (Color.white);
         fuelText.color = (Color.white);
         creditText.color = (Color.white);
+        playerLocation = "town hub";
         TownUI.SetActive(true);
     }
     public void LeaveTown(){
+        PlayerManager.TogglePlayerMovement();
         haulText.color = (Color.black);
         fuelText.color = (Color.black);
         creditText.color = (Color.black);
         TownUI.SetActive(false);
-        scrapMerchantReadout.text = "\"Back again?\"";
+        scrapBuyerReadout.text = "\"Back again?\"";
     }
-
-    // SCRAP BUYER
-    public void enterScrapBuyer(){
-        // turn off the rest of town
-        // turn on scrap buyer stuff
-    }
-    public void cantSellScrap(){
-        scrapMerchantReadout.text = "\"You two ah, don't have any scrap.\"";
-    }
-    public void SoldScrap(){
-        scrapMerchantReadout.text = "\"It's yours\"\nYou made: " + 
-            "<color=#D44900>" + MerchantManager.scrapValue.ToString("#,#") + " credits.";
-        creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#");
-        haulText.text = "Current Haul: " + "0" + " m<sup>3</sup>";
-        for(int i = scrapTickSlots.transform.childCount - 1; i >= 0; i--){
-            GameObject.Destroy(scrapTickSlots.transform.GetChild(i).gameObject);
+    public void BackToHub(){
+        if(playerLocation == "scrap buyer"){
+            scrapBuyer.SetActive(false);
+            townHub.SetActive(true);
         }
-        scrapTick = scrapTickBackup;
+        if(playerLocation == "fuel merchant"){
+            fuelMerchant.SetActive(false);
+            townHub.SetActive(true);
+        }
+        playerLocation = "town hub";
     }
     public void BoughtUpgrade(Upgrade upgrade){
+        // cant afford?
         if(upgrade.type == "engine"){
             panelIndex = 0;
             effectSuffix = " kph";
-            scrapMerchantReadout.text = "You bought a nice new engine, kiddo!";
+            scrapBuyerReadout.text = "\"You bought a nice new engine, kiddos!\"";
         }
         if(upgrade.type == "reactor"){
             panelIndex = 1;
             effectSuffix = " deuterium cassets";
-            scrapMerchantReadout.text = "You bought a nice new fusion reactor, kiddo!";
+            scrapBuyerReadout.text = "\"You bought a nice new fusion reactor, kiddos!\"";
         }
         Debug.Log("Panel index: " + panelIndex);
         upgradePanels[panelIndex].transform.Find("Name").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorName;
@@ -233,20 +217,54 @@ public class UIManager : MonoBehaviour
             upgradePanels[panelIndex].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = "+" + upgrade.effectOffered.ToString("F") + effectSuffix;
         }
     }
+
+    // SCRAP BUYER
+    public void enterScrapBuyer(){
+        townHub.SetActive(false);
+        scrapBuyer.SetActive(true);
+        playerLocation = "scrap buyer";
+        // this should be pulling from a list of welcomes
+        scrapBuyerReadout.text = "\"How are you all doin?\"";
+    }
+    public void cantSellScrap(){
+        scrapBuyerReadout.text = "\"You two ah, don't have any scrap for me.\"";
+    }
+    public void SoldScrap(){
+        scrapBuyerReadout.text = "\"It's yours\"\nYou made: " + 
+            "<color=#D44900>" + MerchantManager.scrapValue.ToString("#,#") + " credits.";
+        creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#");
+        haulText.text = "Current Haul: " + "0" + " m<sup>3</sup>";
+        for(int i = scrapTickSlots.transform.childCount - 1; i >= 0; i--){
+            GameObject.Destroy(scrapTickSlots.transform.GetChild(i).gameObject);
+        }
+        scrapTick = scrapTickBackup;
+    }
     
     
 
     // FUEL MERCHANT
     public void enterFuelMerchant(){
-
+        townHub.SetActive(false);
+        fuelMerchant.SetActive(true);
+        playerLocation = "fuel merchant";
+        // this should be pulling from a list of welcomes
+        fuelMerchantReadout.text = "\"Welcome to my establishment, gentlepersons.\"";
     }
     public void BoughtFuel(){
-        fuelMerchantReadout.text = "\"That'll be " + MerchantManager.creditsToTakeFuel.ToString("#,#") + " credits.\"";
+        fuelMerchantReadout.text = "\"That will be " + MerchantManager.creditsToTakeFuel.ToString("#,#") + " credits.\"";
+        fuleManager.UpdateFuelPercent();
+        Debug.Log("Fuel text" + fuelText.text);
         creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#");
+    }
+    public void FuelAlreadyFull(){
+        fuelMerchantReadout.text = "\"It seems that your reactor is already at maximum capacity.\"";
     }
     public void CantAffordFill(){
         fuelMerchantReadout.text = "\"I am sorry, friend, but that is only enough for a partial fuel refill. I will provide for you what I can.\"";
         creditText.text = "Credits: 0 cr.";
+    }
+    public void TweakedReactor(){
+        fuelMerchantReadout.text = "\"I am not capable of adjusting your reactor, yet.\"";
     }
     
 }

@@ -865,7 +865,7 @@ GameObject:
   - component: {fileID: 803894965}
   - component: {fileID: 803894966}
   m_Layer: 5
-  m_Name: CH1-P Dialogue Panel
+  m_Name: CH1-P Callout
   m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1344,9 +1344,12 @@ MonoBehaviour:
   fuelLevel: 0
   searchRadius: {fileID: 1106422493}
   currentHaul: 0
-  maxHaul: 0
+  maxHaul: 10000000
   playerCredits: 10000
   playerScrap: []
+  hasronCallout: {fileID: 1625353614}
+  chipCallout: {fileID: 803894964}
+  tickReadoutIndex: 0
 --- !u!50 &1106422492
 Rigidbody2D:
   serializedVersion: 4
@@ -1608,7 +1611,7 @@ GameObject:
   - component: {fileID: 1625353615}
   - component: {fileID: 1625353616}
   m_Layer: 5
-  m_Name: Hasron Dialogue Panel
+  m_Name: Hasron Callout
   m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

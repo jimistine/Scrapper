@@ -14,20 +14,9 @@ public class ScrapTickOnHover : MonoBehaviour
 
     }
 
-    void OnMouseOver()
-    {
-        
-    }
-
-    void OnMouseExit()
-    {
-        //The mouse is no longer hovering over the GameObject so output this message each frame
-        
-    }
-
     public void OnPointerEnter(PointerEventData eventData){
         Debug.Log("Mouse is over GameObject.");
-        GameObject tickSlots = gameObject.transform.parent.gameObject;
+       // GameObject tickSlots = gameObject.transform.parent.gameObject;
         tickIndex = transform.GetSiblingIndex();
         UIManager.OnTickHover(tickIndex);
     }

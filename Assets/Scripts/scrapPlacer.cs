@@ -73,12 +73,12 @@ public class scrapPlacer : MonoBehaviour
             // get location of everything with tag scrap
             GameObject[] spawnedScrap = GameObject.FindGameObjectsWithTag("Scrap");
             // if distance between position and any other scrap or obstacle is < minimum distance, generate a new position
-                for(int i = 0; i < spawnedScrap.Length; i++){
-                    if(Vector3.Distance(position, spawnedScrap[i].transform.position) <= minDistance){
-                        position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), -5f);
-                        i = 0;
-                    }   
-                }
+            for(int i = 0; i < spawnedScrap.Length; i++){
+                if(Vector3.Distance(position, spawnedScrap[i].transform.position) <= minDistance){
+                    position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), 0);
+                    i = 0;
+                }   
+            }
             // spawn that $hit
             GameObject copiedScrap = (Instantiate(sampleScrap, position, Quaternion.identity));
             copiedScrap.transform.parent = gameObject.transform;

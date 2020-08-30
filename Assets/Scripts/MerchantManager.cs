@@ -59,27 +59,6 @@ public class MerchantManager : MonoBehaviour
     [Space(5)]
     public float scrapValue;
 
-    // for slightly randomizeing the price and effectiveness the upgrades
-    // public float enginePriceBottom;
-    // public float enginePriceTop;
-    // public float enginePriceModifier;
-    // public float enginePriceOffered;
-    // public float speedRangeBottom;
-    // public float speedRangeTop;
-    // public float speedUpgradeOffered;
-    // public float speedUpgradeModifier;
-    // public int engineUpgradeLevel = 0;
-
-    // public float fuelTankPriceBottom;
-    // public float fuelTankPriceTop;
-    // public float fuelTankPriceModifier;
-    // public float fuelTankPriceOffered;
-    // public float maxFuelRangeBottom;
-    // public float maxFuelRangeTop;
-    // public float maxFuelUpgradeOffered;
-    // public float maxFuelUpgradeModifier;
-    // public int fuelTankUpgradeLevel = 0;
-
 
     [Header("Fuel Merchant")]
     [Space(5)]
@@ -96,9 +75,7 @@ public class MerchantManager : MonoBehaviour
     }
 
     void Update(){
-        // if (Input.GetMouseButtonDown(0)){
-        //     BuyUpgrade(UpgradeCalculator.upgrades.Find(x => x.upgradeName == EventSystem.current.currentSelectedGameObject.name));
-        // }
+       
     }
 
 // SCRAP BUYER
@@ -120,58 +97,9 @@ public class MerchantManager : MonoBehaviour
 
     // Upgrades
     public void BuyUpgrade(string upgrade){
-        //Debug.Log(UpgradeManager.upgrades.Find(x => x.type == upgrade));
-        Upgrade upgradeToCalculate = UpgradeManager.upgrades.Find(x => x.type == upgrade); //UpgradeManager.upgrades.Contains(new Upgrade {type = upgrade.type, uName = ""});
-        //Debug.Log(UpgradeManager.upgrades);
+        Upgrade upgradeToCalculate = UpgradeManager.upgrades.Find(x => x.type == upgrade);
         PlayerManager.playerCredits -= upgradeToCalculate.priceOffered;
         UpgradeManager.CalculateUpgrade(upgradeToCalculate);
-    }
-
-    // public void BuyEngineUpgrade(){
-    //     // initial values for speed and price offered are entered by jimi, maybe calculated on average scrap selling price
-    //     // increase speed
-    //     PlayerManager.clickToMove.speed += speedUpgradeOffered;
-    //     // take their money
-    //     PlayerManager.playerCredits -= enginePriceOffered;
-    //     // keep track of upgrade progressoin with int?
-    //     engineUpgradeLevel++;
-    //     // every time it's divisible by 5, the increments are bigger
-    //     if (engineUpgradeLevel % 5 == 0){
-    //         enginePriceOffered += enginePriceModifier * (enginePriceOffered * Random.Range(enginePriceBottom, enginePriceTop));
-    //         speedUpgradeOffered += speedUpgradeModifier * (speedUpgradeOffered * Random.Range(speedRangeBottom, speedRangeTop));
-    //     }
-    //     else{
-    //         // increment price per level
-    //         enginePriceOffered += enginePriceOffered * Random.Range(enginePriceBottom, enginePriceTop);
-    //         // increment effect per level
-    //         speedUpgradeOffered += speedUpgradeOffered * Random.Range(speedRangeBottom, speedRangeTop);
-    //     }
-    //     // merchant says something about it and the engine name changes
-        
-    // }
-    // public void BuyFuelUpgrade(){
-    //     PlayerManager.fuelManager.maxFuel += maxFuelUpgradeOffered;
-    //     PlayerManager.playerCredits -= fuelTankPriceOffered;
-    //     fuelTankUpgradeLevel++;
-    //     if (fuelTankUpgradeLevel % 5 == 0){
-    //         fuelTankPriceOffered += fuelTankPriceModifier * (fuelTankPriceOffered * Random.Range(fuelTankPriceBottom, fuelTankPriceTop));
-    //         maxFuelUpgradeOffered += maxFuelUpgradeModifier * (maxFuelUpgradeOffered * Random.Range(maxFuelRangeBottom, maxFuelRangeTop));
-    //     }
-    //     else{
-    //         fuelTankPriceOffered += fuelTankPriceOffered * Random.Range(fuelTankPriceBottom, fuelTankPriceTop);
-    //         maxFuelUpgradeOffered += maxFuelUpgradeOffered * Random.Range(maxFuelRangeBottom, maxFuelRangeTop);
-    //     }
-        
-    // }
-
-    public void BuyHaulSizeUpgrade(){
-        
-    }
-    public void BuySearchRadiusUpgrade(){
-        
-    }
-    public void BuyMapScaleUpgrade(){
-        
     }
 
 // FUEL MERCHANT
@@ -181,9 +109,14 @@ public class MerchantManager : MonoBehaviour
         creditsToTakeFuel = fuelToAdd * fuelPrice;
         // Can they afford a fill?
         if(PlayerManager.playerCredits >= creditsToTakeFuel){
+            if (PlayerManager.fuelManager.currentFuelUnits == PlayerManager.fuelManager.maxFuel){
+                UIManager.FuelAlreadyFull();
+            }
+            else{
             PlayerManager.playerCredits -= creditsToTakeFuel;
             PlayerManager.fuelManager.currentFuelUnits = PlayerManager.fuelManager.maxFuel;
             UIManager.BoughtFuel();
+            }
         }
         else{
             fuelToAdd = PlayerManager.playerCredits / fuelPrice;
@@ -192,7 +125,7 @@ public class MerchantManager : MonoBehaviour
             UIManager.CantAffordFill();
         }
     }
-    public void UpgradeFuelEfficiency(){
-        
+    public void TweakReactor(){
+        UIManager.TweakedReactor();
     }
 }

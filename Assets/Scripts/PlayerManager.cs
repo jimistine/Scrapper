@@ -34,6 +34,12 @@ public class PlayerManager : MonoBehaviour
     bool canPlayerMove = true;
     float playerSpeedTemp;
 
+    [Header("UI")]
+    [Space(5)]
+    public GameObject hasronCallout;
+    public GameObject chipCallout;
+    public int tickReadoutIndex;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -65,6 +71,9 @@ public class PlayerManager : MonoBehaviour
                 }
             }    
         }
+        if(Input.GetKeyDown(KeyCode.Q) && UIManager.tickReadout.activeSelf){
+            DropScrap(tickReadoutIndex);
+        }
     }
 
     
@@ -78,27 +87,20 @@ public class PlayerManager : MonoBehaviour
             UIManager.OfferTown();
         }
     }
-    // void OnCollisionEnter2D(Collision2D other){
-    //     if(other.gameObject.tag == "Scrap"){
-    //         ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
-    //         UIManager.ShowScrap(newScrap);
-    //     }
-    
-    // 3. If they clicked Take, take it
+   
+    // 3. If they clicked Take and they can fit it, take it
     public ScrapObject TakeScrap(ScrapObject takenScrap){
-        if((currentHaul + takenScrap.size) < maxHaul){
             takenScrap.gameObject.SetActive(false);
             currentHaul += takenScrap.size;
             playerScrap.Add(takenScrap);
             foreach(ScrapObject scrap in playerScrap){
                 Debug.Log("Player has: " + scrap.GetComponent<ScrapObject>().scrapName);
             }
-        }
-        else{
-            //character says something
-        }
-        
         return null;
+    }
+    public void DropScrap(int tickScrapIndex){
+        playerScrap.RemoveAt(tickScrapIndex);
+        GameObject.Destroy(UIManager.scrapTickSlots.transform.GetChild(tickScrapIndex).gameObject);
     }
 
     // For whenever we need to stop em in their tracks
@@ -107,6 +109,7 @@ public class PlayerManager : MonoBehaviour
             playerSpeedTemp = clickToMove.speed;
             clickToMove.speed = 0;
             Debug.Log("Stopped at: " + playerSpeedTemp);
+            clickToMove.isMoving = false;
             canPlayerMove = false;
         }
         else{
