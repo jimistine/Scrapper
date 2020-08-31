@@ -23,7 +23,7 @@ public class ReadoutManager : MonoBehaviour
         UIM.readoutName.text = newScrap.scrapName;
         UIM.readoutMat.text = newScrap.material;
         UIM.readoutDesc.text = newScrap.description;
-        UIM.readoutSize.text = string.Format("Size: {0:#,#}", newScrap.size + " m<sup>3</sup>");
+        UIM.readoutSize.text = newScrap.size.ToString("Size: " + "#,#" + " m<sup>3</sup>");
         UIM.readoutValue.text = newScrap.value.ToString("Value: " + "#,#" + " cr.");
         Debug.Log("scprap image value: " + newScrap.image);
         UIM.readoutImage.sprite = (Sprite)scrapImages[newScrap.image];
@@ -34,7 +34,7 @@ public class ReadoutManager : MonoBehaviour
         UIM.tickReadout.transform.Find("Material").gameObject.GetComponent<TextMeshProUGUI>().text = tickScrap.material;
         UIM.tickReadout.transform.Find("Image").gameObject.GetComponent<Image>().sprite = (Sprite)scrapImages[tickScrap.image];
         UIM.tickReadout.transform.Find("Description").gameObject.GetComponent<TextMeshProUGUI>().text = tickScrap.description;
-        UIM.tickReadout.transform.Find("Size").gameObject.GetComponent<TextMeshProUGUI>().text = string.Format("Size: {0:#,#}", tickScrap.size + " m<sup>3</sup>");
+        UIM.tickReadout.transform.Find("Size").gameObject.GetComponent<TextMeshProUGUI>().text = tickScrap.size.ToString("Size: "+ "#,#" + " m<sup>3</sup>");
         UIM.tickReadout.transform.Find("Value").gameObject.GetComponent<TextMeshProUGUI>().text = tickScrap.value.ToString("Value: " + "#,#" + " cr.");
         UIM.tickReadout.SetActive(true);
         return null;

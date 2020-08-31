@@ -52,4 +52,14 @@ public class SceneController : MonoBehaviour
         PlayerManager.TogglePlayerMovement();
         //SceneManager.LoadScene("OverworldScene", LoadSceneMode.Additive);
     }
+
+
+
+
+
+
+
+    public void RestartGame(){
+        SceneManager.LoadScene("ManagerScene");
+    }
 }
