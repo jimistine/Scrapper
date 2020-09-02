@@ -15,12 +15,13 @@ public class PlayerManager : MonoBehaviour
     public fuel fuelManager;
     public clickToMove clickToMove;
     public UIManager UIManager;
+    //public scrapPlacer scrapPlacer;
 
     [Header("Rig Stats")]
     [Space(5)]
     public float currentSpeed;
     public float fuelLevel;
-    public Collider2D searchRadius;
+    public CircleCollider2D searchRadius;
 
     [Header("Player Inventory")]
     [Space(5)]
@@ -72,7 +73,11 @@ public class PlayerManager : MonoBehaviour
             }    
         }
         if(Input.GetKeyDown(KeyCode.Q) && UIManager.tickReadout.activeSelf){
+            Debug.Log("GetKey scrap index: "+ tickReadoutIndex);
             DropScrap(tickReadoutIndex);
+        }
+        if(Input.GetMouseButtonDown(1)){
+            RigManager.RM.ChangeZoom(Camera.main.orthographicSize);
         }
     }
 
@@ -91,16 +96,22 @@ public class PlayerManager : MonoBehaviour
     // 3. If they clicked Take and they can fit it, take it
     public ScrapObject TakeScrap(ScrapObject takenScrap){
             takenScrap.gameObject.SetActive(false);
-            currentHaul += takenScrap.size;
+            //currentHaul += takenScrap.size;
             playerScrap.Add(takenScrap);
+            UpdateCurrentHaul();
             foreach(ScrapObject scrap in playerScrap){
                 Debug.Log("Player has: " + scrap.GetComponent<ScrapObject>().scrapName);
             }
         return null;
     }
     public void DropScrap(int tickScrapIndex){
+        Debug.Log("Index Called: " + tickScrapIndex);
+        Debug.Log("Object at index on player: " + playerScrap[tickScrapIndex].scrapName);
+        scrapPlacer.SP.SpawnDroppedScrap(playerScrap[tickScrapIndex]);
         playerScrap.RemoveAt(tickScrapIndex);
         GameObject.Destroy(UIManager.scrapTickSlots.transform.GetChild(tickScrapIndex).gameObject);
+        UpdateCurrentHaul();
+        UIManager.tickReadout.SetActive(false);
     }
 
     // For whenever we need to stop em in their tracks
@@ -108,14 +119,21 @@ public class PlayerManager : MonoBehaviour
         if(canPlayerMove){
             playerSpeedTemp = clickToMove.speed;
             clickToMove.speed = 0;
-            Debug.Log("Stopped at: " + playerSpeedTemp);
+            //Debug.Log("Stopped at: " + playerSpeedTemp);
             clickToMove.isMoving = false;
             canPlayerMove = false;
         }
         else{
             clickToMove.speed = playerSpeedTemp;
-            Debug.Log("Started at: " + clickToMove.speed);
+            //Debug.Log("Started at: " + clickToMove.speed);
             canPlayerMove = true;
+        }
+    }
+
+    public void UpdateCurrentHaul(){
+        currentHaul = 0;
+        foreach(ScrapObject scrap in playerScrap){
+            currentHaul += scrap.size;
         }
     }
 }

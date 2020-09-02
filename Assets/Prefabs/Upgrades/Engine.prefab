@@ -59,6 +59,7 @@ MonoBehaviour:
   effectModifier: 2
   statAffected: speed
   upgradeLevel: 0
+  upgradeLevelMax: 1
   flavorTexts:
   - flavorName: Engine I
     flavorDesc: It's the first engine

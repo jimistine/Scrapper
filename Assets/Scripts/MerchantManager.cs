@@ -87,6 +87,7 @@ public class MerchantManager : MonoBehaviour
             }
             PlayerManager.playerCredits += scrapValue;
             PlayerManager.playerScrap.Clear();
+            PlayerManager.UpdateCurrentHaul();
             Debug.Log("cleared inventory");
             UIManager.SoldScrap();
         }
@@ -96,10 +97,18 @@ public class MerchantManager : MonoBehaviour
     }
 
     // Upgrades
-    public void BuyUpgrade(string upgrade){
+    public void BuyUpgrade(string upgrade){ // button passes name of upgrade as string
+        // upgrade values are in a list on Upgrade Manager, edit Updgrades starter in inspector 
+        //    and we populate the rest as we go.
+        // Check progress of upgrades as childered of Merchant Manager object
         Upgrade upgradeToCalculate = UpgradeManager.upgrades.Find(x => x.type == upgrade);
-        PlayerManager.playerCredits -= upgradeToCalculate.priceOffered;
-        UpgradeManager.CalculateUpgrade(upgradeToCalculate);
+        if(upgradeToCalculate.upgradeLevel == upgradeToCalculate.upgradeLevelMax){
+            UIManager.UpgradeAlreadyMaxed(upgradeToCalculate);
+        }
+        else{
+            PlayerManager.playerCredits -= upgradeToCalculate.priceOffered;
+            UpgradeManager.CalculateUpgrade(upgradeToCalculate);
+        }
     }
 
 // FUEL MERCHANT

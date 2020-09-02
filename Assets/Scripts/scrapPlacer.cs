@@ -36,8 +36,39 @@ public class scrapPlacer : MonoBehaviour
    Scrap incomingScrap;
 
     // Start is called before the first frame update
+    public static scrapPlacer SP;
+    void Awake(){
+        SP = this;
+    }
+    
     void Start(){
         SpawnAllScrap();
+    }
+
+    public void SpawnOneScrap(){
+
+    }
+    public void SpawnDroppedScrap(ScrapObject droppedScrap){
+            Debug.Log("Dropping a " + droppedScrap.scrapName);
+            GameObject droppedScrapObj = sampleScrap;
+            droppedScrapObj.GetComponent<ScrapObject>().scrapName = droppedScrap.scrapName;
+            droppedScrapObj.GetComponent<ScrapObject>().scrapName = droppedScrap.scrapName;
+            droppedScrapObj.GetComponent<ScrapObject>().description = droppedScrap.description;
+            droppedScrapObj.GetComponent<ScrapObject>().image = droppedScrap.image;
+            droppedScrapObj.GetComponent<ScrapObject>().size = droppedScrap.size;
+            droppedScrapObj.GetComponent<ScrapObject>().value = droppedScrap.value;
+            droppedScrapObj.GetComponent<ScrapObject>().material = droppedScrap.material;
+            droppedScrapObj.GetComponent<ScrapObject>().zoneA_rarity = droppedScrap.zoneA_rarity;
+            droppedScrapObj.GetComponent<ScrapObject>().zoneB_rarity = droppedScrap.zoneB_rarity;
+            droppedScrapObj.GetComponent<ScrapObject>().zoneC_rarity = droppedScrap.zoneC_rarity;
+            droppedScrapObj.GetComponent<ScrapObject>().zoneD_rarity = droppedScrap.zoneD_rarity;
+            droppedScrapObj.GetComponent<ScrapObject>().carriesComponents = droppedScrap.carriesComponents;
+            droppedScrapObj.GetComponent<ScrapObject>().isBuried = droppedScrap.isBuried;
+            droppedScrapObj.SetActive(true);
+            Instantiate(droppedScrapObj, PlayerManager.PM.gameObject.transform.position, Quaternion.identity);
+            droppedScrap.transform.parent = PlayerManager.PM.gameObject.transform;
+
+           // return null;
     }
 
     void SpawnAllScrap(){

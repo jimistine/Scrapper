@@ -19,6 +19,7 @@ public class ScrapTickOnHover : MonoBehaviour
        // GameObject tickSlots = gameObject.transform.parent.gameObject;
         tickIndex = transform.GetSiblingIndex();
         UIManager.OnTickHover(tickIndex);
+        PlayerManager.PM.tickReadoutIndex = tickIndex;
     }
 
     public void OnPointerExit(PointerEventData eventData){

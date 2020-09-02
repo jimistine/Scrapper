@@ -826,7 +826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 316715209249053811, guid: 563599bed92065c458ee03a298bfbefd, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 316715209249053811, guid: 563599bed92065c458ee03a298bfbefd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1173,8 +1173,8 @@ Transform:
   - {fileID: 514006759}
   - {fileID: 1106422486}
   - {fileID: 92558897}
-  - {fileID: 406646341}
   - {fileID: 1610507014}
+  - {fileID: 406646341}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1577,7 +1577,7 @@ Transform:
   m_LocalScale: {x: 14.88, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 949542504}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1610507015
 Rigidbody2D:

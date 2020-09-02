@@ -20,31 +20,48 @@ public class UpgradeManager : MonoBehaviour
     {
         UIM = UIManager.UIM;
         PlayerManager = PlayerManager.PM;
-        for(int i = 0; i < upgradesStarter.Count; i++){
+        // Populate the run time upgrades from the starter prefabs
+        for(int i = 0; i < upgradesStarter.Count; i++){ 
             upgrades.Add(Instantiate(upgradesStarter[i], this.transform));
         }
     }
 
     public Upgrade CalculateUpgrade(Upgrade upgrade){
+        // what stat are we touching? (can these be made a part of the upgrade class?)
         if(upgrade.type == "engine"){
             PlayerManager.gameObject.GetComponent<clickToMove>().speed += upgrade.effectOffered;
         }
         if(upgrade.type == "reactor"){
             PlayerManager.gameObject.GetComponent<fuel>().maxFuel += upgrade.effectOffered;
         }
+        if(upgrade.type == "storage bay"){
+            PlayerManager.maxHaul += upgrade.effectOffered;
+        }
+        if(upgrade.type == "scanner"){
+            PlayerManager.searchRadius.radius += upgrade.effectOffered;
+        }
+        if(upgrade.type == "drone"){
+            RigManager.RM.zoomLevels.Add(upgrade.effectOffered);
+        }
         upgrade.upgradeLevel++;
-        // every time it's divisible by 5, the increments are bigger
+        // every time upgrade level is divisible by 5, the increments are bigger
         if (upgrade.upgradeLevel % 5 == 0){
             priceModApplied = upgrade.priceModifier;
             effectModApplied = upgrade.effectModifier;
+            // and maybe the shopkeep says something about it
         }
-        else{
+        else{ // otherwise we don't boost the stats
             priceModApplied = 1; effectModApplied = 1;
         }
         // increment price per level
         upgrade.priceOffered += priceModApplied * (upgrade.priceOffered * Random.Range(upgrade.priceIncreasePercentBottom, upgrade.priceIncreasePercentTop));
         // increment effect per level
-        upgrade.effectOffered += effectModApplied * (upgrade.effectOffered * Random.Range(upgrade.effectRangeBottom, upgrade.effectRangeTop));
+        if(upgrade.type == "drone"){
+            upgrade.effectOffered += 2;
+        }
+        else{
+            upgrade.effectOffered += effectModApplied * (upgrade.effectOffered * Random.Range(upgrade.effectRangeBottom, upgrade.effectRangeTop));
+        }
         // merchant says something about it and the name + desc. change
         UIM.BoughtUpgrade(upgrade);
 

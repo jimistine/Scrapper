@@ -15,6 +15,7 @@ public class Upgrade : MonoBehaviour
     public float effectModifier;
     public string statAffected;
     public int upgradeLevel;
+    public int upgradeLevelMax;
     [System.Serializable]
     public struct FlavorText{
         public string flavorName;
@@ -26,7 +27,7 @@ public class Upgrade : MonoBehaviour
                    FlavorText[] fTexts,
                    float uPriceBottom, float uPriceTop, float uPriceModifier, float uPriceOffered, 
                    float eRangeBottom, float eRangeTop, float eOffered, float eModifier, 
-                   string stAffected, int uLevel)
+                   string stAffected, int uLevel, int uLevelMax)
     {
         type = upgradeType;
         flavorTexts = fTexts;
@@ -40,5 +41,6 @@ public class Upgrade : MonoBehaviour
         effectModifier = eModifier;
         statAffected = stAffected;
         upgradeLevel = uLevel;
+        upgradeLevelMax = uLevelMax;
     }
 }
