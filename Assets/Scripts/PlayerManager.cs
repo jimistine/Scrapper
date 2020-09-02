@@ -58,6 +58,9 @@ public class PlayerManager : MonoBehaviour
         fuelLevel = fuelManager.currentFuelUnits;
         currentSpeed = clickToMove.currentSpeed;
 
+        if(fuelLevel <= 0){clickToMove.enabled = false;}
+        else{clickToMove.enabled = true;}
+
         // INTERACTIONS
         if (Input.GetMouseButtonDown(0)) {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

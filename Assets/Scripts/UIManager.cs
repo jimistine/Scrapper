@@ -81,6 +81,7 @@ public class UIManager : MonoBehaviour
     [Space(10)]
     public GameObject fuelMerchant;
     public TextMeshProUGUI fuelMerchantReadout;
+    public TextMeshProUGUI fillFuelButtonText;
 
     void Awake(){
         UIM = this;
@@ -108,7 +109,9 @@ public class UIManager : MonoBehaviour
         else{
             haulText.text = "Current Haul: 0 m<sup>3</sup>";
         }
-
+        if(PlayerManager.fuelLevel == PlayerManager.fuelManager.maxFuel){
+            fillFuelButtonText.text = "Cassets full.";
+        }
     }
 
     // 1. PlayerManager has found scrap 
@@ -286,11 +289,10 @@ public class UIManager : MonoBehaviour
         townHub.SetActive(false);
         fuelMerchant.SetActive(true);
         playerLocation = "fuel merchant";
-        // this should be pulling from a list of welcomes
-        fuelMerchantReadout.text = "\"Welcome to my establishment, gentlepersons.\"";
+        MerchantManager.EnterFuelMerchant();
     }
     public void BoughtFuel(){
-        fuelMerchantReadout.text = "\"That will be " + MerchantManager.creditsToTakeFuel.ToString("#,#") + " credits.\"";
+        fuelMerchantReadout.text = "\"Thank you for the credits. I assure you it will be put to good use.\"";
         fuleManager.UpdateFuelPercent();
         Debug.Log("Fuel text" + fuelText.text);
         //creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#");

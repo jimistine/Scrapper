@@ -50,10 +50,10 @@ public class MerchantManager : MonoBehaviour
                 - They had just enough to get what they needed
     */
 
-
     public PlayerManager PlayerManager;
     public UIManager UIManager;
     public UpgradeManager UpgradeManager;
+
 
     [Header("Scrap Buyer")]
     [Space(5)]
@@ -65,6 +65,7 @@ public class MerchantManager : MonoBehaviour
     public float fuelPrice;
     public float fuelToAdd;
     public float creditsToTakeFuel;
+    public float towPriceModifier;
 
 
     void Start()
@@ -112,10 +113,24 @@ public class MerchantManager : MonoBehaviour
     }
 
 // FUEL MERCHANT
-    public void FillFuel(){
-        // How much is it to fill up?
+    public void EnterFuelMerchant(){
+        // put the price on the button
         fuelToAdd = PlayerManager.fuelManager.maxFuel - PlayerManager.fuelManager.currentFuelUnits;
         creditsToTakeFuel = fuelToAdd * fuelPrice;
+        UIManager.fillFuelButtonText.text = creditsToTakeFuel.ToString("#,#") + " cr.";
+        if(PlayerManager.fuelLevel <= 0 ){
+            UIManager.fuelMerchantReadout.text = "\"I am sorry to have retrieved you, but I am glad glad to see that you are unharmed. The fee is appreciated as always." 
+                +"\nPlease, buy your fill of what deuterium I have. \""
+                +"\n<sub>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " has been detucted from your account</sub>";
+                PlayerManager.playerCredits -= PlayerManager.playerCredits*towPriceModifier;
+        }
+        else{
+        // this should be pulling from a list of welcomes
+            UIManager.fuelMerchantReadout.text = "\"Welcome to my establishment, gentlepersons.\"";
+        }
+    }
+    public void FillFuel(){
+        // How much is it to fill up?
         // Can they afford a fill?
         if(PlayerManager.playerCredits >= creditsToTakeFuel){
             if (PlayerManager.fuelManager.currentFuelUnits == PlayerManager.fuelManager.maxFuel){
@@ -137,4 +152,5 @@ public class MerchantManager : MonoBehaviour
     public void TweakReactor(){
         UIManager.TweakedReactor();
     }
+
 }

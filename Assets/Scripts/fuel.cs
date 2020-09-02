@@ -33,7 +33,6 @@ public bool hasFuel;
         if(currentFuelUnits <= 0 && hasFuel){
             hasFuel = false;
             clickToMove.StartCoroutine("OutOfFuel");
-            
         }
         
 
