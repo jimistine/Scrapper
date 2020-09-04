@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+
 [System.Serializable]
 
 public class scrapPlacer : MonoBehaviour
@@ -34,6 +35,7 @@ public class scrapPlacer : MonoBehaviour
    float totalSpawningWeight;
    float randomScrapPick;
    Scrap incomingScrap;
+   Random shuffleRandom;
 
     // Start is called before the first frame update
     public static scrapPlacer SP;
@@ -48,6 +50,8 @@ public class scrapPlacer : MonoBehaviour
     public void SpawnOneScrap(){
 
     }
+
+    
     public void SpawnDroppedScrap(ScrapObject droppedScrap){
             Debug.Log("Dropping a " + droppedScrap.scrapName);
             GameObject droppedScrapObj = sampleScrap;
@@ -74,15 +78,17 @@ public class scrapPlacer : MonoBehaviour
     void SpawnAllScrap(){
         for(int j = 0; j < totalSpawnableScrap; j++){
             // find the highest weight of all scrap, that is, the most common
-            int maxWeight = JsonReader.scrapInJson.allScrap.Max(x => x.zoneD_rarity);
+            int maxWeight = JsonReader.scrapInJson.allScrap.Max(x => x.zoneA_rarity);
             // pick a number somwhere inbetween that max and 0
             randomScrapPick = Random.Range(0, maxWeight);
+            // shuffle the array
+            RandomExtensions.Shuffle(shuffleRandom, JsonReader.scrapInJson.allScrap);
             // iterate through all the scrap in our list and pick the first one that's weighted higher than 
             //   our random value and exit the loop.
             foreach(Scrap scrap in JsonReader.scrapInJson.allScrap){
-                if(scrap.zoneD_rarity > randomScrapPick){
+                if(scrap.zoneA_rarity >= randomScrapPick){
                     incomingScrap = scrap;
-                    Debug.Log("Spawned Scrap: " + incomingScrap.scrapName);
+                    Debug.Log("Spawning scrap: " + incomingScrap.scrapName);
                     break;
                 }
             }

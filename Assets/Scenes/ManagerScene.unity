@@ -6957,6 +6957,7 @@ GameObject:
   - component: {fileID: 1005310150}
   - component: {fileID: 1005310151}
   - component: {fileID: 1005310152}
+  - component: {fileID: 1005310153}
   m_Layer: 0
   m_Name: Scrap Placer
   m_TagString: Untagged
@@ -6990,7 +6991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c1426ebc9f38a4b953a8e83d949f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFile: {fileID: 4900000, guid: bb15fb0a768f45c47b97af17e791f59c, type: 3}
+  jsonFile: {fileID: 4900000, guid: 896cc67c54e285a40ad0f6cbd68dfb52, type: 3}
   scrapInJson:
     allScrap: []
 --- !u!114 &1005310152
@@ -7013,6 +7014,23 @@ MonoBehaviour:
   minDistance: 0.75
   spawningBoundX: 11
   spawningBoundY: 8
+--- !u!114 &1005310153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005310149}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba6ff5345d02b054ba93101ab5684478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: 0000000001000000020000000300000004000000
+  total: 0
+  max: 0
+  randomPick: 0
+  picked: 0
 --- !u!1 &1046258476
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,24 +21,31 @@ If weighting values are used, the Random.Range function would be from 1 to the s
   weighted values.(?)
 */
     // Start is called before the first frame update
-    public int[] items = {0,1,5,10,20};
+    public int[] items = {0,1,2,3,4};
     public int total;
     public int max;
     public int randomPick;
     public int picked;
+    //Random testRandom;
+
 
     void Start()
     {
-        int seed = (int)System.DateTime.Now.Ticks;
-        Random.InitState(seed);
-        //Debug.Log("Seed is: " + seed);
+      // RandomExtensions.Shuffle(testRandom, items);
+      // foreach(int item in items){
+      // Debug.Log("New order: " + item);
+      // }
+        // int seed = (int)System.DateTime.Now.Ticks;
+        // Random.InitState(seed);
+        // //Debug.Log("Seed is: " + seed);
 
-        // run the pick x times to test probability
-        for(int i = 0; i < 50; i++){
-            PickItem(); 
-            Debug.Log("We picked: " + picked);       
-        }
+        // // run the pick x times to test probability
+        // for(int i = 0; i < 50; i++){
+        //     PickItem(); 
+        //     Debug.Log("We picked: " + picked);       
+        // }
     }
+
 
     public void PickItem(){
         
@@ -61,4 +68,7 @@ If weighting values are used, the Random.Range function would be from 1 to the s
     {
         
     }
+
+
+
 }
