@@ -1403,10 +1403,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickToMove: {fileID: 1106422487}
-  maxFuel: 100
-  currentFuelUnits: 2
-  currentFuelPercent: 0
-  fuelEfficiency: 0.5
+  maxFuel: 500
+  currentFuelUnits: 500
+  currentFuelPercent: 100
+  fuelEfficiency: 5
   currentSpeed: 0
   hasFuel: 1
 --- !u!114 &1106422491
@@ -1428,9 +1428,10 @@ MonoBehaviour:
   fuelLevel: 0
   searchRadius: {fileID: 1106422493}
   currentHaul: 0
-  maxHaul: 10000000
-  playerCredits: 10000
+  maxHaul: 45
+  playerCredits: 420
   playerScrap: []
+  canPlayerMove: 1
   hasronCallout: {fileID: 1625353614}
   chipCallout: {fileID: 803894964}
   tickReadoutIndex: 0
@@ -1511,7 +1512,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1160511024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe95b1114103a4744b0b192337d910c4, type: 3}
+  m_Script: {fileID: 11500000, guid: a5e914baaa9db1846ac8e7238f684d91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   towRig: {fileID: 952004120}
@@ -1520,7 +1521,7 @@ MonoBehaviour:
   goingOut: 1
   distCovered: 0
   startPos: {x: 0, y: 0, z: 0}
-  speed: 0.0075
+  speed: 0
   startTime: 0
   journeyLength: 0
   fractionOfJourney: 0

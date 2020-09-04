@@ -46,17 +46,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Frustrum Gargantuan 36D
-  description: How is this even possible?
-  image: 1
-  size: 10000
-  value: 500000
-  material: Titanium
-  zoneA_rarity: 0
-  zoneB_rarity: 5
-  zoneC_rarity: 7
-  zoneD_rarity: 10
-  carriesComponents: 1
+  scrapName: E-2 Ecrin Micro-generator
+  description: You could fit one of these in the palm of your hand, but then there
+    wouldn't be much of a hand left after, would there?
+  image: 0
+  size: 0.1
+  value: 7
+  material: Aluminum
+  zoneA_rarity: 40
+  zoneB_rarity: 0
+  zoneC_rarity: 0
+  zoneD_rarity: 0
+  carriesComponents: 0
   isBuried: 0
 --- !u!212 &617055198158216929
 SpriteRenderer:
@@ -65,7 +66,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5283757986021271520}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

@@ -119,6 +119,7 @@ public class scrapPlacer : MonoBehaviour
             // spawn that $hit
             GameObject copiedScrap = (Instantiate(sampleScrap, position, Quaternion.identity));
             copiedScrap.transform.parent = gameObject.transform;
+            copiedScrap.name = copiedScrap.GetComponent<ScrapObject>().scrapName;
         /*
             //check if it has components
             if (copiedScrap.GetComponent<ScrapObject>().carriesComponents){

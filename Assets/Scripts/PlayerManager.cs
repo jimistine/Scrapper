@@ -32,7 +32,7 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Other")]
     [Space(5)]
-    bool canPlayerMove = true;
+    public bool canPlayerMove = true;
     float playerSpeedTemp;
 
     [Header("UI")]
@@ -58,8 +58,8 @@ public class PlayerManager : MonoBehaviour
         fuelLevel = fuelManager.currentFuelUnits;
         currentSpeed = clickToMove.currentSpeed;
 
-        if(fuelLevel <= 0){clickToMove.enabled = false;}
-        else{clickToMove.enabled = true;}
+        if(fuelLevel <= 0){SetPlayerMovement(false);}
+        //else{clickToMove.enabled = true;}
 
         // INTERACTIONS
         if (Input.GetMouseButtonDown(0)) {
@@ -81,6 +81,10 @@ public class PlayerManager : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(1)){
             RigManager.RM.ChangeZoom(Camera.main.orthographicSize);
+        }
+        if(Input.GetKeyDown(KeyCode.R)){
+            Debug.Log("restarting");
+            SceneController.SC.RestartGame();
         }
     }
 
@@ -118,18 +122,20 @@ public class PlayerManager : MonoBehaviour
     }
 
     // For whenever we need to stop em in their tracks
-    public void TogglePlayerMovement(){
-        if(canPlayerMove){
+    public void SetPlayerMovement(bool letPlayerMove){
+        if(!letPlayerMove){
             playerSpeedTemp = clickToMove.speed;
             clickToMove.speed = 0;
-            //Debug.Log("Stopped at: " + playerSpeedTemp);
+            clickToMove.enabled = false;
+            Debug.Log("Stopped at: " + playerSpeedTemp);
             clickToMove.isMoving = false;
-            canPlayerMove = false;
+            //canPlayerMove = false;
         }
         else{
+            clickToMove.enabled = true;
             clickToMove.speed = playerSpeedTemp;
-            //Debug.Log("Started at: " + clickToMove.speed);
-            canPlayerMove = true;
+            Debug.Log("Started at: " + clickToMove.speed);
+            //canPlayerMove = true;
         }
     }
 

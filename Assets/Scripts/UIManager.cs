@@ -102,7 +102,12 @@ public class UIManager : MonoBehaviour
     void Update()
     {   // updating stats at runtime
         fuelText.text = "Fuel: " + fuleManager.currentFuelPercent.ToString("N0") + "%";
-        creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#");
+        if(PlayerManager.playerCredits == 0){
+            creditText.text = "Credits: 0 cr.";
+        }
+        else{
+            creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#") + " cr.";
+        }
         if(PlayerManager.currentHaul != 0){
             haulText.text = "Current Haul: " + PlayerManager.currentHaul.ToString("#,#") + " m<sup>3</sup>";
         }
@@ -126,8 +131,9 @@ public class UIManager : MonoBehaviour
     public ScrapObject ShowReadout(ScrapObject newScrap){
         ReadoutManager.UpdateReadout(newScrap);
         readoutPanel.SetActive(true);
+        PlayerManager.SetPlayerMovement(false);
         // stop the player from moving because how the hell do you actually get UI to block a raycast???
-        PlayerManager.GetComponentInParent<clickToMove>().enabled = false;
+        //PlayerManager.GetComponentInParent<clickToMove>().enabled = false;
         return newScrap;
     }
 
@@ -139,7 +145,8 @@ public class UIManager : MonoBehaviour
             GameObject newTick = Instantiate(scrapTick) as GameObject;
             newTick.transform.SetParent(scrapTickSlots.transform, false);
             readoutPanel.SetActive(false);
-            PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
+            //PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
+            PlayerManager.SetPlayerMovement(true);
         }
         else{
             StartCoroutine(CantFitScrap());
@@ -147,7 +154,8 @@ public class UIManager : MonoBehaviour
     }
     public void LeaveScrap(){
         readoutPanel.SetActive(false);
-        PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
+        PlayerManager.SetPlayerMovement(true);
+        //PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
     }
     public IEnumerator CantFitScrap(){
         int characterToTalk = Random.Range(1,3);
@@ -186,7 +194,6 @@ public class UIManager : MonoBehaviour
         enterTownButton.gameObject.SetActive(true);
     }
     public void EnterTown(){
-        PlayerManager.TogglePlayerMovement();
         enterTownButton.gameObject.SetActive(false);
         haulText.color = (Color.white);
         fuelText.color = (Color.white);
@@ -196,7 +203,6 @@ public class UIManager : MonoBehaviour
         OverworldUI.SetActive(false);
     }
     public void LeaveTown(){
-        PlayerManager.TogglePlayerMovement();
         haulText.color = (Color.black);
         fuelText.color = (Color.black);
         creditText.color = (Color.black);
@@ -220,17 +226,17 @@ public class UIManager : MonoBehaviour
         if(upgrade.type == "engine"){ // more upgrade specific stuff than I would like...
             panelIndex = 0;
             effectSuffix = " kph";
-            scrapBuyerReadout.text = "\"You bought a nice new engine, kiddos!\"";
+            scrapBuyerReadout.text = "\"Careful installing that thing, ok?\"";
         }
         if(upgrade.type == "reactor"){
             panelIndex = 1;
             effectSuffix = " deuterium cassets";
-            scrapBuyerReadout.text = "\"You bought a nice new fusion reactor, kiddos!\"";
+            scrapBuyerReadout.text = "\"Be sure to go see Ogden to have that thing tuned.\"";
         }
         if(upgrade.type == "storage bay"){
             panelIndex = 2;
             effectSuffix = " m<sup>3</sup>";
-            scrapBuyerReadout.text = "\"Gonna fit a lot of scrap in there, huh?\"";
+            scrapBuyerReadout.text = "\"Gonna fit a lot of scrap in there for me?\"";
             maxHaulText.text = PlayerManager.maxHaul.ToString("#,#") + " m<sup>3</sup>";
         }
         if(upgrade.type == "scanner"){
@@ -258,6 +264,7 @@ public class UIManager : MonoBehaviour
     }
     public void UpgradeAlreadyMaxed(Upgrade upgrade){
         scrapBuyerReadout.text = "\"Look, you've bought all I got on that one. Maybe try the next town over, ha.\"";
+        upgradePanels[panelIndex].gameObject.GetComponent<Image>().color = Color.black;
     }
 
     // SCRAP BUYER
@@ -340,4 +347,7 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+
+    
 }

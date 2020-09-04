@@ -37,7 +37,7 @@ public class SceneController : MonoBehaviour
 
         SceneManager.LoadScene("Town", LoadSceneMode.Additive);
         OverworldCamera.SetActive(false);
-        PlayerManager.TogglePlayerMovement();
+        PlayerManager.SetPlayerMovement(false);
         UIManager.EnterTown();
         yield return null;
     }
@@ -45,19 +45,13 @@ public class SceneController : MonoBehaviour
         StartCoroutine("LeaveTown");
     }
     public IEnumerator LeaveTown(){
+        PlayerManager.SetPlayerMovement(true);
         SceneManager.UnloadSceneAsync("Town");
         OverworldCamera.SetActive(true);
         UIManager.LeaveTown();
         yield return new WaitForSeconds(0.05f);
-        PlayerManager.TogglePlayerMovement();
         //SceneManager.LoadScene("OverworldScene", LoadSceneMode.Additive);
     }
-
-
-
-
-
-
 
     public void RestartGame(){
         SceneManager.LoadScene("ManagerScene");

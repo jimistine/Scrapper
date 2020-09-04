@@ -59,9 +59,11 @@ MonoBehaviour:
   effectModifier: 2
   statAffected: maxFuel
   upgradeLevel: 0
-  upgradeLevelMax: 1
+  upgradeLevelMax: 2
   flavorTexts:
   - flavorName: Reactor I
     flavorDesc: First reactor
+  - flavorName: Reactor II
+    flavorDesc: Second reactor
   - flavorName: Reactor II
     flavorDesc: Second reactor

@@ -62,6 +62,7 @@ public class MerchantManager : MonoBehaviour
 
     [Header("Fuel Merchant")]
     [Space(5)]
+    public fuel fuelManager;
     public float fuelPrice;
     public float fuelToAdd;
     public float creditsToTakeFuel;
@@ -73,6 +74,7 @@ public class MerchantManager : MonoBehaviour
         PlayerManager = PlayerManager.PM;
         UIManager = UIManager.UIM;
         UpgradeManager = this.GetComponent<UpgradeManager>();
+        fuelManager = PlayerManager.GetComponent<fuel>();
     }
 
     void Update(){
@@ -101,7 +103,7 @@ public class MerchantManager : MonoBehaviour
     public void BuyUpgrade(string upgrade){ // button passes name of upgrade as string
         // upgrade values are in a list on Upgrade Manager, edit Updgrades starter in inspector 
         //    and we populate the rest as we go.
-        // Check progress of upgrades as childered of Merchant Manager object
+        // Check progress of upgrades as childeren of Merchant Manager object
         Upgrade upgradeToCalculate = UpgradeManager.upgrades.Find(x => x.type == upgrade);
         if(upgradeToCalculate.upgradeLevel == upgradeToCalculate.upgradeLevelMax){
             UIManager.UpgradeAlreadyMaxed(upgradeToCalculate);
@@ -139,6 +141,7 @@ public class MerchantManager : MonoBehaviour
             else{
             PlayerManager.playerCredits -= creditsToTakeFuel;
             PlayerManager.fuelManager.currentFuelUnits = PlayerManager.fuelManager.maxFuel;
+            fuelManager.UpdateFuelPercent();
             UIManager.BoughtFuel();
             }
         }
@@ -146,6 +149,7 @@ public class MerchantManager : MonoBehaviour
             fuelToAdd = PlayerManager.playerCredits / fuelPrice;
             PlayerManager.fuelManager.currentFuelUnits += fuelToAdd;
             PlayerManager.playerCredits = 0;
+            fuelManager.UpdateFuelPercent();
             UIManager.CantAffordFill();
         }
     }

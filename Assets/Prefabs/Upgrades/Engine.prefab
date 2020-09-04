@@ -59,9 +59,17 @@ MonoBehaviour:
   effectModifier: 2
   statAffected: speed
   upgradeLevel: 0
-  upgradeLevelMax: 1
+  upgradeLevelMax: 3
   flavorTexts:
-  - flavorName: Engine I
-    flavorDesc: It's the first engine
-  - flavorName: Engine II
-    flavorDesc: It's the second engine
+  - flavorName: Churn Industries Mover 6-7 Mark I
+    flavorDesc: It does what it says, and at a pretty reasonable price to boot.
+  - flavorName: Churn Industries Mover 6-7 Mark VII
+    flavorDesc: '"To tell you the truth, I''m not sure if Churn ever made a Mover
+      II, III, or IV."'
+  - flavorName: H12 Cad Cruiser
+    flavorDesc: Installing an H12 is the dream of most industrial motoring enthusiasts.
+      If you all but live in your rig, it might as well be a smooth ride.
+  - flavorName: Yaak-9
+    flavorDesc: '"Took me two weeks to get that thing, runnuing again. Some scrapper
+      wandered in here with that thing covered in oil and some kind of mucus. Never
+      saw them again."'

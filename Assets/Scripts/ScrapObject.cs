@@ -7,7 +7,7 @@ public class ScrapObject : MonoBehaviour
     public string scrapName;
     public string description;
     public int image;
-    public int size;
+    public float size;
     public int value;
     public string material;
     public int zoneA_rarity;
@@ -18,7 +18,7 @@ public class ScrapObject : MonoBehaviour
     public bool isBuried;
 
 
-    public ScrapObject(string name, string desc, int img, int siz, int val, string mat, 
+    public ScrapObject(string name, string desc, int img, float siz, int val, string mat, 
                         int rarityA, int rarityB, int rarityC, int rarityD, bool components, bool buried)
         {
             scrapName = name;
