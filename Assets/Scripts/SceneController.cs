@@ -36,9 +36,9 @@ public class SceneController : MonoBehaviour
         //SceneManager.UnloadSceneAsync("OverworldScene");
 
         SceneManager.LoadScene("Town", LoadSceneMode.Additive);
-        OverworldCamera.SetActive(false);
         PlayerManager.SetPlayerMovement(false);
         UIManager.EnterTown();
+        OverworldCamera.SetActive(false);
         yield return null;
     }
     public void StartLeaveTown(){

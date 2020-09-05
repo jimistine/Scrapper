@@ -34,6 +34,9 @@ public bool hasFuel;
             hasFuel = false;
             clickToMove.StartCoroutine("OutOfFuel");
         }
+        else if(currentFuelUnits > 0){
+            hasFuel = true;
+        }
         
 
     }

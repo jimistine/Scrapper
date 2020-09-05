@@ -20,9 +20,7 @@ public class OverworldManager : MonoBehaviour
     public float journeyLength;
     public float fractionOfJourney;
     public float distanceToEnd;
-    public float lerpTime = 1f;
-    public float currentLerpTime;
-
+    
     void Awake()
     {
         OM = this;
@@ -83,6 +81,19 @@ public class OverworldManager : MonoBehaviour
             yield return null;
         }
         towRig.SetActive(false);
+        ResetMove();
         SceneController.SC.StartLoadTown();
+    }
+
+    public void ResetMove(){
+        isMoving = false;
+        goingOut = true;
+        speed = .005f;
+        startPos = transform.position;
+        journeyLength = 0;
+        fractionOfJourney = 0;
+        distanceToEnd = 0;
+        distCovered = 0;
+        //Debug.Log("Move resest");
     }
 }

@@ -109,44 +109,46 @@ public class UIManager : MonoBehaviour
             creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#") + " cr.";
         }
         if(PlayerManager.currentHaul != 0){
-            haulText.text = "Current Haul: " + PlayerManager.currentHaul.ToString("#,#") + " m<sup>3</sup>";
+            haulText.text = "Space left: " + (PlayerManager.maxHaul - PlayerManager.currentHaul).ToString("#,#") + " m<sup>3</sup>";
         }
-        else{
-            haulText.text = "Current Haul: 0 m<sup>3</sup>";
-        }
+        // else{
+        //     haulText.text = "Current Haul: 0 m<sup>3</sup>";
+        // }
         if(PlayerManager.fuelLevel == PlayerManager.fuelManager.maxFuel){
             fillFuelButtonText.text = "Cassets full.";
         }
     }
 
-    // 1. PlayerManager has found scrap 
+    // 2. PlayerManager has found scrap 
     public ScrapObject ShowScrap(ScrapObject newScrap){
         Debug.Log("Showing: " + newScrap.scrapName);
         newScrap.GetComponent<SpriteRenderer>().enabled = true;
+        newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.5764706f,0.2431373f,0,1);
         scrapToTake = newScrap;
         return newScrap;
     }
-
-    // 2. Player has clicked on scrap
-    public ScrapObject ShowReadout(ScrapObject newScrap){
-        ReadoutManager.UpdateReadout(newScrap);
-        readoutPanel.SetActive(true);
-        PlayerManager.SetPlayerMovement(false);
-        // stop the player from moving because how the hell do you actually get UI to block a raycast???
-        //PlayerManager.GetComponentInParent<clickToMove>().enabled = false;
+    public ScrapObject OutOfRangeScrap(ScrapObject newScrap){
+        Debug.Log(newScrap.scrapName + " is now out of range");
+        newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.6509434f,0.5183763f,0.4216803f,1);
         return newScrap;
     }
 
-    // 3. Player clicks "take" or "leave" and we do what they tell us
+    // 4. Player has clicked on scrap
+    public ScrapObject ShowReadout(ScrapObject newScrap){
+        ReadoutManager.UpdateReadout(newScrap);
+        readoutPanel.SetActive(true);
+        PlayerManager.SetPlayerMovement(false); // stop the player from moving because how the hell do you actually get UI to block a raycast???
+        return newScrap;
+    }
+
+    // 5. Player clicks "take" or "leave" and we do what they tell us
     public void TakeScrap(){
         if((PlayerManager.currentHaul + scrapToTake.size) < PlayerManager.maxHaul){
-            PlayerManager.TakeScrap(scrapToTake);
-            //haulText.text = "Current Haul: " + PlayerManager.currentHaul.ToString("#,#") + " m<sup>3</sup>";
-            GameObject newTick = Instantiate(scrapTick) as GameObject;
-            newTick.transform.SetParent(scrapTickSlots.transform, false);
-            readoutPanel.SetActive(false);
-            //PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
-            PlayerManager.SetPlayerMovement(true);
+                PlayerManager.TakeScrap(scrapToTake);
+                GameObject newTick = Instantiate(scrapTick) as GameObject;
+                newTick.transform.SetParent(scrapTickSlots.transform, false);
+                readoutPanel.SetActive(false);
+                PlayerManager.SetPlayerMovement(true);
         }
         else{
             StartCoroutine(CantFitScrap());
@@ -190,12 +192,13 @@ public class UIManager : MonoBehaviour
 
 
 // TOWN AND MERCHANTS
-    public void OfferTown(){
-        enterTownButton.gameObject.SetActive(true);
+    public void ActivateTownButton(bool isActive){
+        enterTownButton.gameObject.SetActive(isActive);
     }
     public void EnterTown(){
-        enterTownButton.gameObject.SetActive(false);
+        ActivateTownButton(false);
         haulText.color = (Color.white);
+        maxHaulText.color = (Color.white);
         fuelText.color = (Color.white);
         creditText.color = (Color.white);
         playerLocation = "town hub";
@@ -203,7 +206,9 @@ public class UIManager : MonoBehaviour
         OverworldUI.SetActive(false);
     }
     public void LeaveTown(){
+        ActivateTownButton(true);
         haulText.color = (Color.black);
+        maxHaulText.color = (Color.black);
         fuelText.color = (Color.black);
         creditText.color = (Color.black);
         TownUI.SetActive(false);
@@ -237,7 +242,7 @@ public class UIManager : MonoBehaviour
             panelIndex = 2;
             effectSuffix = " m<sup>3</sup>";
             scrapBuyerReadout.text = "\"Gonna fit a lot of scrap in there for me?\"";
-            maxHaulText.text = PlayerManager.maxHaul.ToString("#,#") + " m<sup>3</sup>";
+            maxHaulText.text = "max: " + PlayerManager.maxHaul.ToString("#,#") + " m<sup>3</sup>";
         }
         if(upgrade.type == "scanner"){
             panelIndex = 3;
@@ -266,6 +271,9 @@ public class UIManager : MonoBehaviour
         scrapBuyerReadout.text = "\"Look, you've bought all I got on that one. Maybe try the next town over, ha.\"";
         upgradePanels[panelIndex].gameObject.GetComponent<Image>().color = Color.black;
     }
+    public void CantAffordUpgrade(Upgrade upgrade){
+        scrapBuyerReadout.text = "\"As much as I'd like to, I can't sell that " + upgrade.type + " for anything less.\"";
+    }
 
     // SCRAP BUYER
     public void enterScrapBuyer(){
@@ -273,10 +281,10 @@ public class UIManager : MonoBehaviour
         scrapBuyer.SetActive(true);
         playerLocation = "scrap buyer";
         // this should be pulling from a list of welcomes
-        scrapBuyerReadout.text = "\"How are you all doin?\"";
+        scrapBuyerReadout.text = "\"How are you all doing?\"";
     }
     public void cantSellScrap(){
-        scrapBuyerReadout.text = "\"You two ah, don't have any scrap for me.\"";
+        scrapBuyerReadout.text = "\"You two ah, don't have any scrap out there.\"";
     }
     public void SoldScrap(){  // Called from Merchant Manager
         scrapBuyerReadout.text = "\"It's yours\"\nYou made: " + 

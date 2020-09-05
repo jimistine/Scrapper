@@ -105,31 +105,42 @@ public class MerchantManager : MonoBehaviour
         //    and we populate the rest as we go.
         // Check progress of upgrades as childeren of Merchant Manager object
         Upgrade upgradeToCalculate = UpgradeManager.upgrades.Find(x => x.type == upgrade);
-        if(upgradeToCalculate.upgradeLevel == upgradeToCalculate.upgradeLevelMax){
-            UIManager.UpgradeAlreadyMaxed(upgradeToCalculate);
+        if(PlayerManager.playerCredits > upgradeToCalculate.priceOffered){
+            if(upgradeToCalculate.upgradeLevel == upgradeToCalculate.upgradeLevelMax){
+                UIManager.UpgradeAlreadyMaxed(upgradeToCalculate);
+            }
+            else{
+                PlayerManager.playerCredits -= upgradeToCalculate.priceOffered;
+                UpgradeManager.CalculateUpgrade(upgradeToCalculate);
+            }
         }
         else{
-            PlayerManager.playerCredits -= upgradeToCalculate.priceOffered;
-            UpgradeManager.CalculateUpgrade(upgradeToCalculate);
+            UIManager.CantAffordUpgrade(upgradeToCalculate);
         }
     }
 
 // FUEL MERCHANT
     public void EnterFuelMerchant(){
         // put the price on the button
-        fuelToAdd = PlayerManager.fuelManager.maxFuel - PlayerManager.fuelManager.currentFuelUnits;
-        creditsToTakeFuel = fuelToAdd * fuelPrice;
-        UIManager.fillFuelButtonText.text = creditsToTakeFuel.ToString("#,#") + " cr.";
+        UpdateFuelPrice();
+        // fuelToAdd = PlayerManager.fuelManager.maxFuel - PlayerManager.fuelManager.currentFuelUnits;
+        // creditsToTakeFuel = fuelToAdd * fuelPrice;
+        // UIManager.fillFuelButtonText.text = creditsToTakeFuel.ToString("#,#") + " cr.";
         if(PlayerManager.fuelLevel <= 0 ){
             UIManager.fuelMerchantReadout.text = "\"I am sorry to have retrieved you, but I am glad glad to see that you are unharmed. The fee is appreciated as always." 
                 +"\nPlease, buy your fill of what deuterium I have. \""
-                +"\n<sub>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " has been detucted from your account</sub>";
+                +"\n<sub>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " credits has been detucted from your account</sub>";
                 PlayerManager.playerCredits -= PlayerManager.playerCredits*towPriceModifier;
         }
         else{
         // this should be pulling from a list of welcomes
             UIManager.fuelMerchantReadout.text = "\"Welcome to my establishment, gentlepersons.\"";
         }
+    }
+    public void UpdateFuelPrice(){
+        fuelToAdd = PlayerManager.fuelManager.maxFuel - PlayerManager.fuelManager.currentFuelUnits;
+        creditsToTakeFuel = fuelToAdd * fuelPrice;
+        UIManager.fillFuelButtonText.text = creditsToTakeFuel.ToString("#,#") + " cr.";
     }
     public void FillFuel(){
         // How much is it to fill up?
@@ -141,6 +152,7 @@ public class MerchantManager : MonoBehaviour
             else{
             PlayerManager.playerCredits -= creditsToTakeFuel;
             PlayerManager.fuelManager.currentFuelUnits = PlayerManager.fuelManager.maxFuel;
+            UpdateFuelPrice();
             fuelManager.UpdateFuelPercent();
             UIManager.BoughtFuel();
             }
@@ -149,6 +161,7 @@ public class MerchantManager : MonoBehaviour
             fuelToAdd = PlayerManager.playerCredits / fuelPrice;
             PlayerManager.fuelManager.currentFuelUnits += fuelToAdd;
             PlayerManager.playerCredits = 0;
+            UpdateFuelPrice();
             fuelManager.UpdateFuelPercent();
             UIManager.CantAffordFill();
         }

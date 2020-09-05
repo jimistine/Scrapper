@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 316715209249053811}
   - component: {fileID: 5956131257699123456}
+  - component: {fileID: 8142259534611466276}
   - component: {fileID: 617055198158216929}
   - component: {fileID: 3923544943884869623}
+  - component: {fileID: 7760724199766874170}
   - component: {fileID: 8219202195195036959}
   m_Layer: 0
   m_Name: ScrapPrefab
@@ -46,19 +48,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: E-2 Ecrin Micro-generator
-  description: You could fit one of these in the palm of your hand, but then there
-    wouldn't be much of a hand left after, would there?
+  scrapName: Intelaa J.2 engine
+  description: Now these were a disappointment. They were supposed to be the next
+    big thing for the Maelstrom Cup a long while ago but never made it off the starting
+    line in one piece. Been blacklisted in legal races ever since.
   image: 0
-  size: 0.1
-  value: 7
-  material: Aluminum
-  zoneA_rarity: 40
+  size: 2
+  value: 500
+  material: Cartilo
+  zoneA_rarity: 60
   zoneB_rarity: 0
   zoneC_rarity: 0
   zoneD_rarity: 0
   carriesComponents: 0
   isBuried: 0
+--- !u!114 &8142259534611466276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5283757986021271520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1e625063a5b9a47811b8bb48143edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactable: 0
 --- !u!212 &617055198158216929
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -100,7 +116,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.5764706, g: 0.24313726, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -125,7 +141,40 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.3
+--- !u!68 &7760724199766874170
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5283757986021271520}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.12086581, y: -0.008428469}
+  - {x: -0.09399748, y: -0.09103441}
+  - {x: 0.012969017, y: -0.12040377}
+  - {x: 0.11745834, y: -0.06263113}
+  - {x: 0.1203866, y: 0.05843067}
+  - {x: 0.056902885, y: 0.12077284}
+  - {x: -0.03528595, y: 0.12066126}
+  - {x: -0.111988544, y: 0.08651543}
+  - {x: -0.12105036, y: -0.007217407}
+  - {x: -0.1, y: 0}
+  - {x: -0.1, y: 0}
+  - {x: -0.1, y: 0}
+  - {x: -0.1, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!50 &8219202195195036959
 Rigidbody2D:
   serializedVersion: 4

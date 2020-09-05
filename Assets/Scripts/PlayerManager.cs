@@ -58,20 +58,20 @@ public class PlayerManager : MonoBehaviour
         fuelLevel = fuelManager.currentFuelUnits;
         currentSpeed = clickToMove.currentSpeed;
 
-        if(fuelLevel <= 0){SetPlayerMovement(false);}
-        //else{clickToMove.enabled = true;}
-
         // INTERACTIONS
         if (Input.GetMouseButtonDown(0)) {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
             RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
 
-            // 2. If player clicked something, and that something was scrap, show the readout panel
+            // 3. If player clicked something, and that something was scrap, and it's in range, show the readout panel
             if(hit.collider != null){
-                if (hit.collider.tag == "Scrap") {
+                if (hit.collider.tag == "Scrap" && hit.collider.gameObject.GetComponent<ProximityCheck>().interactable == true) {
                     ScrapObject newScrap = hit.collider.GetComponent<ScrapObject>();
                     UIManager.ShowReadout(newScrap);
+                }
+                else if(hit.collider.tag == "Scrap" && canPlayerMove == true){
+                    clickToMove.MoveToCustomPoint(this.gameObject, hit.collider.transform.position);
                 }
             }    
         }
@@ -91,19 +91,29 @@ public class PlayerManager : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other){
         // 1. Pop goes the scrap!
-        if(other.gameObject.tag == "Scrap"){
+        if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(EdgeCollider2D)){
             ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
+            other.gameObject.GetComponent<ProximityCheck>().IsInRange(true);
             UIManager.ShowScrap(newScrap);
         }
         if(other.gameObject.name == "Town"){
-            UIManager.OfferTown();
+            UIManager.ActivateTownButton(true);
+        }
+    }
+    void OnTriggerExit2D(Collider2D other){
+        if(other.gameObject.tag == "Scrap"){
+            ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
+            other.gameObject.GetComponent<ProximityCheck>().IsInRange(false);
+            UIManager.OutOfRangeScrap(newScrap);
+        }
+        if(other.gameObject.name == "Town"){
+            UIManager.ActivateTownButton(false);
         }
     }
    
-    // 3. If they clicked Take and they can fit it, take it
+    // 5. If they clicked Take (UIM) and they could fit it, take it
     public ScrapObject TakeScrap(ScrapObject takenScrap){
             takenScrap.gameObject.SetActive(false);
-            //currentHaul += takenScrap.size;
             playerScrap.Add(takenScrap);
             UpdateCurrentHaul();
             foreach(ScrapObject scrap in playerScrap){
@@ -123,7 +133,7 @@ public class PlayerManager : MonoBehaviour
 
     // For whenever we need to stop em in their tracks
     public void SetPlayerMovement(bool letPlayerMove){
-        if(!letPlayerMove){
+        if(letPlayerMove == false){
             playerSpeedTemp = clickToMove.speed;
             clickToMove.speed = 0;
             clickToMove.enabled = false;
