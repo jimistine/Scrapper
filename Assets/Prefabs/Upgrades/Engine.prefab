@@ -49,12 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: engine
-  priceIncreasePercentBottom: 0.09
-  priceIncreasePercentTop: 0.12
+  priceIncreasePercentBottom: 2
+  priceIncreasePercentTop: 4
   priceModifier: 3
-  priceOffered: 100
-  effectRangeBottom: 0.09
-  effectRangeTop: 0.12
+  priceOffered: 2500
+  effectRangeBottom: 0.1
+  effectRangeTop: 0.2
   effectOffered: 0.002
   effectModifier: 2
   statAffected: speed

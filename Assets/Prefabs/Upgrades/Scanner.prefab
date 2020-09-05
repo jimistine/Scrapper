@@ -49,21 +49,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: scanner
-  priceIncreasePercentBottom: 0.08
-  priceIncreasePercentTop: 0.1
+  priceIncreasePercentBottom: 1
+  priceIncreasePercentTop: 1.5
   priceModifier: 2
-  priceOffered: 100
-  effectRangeBottom: 0.025
-  effectRangeTop: 0.05
-  effectOffered: 1
+  priceOffered: 2400
+  effectRangeBottom: 0.05
+  effectRangeTop: 0.1
+  effectOffered: 0.5
   effectModifier: 1.5
   statAffected: searchRadius
   upgradeLevel: 0
   upgradeLevelMax: 2
   flavorTexts:
   - flavorName: Scanner I
-    flavorDesc: First scanner upgrade
+    flavorDesc: This increases your search radius.
   - flavorName: Scanner II
-    flavorDesc: Second scanner upgrade
+    flavorDesc: This increases your search radius.
   - flavorName: Scanner III
-    flavorDesc: Third scanner upgrade
+    flavorDesc: This increases your search radius.

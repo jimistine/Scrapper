@@ -49,12 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: reactor
-  priceIncreasePercentBottom: 0.1
-  priceIncreasePercentTop: 0.15
+  priceIncreasePercentBottom: 2.5
+  priceIncreasePercentTop: 5
   priceModifier: 3
-  priceOffered: 1000
-  effectRangeBottom: 0.09
-  effectRangeTop: 0.12
+  priceOffered: 3200
+  effectRangeBottom: 0.1
+  effectRangeTop: 0.2
   effectOffered: 1
   effectModifier: 2
   statAffected: maxFuel
@@ -62,8 +62,8 @@ MonoBehaviour:
   upgradeLevelMax: 2
   flavorTexts:
   - flavorName: Reactor I
-    flavorDesc: First reactor
+    flavorDesc: These increase your max fuel
   - flavorName: Reactor II
-    flavorDesc: Second reactor
-  - flavorName: Reactor II
-    flavorDesc: Second reactor
+    flavorDesc: These increase your max fuel
+  - flavorName: Reactor III
+    flavorDesc: These increase your max fuel

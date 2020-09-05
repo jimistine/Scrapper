@@ -49,10 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: storage bay
-  priceIncreasePercentBottom: 0.08
-  priceIncreasePercentTop: 0.1
+  priceIncreasePercentBottom: 2
+  priceIncreasePercentTop: 4.5
   priceModifier: 2
-  priceOffered: 100
+  priceOffered: 4200
   effectRangeBottom: 0.09
   effectRangeTop: 0.12
   effectOffered: 10
@@ -62,8 +62,8 @@ MonoBehaviour:
   upgradeLevelMax: 2
   flavorTexts:
   - flavorName: Storage Bay I
-    flavorDesc: First haul size upgrade
+    flavorDesc: This increases your maximum haul capacity.
   - flavorName: Storage Bay II
-    flavorDesc: Second haul size upgrade
+    flavorDesc: This increases your maximum haul capacity.
   - flavorName: Storage Bay III
-    flavorDesc: Third haul size upgrade
+    flavorDesc: This increases your maximum haul capacity.

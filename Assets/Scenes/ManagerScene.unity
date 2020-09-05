@@ -2639,7 +2639,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.074142456, y: 1.1038437, z: -91.684204, w: -0.17847824}
+  m_margin: {x: 0.074142456, y: 1.1038437, z: -91.684204, w: 6.710541}
   m_textInfo:
     textComponent: {fileID: 214179239}
     characterCount: 16
@@ -6427,10 +6427,10 @@ MonoBehaviour:
   UpgradeManager: {fileID: 0}
   scrapValue: 0
   fuelManager: {fileID: 0}
-  fuelPrice: 30
+  fuelPrice: 10
   fuelToAdd: 0
   creditsToTakeFuel: 0
-  towPriceModifier: 0.1
+  towPriceModifier: 0.075
 --- !u!114 &765283190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8185,6 +8185,7 @@ MonoBehaviour:
   placing: 1
   sampleScrap: {fileID: 5283757986021271520, guid: 563599bed92065c458ee03a298bfbefd, type: 3}
   totalSpawnableScrap: 150
+  scrapRespawnBuffer: 0.15
   minDistance: 0.75
   spawningBoundX: 11
   spawningBoundY: 8
@@ -15868,7 +15869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -79.6, y: -24.23}
+  m_AnchoredPosition: {x: -79.6, y: -25.1}
   m_SizeDelta: {x: 249.36288, y: 25.549232}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2145135837

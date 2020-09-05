@@ -82,6 +82,7 @@ public class UIManager : MonoBehaviour
     public GameObject fuelMerchant;
     public TextMeshProUGUI fuelMerchantReadout;
     public TextMeshProUGUI fillFuelButtonText;
+    int characterToTalk;
 
     void Awake(){
         UIM = this;
@@ -151,7 +152,7 @@ public class UIManager : MonoBehaviour
                 PlayerManager.SetPlayerMovement(true);
         }
         else{
-            StartCoroutine(CantFitScrap());
+            Callout("CantFitScrap");
         }
     }
     public void LeaveScrap(){
@@ -159,9 +160,13 @@ public class UIManager : MonoBehaviour
         PlayerManager.SetPlayerMovement(true);
         //PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
     }
-    public IEnumerator CantFitScrap(){
-        int characterToTalk = Random.Range(1,3);
+
+    public void Callout(string callout){
+        characterToTalk = Random.Range(1,3);
         Debug.Log("Character int: " + characterToTalk);
+        StartCoroutine(callout);
+    }
+    public IEnumerator CantFitScrap(){
         if(characterToTalk == 1){
             PlayerManager.hasronCallout.SetActive(true);
             PlayerManager.hasronCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"Doesn't look like that's gonna fit...\"";
@@ -171,6 +176,21 @@ public class UIManager : MonoBehaviour
         else{
             PlayerManager.chipCallout.SetActive(true);
             PlayerManager.chipCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"No way we're taking that right now.\"";
+            yield return new WaitForSeconds(3);
+            PlayerManager.chipCallout.SetActive(false);
+        }
+    }
+    public IEnumerator LowFuel(){
+        Debug.Log("Character int: " + characterToTalk);
+        if(characterToTalk == 1){
+            PlayerManager.hasronCallout.SetActive(true);
+            PlayerManager.hasronCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"Not this again.\"";
+            yield return new WaitForSeconds(3);
+            PlayerManager.hasronCallout.SetActive(false);
+        }
+        else{
+            PlayerManager.chipCallout.SetActive(true);
+            PlayerManager.chipCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"How do they even know we're out?\"";
             yield return new WaitForSeconds(3);
             PlayerManager.chipCallout.SetActive(false);
         }

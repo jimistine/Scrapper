@@ -28,6 +28,7 @@ public class scrapPlacer : MonoBehaviour
    public bool placing = true;
    public GameObject sampleScrap;
    public int totalSpawnableScrap;
+   public float scrapRespawnBuffer;
    public float minDistance;
    public float spawningBoundX;
    public float spawningBoundY;
@@ -44,44 +45,24 @@ public class scrapPlacer : MonoBehaviour
     }
     
     void Start(){
-        SpawnAllScrap();
+        SpawnScrap(totalSpawnableScrap);
     }
-
-    public void SpawnOneScrap(){
-
+    void Update(){
+        GameObject[] currentLiveScrap = GameObject.FindGameObjectsWithTag("Scrap");
+        if(currentLiveScrap.Count() < (totalSpawnableScrap * scrapRespawnBuffer)){
+            int scrapToRespawn = totalSpawnableScrap - currentLiveScrap.Count();
+            SpawnScrap(scrapToRespawn);
+        }
     }
-
     
-    public void SpawnDroppedScrap(ScrapObject droppedScrap){
-            Debug.Log("Dropping a " + droppedScrap.scrapName);
-            GameObject droppedScrapObj = sampleScrap;
-            droppedScrapObj.GetComponent<ScrapObject>().scrapName = droppedScrap.scrapName;
-            droppedScrapObj.GetComponent<ScrapObject>().scrapName = droppedScrap.scrapName;
-            droppedScrapObj.GetComponent<ScrapObject>().description = droppedScrap.description;
-            droppedScrapObj.GetComponent<ScrapObject>().image = droppedScrap.image;
-            droppedScrapObj.GetComponent<ScrapObject>().size = droppedScrap.size;
-            droppedScrapObj.GetComponent<ScrapObject>().value = droppedScrap.value;
-            droppedScrapObj.GetComponent<ScrapObject>().material = droppedScrap.material;
-            droppedScrapObj.GetComponent<ScrapObject>().zoneA_rarity = droppedScrap.zoneA_rarity;
-            droppedScrapObj.GetComponent<ScrapObject>().zoneB_rarity = droppedScrap.zoneB_rarity;
-            droppedScrapObj.GetComponent<ScrapObject>().zoneC_rarity = droppedScrap.zoneC_rarity;
-            droppedScrapObj.GetComponent<ScrapObject>().zoneD_rarity = droppedScrap.zoneD_rarity;
-            droppedScrapObj.GetComponent<ScrapObject>().carriesComponents = droppedScrap.carriesComponents;
-            droppedScrapObj.GetComponent<ScrapObject>().isBuried = droppedScrap.isBuried;
-            droppedScrapObj.SetActive(true);
-            Instantiate(droppedScrapObj, PlayerManager.PM.gameObject.transform.position, Quaternion.identity);
-            droppedScrap.transform.parent = PlayerManager.PM.gameObject.transform;
 
-           // return null;
-    }
-
-    void SpawnAllScrap(){
-        for(int j = 0; j < totalSpawnableScrap; j++){
+    void SpawnScrap(int scrapToSpawn){
+        for(int j = 0; j < scrapToSpawn; j++){
             // find the highest weight of all scrap, that is, the most common
             int maxWeight = JsonReader.scrapInJson.allScrap.Max(x => x.zoneA_rarity);
             // pick a number somwhere inbetween that max and 0
             randomScrapPick = Random.Range(0, maxWeight);
-            // shuffle the array
+            // shuffle the array so everyone gets a chance
             RandomExtensions.Shuffle(shuffleRandom, JsonReader.scrapInJson.allScrap);
             // iterate through all the scrap in our list and pick the first one that's weighted higher than 
             //   our random value and exit the loop.
@@ -132,9 +113,24 @@ public class scrapPlacer : MonoBehaviour
             counter++;
         }
     }
-
-    // Update is called once per frame
-    void Update(){
-      
+    public void SpawnDroppedScrap(ScrapObject droppedScrap){
+            Debug.Log("Dropping a " + droppedScrap.scrapName);
+            GameObject droppedScrapObj = sampleScrap;
+            droppedScrapObj.GetComponent<ScrapObject>().scrapName = droppedScrap.scrapName;
+            droppedScrapObj.GetComponent<ScrapObject>().scrapName = droppedScrap.scrapName;
+            droppedScrapObj.GetComponent<ScrapObject>().description = droppedScrap.description;
+            droppedScrapObj.GetComponent<ScrapObject>().image = droppedScrap.image;
+            droppedScrapObj.GetComponent<ScrapObject>().size = droppedScrap.size;
+            droppedScrapObj.GetComponent<ScrapObject>().value = droppedScrap.value;
+            droppedScrapObj.GetComponent<ScrapObject>().material = droppedScrap.material;
+            droppedScrapObj.GetComponent<ScrapObject>().zoneA_rarity = droppedScrap.zoneA_rarity;
+            droppedScrapObj.GetComponent<ScrapObject>().zoneB_rarity = droppedScrap.zoneB_rarity;
+            droppedScrapObj.GetComponent<ScrapObject>().zoneC_rarity = droppedScrap.zoneC_rarity;
+            droppedScrapObj.GetComponent<ScrapObject>().zoneD_rarity = droppedScrap.zoneD_rarity;
+            droppedScrapObj.GetComponent<ScrapObject>().carriesComponents = droppedScrap.carriesComponents;
+            droppedScrapObj.GetComponent<ScrapObject>().isBuried = droppedScrap.isBuried;
+            droppedScrapObj.SetActive(true);
+            Instantiate(droppedScrapObj, PlayerManager.PM.gameObject.transform.position, Quaternion.identity);
+            droppedScrap.transform.parent = PlayerManager.PM.gameObject.transform;
     }
  }

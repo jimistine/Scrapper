@@ -83,7 +83,7 @@ public bool speedSlowed;
 
             currentSpeed = Vector3.Distance(startPos, transform.position) / (Time.time - startTime);
             distanceToEnd = Vector3.Distance(transform.position, destination);
-            if(distanceToEnd < .025f){
+            if(distanceToEnd < .05f){
                 isMoving = false;
             }
             yield return null;
@@ -93,6 +93,7 @@ public bool speedSlowed;
     public IEnumerator OutOfFuel(){
         // once they run out, slow them down for ~drama~
         storedSpeed = speed;
+        UIManager.UIM.Callout("LowFuel");
         for (float i = speed; speed > 0.001; speed -=.00005f){
             Debug.Log("Running out!");
             yield return new WaitForSeconds(outOfFuelSlowRate);
@@ -105,6 +106,7 @@ public bool speedSlowed;
         //this.enabled = false;
         OverworldManager.OM.SetUpTowRig();
     }
+    
 
     public void ResetMove(){
         isMoving = false;
