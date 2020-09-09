@@ -12,12 +12,12 @@ public class cameraFollow : MonoBehaviour
      public bool adjusted;
  
     void Start(){
-        player = PlayerManager.PM.gameObject.transform;
+//        player = PlayerManager.PM.gameObject.transform;
         //transform.position += followOffset;
     }
 
 
-     void Update () 
+     void FixedUpdate () 
      {
          if (player)
          {
@@ -34,7 +34,5 @@ public class cameraFollow : MonoBehaviour
                 transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
              }
          }
-
-     
      }
 }
