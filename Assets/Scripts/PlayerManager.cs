@@ -13,14 +13,11 @@ public class PlayerManager : MonoBehaviour
     [Header("Scripts")]
     [Space(5)]
     public fuel fuelManager;
-    public clickToMove clickToMove;
+    public ClickDrag ClickDrag;
     public UIManager UIManager;
-    //public scrapPlacer scrapPlacer;
 
     [Header("Rig Stats")]
     [Space(5)]
-    public float currentSpeed;
-    public float fuelLevel;
     public CircleCollider2D searchRadius;
 
     [Header("Player Inventory")]
@@ -29,11 +26,6 @@ public class PlayerManager : MonoBehaviour
     public float maxHaul;
     public float playerCredits;
     public List<ScrapObject> playerScrap = new List<ScrapObject>();
-
-    [Header("Other")]
-    [Space(5)]
-    public bool canPlayerMove = true;
-    float playerSpeedTemp;
 
     [Header("UI")]
     [Space(5)]
@@ -49,15 +41,13 @@ public class PlayerManager : MonoBehaviour
     }
     void Start(){
         UIManager = UIManager.UIM;
+        fuelManager = gameObject.GetComponent<fuel>();
+        ClickDrag = gameObject.GetComponent<ClickDrag>();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        // Keeping an eye on fuel and speed
-        fuelLevel = fuelManager.currentFuelUnits;
-        currentSpeed = clickToMove.currentSpeed;
-
+    {        
         // INTERACTIONS
         if (Input.GetMouseButtonDown(0)) {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -69,9 +59,6 @@ public class PlayerManager : MonoBehaviour
                 if (hit.collider.tag == "Scrap" && hit.collider.gameObject.GetComponent<ProximityCheck>().interactable == true) {
                     ScrapObject newScrap = hit.collider.GetComponent<ScrapObject>();
                     UIManager.ShowReadout(newScrap);
-                }
-                else if(hit.collider.tag == "Scrap" && canPlayerMove == true){
-                    clickToMove.MoveToCustomPoint(this.gameObject, hit.collider.transform.position);
                 }
             }    
         }
@@ -90,7 +77,7 @@ public class PlayerManager : MonoBehaviour
 
     
     void OnTriggerEnter2D(Collider2D other){
-        // 1. Pop goes the scrap!
+        // 1. Pop goes the scrap!  If our search radius hits the small edge collider on the scrap, it pops
         if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(EdgeCollider2D)){
             ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
             other.gameObject.GetComponent<ProximityCheck>().IsInRange(true);
@@ -100,8 +87,8 @@ public class PlayerManager : MonoBehaviour
             UIManager.ActivateTownButton(true);
         }
     }
-    void OnTriggerExit2D(Collider2D other){
-        if(other.gameObject.tag == "Scrap"){
+    void OnTriggerExit2D(Collider2D other){ // Only consider out of range when we exit the larger collider on scrap
+        if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(CircleCollider2D)){
             ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
             other.gameObject.GetComponent<ProximityCheck>().IsInRange(false);
             UIManager.OutOfRangeScrap(newScrap);
@@ -133,20 +120,7 @@ public class PlayerManager : MonoBehaviour
 
     // For whenever we need to stop em in their tracks
     public void SetPlayerMovement(bool letPlayerMove){
-        if(letPlayerMove == false){
-            playerSpeedTemp = clickToMove.speed;
-            clickToMove.speed = 0;
-            clickToMove.enabled = false;
-            Debug.Log("Stopped at: " + playerSpeedTemp);
-            clickToMove.isMoving = false;
-            //canPlayerMove = false;
-        }
-        else{
-            clickToMove.enabled = true;
-            clickToMove.speed = playerSpeedTemp;
-            Debug.Log("Started at: " + clickToMove.speed);
-            //canPlayerMove = true;
-        }
+        ClickDrag.moveEnabled = letPlayerMove;
     }
 
     public void UpdateCurrentHaul(){

@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    // Next is disabling scene parent in overworkd during town scene
-    // how do we store everything in town scene so that it is the same when you go back?
-    // Rough skeleton of town with vendors and things to buy
     public static SceneController SC;
     public PlayerManager PlayerManager;
     public UIManager UIManager;
@@ -32,11 +29,9 @@ public class SceneController : MonoBehaviour
         StartCoroutine("LoadTown");
     }
     public IEnumerator LoadTown(){
-        //OverworldParent.SetActive(false);
-        //SceneManager.UnloadSceneAsync("OverworldScene");
-
         SceneManager.LoadScene("Town", LoadSceneMode.Additive);
         PlayerManager.SetPlayerMovement(false);
+        PlayerManager.gameObject.GetComponent<ClickDrag>().currentSpeed = 0;
         UIManager.EnterTown();
         OverworldCamera.SetActive(false);
         yield return null;
@@ -50,7 +45,6 @@ public class SceneController : MonoBehaviour
         OverworldCamera.SetActive(true);
         UIManager.LeaveTown();
         yield return new WaitForSeconds(0.05f);
-        //SceneManager.LoadScene("OverworldScene", LoadSceneMode.Additive);
     }
 
     public void RestartGame(){

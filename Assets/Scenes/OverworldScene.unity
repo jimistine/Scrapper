@@ -296,8 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27cd9dc1da6bfd44baf0213d39fd7bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dampTime: 0.33
-  player: {fileID: 0}
+  dampTime: 0.15
+  player: {fileID: 1106422486}
   adjusted: 0
 --- !u!20 &519420031
 Camera:
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dampTime: 0.05
-  player: {fileID: 0}
+  player: {fileID: 1106422486}
   adjusted: 0
 --- !u!1 &816029713
 GameObject:
@@ -1163,7 +1163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1106422486}
   - component: {fileID: 1106422491}
-  - component: {fileID: 1106422487}
+  - component: {fileID: 1106422494}
   - component: {fileID: 1106422490}
   - component: {fileID: 1106422488}
   - component: {fileID: 1106422489}
@@ -1190,32 +1190,6 @@ Transform:
   m_Father: {fileID: 949542504}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1106422487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106422485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72cf3e5fa3a27df4cadda562c72350b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPos: {x: 0, y: 0, z: 0}
-  pointClicked: {x: 0, y: 0, z: 0}
-  speed: 0.02
-  storedSpeed: 0
-  currentSpeed: 0
-  startTime: 0
-  journeyLength: 0.01
-  fractionOfJourney: 0
-  distanceToEnd: 0
-  lerpTime: 1
-  currentLerpTime: 0
-  outOfFuelSlowRate: 0.025
-  isMoving: 0
-  speedSlowed: 0
 --- !u!212 &1106422488
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1295,13 +1269,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d5c1ccd2a3c1946a603b393082df39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickToMove: {fileID: 1106422487}
   maxFuel: 500
   currentFuelUnits: 500
   currentFuelPercent: 100
-  fuelEfficiency: 5
-  currentSpeed: 0
-  hasFuel: 1
+  fuelEfficiency: 0.05
+  outOfFuelSlowRate: 0.25
+  noFuelSpeedModifier: 0.1
+  canBeTowed: 1
 --- !u!114 &1106422491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1315,16 +1289,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuelManager: {fileID: 1106422490}
-  clickToMove: {fileID: 1106422487}
+  ClickDrag: {fileID: 0}
   UIManager: {fileID: 0}
-  currentSpeed: 0
-  fuelLevel: 0
   searchRadius: {fileID: 1106422493}
   currentHaul: 0
   maxHaul: 45
-  playerCredits: 420
+  playerCredits: 5000
   playerScrap: []
-  canPlayerMove: 1
   hasronCallout: {fileID: 1625353614}
   chipCallout: {fileID: 803894964}
   tickReadoutIndex: 0
@@ -1336,14 +1307,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106422485}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2.5
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1365,6 +1336,29 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &1106422494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106422485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f5de6d65b57ab488cc57f7f0301838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpeed: 0
+  currentSpeedActual: 0
+  topSpeed: 3
+  acceleration: 0.1
+  breakingPower: 0.15
+  recoveryTime: 0.025
+  turnIntensityModifier: 0.05
+  turnIntensity: 1
+  fuelModifier: 1
+  moveEnabled: 1
+  recovering: 0
 --- !u!1 &1160511024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,7 +1676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dampTime: 0.05
-  player: {fileID: 0}
+  player: {fileID: 1106422486}
   adjusted: 0
 --- !u!1 &2017435982
 GameObject:

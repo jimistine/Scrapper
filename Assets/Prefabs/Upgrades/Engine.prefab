@@ -55,7 +55,7 @@ MonoBehaviour:
   priceOffered: 2500
   effectRangeBottom: 0.1
   effectRangeTop: 0.2
-  effectOffered: 0.002
+  effectOffered: 0.1
   effectModifier: 2
   statAffected: speed
   upgradeLevel: 0

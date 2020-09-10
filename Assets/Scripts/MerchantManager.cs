@@ -123,10 +123,8 @@ public class MerchantManager : MonoBehaviour
     public void EnterFuelMerchant(){
         // put the price on the button
         UpdateFuelPrice();
-        // fuelToAdd = PlayerManager.fuelManager.maxFuel - PlayerManager.fuelManager.currentFuelUnits;
-        // creditsToTakeFuel = fuelToAdd * fuelPrice;
-        // UIManager.fillFuelButtonText.text = creditsToTakeFuel.ToString("#,#") + " cr.";
-        if(PlayerManager.fuelLevel <= 0 ){
+    
+        if(PlayerManager.GetComponent<fuel>().currentFuelUnits <= 0 ){
             UIManager.fuelMerchantReadout.text = "\"I am sorry to have retrieved you, but I am glad glad to see that you are unharmed. The fee is appreciated as always." 
                 +"\nPlease, buy your fill of what deuterium I have. \""
                 +"\n<sub>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " credits has been detucted from your account</sub>";

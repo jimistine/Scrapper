@@ -12,58 +12,61 @@ public class ClickDrag : MonoBehaviour
     public float recoveryTime;
     public float turnIntensityModifier;
     public float turnIntensity;
+    public float fuelModifier = 1;
+    public bool moveEnabled = true;
     public bool recovering;
     Rigidbody2D  PlayerRB;
     Vector2 direction;
     Vector2 lastDirection;
+    fuel fuel;
 
     // Start is called before the first frame update
     void Start()
     {
         PlayerRB = gameObject.GetComponent<Rigidbody2D>(); 
+        fuel = gameObject.GetComponent<fuel>();
     }
 
 
     void Update(){
-        if (currentSpeed < 0){           
-            currentSpeed = 0;
-        }
-        if(Input.GetKeyDown(KeyCode.W)){
-            StartCoroutine("Accelerate");
-            StartCoroutine("UpdateRotation");
-        }
-        if(Input.GetKeyUp(KeyCode.W)){
-            StopCoroutine("Accelerate");
-        }
-        if(Input.GetKeyDown(KeyCode.S)){
-            StartCoroutine("Break");
-        }
-        if(Input.GetKeyUp(KeyCode.S)){
-            StopCoroutine("Break");
-        }
+        if(moveEnabled){
+            if (currentSpeed < 0){           
+                currentSpeed = 0;
+            }
+            if(Input.GetKeyDown(KeyCode.W)){
+                StartCoroutine("Accelerate");
+                StartCoroutine("UpdateRotation");
+            }
+            if(Input.GetKeyUp(KeyCode.W)){
+                StopCoroutine("Accelerate");
+            }
+            if(Input.GetKeyDown(KeyCode.S)){
+                StartCoroutine("Break");
+            }
+            if(Input.GetKeyUp(KeyCode.S)){
+                StopCoroutine("Break");
+            }
 
-        if(turnIntensity < .99f && recovering == false){
-            StartCoroutine("SteeringDampener");
+            if(turnIntensity < .99f && recovering == false){
+                StartCoroutine("SteeringDampener");
+            }
         }
-        // else{
-        //     turnIntensity = 1;
-        // }
-
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        currentSpeedActual = PlayerRB.velocity.magnitude;
-        PlayerRB.AddForce((direction.normalized * -1) * currentSpeed * turnIntensity);
+        if(moveEnabled){
+            currentSpeedActual = PlayerRB.velocity.magnitude;
+            PlayerRB.AddForce((direction.normalized * -1) * currentSpeed * turnIntensity * fuelModifier);
 
-        float driftForce = Vector2.Dot(PlayerRB.velocity, PlayerRB.GetRelativeVector(Vector2.left)) * 2.0f;
-        Vector2 relativeForce = Vector2.right * driftForce;
-        Debug.DrawLine(PlayerRB.position, PlayerRB.GetRelativePoint(relativeForce), Color.green);
-        PlayerRB.AddForce(PlayerRB.GetRelativeVector(relativeForce));
-
+            float driftForce = Vector2.Dot(PlayerRB.velocity, PlayerRB.GetRelativeVector(Vector2.left)) * 2.0f;
+            Vector2 relativeForce = Vector2.right * driftForce;
+            Debug.DrawLine(PlayerRB.position, PlayerRB.GetRelativePoint(relativeForce), Color.green);
+            PlayerRB.AddForce(PlayerRB.GetRelativeVector(relativeForce));
+        }
     }
 
-    public IEnumerator Accelerate(){
+    public IEnumerator Accelerate(){ //speed slowed?
         while(currentSpeed < topSpeed){
             currentSpeed += acceleration;
             yield return new WaitForSeconds(.01f);
@@ -102,5 +105,16 @@ public class ClickDrag : MonoBehaviour
             yield return new WaitForSeconds(recoveryTime);
         }
         recovering = false;
+    }
+    public IEnumerator OutOfFuel(){
+        // once they run out, slow them down for ~drama~
+        UIManager.UIM.Callout("OutOfFuel");
+        fuelModifier = fuel.noFuelSpeedModifier;
+        moveEnabled = false;
+        for (float i = currentSpeed; i > 0; i -= fuel.outOfFuelSlowRate){
+            Debug.Log("Running out!");
+            yield return new WaitForSeconds(.01f);
+        }
+        OverworldManager.OM.SetUpTowRig();
     }
 }

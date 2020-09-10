@@ -32,7 +32,7 @@ public class OverworldManager : MonoBehaviour
         
     }
 
-    public void SetUpTowRig(){ // called from clickToMove
+    public void SetUpTowRig(){ // called from fuel
         startPos = towRig.gameObject.transform.position;
         startTime = Time.time;
         isMoving = true;
@@ -80,20 +80,8 @@ public class OverworldManager : MonoBehaviour
             }
             yield return null;
         }
-        towRig.SetActive(false);
-        ResetMove();
-        SceneController.SC.StartLoadTown();
-    }
-
-    public void ResetMove(){
-        isMoving = false;
         goingOut = true;
-        speed = .005f;
-        startPos = transform.position;
-        journeyLength = 0;
-        fractionOfJourney = 0;
-        distanceToEnd = 0;
-        distCovered = 0;
-        //Debug.Log("Move resest");
+        towRig.SetActive(false);
+        SceneController.SC.StartLoadTown();
     }
 }

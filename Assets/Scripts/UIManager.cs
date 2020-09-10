@@ -6,31 +6,13 @@ using TMPro;
 [System.Serializable]
 public class UIManager : MonoBehaviour
 {
-
-    /*
-        Bugs
-        [] Player moves when clicking on UI
-            - move all interactions to player
-            - rout all clicks accordingly
-            - only run click to move if the player clicks on object with tag terrain
-            - click to move lives in a coroutine?
-            ^^ did all this and none of it works! Ha! Haha!
-               current fix stops player from moving at all while readout is open
-        [x] Scrap spawns behind the map...
-        [x] Player spawns behind the map 
-        [] Need better memory of different scrap instead of treating every scrap like it's the one you found
-            most recently
-            - 
-    
-    */
-
     public static UIManager UIM;
 
     [Header("Scripts")]
     [Space(5)]
     public PlayerManager PlayerManager;
     public SceneController SceneController;
-    public fuel fuleManager;
+    public fuel fuelManager;
     public MerchantManager MerchantManager;
     public UpgradeManager UpgradeManager;
     public ReadoutManager ReadoutManager;
@@ -90,7 +72,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        fuleManager = PlayerManager.PM.GetComponent<fuel>();
+        fuelManager = PlayerManager.PM.GetComponent<fuel>();
         PlayerManager = PlayerManager.PM;
         SceneController = SceneController.SC;
         scrapTickBackup = scrapTick;
@@ -102,7 +84,7 @@ public class UIManager : MonoBehaviour
 // OVERWORLD AND GAMEPLAY
     void Update()
     {   // updating stats at runtime
-        fuelText.text = "Fuel: " + fuleManager.currentFuelPercent.ToString("N0") + "%";
+        fuelText.text = "Fuel: " + fuelManager.currentFuelPercent.ToString("N0") + "%";
         if(PlayerManager.playerCredits == 0){
             creditText.text = "Credits: 0 cr.";
         }
@@ -112,10 +94,10 @@ public class UIManager : MonoBehaviour
         if(PlayerManager.currentHaul != 0){
             haulText.text = "Space left: " + (PlayerManager.maxHaul - PlayerManager.currentHaul).ToString("#,#") + " m<sup>3</sup>";
         }
-        // else{
-        //     haulText.text = "Current Haul: 0 m<sup>3</sup>";
-        // }
-        if(PlayerManager.fuelLevel == PlayerManager.fuelManager.maxFuel){
+        else{
+            haulText.text = "Space left: " + PlayerManager.maxHaul;
+        }
+        if(fuelManager.currentFuelUnits == fuelManager.maxFuel){
             fillFuelButtonText.text = "Cassets full.";
         }
     }
@@ -138,7 +120,7 @@ public class UIManager : MonoBehaviour
     public ScrapObject ShowReadout(ScrapObject newScrap){
         ReadoutManager.UpdateReadout(newScrap);
         readoutPanel.SetActive(true);
-        PlayerManager.SetPlayerMovement(false); // stop the player from moving because how the hell do you actually get UI to block a raycast???
+        //PlayerManager.SetPlayerMovement(false); // stop the player from moving because how the hell do you actually get UI to block a raycast???
         return newScrap;
     }
 
@@ -149,7 +131,7 @@ public class UIManager : MonoBehaviour
                 GameObject newTick = Instantiate(scrapTick) as GameObject;
                 newTick.transform.SetParent(scrapTickSlots.transform, false);
                 readoutPanel.SetActive(false);
-                PlayerManager.SetPlayerMovement(true);
+                //PlayerManager.SetPlayerMovement(true);
         }
         else{
             Callout("CantFitScrap");
@@ -157,8 +139,7 @@ public class UIManager : MonoBehaviour
     }
     public void LeaveScrap(){
         readoutPanel.SetActive(false);
-        PlayerManager.SetPlayerMovement(true);
-        //PlayerManager.GetComponentInParent<clickToMove>().enabled = true;
+        //PlayerManager.SetPlayerMovement(true);
     }
 
     public void Callout(string callout){
@@ -180,7 +161,7 @@ public class UIManager : MonoBehaviour
             PlayerManager.chipCallout.SetActive(false);
         }
     }
-    public IEnumerator LowFuel(){
+    public IEnumerator OutOfFuel(){
         Debug.Log("Character int: " + characterToTalk);
         if(characterToTalk == 1){
             PlayerManager.hasronCallout.SetActive(true);
@@ -309,16 +290,12 @@ public class UIManager : MonoBehaviour
     public void SoldScrap(){  // Called from Merchant Manager
         scrapBuyerReadout.text = "\"It's yours\"\nYou made: " + 
             "<color=#D44900>" + MerchantManager.scrapValue.ToString("#,#") + " credits.";
-        // creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#");
-        //haulText.text = "Current Haul: " + "0" + " m<sup>3</sup>";
         for(int i = scrapTickSlots.transform.childCount - 1; i >= 0; i--){
             GameObject.Destroy(scrapTickSlots.transform.GetChild(i).gameObject);
         }
         scrapTick = scrapTickBackup;
     }
     
-    
-
     // FUEL MERCHANT
     public void enterFuelMerchant(){
         townHub.SetActive(false);
@@ -328,16 +305,14 @@ public class UIManager : MonoBehaviour
     }
     public void BoughtFuel(){
         fuelMerchantReadout.text = "\"Thank you for the credits. I assure you it will be put to good use.\"";
-        fuleManager.UpdateFuelPercent();
+        fuelManager.UpdateFuelPercent();
         Debug.Log("Fuel text" + fuelText.text);
-        //creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#");
     }
     public void FuelAlreadyFull(){
         fuelMerchantReadout.text = "\"It seems that your reactor is already at maximum capacity.\"";
     }
     public void CantAffordFill(){
         fuelMerchantReadout.text = "\"I am sorry, friend, but that is only enough for a partial fuel refill. I will provide for you what I can.\"";
-        //creditText.text = "Credits: 0 cr.";
     }
     public void TweakedReactor(){
         fuelMerchantReadout.text = "\"I am not capable of adjusting your reactor, yet.\"";

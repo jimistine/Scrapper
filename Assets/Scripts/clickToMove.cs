@@ -28,9 +28,9 @@ public bool speedSlowed;
 
     void Update()
     {
-        if(gameObject.GetComponent<fuel>().hasFuel == true){
-            speedSlowed = false;
-        }
+        // if(gameObject.GetComponent<fuel>().hasFuel == true){
+        //     speedSlowed = false;
+        // }
 
         if (Input.GetMouseButtonDown(0) && !isMoving){           
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

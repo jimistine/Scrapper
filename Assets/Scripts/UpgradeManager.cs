@@ -29,7 +29,8 @@ public class UpgradeManager : MonoBehaviour
     public Upgrade CalculateUpgrade(Upgrade upgrade){
         // what stat are we touching? (can these be made a part of the upgrade class?)
         if(upgrade.type == "engine"){
-            PlayerManager.gameObject.GetComponent<clickToMove>().speed += upgrade.effectOffered;
+            //PlayerManager.gameObject.GetComponent<clickToMove>().speed += upgrade.effectOffered;
+            PlayerManager.gameObject.GetComponent<ClickDrag>().topSpeed += upgrade.effectOffered;
         }
         if(upgrade.type == "reactor"){
             PlayerManager.gameObject.GetComponent<fuel>().maxFuel += upgrade.effectOffered;
