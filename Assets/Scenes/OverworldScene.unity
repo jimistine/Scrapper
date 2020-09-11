@@ -1185,7 +1185,7 @@ Transform:
   m_GameObject: {fileID: 1106422485}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.162, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 949542504}
   m_RootOrder: 3
@@ -1230,7 +1230,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: f5cb0d9596dda3345ba1eb4eca95ea56, type: 3}
   m_Color: {r: 0.4056604, g: 0, b: 0.053050034, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1312,7 +1312,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2.5
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -1350,15 +1350,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSpeed: 0
   currentSpeedActual: 0
-  topSpeed: 3
+  topSpeed: 1
   acceleration: 0.1
   breakingPower: 0.15
   recoveryTime: 0.025
   turnIntensityModifier: 0.05
   turnIntensity: 1
+  wasdTurnSpeed: 0.75
   fuelModifier: 1
   moveEnabled: 1
   recovering: 0
+  moveType: PointerSteer
 --- !u!1 &1160511024
 GameObject:
   m_ObjectHideFlags: 0

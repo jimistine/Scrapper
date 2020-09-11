@@ -350,6 +350,19 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+    
+    bool paused;
+    public void TogglePause(){
+        GameObject pauseMenu = gameObject.transform.Find("IntroPanel").gameObject;
+        if(paused == false){
+            pauseMenu.SetActive(true);
+            paused = true;
+        }
+        else{
+            pauseMenu.SetActive(false);
+            paused = false;
+        }
+    }
 
 
     

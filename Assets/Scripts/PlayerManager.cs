@@ -73,6 +73,10 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("restarting");
             SceneController.SC.RestartGame();
         }
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            UIManager.TogglePause();
+        }
+
     }
 
     
