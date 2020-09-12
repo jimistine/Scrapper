@@ -55,7 +55,7 @@ MonoBehaviour:
   priceOffered: 2400
   effectRangeBottom: 0.05
   effectRangeTop: 0.1
-  effectOffered: 0.5
+  effectOffered: 0.1
   effectModifier: 1.5
   statAffected: searchRadius
   upgradeLevel: 0

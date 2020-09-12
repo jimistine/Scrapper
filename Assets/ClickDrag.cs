@@ -16,6 +16,7 @@ public class ClickDrag : MonoBehaviour
     public float fuelModifier = 1;
     public bool moveEnabled = true;
     public bool recovering;
+    public bool accelerating;
     public string moveType = "PointerSteer";
     Rigidbody2D  PlayerRB;
     Vector2 direction;
@@ -44,10 +45,12 @@ public class ClickDrag : MonoBehaviour
                 currentSpeed = 0;
             }
             if(Input.GetKeyDown(KeyCode.W)){
+                accelerating = true;
                 StartCoroutine("Accelerate");
                 StartCoroutine("UpdateRotation");
             }
             if(Input.GetKeyUp(KeyCode.W)){
+                accelerating = false;
                 StopCoroutine("Accelerate");
             }
             if(Input.GetKeyDown(KeyCode.S)){
@@ -67,10 +70,12 @@ public class ClickDrag : MonoBehaviour
                 currentSpeed = 0;
             }
             if(Input.GetKeyDown(KeyCode.W)){
+                accelerating = true;
                 StartCoroutine("Accelerate");
             }
             if(Input.GetKeyUp(KeyCode.W)){
                 StopCoroutine("Accelerate");
+                accelerating = false;
             }
             if(Input.GetKeyDown(KeyCode.S)){
                 dragStored = PlayerRB.drag;

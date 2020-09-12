@@ -105,7 +105,7 @@ public class MerchantManager : MonoBehaviour
         //    and we populate the rest as we go.
         // Check progress of upgrades as childeren of Merchant Manager object
         Upgrade upgradeToCalculate = UpgradeManager.upgrades.Find(x => x.type == upgrade);
-        if(PlayerManager.playerCredits > upgradeToCalculate.priceOffered){
+        if(PlayerManager.playerCredits >= upgradeToCalculate.priceOffered){
             if(upgradeToCalculate.upgradeLevel == upgradeToCalculate.upgradeLevelMax){
                 UIManager.UpgradeAlreadyMaxed(upgradeToCalculate);
             }
@@ -127,7 +127,7 @@ public class MerchantManager : MonoBehaviour
         if(PlayerManager.GetComponent<fuel>().currentFuelUnits <= 0 ){
             UIManager.fuelMerchantReadout.text = "\"I am sorry to have retrieved you, but I am glad glad to see that you are unharmed. The fee is appreciated as always." 
                 +"\nPlease, buy your fill of what deuterium I have. \""
-                +"\n<sub>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " credits has been detucted from your account</sub>";
+                +"\n<size=75%>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " credits has been detucted from your account</size>";
                 PlayerManager.playerCredits -= PlayerManager.playerCredits*towPriceModifier;
         }
         else{

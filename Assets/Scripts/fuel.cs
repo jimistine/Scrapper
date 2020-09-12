@@ -26,7 +26,7 @@ public bool canBeTowed = true;
 
     void Update()
     {
-        if(currentFuelUnits > 0 && ClickDrag.moveEnabled){
+        if(currentFuelUnits > 0 && ClickDrag.moveEnabled && ClickDrag.accelerating){
             ClickDrag.fuelModifier = 1;
             currentFuelUnits -= fuelEfficiency * ClickDrag.currentSpeedActual;
             currentFuelPercent = (currentFuelUnits/maxFuel) * 100;

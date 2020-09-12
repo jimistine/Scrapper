@@ -34,6 +34,7 @@ public class UpgradeManager : MonoBehaviour
         }
         if(upgrade.type == "reactor"){
             PlayerManager.gameObject.GetComponent<fuel>().maxFuel += upgrade.effectOffered;
+            PlayerManager.gameObject.GetComponent<fuel>().UpdateFuelPercent();
         }
         if(upgrade.type == "storage bay"){
             PlayerManager.maxHaul += upgrade.effectOffered;

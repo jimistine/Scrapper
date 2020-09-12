@@ -53,9 +53,9 @@ MonoBehaviour:
   priceIncreasePercentTop: 5
   priceModifier: 3
   priceOffered: 3200
-  effectRangeBottom: 0.1
-  effectRangeTop: 0.2
-  effectOffered: 1
+  effectRangeBottom: 0.5
+  effectRangeTop: 1
+  effectOffered: 10
   effectModifier: 2
   statAffected: maxFuel
   upgradeLevel: 0
