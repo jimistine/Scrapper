@@ -16,6 +16,21 @@ public class SceneController : MonoBehaviour
 
     void Awake(){
         SC = this;
+
+        // int countLoaded = SceneManager.sceneCount;
+        // Scene[] loadedScenes = new Scene[countLoaded];
+        // for (int i = 0; i < countLoaded; i++){
+        //     loadedScenes[i] = SceneManager.GetSceneAt(i);
+        // }
+        // foreach (Scene scene in loadedScenes){
+        //     Debug.Log("Scene name: " + scene.name);
+        //     if(scene.name == "OverworldScene"){
+        //         Debug.Log("Unloading: " + scene.name);
+        //         SceneManager.UnloadSceneAsync("OverworldScene");
+        //     }
+        // }
+     
+    
         SceneManager.LoadScene("OverWorldScene", LoadSceneMode.Additive);
     }
 

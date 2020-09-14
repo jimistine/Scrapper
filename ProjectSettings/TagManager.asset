@@ -9,6 +9,8 @@ TagManager:
   - Obstacle
   - Terrain
   - OverworldParent
+  - ob
+  - Spawnable
   layers:
   - Default
   - TransparentFX

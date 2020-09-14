@@ -48,14 +48,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Proton exiter muzzle
-  description: It's interesting to see one of these up close. In outer orbit you'd
-    never get within optical range if you came up against something like this.
+  scrapName: Land speeder (unknown)
+  description: If there were anything more left of this speeder, one of you would
+    certainly recognize it. As it stands you're just glad whatever crashed in it
+    is long gone.
   image: 0
-  size: 3
-  value: 225
-  material: Titanium
-  zoneA_rarity: 90
+  size: 2
+  value: 200
+  material: Platinum
+  zoneA_rarity: 75
   zoneB_rarity: 0
   zoneC_rarity: 0
   zoneD_rarity: 0
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5283757986021271520}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

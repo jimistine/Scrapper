@@ -24,7 +24,7 @@ public bool canBeTowed = true;
         ClickDrag = PlayerManager.PM.gameObject.GetComponent<ClickDrag>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(currentFuelUnits > 0 && ClickDrag.moveEnabled && ClickDrag.accelerating){
             ClickDrag.fuelModifier = 1;
