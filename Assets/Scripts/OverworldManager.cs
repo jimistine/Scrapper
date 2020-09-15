@@ -64,6 +64,7 @@ public class OverworldManager : MonoBehaviour
         }
         yield return new WaitForSeconds(2);
         goingOut = false;
+        PlayerManager.PM.GetComponent<CircleCollider2D>().enabled = false;
         SetUpTowRig();
     }
     public IEnumerator BringTowRigBack(){
@@ -81,6 +82,7 @@ public class OverworldManager : MonoBehaviour
             yield return null;
         }
         goingOut = true;
+        PlayerManager.PM.GetComponent<CircleCollider2D>().enabled = true;
         towRig.SetActive(false);
         SceneController.SC.StartLoadTown();
     }

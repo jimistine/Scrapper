@@ -51,7 +51,9 @@ public class ClickDrag : MonoBehaviour
             }
             if(Input.GetKeyUp(KeyCode.W)){
                 accelerating = false;
+                //currentSpeed = 0;
                 StopCoroutine("Accelerate");
+                StopCoroutine("UpdateRotation");
             }
             if(Input.GetKeyDown(KeyCode.S)){
                 dragStored = PlayerRB.drag;
@@ -91,6 +93,7 @@ public class ClickDrag : MonoBehaviour
     void FixedUpdate()
     {
         currentSpeedActual = PlayerRB.velocity.magnitude;
+        if(currentSpeedActual < 0.001){currentSpeedActual = 0.0f;}
         if(moveType == "PointerSteer"){
             if(moveEnabled && Input.GetKey(KeyCode.W)){
                 PlayerRB.AddForce((direction.normalized * -1) * currentSpeed * turnIntensity * fuelModifier);

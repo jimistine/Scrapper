@@ -34,6 +34,7 @@ public class scrapPlacer : MonoBehaviour
    public float minDistance;
    public float spawningBoundX;
    public float spawningBoundY;
+   Rect spawningRect;
    int counter = 0;
    float totalSpawningWeight;
    float randomScrapPick;
@@ -54,6 +55,10 @@ public class scrapPlacer : MonoBehaviour
     
     void Start(){
         SpawnScrap(totalSpawnableScrap);
+        spawningRect = gameObject.GetComponent<RectTransform>().rect;
+        spawningBoundX = Mathf.RoundToInt(spawningRect.xMax);
+        spawningBoundY = Mathf.RoundToInt(spawningRect.yMax);
+        Debug.Log("Spawning bounds X: " + spawningRect.xMin + ", " + spawningRect.xMax + " | Y: " + spawningRect.yMin + ", " + spawningRect.yMax);
     }
     void Update(){
         currentLiveScrap = GameObject.FindGameObjectsWithTag("Scrap");
@@ -108,6 +113,8 @@ public class scrapPlacer : MonoBehaviour
             generatingPosition = true;
             while(generatingPosition){
                 position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), 0);
+                // position = new Vector3(Random.Range(Mathf.RoundToInt(spawningRect.xMin), Mathf.RoundToInt(spawningRect.xMax)), 
+                //                        Random.Range(Mathf.RoundToInt(spawningRect.yMin), Mathf.RoundToInt(spawningRect.yMax)), 0);
                 Vector2 pos2D = new Vector2(position.x, position.y);
                 scrapPosRay = Physics2D.Raycast(pos2D, Vector2.zero);
                 if(scrapPosRay.collider == null){
@@ -123,6 +130,8 @@ public class scrapPlacer : MonoBehaviour
             for(int i = 0; i < spawnedScrap.Length; i++){
                 if(Vector3.Distance(position, spawnedScrap[i].transform.position) <= minDistance){
                     position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), 0);
+                    // position = new Vector3(Random.Range(Mathf.RoundToInt(spawningRect.xMin), Mathf.RoundToInt(spawningRect.xMax)), 
+                    //                        Random.Range(Mathf.RoundToInt(spawningRect.yMin), Mathf.RoundToInt(spawningRect.yMax)), 0);
                     i = 0;
                 }   
             }
