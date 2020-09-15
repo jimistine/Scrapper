@@ -110,8 +110,11 @@ public class scrapPlacer : MonoBehaviour
                 position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), 0);
                 Vector2 pos2D = new Vector2(position.x, position.y);
                 scrapPosRay = Physics2D.Raycast(pos2D, Vector2.zero);
-                if(scrapPosRay.collider.tag == "Spawnable"){
+                if(scrapPosRay.collider == null){
                     generatingPosition = false;
+                }
+                else if(scrapPosRay.collider.tag == "ob"){
+                    generatingPosition = true;
                 }
             }
             // get location of everything with tag scrap
@@ -124,7 +127,7 @@ public class scrapPlacer : MonoBehaviour
                 }   
             }
             // spawn that $hit
-            Debug.Log("Spawning scrap on " + scrapPosRay.collider.tag);
+            //Debug.Log("Spawning scrap on " + scrapPosRay.collider.tag);
             GameObject copiedScrap = (Instantiate(sampleScrap, position, Quaternion.identity));
             copiedScrap.transform.parent = gameObject.transform;
             copiedScrap.name = copiedScrap.GetComponent<ScrapObject>().scrapName;

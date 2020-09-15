@@ -58,6 +58,7 @@ public class MerchantManager : MonoBehaviour
     [Header("Scrap Buyer")]
     [Space(5)]
     public float scrapValue;
+    public List<ScrapObject> SoldScrap;
 
 
     [Header("Fuel Merchant")]
@@ -86,6 +87,7 @@ public class MerchantManager : MonoBehaviour
         if(PlayerManager.playerScrap.Count != 0){
             foreach(ScrapObject scrap in PlayerManager.playerScrap){
                 scrapValue += scrap.value;
+                SoldScrap.Add(scrap);
                 Debug.Log("Sold a: " + scrap.scrapName);
             }
             PlayerManager.playerCredits += scrapValue;
@@ -93,6 +95,7 @@ public class MerchantManager : MonoBehaviour
             PlayerManager.UpdateCurrentHaul();
             Debug.Log("cleared inventory");
             UIManager.SoldScrap();
+            scrapValue = 0;
         }
         else{
             UIManager.cantSellScrap();

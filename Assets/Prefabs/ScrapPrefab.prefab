@@ -48,15 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Land speeder (unknown)
-  description: If there were anything more left of this speeder, one of you would
-    certainly recognize it. As it stands you're just glad whatever crashed in it
-    is long gone.
+  scrapName: Heating unit (unknown)
+  description: Not much use for these on Talacan, but someone will buy it to take
+    somewhere cold.
   image: 0
-  size: 2
-  value: 200
-  material: Platinum
-  zoneA_rarity: 75
+  size: 20
+  value: 1000
+  material: Aluminum
+  zoneA_rarity: 60
   zoneB_rarity: 0
   zoneC_rarity: 0
   zoneD_rarity: 0
