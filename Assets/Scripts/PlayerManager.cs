@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     public fuel fuelManager;
     public ClickDrag ClickDrag;
     public UIManager UIManager;
+    AudioManager AudioManager;
 
     [Header("Rig Stats")]
     [Space(5)]
@@ -41,6 +42,7 @@ public class PlayerManager : MonoBehaviour
     }
     void Start(){
         UIManager = UIManager.UIM;
+        AudioManager = AudioManager.AM;
         fuelManager = gameObject.GetComponent<fuel>();
         ClickDrag = gameObject.GetComponent<ClickDrag>();
     }
@@ -48,7 +50,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
-        // INTERACTIONS
+// INTERACTIONS
         if (Input.GetMouseButtonDown(0)) {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
@@ -67,7 +69,10 @@ public class PlayerManager : MonoBehaviour
             DropScrap(tickReadoutIndex);
         }
         if(Input.GetMouseButtonDown(1)){
-            RigManager.RM.ChangeZoom(Camera.main.orthographicSize);
+            if(RigManager.RM.zoomLevels.Count > 1){
+                RigManager.RM.ChangeZoom(Camera.main.orthographicSize);
+                AudioManager.ChangeZoom();
+            }
         }
         if(Input.GetKeyDown(KeyCode.R)){
             Debug.Log("restarting");
@@ -75,6 +80,7 @@ public class PlayerManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.P)){
             UIManager.TogglePause();
+            AudioManager.PlayRandomButton();
         }
 
     }

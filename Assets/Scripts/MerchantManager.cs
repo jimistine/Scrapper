@@ -115,10 +115,12 @@ public class MerchantManager : MonoBehaviour
             else{
                 PlayerManager.playerCredits -= upgradeToCalculate.priceOffered;
                 UpgradeManager.CalculateUpgrade(upgradeToCalculate);
+                AudioManager.AM.PlayRandomUpgrade();
             }
         }
         else{
             UIManager.CantAffordUpgrade(upgradeToCalculate);
+            AudioManager.AM.PlayMiscUIClip("reject");
         }
     }
 
@@ -149,18 +151,26 @@ public class MerchantManager : MonoBehaviour
         if(PlayerManager.playerCredits >= creditsToTakeFuel){
             if (PlayerManager.fuelManager.currentFuelUnits == PlayerManager.fuelManager.maxFuel){
                 UIManager.FuelAlreadyFull();
+                AudioManager.AM.PlayMiscUIClip("reject");
             }
             else{
-            PlayerManager.playerCredits -= creditsToTakeFuel;
-            PlayerManager.fuelManager.currentFuelUnits = PlayerManager.fuelManager.maxFuel;
-            UpdateFuelPrice();
-            fuelManager.UpdateFuelPercent();
-            UIManager.BoughtFuel();
+                PlayerManager.playerCredits -= creditsToTakeFuel;
+                PlayerManager.fuelManager.currentFuelUnits = PlayerManager.fuelManager.maxFuel;
+                UpdateFuelPrice();
+                fuelManager.UpdateFuelPercent();
+                UIManager.BoughtFuel();
+                AudioManager.AM.FillFuel();
             }
         }
         else{
             fuelToAdd = PlayerManager.playerCredits / fuelPrice;
             PlayerManager.fuelManager.currentFuelUnits += fuelToAdd;
+            if(PlayerManager.playerCredits == 0){
+                AudioManager.AM.PlayMiscUIClip("reject");
+            }
+            else{
+                AudioManager.AM.PlayMiscUIClip("fill fuel");
+            }
             PlayerManager.playerCredits = 0;
             UpdateFuelPrice();
             fuelManager.UpdateFuelPercent();

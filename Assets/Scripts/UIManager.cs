@@ -120,7 +120,7 @@ public class UIManager : MonoBehaviour
     public ScrapObject ShowReadout(ScrapObject newScrap){
         ReadoutManager.UpdateReadout(newScrap);
         readoutPanel.SetActive(true);
-        //PlayerManager.SetPlayerMovement(false); // stop the player from moving because how the hell do you actually get UI to block a raycast???
+        AudioManager.AM.PlayMiscUIClip("inspect");
         return newScrap;
     }
 
@@ -131,7 +131,7 @@ public class UIManager : MonoBehaviour
                 GameObject newTick = Instantiate(scrapTick) as GameObject;
                 newTick.transform.SetParent(scrapTickSlots.transform, false);
                 readoutPanel.SetActive(false);
-                //PlayerManager.SetPlayerMovement(true);
+                AudioManager.AM.PlayRandomButton();
         }
         else{
             Callout("CantFitScrap");
@@ -139,7 +139,7 @@ public class UIManager : MonoBehaviour
     }
     public void LeaveScrap(){
         readoutPanel.SetActive(false);
-        //PlayerManager.SetPlayerMovement(true);
+        AudioManager.AM.PlayMiscUIClip("dismiss");
     }
 
     public void Callout(string callout){
@@ -286,8 +286,10 @@ public class UIManager : MonoBehaviour
     }
     public void cantSellScrap(){
         scrapBuyerReadout.text = "\"You two ah, don't have any scrap out there.\"";
+        AudioManager.AM.PlayMiscUIClip("reject");
     }
     public void SoldScrap(){  // Called from Merchant Manager
+        AudioManager.AM.PlayMiscUIClip("sold scrap");
         scrapBuyerReadout.text = "\"It's yours\"\nYou made: " + 
             "<color=#D44900>" + MerchantManager.scrapValue.ToString("#,#") + " credits.";
         for(int i = scrapTickSlots.transform.childCount - 1; i >= 0; i--){

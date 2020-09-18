@@ -48,14 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Heating unit (unknown)
-  description: Not much use for these on Talacan, but someone will buy it to take
-    somewhere cold.
+  scrapName: Interplanetary entertainment satellite
+  description: Can't tell you how much I wish this thing was still in orbit. Hoping
+    our little beacon up there can at least pull down the Strom Race next week.
   image: 0
-  size: 20
-  value: 1000
-  material: Aluminum
-  zoneA_rarity: 60
+  size: 4
+  value: 400
+  material: Platinum
+  zoneA_rarity: 90
   zoneB_rarity: 0
   zoneC_rarity: 0
   zoneD_rarity: 0

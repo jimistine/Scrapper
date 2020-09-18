@@ -8,17 +8,14 @@ public class ScrapTickOnHover : MonoBehaviour
     , IPointerExitHandler
 {
     UIManager UIManager = UIManager.UIM;
+    AudioManager AudioManager = AudioManager.AM;
     int tickIndex;
-    void Update()
-    {
-
-    }
 
     public void OnPointerEnter(PointerEventData eventData){
         Debug.Log("Mouse is over GameObject.");
-       // GameObject tickSlots = gameObject.transform.parent.gameObject;
         tickIndex = transform.GetSiblingIndex();
         UIManager.OnTickHover(tickIndex);
+        AudioManager.OnHover();
         PlayerManager.PM.tickReadoutIndex = tickIndex;
     }
 
