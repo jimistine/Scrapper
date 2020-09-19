@@ -39,19 +39,23 @@ public class ClickDrag : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha2)){
             moveType = "WASD";
         }
-
+                                                             //Pointer
         if(moveEnabled && moveType == "PointerSteer"){
             if (currentSpeed < 0){           
                 currentSpeed = 0;
             }
             if(Input.GetKeyDown(KeyCode.W)){
                 accelerating = true;
+                AudioManager.AM.PlayRigStart();
                 StartCoroutine("Accelerate");
                 StartCoroutine("UpdateRotation");
             }
             if(Input.GetKeyUp(KeyCode.W)){
                 accelerating = false;
                 //currentSpeed = 0;
+
+                AudioManager.AM.PlayRigStop();
+                AudioManager.AM.RigStartStop.Stop();
                 StopCoroutine("Accelerate");
                 StopCoroutine("UpdateRotation");
             }
@@ -66,7 +70,7 @@ public class ClickDrag : MonoBehaviour
             if(turnIntensity < .99f && recovering == false){
                 StartCoroutine("SteeringDampener");
             }
-        }
+        }                                                   // WASD
         else if(moveEnabled && moveType == "WASD"){
             if (currentSpeed < 0){           
                 currentSpeed = 0;

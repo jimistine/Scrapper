@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     public List<NamedClip> playerClips;
     public List<AudioClip> ambientStings;
     public List<AudioClip> musicClips;
+    public AudioClip rigStart;
+    public AudioClip rigStop;
     [Header("Audio Sources")]
     [Space(5)]
     public AudioSource UIAudio;
@@ -24,6 +26,8 @@ public class AudioManager : MonoBehaviour
    // public AudioSource AmbientAudio;
     public AudioSource AmbientAudioSting;
     public AudioSource AmbientTown;
+    public AudioSource RigStartStop;
+    public AudioSource RigRunning;
     [Header("Snapshots")]
     [Space(5)]
     public AudioMixerSnapshot currentSnapShot;
@@ -91,6 +95,21 @@ public class AudioManager : MonoBehaviour
     public void FillFuel(){
         UIAudio.PlayOneShot(miscUIClips.Find(x => x.clipName == "fill fuel").clip, 1);
     }
+
+// RIG
+    public void PlayRigStart(){
+        double startDuration = (double)RigStartStop.clip.samples / RigStartStop.clip.frequency;
+        RigStartStop.PlayScheduled(AudioSettings.dspTime + 0.1);
+        RigRunning.PlayScheduled(AudioSettings.dspTime + 0.1 + startDuration);
+        //RigStartStop.PlayOneShot(rigStart);
+    }
+    public void PlayRigRunning(){
+    }
+    public void PlayRigStop(){
+        RigStartStop.PlayOneShot(rigStop);
+        Debug.Log("Playing Stop");
+    }
+
 
 // AMBIENT
     // Snapshot Transitions
