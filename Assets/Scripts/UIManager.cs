@@ -219,12 +219,12 @@ public class UIManager : MonoBehaviour
     public void BackToHub(){
         if(playerLocation == "scrap buyer"){
             scrapBuyer.SetActive(false);
-            townHub.SetActive(true);
         }
         if(playerLocation == "fuel merchant"){
             fuelMerchant.SetActive(false);
-            townHub.SetActive(true);
         }
+        townHub.SetActive(true);
+        AudioManager.AM.TransitionToTownExterior();
         playerLocation = "town hub";
     }
     public void BoughtUpgrade(Upgrade upgrade){
@@ -278,6 +278,7 @@ public class UIManager : MonoBehaviour
 
     // SCRAP BUYER
     public void enterScrapBuyer(){
+        AudioManager.AM.TransitionToTownInterior();
         townHub.SetActive(false);
         scrapBuyer.SetActive(true);
         playerLocation = "scrap buyer";
@@ -300,6 +301,7 @@ public class UIManager : MonoBehaviour
     
     // FUEL MERCHANT
     public void enterFuelMerchant(){
+        AudioManager.AM.TransitionToTownInterior();
         townHub.SetActive(false);
         fuelMerchant.SetActive(true);
         playerLocation = "fuel merchant";
@@ -356,13 +358,16 @@ public class UIManager : MonoBehaviour
     bool paused = true;
     public void TogglePause(){
         GameObject pauseMenu = gameObject.transform.Find("IntroPanel").gameObject;
-        if(paused == false){
+        AudioManager.AM.TogglePausedSnapshot();
+        if(paused == false){ // they pause the game
             pauseMenu.SetActive(true);
             paused = true;
+            AudioManager.AM.PlayMiscUIClip("inspect");
         }
-        else{
+        else{                // they unpause the game
             pauseMenu.SetActive(false);
             paused = false;
+            AudioManager.AM.PlayMiscUIClip("dismiss");
         }
     }
 

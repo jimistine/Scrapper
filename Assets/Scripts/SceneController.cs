@@ -42,6 +42,7 @@ public class SceneController : MonoBehaviour
     }
     public void StartLoadTown(){
         StartCoroutine("LoadTown");
+        AudioManager.AM.TransitionToTownExterior();
     }
     public IEnumerator LoadTown(){
         SceneManager.LoadScene("Town", LoadSceneMode.Additive);
@@ -53,6 +54,7 @@ public class SceneController : MonoBehaviour
     }
     public void StartLeaveTown(){
         StartCoroutine("LeaveTown");
+        AudioManager.AM.TransitionToOverworld();
     }
     public IEnumerator LeaveTown(){
         PlayerManager.SetPlayerMovement(true);

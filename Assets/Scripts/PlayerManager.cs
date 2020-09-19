@@ -80,7 +80,7 @@ public class PlayerManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.P)){
             UIManager.TogglePause();
-            AudioManager.PlayRandomButton();
+           // AudioManager.PlayRandomButton();
         }
 
     }
