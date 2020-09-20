@@ -107,6 +107,7 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayRigStop(){
         RigStartStop.PlayOneShot(rigStop);
+        RigRunning.Stop();
         Debug.Log("Playing Stop");
     }
 

@@ -53,7 +53,6 @@ public class ClickDrag : MonoBehaviour
             if(Input.GetKeyUp(KeyCode.W)){
                 accelerating = false;
                 //currentSpeed = 0;
-
                 AudioManager.AM.PlayRigStop();
                 AudioManager.AM.RigStartStop.Stop();
                 StopCoroutine("Accelerate");
