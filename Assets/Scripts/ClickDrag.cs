@@ -52,9 +52,7 @@ public class ClickDrag : MonoBehaviour
             }
             if(Input.GetKeyUp(KeyCode.W)){
                 accelerating = false;
-                //currentSpeed = 0;
                 AudioManager.AM.PlayRigStop();
-                AudioManager.AM.RigStartStop.Stop();
                 StopCoroutine("Accelerate");
                 StopCoroutine("UpdateRotation");
             }
@@ -76,10 +74,12 @@ public class ClickDrag : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.W)){
                 accelerating = true;
+                AudioManager.AM.PlayRigStart();
                 StartCoroutine("Accelerate");
             }
             if(Input.GetKeyUp(KeyCode.W)){
                 StopCoroutine("Accelerate");
+                AudioManager.AM.PlayRigStop();
                 accelerating = false;
             }
             if(Input.GetKeyDown(KeyCode.S)){

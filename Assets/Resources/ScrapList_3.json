@@ -13,7 +13,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Ulterior Jamsin Beacon",
@@ -27,7 +27,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Wotaki EX-9 Armature",
@@ -41,7 +41,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Unknown (cooling unit)",
@@ -55,7 +55,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Enliven Tokamak VII",
@@ -69,7 +69,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Interplanetary entertainment satellite",
@@ -83,7 +83,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Proton exiter muzzle",
@@ -97,7 +97,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Spartak Lite Drone",
@@ -111,7 +111,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Sha'ak-ji Compact generator",
@@ -125,7 +125,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Fenz9 Optical Sensor",
@@ -153,7 +153,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Land speeder (unknown)",
@@ -167,7 +167,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Boson netting",
@@ -181,7 +181,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Diplomatic personal vessel",
@@ -195,7 +195,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Heating unit (unknown)",
@@ -223,7 +223,7 @@
     "zoneC_rarity": null,
     "zoneD_rarity": null,
     "carriesComponents": null,
-    "isBuried": null
+    "isBuried": false
   },
   {
     "scrapName": "Intelaa J.2 engine",
@@ -237,7 +237,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Frustrum Septimus Nanobots",
@@ -251,7 +251,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Destabilizing 0058 reactor",
@@ -265,7 +265,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "E-2 Ecrin Micro-generator",
@@ -279,7 +279,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Desert Shaper sand-based terraformer",
@@ -293,7 +293,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Ancient combustion-based engine",
@@ -307,7 +307,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Redoit Comms Relay",
@@ -321,7 +321,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Paranti Ecco Drone",
@@ -335,7 +335,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Warp tunnel control tower",
@@ -349,7 +349,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "LO Humanoid-friendly space station",
@@ -363,7 +363,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "WD-40k Compactor",
@@ -377,7 +377,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "General Orbiters Telluride Satellite",
@@ -391,7 +391,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "K1 Processor Chip",
@@ -405,7 +405,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Intra-Galaxie 500",
@@ -419,7 +419,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "EIT Square Fighter",
@@ -433,7 +433,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Cloud gatherer (unknown)",
@@ -447,7 +447,7 @@
     "zoneC_rarity": null,
     "zoneD_rarity": null,
     "carriesComponents": null,
-    "isBuried": null
+    "isBuried": true
   },
   {
     "scrapName": "Frustrum Gargantuan 36D",
@@ -461,7 +461,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Unknown (interplanetary cargo hauler)",
@@ -475,7 +475,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Bamak Imperial Frigate",
@@ -489,7 +489,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Cordona Land Speeder",
@@ -503,7 +503,7 @@
     "zoneC_rarity": 0,
     "zoneD_rarity": 0,
     "carriesComponents": false,
-    "isBuried": false
+    "isBuried": true
     }
   ]
 }

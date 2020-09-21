@@ -35,6 +35,7 @@ public class AudioManager : MonoBehaviour
     public AudioMixerSnapshot townInterior;
     public AudioMixerSnapshot overworldSnapshot;
     public AudioMixerSnapshot pausedSnapshot;
+    public float startRunningAdjustment;
 
     int secondsToWait;
     float startWaitTime;
@@ -99,15 +100,16 @@ public class AudioManager : MonoBehaviour
 // RIG
     public void PlayRigStart(){
         double startDuration = (double)RigStartStop.clip.samples / RigStartStop.clip.frequency;
-        RigStartStop.PlayScheduled(AudioSettings.dspTime + 0.1);
-        RigRunning.PlayScheduled(AudioSettings.dspTime + 0.1 + startDuration);
+        RigStartStop.PlayScheduled(AudioSettings.dspTime);
+        RigRunning.PlayScheduled(AudioSettings.dspTime + startDuration + startRunningAdjustment);
         //RigStartStop.PlayOneShot(rigStart);
     }
     public void PlayRigRunning(){
     }
     public void PlayRigStop(){
-        RigStartStop.PlayOneShot(rigStop);
+        RigStartStop.Stop();
         RigRunning.Stop();
+        RigStartStop.PlayOneShot(rigStop);
         Debug.Log("Playing Stop");
     }
 

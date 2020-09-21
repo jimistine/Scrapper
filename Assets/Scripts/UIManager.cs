@@ -131,10 +131,11 @@ public class UIManager : MonoBehaviour
                 GameObject newTick = Instantiate(scrapTick) as GameObject;
                 newTick.transform.SetParent(scrapTickSlots.transform, false);
                 readoutPanel.SetActive(false);
-                AudioManager.AM.PlayRandomButton();
+                AudioManager.AM.PlayPlayerClip("pick up scrap");
         }
         else{
             Callout("CantFitScrap");
+            AudioManager.AM.PlayMiscUIClip("reject");
         }
     }
     public void LeaveScrap(){

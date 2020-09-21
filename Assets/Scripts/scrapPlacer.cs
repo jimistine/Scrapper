@@ -43,9 +43,11 @@ public class scrapPlacer : MonoBehaviour
    float totalScrapValue;
    float totalScrapVolume;
    GameObject[] currentLiveScrap;
+   public GameObject[] placedScrap;
    RaycastHit2D scrapPosRay;
    Vector3 position;
    bool generatingPosition;
+   bool spawnedPlacedScrap;
 
     // Start is called before the first frame update
     public static scrapPlacer SP;
@@ -55,6 +57,7 @@ public class scrapPlacer : MonoBehaviour
     
     void Start(){
         SpawnScrap(totalSpawnableScrap);
+        SpawnPlacedScrap();
         spawningRect = gameObject.GetComponent<RectTransform>().rect;
         spawningBoundX = Mathf.RoundToInt(spawningRect.xMax);
         spawningBoundY = Mathf.RoundToInt(spawningRect.yMax);
@@ -109,12 +112,11 @@ public class scrapPlacer : MonoBehaviour
             sampleScrap.GetComponent<ScrapObject>().zoneD_rarity = incomingScrap.zoneD_rarity;
             sampleScrap.GetComponent<ScrapObject>().carriesComponents = incomingScrap.carriesComponents;
             sampleScrap.GetComponent<ScrapObject>().isBuried = incomingScrap.isBuried;
+
             // generate a position within the bounds of the map
             generatingPosition = true;
             while(generatingPosition){
                 position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), 0);
-                // position = new Vector3(Random.Range(Mathf.RoundToInt(spawningRect.xMin), Mathf.RoundToInt(spawningRect.xMax)), 
-                //                        Random.Range(Mathf.RoundToInt(spawningRect.yMin), Mathf.RoundToInt(spawningRect.yMax)), 0);
                 Vector2 pos2D = new Vector2(position.x, position.y);
                 scrapPosRay = Physics2D.Raycast(pos2D, Vector2.zero);
                 if(scrapPosRay.collider == null){
@@ -130,13 +132,11 @@ public class scrapPlacer : MonoBehaviour
             for(int i = 0; i < spawnedScrap.Length; i++){
                 if(Vector3.Distance(position, spawnedScrap[i].transform.position) <= minDistance){
                     position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), 0);
-                    // position = new Vector3(Random.Range(Mathf.RoundToInt(spawningRect.xMin), Mathf.RoundToInt(spawningRect.xMax)), 
-                    //                        Random.Range(Mathf.RoundToInt(spawningRect.yMin), Mathf.RoundToInt(spawningRect.yMax)), 0);
+                   
                     i = 0;
                 }   
             }
             // spawn that $hit
-            //Debug.Log("Spawning scrap on " + scrapPosRay.collider.tag);
             GameObject copiedScrap = (Instantiate(sampleScrap, position, Quaternion.identity));
             copiedScrap.transform.parent = gameObject.transform;
             copiedScrap.name = copiedScrap.GetComponent<ScrapObject>().scrapName;
@@ -152,6 +152,44 @@ public class scrapPlacer : MonoBehaviour
             counter++;
         }
     }
+
+    public void SpawnPlacedScrap(){
+        placedScrap = GameObject.FindGameObjectsWithTag("placed");
+        foreach(GameObject placedObj in placedScrap){
+        // find the highest weight of all scrap, that is, the most common
+            int maxWeight = JsonReader.scrapInJson.allScrap.Max(x => x.zoneA_rarity);
+            // pick a number somwhere inbetween that max and 0
+            randomScrapPick = Random.Range(0, maxWeight);
+            // shuffle the array so everyone gets a chance
+            RandomExtensions.Shuffle(shuffleRandom, JsonReader.scrapInJson.allScrap);
+            // iterate through all the scrap in our list and pick the first one that's weighted higher than 
+            //   our random value and exit the loop.
+            foreach(Scrap scrap in JsonReader.scrapInJson.allScrap){
+                if(scrap.zoneA_rarity >= randomScrapPick){
+                    incomingScrap = scrap;
+                    break;
+                }
+            }
+            // transfer that sweet sweet data to prefab
+            sampleScrap.GetComponent<ScrapObject>().scrapName = incomingScrap.scrapName;
+            sampleScrap.GetComponent<ScrapObject>().description = incomingScrap.description;
+            sampleScrap.GetComponent<ScrapObject>().image = incomingScrap.image;
+            sampleScrap.GetComponent<ScrapObject>().size = incomingScrap.size;
+            sampleScrap.GetComponent<ScrapObject>().value = incomingScrap.value;
+            sampleScrap.GetComponent<ScrapObject>().material = incomingScrap.material;
+            sampleScrap.GetComponent<ScrapObject>().zoneA_rarity = incomingScrap.zoneA_rarity;
+            sampleScrap.GetComponent<ScrapObject>().zoneB_rarity = incomingScrap.zoneB_rarity;
+            sampleScrap.GetComponent<ScrapObject>().zoneC_rarity = incomingScrap.zoneC_rarity;
+            sampleScrap.GetComponent<ScrapObject>().zoneD_rarity = incomingScrap.zoneD_rarity;
+            sampleScrap.GetComponent<ScrapObject>().carriesComponents = incomingScrap.carriesComponents;
+            sampleScrap.GetComponent<ScrapObject>().isBuried = incomingScrap.isBuried;
+
+            GameObject placedScrap = (Instantiate(sampleScrap, placedObj.transform.position, Quaternion.identity));
+            placedScrap.transform.parent = gameObject.transform;
+            placedScrap.name = placedScrap.GetComponent<ScrapObject>().scrapName;
+            }
+        }
+
     public void SpawnDroppedScrap(ScrapObject droppedScrap){
             Debug.Log("Dropping a " + droppedScrap.scrapName);
             GameObject droppedScrapObj = sampleScrap;
