@@ -35,7 +35,10 @@ public class AudioManager : MonoBehaviour
     public AudioMixerSnapshot townInterior;
     public AudioMixerSnapshot overworldSnapshot;
     public AudioMixerSnapshot pausedSnapshot;
+    [Header("Other")]
+    [Space(5)]
     public float startRunningAdjustment;
+    public float runningVolumeModifier;
 
     int secondsToWait;
     float startWaitTime;
@@ -59,6 +62,9 @@ public class AudioManager : MonoBehaviour
         
     }
 
+    void Update(){
+        masterMixer.SetFloat("RunningVolume", (PlayerManager.PM.GetComponent<ClickDrag>().currentSpeedActual * runningVolumeModifier) - 80);
+    }
     void FixedUpdate()
     {
         currentTime = Time.time;

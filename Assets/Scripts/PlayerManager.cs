@@ -83,6 +83,10 @@ public class PlayerManager : MonoBehaviour
             UIManager.TogglePause();
            // AudioManager.PlayRandomButton();
         }
+        if(Input.GetKeyDown(KeyCode.Space)){
+            DialogueManager.DM.ContinueDialogue();
+           // AudioManager.PlayRandomButton();
+        }
 
     }
 

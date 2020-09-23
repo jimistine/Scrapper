@@ -6603,7 +6603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe50241ae677dd4c94bbbb223e505a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterMixer: {fileID: 0}
+  masterMixer: {fileID: 24100000, guid: e7893bab2dfdf79478dba7bf5170b316, type: 2}
   buttonClips:
   - {fileID: 8300000, guid: 7decc959a98fb3d46b8bd85b9c41983d, type: 3}
   - {fileID: 8300000, guid: 9713e032cc5f87f4f9372dd0dd14cabf, type: 3}
@@ -6656,6 +6656,7 @@ MonoBehaviour:
   overworldSnapshot: {fileID: 24500006, guid: e7893bab2dfdf79478dba7bf5170b316, type: 2}
   pausedSnapshot: {fileID: -2597962052861911410, guid: e7893bab2dfdf79478dba7bf5170b316, type: 2}
   startRunningAdjustment: 0
+  runningVolumeModifier: 1
 --- !u!1 &798863990
 GameObject:
   m_ObjectHideFlags: 0
