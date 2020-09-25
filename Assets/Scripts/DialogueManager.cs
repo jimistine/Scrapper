@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Yarn.Unity;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour
 {
     
     public static DialogueManager DM;
     public ScrapDialogueUI ui;
+    public DialogueRunner DialogueRunner;
 
     public string test = "Hasron: Well look at that.";
     public string characterName = "Hasron:";
     GameObject activeSpeakerPanel;
+    string speakerNameLast;
     
     [System.Serializable]
     public struct Characters{
@@ -26,51 +28,51 @@ public class DialogueManager : MonoBehaviour
     void Awake(){
         DM = this;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
+    
+    void Start(){
         ui.onLineStart.AddListener(LineStarted);
         ui.onLineUpdate.AddListener(LineUpdate);
+        DialogueRunner.onDialogueComplete.AddListener(ConversationEnded);
+        
     }
-    void Update(){
+    
+    private void ListenerTest(){
+        Debug.Log("Line start tested");
+
+    }
+
+    public void LineStarted(){   // if the speaker of this line is different from the last line, swap active panels
+        Debug.Log("Line started");
+        if(speakerNameLast != ui.speakerName || speakerNameLast == null){
+            if(activeSpeakerPanel != null){
+                activeSpeakerPanel.SetActive(false);
+            } 
+            activeSpeakerPanel = characters.Find(x => x.characterName == ui.speakerName).characterPanel;
+            activeSpeakerPanel.SetActive(true);
+            Debug.Log("Swapped to " + ui.speakerName);
+        }
+
+        speakerNameLast = ui.speakerName;
         
     }
 
-    private void LineUpdate(string line){
-        Debug.Log(line);
+    private void LineUpdate(string line)
+    {
+        activeSpeakerPanel.GetComponentInChildren<TextMeshProUGUI>().text = line;
+        //Debug.Log(line);
     }
 
-    private void LineStarted(){
-        //play a sound
-        //...
-    }
 
     private void ConversationEnded(){
+        activeSpeakerPanel.SetActive(false);
         // return control etc
     }
 
-    /*
-    To swap panels based on who is talking
-    DialogueUI looks at each line
-        -> doRunLine
-        specifically everything until thre is a : in the line
-            we pass 
-                line = "Hasron: Well look at that"
-            get the name
-                Match speakerName = RegEx.Match(line, @"^.*?(?=:)");
-            set the current dialogue container to the gameObject associated with the same name in our list of names
-                dialogueConainer = characterNames.Find(x => x.characterName == speakerName).characterPanel);
-    */
 
     public void ContinueDialogue(){
         ui.MarkLineComplete();
     }
     public void SwapTest(string speakerName){
-        // set proper text elements active
-        activeSpeakerPanel = characters.Find(x => x.characterName == speakerName).characterPanel;
-        activeSpeakerPanel.SetActive(true);
-        activeSpeakerText = activeSpeakerPanel.GetComponentInChildren<TextMeshProUGUI>().text;
-        Debug.Log("Swapping to " + characterName);
+       
     }
 }

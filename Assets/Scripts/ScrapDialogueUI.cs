@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using System.Text.RegularExpressions;
+using UnityEngine.Events;
 
 namespace Yarn.Unity 
 {
     public class ScrapDialogueUI : Yarn.Unity.DialogueUIBehaviour
     {
+        public static ScrapDialogueUI sDUI;
+
         private bool userRequestedNextLine = false;
         [Tooltip("How quickly to show the text, in seconds per character")]
         public float textSpeed;
@@ -16,15 +19,23 @@ namespace Yarn.Unity
         public UnityEngine.Events.UnityEvent onLineFinishDisplaying;
         public DialogueRunner.StringUnityEvent onLineUpdate;
         public UnityEngine.Events.UnityEvent onLineEnd;
+
         public DialogueRunner.StringUnityEvent onCommand;
 
+        public string speakerName;
 
+        void Awake(){
+            sDUI = this;
+        }
+        void Start(){
+            onLineStart.AddListener(DialogueManager.DM.LineStarted);
+        }
 
         public override Dialogue.HandlerExecutionType RunLine (Yarn.Line line, ILineLocalisationProvider localisationProvider, System.Action onLineComplete)
         {
             string text = localisationProvider.GetLocalisedTextForLine(line);
 
-            string speakerName = Regex.Match(text, @"^.*?(?=:)").Value;
+            speakerName = Regex.Match(text, @"^.*?(?=:)").Value;
             
 
             // Start displaying the line; it will call onComplete later
@@ -35,11 +46,12 @@ namespace Yarn.Unity
 
         private IEnumerator DoRunLine(Yarn.Line line, ILineLocalisationProvider localisationProvider, System.Action onComplete) {
             
-            onLineStart?.Invoke();
+           // onLineStart?.Invoke();
             // ? is the same as below
-            // if(onLineStart != null){
-            //     onLineStart.Invoke();
-            // }
+            if(onLineStart != null){
+                onLineStart.Invoke();
+                Debug.Log("onLineStart invoked");
+            }
             
             userRequestedNextLine = false;
             

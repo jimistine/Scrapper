@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 739daa0050f951c4084f023d1e8d9ba2
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: en-US
+  stringIDs: []
+  compilationStatus: 0
+  isSuccesfullyCompiled: 0
+  compilationErrorMessage: "Error on line 9 at position 62:\nmismatched input ']'
+    expecting FORMAT_FUNCTION_EXPRESSION_START\r\nHasron: Well, I mean if it's around
+    this bend, then I know [i]exactly[/i] where we are. And if it isn't...\r\n                                                            
+    ^"
+  baseLanguage: {instanceID: 0}
+  localizations: []

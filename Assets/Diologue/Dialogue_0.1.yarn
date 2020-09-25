@@ -1,0 +1,28 @@
+title: intro
+tags: 
+colorID: 0
+position: 540,538
+---
+CH1-P: Are you sure this is the right place?
+Hasron: No, not really.
+CH1-P: Ah. I was wondering.
+Hasron: Well, I mean if it's around this bend, then I know <b>exactly</b> where we are. And if it isn't...
+CH1-P: We're screwed.
+Hasron: Pretty much.
+===
+title: close-to-town
+tags: 
+colorID: 0
+position: 257,529
+---
+CH1-P: Well I'll be damned.
+<<wait 2>>
+Hasron: Not gonna lie, I was getting pretty nervous there.
+CH1-P: Oh I know.
+CH1-P: You're looking pretty dehydrated from all that sweating.
+Hasron: They'll have more water in town, right?
+CH1-P: You never know. Did the guide say if this place was run by droids?
+Hasron: CH1-P...
+Hasron: There's no guide for <b>anywhere</b> on Talacan.
+CH1-P: Well then I guess we'll just have to find out.
+===

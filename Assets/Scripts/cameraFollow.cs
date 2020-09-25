@@ -8,14 +8,6 @@ public class cameraFollow : MonoBehaviour
      public float dampTime = 0.15f;
      private Vector3 velocity = Vector3.zero;
      public Transform player;
-    // public Vector3 followOffset;
-     public bool adjusted;
- 
-    void Start(){
-//        player = PlayerManager.PM.gameObject.transform;
-        //transform.position += followOffset;
-    }
-
 
      void FixedUpdate () 
      {

@@ -19,7 +19,7 @@ public class scrapPlacer : MonoBehaviour
     [x] spawn based on rarity
     [] spawn based on seed
     [] distribute according to zone rarity
-    [] don't place scrap anywhere the player can't get to
+    [x] don't place scrap anywhere the player can't get to
     */
 
 
