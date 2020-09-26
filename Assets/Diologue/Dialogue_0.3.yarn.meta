@@ -1,0 +1,58 @@
+fileFormatVersion: 2
+guid: e8bebe806b865114c87f6f1b2723129e
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: 
+  stringIDs:
+  - Dialogue_0.3-intro-0
+  - Dialogue_0.3-intro-1
+  - Dialogue_0.3-intro-2
+  - Dialogue_0.3-intro-3
+  - Dialogue_0.3-intro-4
+  - Dialogue_0.3-intro-5
+  - Dialogue_0.3-intro-6
+  - Dialogue_0.3-intro-7
+  - Dialogue_0.3-intro-8
+  - Dialogue_0.3-intro-9
+  - Dialogue_0.3-intro-10
+  - Dialogue_0.3-intro-11
+  - Dialogue_0.3-intro-12
+  - Dialogue_0.3-intro-13
+  - Dialogue_0.3-intro-14
+  - Dialogue_0.3-intro-15
+  - Dialogue_0.3-intro-16
+  - Dialogue_0.3-intro-17
+  - Dialogue_0.3-intro-18
+  - Dialogue_0.3-intro-19
+  - Dialogue_0.3-intro-20
+  - Dialogue_0.3-intro-21
+  - Dialogue_0.3-intro-22
+  - Dialogue_0.3-intro-23
+  - Dialogue_0.3-intro-24
+  - Dialogue_0.3-intro-25
+  - Dialogue_0.3-intro-26
+  - Dialogue_0.3-intro-27
+  - Dialogue_0.3-intro-28
+  - Dialogue_0.3-intro-29
+  - Dialogue_0.3-intro-30
+  - Dialogue_0.3-intro-31
+  - Dialogue_0.3-close-to-town-32
+  - Dialogue_0.3-close-to-town-33
+  - Dialogue_0.3-close-to-town-34
+  - Dialogue_0.3-close-to-town-35
+  - Dialogue_0.3-close-to-town-36
+  - Dialogue_0.3-close-to-town-37
+  - Dialogue_0.3-close-to-town-38
+  - Dialogue_0.3-close-to-town-39
+  - Dialogue_0.3-close-to-town-40
+  compilationStatus: 1
+  isSuccesfullyCompiled: 1
+  compilationErrorMessage: 
+  baseLanguage: {instanceID: 0}
+  localizations: []

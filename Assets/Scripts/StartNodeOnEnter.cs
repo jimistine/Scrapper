@@ -11,7 +11,7 @@ public class StartNodeOnEnter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DialogueRunner = GameObject.Find("Yarn Manager").GetComponent<DialogueRunner>();
+        DialogueRunner = GameObject.Find("YarnManager").GetComponent<DialogueRunner>();
     }
 
     void OnTriggerEnter2D(Collider2D other){

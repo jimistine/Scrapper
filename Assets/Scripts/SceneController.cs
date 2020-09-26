@@ -14,6 +14,7 @@ public class SceneController : MonoBehaviour
     public GameObject TownCamera;
 
     public UnityEngine.Events.UnityEvent overworldLoaded;
+    public UnityEngine.Events.UnityEvent initCharacters;
 
 
     void Awake(){
@@ -41,6 +42,9 @@ public class SceneController : MonoBehaviour
         UIManager = UIManager.UIM;
         OverworldCamera = GameObject.Find("Overworld Camera");
         OverworldParent = GameObject.FindWithTag("OverworldParent");
+
+        initCharacters?.Invoke();
+        overworldLoaded?.Invoke();
     }
     public void StartLoadTown(){
         StartCoroutine("LoadTown");

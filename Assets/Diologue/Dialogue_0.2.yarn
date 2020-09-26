@@ -15,8 +15,9 @@ position: 540,538
     CH1-P: It is a lot more windy than the last few, I'll say that much.
     CH1-P: Anyway we should keep moving.
     Hasron: Right.
+    <<setPanelVisibility YarnManager Hasron false>>
+    <<wait 5>>
     [[intro-2]]
-    Hasron: Here's hoping.
 ===
 title: close-to-town
 tags: 
@@ -39,7 +40,6 @@ tags:
 colorID: 0
 position: 544,795
 ---
-<<wait 5>>
 Hasron: So you actually think we can make the big creds out there?
 CH1-P: We'll see. But I have a good feeling. 
 Hasron: Oh! Let me guess...

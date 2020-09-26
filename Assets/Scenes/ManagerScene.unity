@@ -5465,7 +5465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1841734413}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &668949682
 GameObject:
@@ -6286,7 +6286,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1841734413}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &765283189
 MonoBehaviour:
@@ -6589,7 +6589,7 @@ Transform:
   - {fileID: 1012248201}
   - {fileID: 237752669}
   m_Father: {fileID: 1841734413}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &793839227
 MonoBehaviour:
@@ -8191,8 +8191,9 @@ GameObject:
   - component: {fileID: 1000250098}
   - component: {fileID: 1000250096}
   - component: {fileID: 1000250097}
+  - component: {fileID: 1000250100}
   m_Layer: 0
-  m_Name: Yarn Manager
+  m_Name: YarnManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8221,6 +8222,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onLineEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onDialogueEnd:
     m_PersistentCalls:
       m_Calls: []
   onCommand:
@@ -8254,7 +8258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yarnScripts:
-  - {fileID: 2480198943629176163, guid: a0de16c0b78fd2c4088de83a67ad2d33, type: 3}
+  - {fileID: 2480198943629176163, guid: e8bebe806b865114c87f6f1b2723129e, type: 3}
   textLanguage: en-US
   variableStorage: {fileID: 1000250097}
   dialogueUI: {fileID: 1000250096}
@@ -8262,10 +8266,34 @@ MonoBehaviour:
   startAutomatically: 0
   onNodeStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1000250100}
+        m_TargetAssemblyTypeName: NodeVisitedTracker, Assembly-CSharp-firstpass
+        m_MethodName: NodeStart
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onNodeComplete:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1000250100}
+        m_TargetAssemblyTypeName: NodeVisitedTracker, Assembly-CSharp-firstpass
+        m_MethodName: NodeComplete
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDialogueComplete:
     m_PersistentCalls:
       m_Calls: []
@@ -8281,8 +8309,21 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1841734413}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1000250100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000250095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3414bb16e3354487c869122a1d6b873e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueRunner: {fileID: 1000250098}
 --- !u!1 &1005310149
 GameObject:
   m_ObjectHideFlags: 0
@@ -9824,6 +9865,12 @@ MonoBehaviour:
   OverworldParent: {fileID: 0}
   OverworldCamera: {fileID: 0}
   TownCamera: {fileID: 0}
+  overworldLoaded:
+    m_PersistentCalls:
+      m_Calls: []
+  initCharacters:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1158511090
 Transform:
   m_ObjectHideFlags: 0
@@ -9836,7 +9883,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1841734413}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1184486288
 GameObject:
@@ -13269,7 +13316,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1841734413}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1565986259
 MonoBehaviour:
@@ -13861,6 +13908,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633960870}
   m_CullTransparentMesh: 0
+--- !u!1 &1652584909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1652584911}
+  - component: {fileID: 1652584910}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1652584910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652584909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e281f66e5c9e32d4fb22da9b91881d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 1000250096}
+  DialogueRunner: {fileID: 1000250098}
+  SceneController: {fileID: 1158511089}
+  characters: []
+--- !u!4 &1652584911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652584909}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -594.1986, y: -500.6217, z: 25.154005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1841734413}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1653155425
 GameObject:
   m_ObjectHideFlags: 0
@@ -15338,12 +15432,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1005310150}
+  - {fileID: 1652584911}
+  - {fileID: 1000250099}
   - {fileID: 664187446}
   - {fileID: 1158511090}
   - {fileID: 765283188}
   - {fileID: 1565986258}
   - {fileID: 793839225}
-  - {fileID: 1000250099}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

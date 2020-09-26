@@ -15,14 +15,17 @@ namespace Yarn.Unity
         [Tooltip("How quickly to show the text, in seconds per character")]
         public float textSpeed;
 
+        public UnityEngine.Events.UnityEvent onDialogueStart;
         public UnityEngine.Events.UnityEvent onLineStart;
         public UnityEngine.Events.UnityEvent onLineFinishDisplaying;
         public DialogueRunner.StringUnityEvent onLineUpdate;
         public UnityEngine.Events.UnityEvent onLineEnd;
+        public UnityEngine.Events.UnityEvent onDialogueEnd;
 
         public DialogueRunner.StringUnityEvent onCommand;
 
         public string speakerName;
+        public string currentLineID;
 
         void Awake(){
             sDUI = this;
@@ -37,11 +40,17 @@ namespace Yarn.Unity
 
         }
 
+        public override void DialogueStarted ()
+        {
+            onDialogueStart?.Invoke();            
+        }
+
         public override Dialogue.HandlerExecutionType RunLine (Yarn.Line line, ILineLocalisationProvider localisationProvider, System.Action onLineComplete)
         {
             string text = localisationProvider.GetLocalisedTextForLine(line);
 
             speakerName = Regex.Match(text, @"^.*?(?=:)").Value;
+            currentLineID = line.ID;
             
             // Start displaying the line; it will call onComplete later
             // which will tell the dialogue to continue
@@ -192,6 +201,16 @@ namespace Yarn.Unity
             // that execution should continue, and never calls
             // onCommandComplete.)
             return Dialogue.HandlerExecutionType.ContinueExecution;
+        }
+
+        public override void DialogueComplete ()
+        {
+            onDialogueEnd?.Invoke();
+
+            // Hide the dialogue interface.
+            // if (dialogueContainer != null)
+            //     dialogueContainer.SetActive(false);
+            
         }
         
         public void MarkLineComplete() {
