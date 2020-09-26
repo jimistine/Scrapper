@@ -1,0 +1,65 @@
+title: intro
+tags: 
+colorID: 0
+position: 540,538
+---
+
+    CH1-P: Are you sure this is the right direction?
+    Hasron: No, not really.
+    CH1-P: Ah. I was wondering.
+    Hasron: Well, I mean if it's around this bend, then I know exactly where we are. 
+    Hasron: And if it isn't...
+    CH1-P: Yes?
+    Hasron: Uh, well then I won't be as sure.
+    Hasron: But I have a good feeling about this canyon!
+    CH1-P: It is a lot more windy than the last few, I'll say that much.
+    CH1-P: Anyway we should keep moving.
+    Hasron: Right.
+    [[intro-2]]
+    Hasron: Here's hoping.
+===
+title: close-to-town
+tags: 
+colorID: 0
+position: 257,529
+---
+CH1-P: Well I'll be damned.
+<<wait 2>>
+Hasron: Not gonna lie, I was getting pretty nervous there.
+CH1-P: Oh I know.
+CH1-P: You're looking pretty dehydrated from all that sweating.
+Hasron: They'll have more water in town, right?
+CH1-P: You never know. Did the guide say if this place was run by droids?
+Hasron: CH1-P...
+Hasron: There's no guide for <b>anywhere</b> on Talacan.
+CH1-P: Well then I guess we'll just have to find out.
+===
+title: intro-2
+tags: 
+colorID: 0
+position: 544,795
+---
+<<wait 5>>
+Hasron: So you actually think we can make the big creds out there?
+CH1-P: We'll see. But I have a good feeling. 
+Hasron: Oh! Let me guess...
+Hasron: You can feel it in your...
+Hasron: Shoulder?
+CH1-P: Which one?
+Hasron: Umm...
+Hasron: If you could just take off your--
+CH1-P: Uh-uh-uh! The desert robe stays on!
+CH1-P: You really don't remember which is which?
+<<wait .05>>
+Hasron: Left!
+<<wait .05>>
+CH1-P: Nope. I replaced the right one. Because of that dislocation on the exodus ship? Pure cartilo now.
+CH1-P: I've told you that story right?
+Hasron: Yeah. Crazy to think you didn't even feel it.
+CH1-P: You're telling me.
+<<wait 1>>
+CH1-P: So many have told me that I'm a fool for going bionic because of all the pain organics deal with.
+Hasron: I mean...
+CH1-P: It's not that I like the pain itself. Believe me I wish I had less of it at all the merges. But being able to feel? And not just the simulation of feeling, but feeling that actually matters?
+CH1-P: Can't imagine life without it now.
+===

@@ -13,6 +13,8 @@ public class SceneController : MonoBehaviour
     public GameObject OverworldCamera;
     public GameObject TownCamera;
 
+    public UnityEngine.Events.UnityEvent overworldLoaded;
+
 
     void Awake(){
         SC = this;
@@ -55,6 +57,7 @@ public class SceneController : MonoBehaviour
     public void StartLeaveTown(){
         StartCoroutine("LeaveTown");
         AudioManager.AM.TransitionToOverworld();
+        overworldLoaded?.Invoke();
     }
     public IEnumerator LeaveTown(){
         PlayerManager.SetPlayerMovement(true);

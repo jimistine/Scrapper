@@ -10,36 +10,42 @@ public class DialogueManager : MonoBehaviour
 {
     
     public static DialogueManager DM;
+
     public ScrapDialogueUI ui;
     public DialogueRunner DialogueRunner;
-
-    public string test = "Hasron: Well look at that.";
-    public string characterName = "Hasron:";
+    public SceneController SceneController;
+    
+    //public string characterName = "Hasron:";
     GameObject activeSpeakerPanel;
     string speakerNameLast;
     
     [System.Serializable]
-    public struct Characters{
+    public struct Character{
         public string characterName;
         public GameObject characterPanel;
     }
-    public List<Characters> characters;
+    public List<Character> characters;
+
+
 
     void Awake(){
         DM = this;
     }
     
     void Start(){
+        DialogueRunner = GameObject.Find("Yarn Manager").GetComponent<DialogueRunner>();
+        ui = GameObject.Find("Yarn Manager").GetComponent<ScrapDialogueUI>();
+        SceneController = SceneController.SC;
+
         ui.onLineStart.AddListener(LineStarted);
         ui.onLineUpdate.AddListener(LineUpdate);
         DialogueRunner.onDialogueComplete.AddListener(ConversationEnded);
+        //SceneController.overworldLoaded.AddListener(RunOverwolrdDialogue);
+        RunOverwolrdDialogue();
         
     }
     
-    private void ListenerTest(){
-        Debug.Log("Line start tested");
-
-    }
+    
 
     public void LineStarted(){   // if the speaker of this line is different from the last line, swap active panels
         Debug.Log("Line started");
@@ -72,7 +78,7 @@ public class DialogueManager : MonoBehaviour
     public void ContinueDialogue(){
         ui.MarkLineComplete();
     }
-    public void SwapTest(string speakerName){
-       
+    public void RunOverwolrdDialogue(){
+       DialogueRunner.StartDialogue("intro");
     }
 }

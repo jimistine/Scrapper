@@ -29,6 +29,12 @@ namespace Yarn.Unity
         }
         void Start(){
             onLineStart.AddListener(DialogueManager.DM.LineStarted);
+
+            // string test = "This: Is a test.";
+            // speakerName = Regex.Match(test, @"^.*?(?=:)").Value;
+            // test = Regex.Replace(test, speakerName+": ", "");
+            // Debug.Log("Replaced " + speakerName + " with " + "" + "to form " +"\n" +test);
+
         }
 
         public override Dialogue.HandlerExecutionType RunLine (Yarn.Line line, ILineLocalisationProvider localisationProvider, System.Action onLineComplete)
@@ -37,7 +43,6 @@ namespace Yarn.Unity
 
             speakerName = Regex.Match(text, @"^.*?(?=:)").Value;
             
-
             // Start displaying the line; it will call onComplete later
             // which will tell the dialogue to continue
             StartCoroutine(DoRunLine(line, localisationProvider, onLineComplete));
@@ -57,6 +62,7 @@ namespace Yarn.Unity
             
             // The final text we'll be showing for this line.
             string text = localisationProvider.GetLocalisedTextForLine(line);
+            text = Regex.Replace(text, speakerName + ": ", "");
 
           
             if (text == null) {
