@@ -53,9 +53,9 @@ public class SceneController : MonoBehaviour
     public IEnumerator LoadTown(){
         PlayerManager.SetPlayerMovement(false);
         PlayerManager.gameObject.GetComponent<ClickDrag>().currentSpeed = 0;
-        while (DialogueManager.DM.isRunnerRunning){
+        // while (DialogueManager.DM.isRunnerRunning){
 
-        }
+        // }
         SceneManager.LoadScene("Town", LoadSceneMode.Additive);
         OverworldCamera.SetActive(false);
         UIManager.EnterTown();

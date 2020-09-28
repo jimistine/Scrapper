@@ -11,6 +11,7 @@ namespace Yarn.Unity
     {
         public static ScrapDialogueUI sDUI;
         public DialogueRunner DialogueRunner;
+        public DialogueRunner DialogueRunner_2;
 
         private bool userRequestedNextLine = false;
         [Tooltip("How quickly to show the text, in seconds per character")]
@@ -35,16 +36,13 @@ namespace Yarn.Unity
         void Start(){
             onLineStart.AddListener(DialogueManager.DM.LineStarted);
 
-            // string test = "This: Is a test.";
-            // speakerName = Regex.Match(test, @"^.*?(?=:)").Value;
-            // test = Regex.Replace(test, speakerName+": ", "");
-            // Debug.Log("Replaced " + speakerName + " with " + "" + "to form " +"\n" +test);
-
         }
 
         public override void DialogueStarted ()
         {
-            onDialogueStart?.Invoke();            
+            onDialogueStart?.Invoke();
+            DialogueRunner_2.StartDialogue(DialogueRunner.CurrentNodeName);
+      
         }
 
         public override Dialogue.HandlerExecutionType RunLine (Yarn.Line line, ILineLocalisationProvider localisationProvider, System.Action onLineComplete)

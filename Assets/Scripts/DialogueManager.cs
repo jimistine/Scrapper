@@ -128,13 +128,13 @@ public class DialogueManager : MonoBehaviour
     public void RunOverwolrdDialogue(){
 
         //Debug.Log("Running overworld dialogue");
-       //DR.StartDialogue("intro");
+       DR.StartDialogue("intro");
     }
 
     public void RunNode(string nodeToRun){
         // tage a look at those tags
         var tags = string.Join(" ", DR.GetTagsForNode(nodeToRun));
-        // if we're already talking, and this isn't thar important, don't say anything
+        // if we're already talking, and this isn't that important, don't say anything
         // if we aren't talking, and it's a bark, roll to see if we play the bark
         if(DR.IsDialogueRunning && tags.Contains("sub")){
             return;
@@ -167,10 +167,10 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("conversation ended");
         activeSpeakerPanel.SetActive(false);
         speakerNameLast = null;
-        // if(lineQueue != null){
-        //     Debug.Log("starting transition");
-        //     DR.StartDialogue("transition");
-        // }
+        if(lineQueue != null){
+            Debug.Log("starting transition");
+            DR.StartDialogue("transition");
+        }
         // return control etc
     }
 

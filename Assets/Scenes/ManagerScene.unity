@@ -8192,6 +8192,7 @@ GameObject:
   - component: {fileID: 1000250096}
   - component: {fileID: 1000250097}
   - component: {fileID: 1000250100}
+  - component: {fileID: 1000250101}
   m_Layer: 0
   m_Name: YarnManager
   m_TagString: Untagged
@@ -8212,6 +8213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DialogueRunner: {fileID: 1000250098}
+  DialogueRunner_2: {fileID: 0}
   textSpeed: 0.025
   onDialogueStart:
     m_PersistentCalls:
@@ -8328,6 +8330,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1000250098}
+--- !u!114 &1000250101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000250095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yarnScripts:
+  - {fileID: 2480198943629176163, guid: 328c1084ab48bbd4980a7d74c733e5f3, type: 3}
+  textLanguage: en-US
+  variableStorage: {fileID: 1000250097}
+  dialogueUI: {fileID: 1000250096}
+  startNode: 
+  startAutomatically: 0
+  onNodeStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onNodeComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onDialogueComplete:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1005310149
 GameObject:
   m_ObjectHideFlags: 0
@@ -13946,6 +13976,7 @@ MonoBehaviour:
   isRunnerRunning: 0
   SceneController: {fileID: 1158511089}
   characters: []
+  lineQueueIDs: []
 --- !u!4 &1652584911
 Transform:
   m_ObjectHideFlags: 0
@@ -16045,7 +16076,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -3.5999756}
+  m_AnchoredPosition: {x: 0, y: -3.6000977}
   m_SizeDelta: {x: -472.3203, y: -222.60345}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1981903082
@@ -16351,7 +16382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.07431261}
-  m_AnchoredPosition: {x: -0.5999756, y: -2.499878}
+  m_AnchoredPosition: {x: -0.60009766, y: -2.5}
   m_SizeDelta: {x: 0.0007324219, y: -1.5586853}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2055902249
