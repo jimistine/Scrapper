@@ -223,7 +223,7 @@
     "zoneC_rarity": null,
     "zoneD_rarity": null,
     "carriesComponents": null,
-    "isBuried": false
+    "isBuried": true
   },
   {
     "scrapName": "Intelaa J.2 engine",

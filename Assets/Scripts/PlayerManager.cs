@@ -92,12 +92,14 @@ public class PlayerManager : MonoBehaviour
 
     
     void OnTriggerEnter2D(Collider2D other){
-    // 1. Pop goes the scrap!  If our search radius hits the small edge collider on the scrap, it pops
+    // 1. Pop goes the scrap!  If our search radius hits the small EdgeCollider on the scrap, it pops
         if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(EdgeCollider2D)){
             ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
             if(other.gameObject.GetComponent<ScrapObject>().isBuried == true){
                 other.gameObject.GetComponent<ScrapObject>().isBuried = false;
                 AudioManager.PlayPlayerClip("found scrap");
+                DialogueManager.DM.RunNode("scrap-find");
+                Debug.Log("Found scrap");
             }
             other.gameObject.GetComponent<ProximityCheck>().IsInRange(true);
             UIManager.ShowScrap(newScrap);

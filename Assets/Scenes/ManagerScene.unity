@@ -8211,7 +8211,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3456977aec85d4a4d9eebf74e8bdc373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DialogueRunner: {fileID: 1000250098}
   textSpeed: 0.025
+  onDialogueStart:
+    m_PersistentCalls:
+      m_Calls: []
   onLineStart:
     m_PersistentCalls:
       m_Calls: []
@@ -8258,7 +8262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yarnScripts:
-  - {fileID: 2480198943629176163, guid: e8bebe806b865114c87f6f1b2723129e, type: 3}
+  - {fileID: 2480198943629176163, guid: 328c1084ab48bbd4980a7d74c733e5f3, type: 3}
   textLanguage: en-US
   variableStorage: {fileID: 1000250097}
   dialogueUI: {fileID: 1000250096}
@@ -13938,7 +13942,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 1000250096}
-  DialogueRunner: {fileID: 1000250098}
+  DR: {fileID: 1000250098}
+  isRunnerRunning: 0
   SceneController: {fileID: 1158511089}
   characters: []
 --- !u!4 &1652584911

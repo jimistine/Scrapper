@@ -35,6 +35,7 @@ bool lowFuel;
         if(currentFuelPercent <= 10f && lowFuel == false){
             lowFuel = true;
             AudioManager.AM.PlayPlayerClip("low fuel"); // calllout here
+            DialogueManager.DM.RunNode("fuel-running-low");
         }
         if( currentFuelPercent > 10f){
             lowFuel = false;
@@ -43,6 +44,7 @@ bool lowFuel;
             canBeTowed = false;
             AudioManager.AM.PlayRigStop();
             ClickDrag.StartCoroutine("OutOfFuel");
+            DialogueManager.DM.RunNode("fuel-out");
         }
         else if(currentFuelUnits > 0){
             canBeTowed = true;

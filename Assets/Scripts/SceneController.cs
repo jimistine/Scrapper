@@ -51,11 +51,14 @@ public class SceneController : MonoBehaviour
         AudioManager.AM.TransitionToTownExterior();
     }
     public IEnumerator LoadTown(){
-        SceneManager.LoadScene("Town", LoadSceneMode.Additive);
         PlayerManager.SetPlayerMovement(false);
         PlayerManager.gameObject.GetComponent<ClickDrag>().currentSpeed = 0;
-        UIManager.EnterTown();
+        while (DialogueManager.DM.isRunnerRunning){
+
+        }
+        SceneManager.LoadScene("Town", LoadSceneMode.Additive);
         OverworldCamera.SetActive(false);
+        UIManager.EnterTown();
         yield return null;
     }
     public void StartLeaveTown(){

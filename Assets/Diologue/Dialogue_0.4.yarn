@@ -1,0 +1,80 @@
+title: intro
+tags: 
+colorID: 0
+position: 540,538
+---
+<<if visited("intro") is false>> 
+    CH1-P: Are you sure this is the right direction?
+    Hasron: No, not really.
+    CH1-P: Ah. I was wondering.
+    Hasron: Well, I mean if it's around this bend, then I know exactly where we are. 
+    Hasron: And if it isn't...
+    CH1-P: Yes?
+    Hasron: Uh, well then I won't be as sure.
+    Hasron: But I have a good feeling about this canyon!
+    CH1-P: It is a lot more windy than the last few, I'll give you that.
+    CH1-P: Anyway we should keep moving.
+    Hasron: Right.
+
+    <<setPanelVisibility DialogueManager Hasron false>>
+    <<wait 3>> 
+    <<setPanelVisibility DialogueManager Hasron true>>
+    Hasron: So you actually think we can make the big creds out there?
+    CH1-P: We'll see. But I have a good feeling. 
+    Hasron: Oh! Let me guess...
+    Hasron: You can feel it in your...
+    Hasron: Shoulder?
+    CH1-P: Which one?
+    Hasron: Umm...
+    Hasron: If you could just take off your--
+    CH1-P: Uh-uh-uh! The desert robe stays on!
+    CH1-P: You really don't remember which is which?
+    <<wait .05>>
+    Hasron: Left!
+    <<wait .05>>
+    CH1-P: Nope. I replaced the right one. Because of that dislocation on the exodus ship? Pure cartilo now.
+    CH1-P: I've told you that story right?
+    Hasron: Yeah. Crazy to think you didn't even feel it.
+    CH1-P: You're telling me.
+    <<wait 1>>
+    CH1-P: So many have told me that I'm a fool for going bionic because of all the pain organics deal with.
+    Hasron: I mean...
+    CH1-P: It's not that I like the pain itself. Believe me I wish I had less of it at all the merges.
+    CH1-P: But being able to feel? And not just like the simulation of feeling, but feeling that actually matters?
+    CH1-P: Can't imagine life without it now.
+<<else>>
+    Hasron: Here's hoping.
+<<endif>>
+===
+title: close-to-town
+tags: 
+colorID: 0
+position: 257,529
+---
+CH1-P: Well I'll be damned.
+Hasron: Not gonna lie, I was getting pretty nervous there.
+CH1-P: Oh I know.
+CH1-P: You're looking pretty dehydrated from all that sweating.
+Hasron: They'll have more water in town, right?
+CH1-P: You never know. Did the guide say if this place was run by droids?
+Hasron: CH1-P...
+Hasron: There's no guide for <b>anywhere</b> on Talacan.
+CH1-P: Well then I guess we'll just have to find out.
+===
+title: transition
+tags: 
+colorID: 0
+position: 805,523
+---
+<<set $transToPlay = random(3)>> 
+<<if $transToPlay == 0>>
+    Hasron: What were we talking about again?
+<<elseif $transToPlay == 1>>
+    Hasron: Weren't we just talking about something else?
+<<elseif $transToPlay == 2>>
+    CH1-P: What's that we were talking about just a second ago?
+<<elseif $transToPlay == 3>>
+    CH1-P: Anyway...
+<<endif>> 
+<<resume DialogueManager>>
+===

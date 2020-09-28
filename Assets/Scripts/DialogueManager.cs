@@ -13,19 +13,26 @@ public class DialogueManager : MonoBehaviour
 
     public ScrapDialogueUI ui;
     public DialogueRunner DR;
+    public bool isRunnerRunning;
     public SceneController SceneController;
-    
-    GameObject activeSpeakerPanel;
-    string speakerNameLast;
-    List<string> lineQueue;
+
+    public System.Action testAction;
     
     [System.Serializable]
     public struct Character{
         public string characterName;
         public GameObject characterPanel;
     }
+
     public List<Character> characters = new List<Character>();
 
+    public List<Yarn.Line> lineQueue = new List<Yarn.Line>();
+    public List<string> lineQueueIDs = new List<string>();
+    public Yarn.Line queuedLine;
+
+    GameObject activeSpeakerPanel;
+    string speakerNameLast;
+    Dictionary<string, int> randomLinePulls = new Dictionary<string, int>();
 
 
 
@@ -34,22 +41,49 @@ public class DialogueManager : MonoBehaviour
         DM = this;
         SceneController.initCharacters.AddListener(InitCharacters);
         SceneController.overworldLoaded.AddListener(RunOverwolrdDialogue);
+        testAction += scrapOnComplete;
     }
     
     void Start(){
         
 
-        ui.onDialogueStart.AddListener(InturruptCheck);
+        //ui.onDialogueStart.AddListener(InturruptCheck);
         ui.onLineStart.AddListener(LineStarted);
         ui.onLineUpdate.AddListener(LineUpdate);
+        ui.onLineEnd.AddListener(LineEnd);
         DR.onDialogueComplete.AddListener(ConversationEnded);
         
         DR = GameObject.Find("YarnManager").GetComponent<DialogueRunner>();
         ui = GameObject.Find("YarnManager").GetComponent<ScrapDialogueUI>();
+
+// Functions
+        // adds the node requesting the random to a dictionary to make sure
+        //   we don't play the same random line for that node twice in a row
+        DR.AddFunction("random", 2, delegate(Yarn.Value[] parameters){
+            var requestingNode = parameters[0];
+            var maxNum = parameters[1];
+            int numberToReturn = (int)Random.Range(0, Mathf.Round(maxNum.AsNumber));
+
+            if(!randomLinePulls.ContainsKey(requestingNode.AsString)){
+                randomLinePulls.Add(requestingNode.AsString, numberToReturn);
+            }
+            else if(randomLinePulls[requestingNode.AsString] == numberToReturn){
+                while(randomLinePulls[requestingNode.AsString] == numberToReturn){
+                    numberToReturn = (int)Random.Range(0, Mathf.Round(maxNum.AsNumber));
+                }
+            }
+            Debug.Log("Random line number is: " + numberToReturn);
+            return numberToReturn;
+        });
+
+    }
+
+    void Update(){
+        isRunnerRunning = DR.IsDialogueRunning;
     }
     
     public void InitCharacters(){
-        Debug.Log("Initializing characters");
+        //Debug.Log("Initializing characters");
         Character Hasron = new Character();
         Hasron.characterName = "Hasron";
         Hasron.characterPanel = GameObject.Find("Hasron Callout");
@@ -80,9 +114,12 @@ public class DialogueManager : MonoBehaviour
         activeSpeakerPanel.GetComponentInChildren<TextMeshProUGUI>().text = line;
     }
 
-    private void ConversationEnded(){
-        activeSpeakerPanel.SetActive(false);
-        // return control etc
+    public void LineEnd(){
+       // time out panel after a beat once the line is there.
+    }
+
+    public void scrapOnComplete(){
+        
     }
 
     public void ContinueDialogue(){
@@ -90,12 +127,54 @@ public class DialogueManager : MonoBehaviour
     }
     public void RunOverwolrdDialogue(){
 
-        
-
-        Debug.Log("Running overworld dialogue");
-        DR.StartDialogue("intro");
+        //Debug.Log("Running overworld dialogue");
+       //DR.StartDialogue("intro");
     }
 
+    public void RunNode(string nodeToRun){
+        // tage a look at those tags
+        var tags = string.Join(" ", DR.GetTagsForNode(nodeToRun));
+        // if we're already talking, and this isn't thar important, don't say anything
+        // if we aren't talking, and it's a bark, roll to see if we play the bark
+        if(DR.IsDialogueRunning && tags.Contains("sub")){
+            return;
+        }
+        else if(!DR.IsDialogueRunning && tags.Contains("sub")){
+            int randomRoll = Random.Range(0, 2);
+            //int randomRoll = 0;
+            Debug.Log("Rolled:" + randomRoll);
+            if(randomRoll == 0){
+                DR.StartDialogue(nodeToRun);
+            }
+        }
+        else{
+            DR.StartDialogue(nodeToRun);
+        }
+    }
+
+
+    public void InturruptCheck(){
+        Debug.Log("Checking inturrupt");
+        if(DR.IsDialogueRunning){
+            lineQueue.Add(ui.lastLine); // check to see if this get's inturrupted line b4 trying to fix it
+            lineQueueIDs.Add(ui.lastLine.ID);
+            Debug.Log("Inturrupted and grabed line: " + ui.lastLine.ID);
+        }
+    }
+
+    private void ConversationEnded(){
+        DR.Stop();
+        Debug.Log("conversation ended");
+        activeSpeakerPanel.SetActive(false);
+        speakerNameLast = null;
+        // if(lineQueue != null){
+        //     Debug.Log("starting transition");
+        //     DR.StartDialogue("transition");
+        // }
+        // return control etc
+    }
+
+// Commands
     [YarnCommand("setPanelVisibility")]
     public void setPanelVisibility(string characterName, string isPanelVisible){
         Debug.Log("setting " + characterName + "'s " + "panel visibility to " + isPanelVisible);
@@ -106,33 +185,44 @@ public class DialogueManager : MonoBehaviour
             characters.Find(x => x.characterName == ui.speakerName).characterPanel.SetActive(true);
         }
     }
-
-    public void InturruptCheck(){
-        if(DR.IsDialogueRunning){
-            lineQueue.Add(ui.currentLineID); // check to see if this get's inturrupted line b4 trying to fix it
+    [YarnCommand("resume")]
+    public void resume(){
+        Debug.Log("Resume called");
+        DR.Stop();
+        if(lineQueue != null){
+            // start form the line in queue
+            Debug.Log("Resuming from " + lineQueue[0].ID);
+            ui.RunLine(lineQueue[0], DR, testAction);
+            lineQueue.Clear();
+            lineQueueIDs.Clear();
         }
     }
+
+
+    
     /* 
     Sorry to inturrupt...
 
-    at dialogue started
-        if dialogue is already running
-            grab the line
-            add it to dialogue queue
-            wait until line end
-            run the new dialogue
-                if it has nothing to say
-                    run resume from yarn
-                        picks up from next line with no transition
-                        clears the dialogue queue
-                if it does have dialogue to run
-                    it'll run the dialogue
-                    when we get to dialogue end
-                    dialogue manager looks at queue
-                        if something is there
-                            play transition node
-                                transition node picks a random transition
-                                then runs command to tell dialogue runner to resume
-                        if not, dialogue is over
+    x    at dialogue started
+    x        if dialogue is already running
+    x            grab the line that's being inturrupted
+    x            add it to dialogue queue
+    -            wait until line end
+    x            run the new dialogue
+                    if it has nothing to say
+                        run resume from yarn
+                            picks up from next line with no transition
+                            clears the dialogue queue
+                    if it does have dialogue to run
+    x                    it'll run the dialogue
+    x                    when we get to dialogue end
+    x                    dialogue manager looks at queue
+    x                        if something is there
+    x                            play transition node
+    x                                transition node runs function to pick a random transition
+    x                                then runs command to tell dialogue manager to resume
+                                    resume then finds the line in the string table
+                                    and starts the dialogue back up from there
+                            if not, dialogue is over
     */
 }

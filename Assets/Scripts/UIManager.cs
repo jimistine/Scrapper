@@ -132,6 +132,7 @@ public class UIManager : MonoBehaviour
                 newTick.transform.SetParent(scrapTickSlots.transform, false);
                 readoutPanel.SetActive(false);
                 AudioManager.AM.PlayPlayerClip("pick up scrap");
+                DialogueManager.DM.RunNode("scrap-take");
         }
         else{
             Callout("CantFitScrap");
@@ -141,6 +142,7 @@ public class UIManager : MonoBehaviour
     public void LeaveScrap(){
         readoutPanel.SetActive(false);
         AudioManager.AM.PlayMiscUIClip("dismiss");
+        DialogueManager.DM.RunNode("scrap-leave");
     }
 
     public void Callout(string callout){

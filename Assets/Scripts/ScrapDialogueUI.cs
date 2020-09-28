@@ -10,6 +10,7 @@ namespace Yarn.Unity
     public class ScrapDialogueUI : Yarn.Unity.DialogueUIBehaviour
     {
         public static ScrapDialogueUI sDUI;
+        public DialogueRunner DialogueRunner;
 
         private bool userRequestedNextLine = false;
         [Tooltip("How quickly to show the text, in seconds per character")]
@@ -25,7 +26,8 @@ namespace Yarn.Unity
         public DialogueRunner.StringUnityEvent onCommand;
 
         public string speakerName;
-        public string currentLineID;
+        public Line currentLine;
+        public Line lastLine;
 
         void Awake(){
             sDUI = this;
@@ -50,7 +52,11 @@ namespace Yarn.Unity
             string text = localisationProvider.GetLocalisedTextForLine(line);
 
             speakerName = Regex.Match(text, @"^.*?(?=:)").Value;
-            currentLineID = line.ID;
+
+            // if(currentLine != null){
+            // }
+            lastLine = currentLine;
+            currentLine = line;
             
             // Start displaying the line; it will call onComplete later
             // which will tell the dialogue to continue
@@ -114,7 +120,6 @@ namespace Yarn.Unity
 
             // Hide the text and prompt
             onLineEnd?.Invoke();
-           // activeSpeakerPanel.SetActive(false);
             onComplete();
 
         }
