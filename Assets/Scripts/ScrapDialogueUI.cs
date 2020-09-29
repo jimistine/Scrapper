@@ -11,7 +11,6 @@ namespace Yarn.Unity
     {
         public static ScrapDialogueUI sDUI;
         public DialogueRunner DialogueRunner;
-        public DialogueRunner DialogueRunner_2;
 
         private bool userRequestedNextLine = false;
         [Tooltip("How quickly to show the text, in seconds per character")]
@@ -40,9 +39,7 @@ namespace Yarn.Unity
 
         public override void DialogueStarted ()
         {
-            onDialogueStart?.Invoke();
-            DialogueRunner_2.StartDialogue(DialogueRunner.CurrentNodeName);
-      
+            onDialogueStart?.Invoke();      
         }
 
         public override Dialogue.HandlerExecutionType RunLine (Yarn.Line line, ILineLocalisationProvider localisationProvider, System.Action onLineComplete)

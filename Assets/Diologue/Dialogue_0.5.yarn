@@ -42,8 +42,6 @@ position: 540,538
     CH1-P: It's not that I like the pain itself. Believe me I wish I had less of it at all the merges.
     CH1-P: But being able to feel? And not just like the simulation of feeling, but feeling that actually matters?
     CH1-P: Can't imagine life without it now.
-<<else>>
-    Hasron: Here's hoping.
 <<endif>>
 ===
 title: close-to-town

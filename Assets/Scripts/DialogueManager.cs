@@ -13,7 +13,10 @@ public class DialogueManager : MonoBehaviour
 
     public ScrapDialogueUI ui;
     public DialogueRunner DR;
-    public bool isRunnerRunning;
+    //public DialogueRunner DialogueRunner_2;
+
+    public bool isDialogueRunner1Running;
+    //public bool isDialogueRunner2Running;
     public SceneController SceneController;
 
     public System.Action testAction;
@@ -75,11 +78,28 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("Random line number is: " + numberToReturn);
             return numberToReturn;
         });
+        // DialogueRunner_2.AddFunction("random", 2, delegate(Yarn.Value[] parameters){
+        //     var requestingNode = parameters[0];
+        //     var maxNum = parameters[1];
+        //     int numberToReturn = (int)Random.Range(0, Mathf.Round(maxNum.AsNumber));
+
+        //     if(!randomLinePulls.ContainsKey(requestingNode.AsString)){
+        //         randomLinePulls.Add(requestingNode.AsString, numberToReturn);
+        //     }
+        //     else if(randomLinePulls[requestingNode.AsString] == numberToReturn){
+        //         while(randomLinePulls[requestingNode.AsString] == numberToReturn){
+        //             numberToReturn = (int)Random.Range(0, Mathf.Round(maxNum.AsNumber));
+        //         }
+        //     }
+        //     Debug.Log("Random line number is: " + numberToReturn);
+        //     return numberToReturn;
+        // });
 
     }
 
     void Update(){
-        isRunnerRunning = DR.IsDialogueRunning;
+        isDialogueRunner1Running = DR.IsDialogueRunning;
+    //    isDialogueRunner2Running = DialogueRunner_2.IsDialogueRunning;
     }
     
     public void InitCharacters(){
@@ -116,6 +136,10 @@ public class DialogueManager : MonoBehaviour
 
     public void LineEnd(){
        // time out panel after a beat once the line is there.
+
+    //    if (DialogueRunner_2.IsDialogueRunning == false){
+    //        DialogueRunner_2.StartDialogue(DR.CurrentNodeName);
+    //    }
     }
 
     public void scrapOnComplete(){
@@ -128,7 +152,7 @@ public class DialogueManager : MonoBehaviour
     public void RunOverwolrdDialogue(){
 
         //Debug.Log("Running overworld dialogue");
-       DR.StartDialogue("intro");
+       
     }
 
     public void RunNode(string nodeToRun){
@@ -167,7 +191,7 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("conversation ended");
         activeSpeakerPanel.SetActive(false);
         speakerNameLast = null;
-        if(lineQueue != null){
+        if(lineQueue.Count > 0){
             Debug.Log("starting transition");
             DR.StartDialogue("transition");
         }
@@ -221,8 +245,23 @@ public class DialogueManager : MonoBehaviour
     x                            play transition node
     x                                transition node runs function to pick a random transition
     x                                then runs command to tell dialogue manager to resume
-                                    resume then finds the line in the string table
-                                    and starts the dialogue back up from there
                             if not, dialogue is over
+
+
+
+                                    start dialogue in runner 1 at node
+                                    on first line complete only
+                                        start runner 2 at the same node
+                                    on inturrupt
+                                        stop runner 2
+                                        runner 1 plays inturrupting dialogue
+                                    on inturrupt end
+                                        on dialogue complete -> runner 1 is done
+                                        if runner 2 is paused
+                                            resume runner 2
+                                            send lines to UI
+                                    on resume end
+                                        runner 2 dialogue complete
+                                        make sure runner 1 becomes primary runner
     */
 }

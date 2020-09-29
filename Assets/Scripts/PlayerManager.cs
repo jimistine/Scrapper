@@ -81,6 +81,9 @@ public class PlayerManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.P)){
             UIManager.TogglePause();
+            if(Director.Dir.gameStarted == false){
+                Director.Dir.StartGame();
+            }
            // AudioManager.PlayRandomButton();
         }
         if(Input.GetKeyDown(KeyCode.Space)){

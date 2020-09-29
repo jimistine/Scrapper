@@ -33,8 +33,8 @@ public class SceneController : MonoBehaviour
         //     }
         // }
      
-    
         SceneManager.LoadScene("OverWorldScene", LoadSceneMode.Additive);
+    
     }
 
     void Start(){
@@ -46,16 +46,24 @@ public class SceneController : MonoBehaviour
         initCharacters?.Invoke();
         overworldLoaded?.Invoke();
     }
+
+    public void LoadOverworld(){
+        SceneManager.LoadScene("OverWorldScene", LoadSceneMode.Additive);
+        AudioManager.AM.TransitionToOverworld();
+        overworldLoaded?.Invoke();
+    }
     public void StartLoadTown(){
-        StartCoroutine("LoadTown");
-        AudioManager.AM.TransitionToTownExterior();
+        if (DialogueManager.DM.isDialogueRunner1Running){
+            Director.Dir.StartWaitToEnterTown();
+        }
+        else{
+            StartCoroutine("LoadTown");
+            AudioManager.AM.TransitionToTownExterior();
+        }
     }
     public IEnumerator LoadTown(){
         PlayerManager.SetPlayerMovement(false);
         PlayerManager.gameObject.GetComponent<ClickDrag>().currentSpeed = 0;
-        // while (DialogueManager.DM.isRunnerRunning){
-
-        // }
         SceneManager.LoadScene("Town", LoadSceneMode.Additive);
         OverworldCamera.SetActive(false);
         UIManager.EnterTown();
