@@ -42,22 +42,26 @@ position: 540,538
     CH1-P: It's not that I like the pain itself. Believe me I wish I had less of it at all the merges.
     CH1-P: But being able to feel? And not just like the simulation of feeling, but feeling that actually matters?
     CH1-P: Can't imagine life without it now.
+<<else>>
+    Hasron: Here's hoping.
 <<endif>>
 ===
 title: close-to-town
 tags: 
 colorID: 0
-position: 257,529
+position: 256,528
 ---
-CH1-P: Well I'll be damned, we made it.
-Hasron: Not gonna lie, I was getting pretty nervous there.
-CH1-P: Oh I know.
-CH1-P: You're looking pretty dehydrated from all that sweating.
-Hasron: They'll have more water in town, right?
-CH1-P: You never know. Did the guide say if this place was run by droids?
-Hasron: CH1-P...
-Hasron: There's no guide for <b>anywhere</b> on Talacan.
-CH1-P: Well then I guess we'll just have to find out.
+<<if visited("close-to-town") is false>> 
+    CH1-P: Well I'll be damned, we made it.
+    Hasron: Not gonna lie, I was getting pretty nervous there.
+    CH1-P: Oh I know.
+    CH1-P: You're looking pretty dehydrated from all that sweating.
+    Hasron: They'll have more water in town, right?
+    CH1-P: You never know. Did the guide say if this place was run by droids?
+    Hasron: CH1-P...
+    Hasron: There's no guide for <b>anywhere</b> on Talacan.
+    CH1-P: Well then I guess we'll just have to find out.
+<<endif>>
 ===
 title: transition
 tags: 
@@ -162,11 +166,11 @@ position: 1114,1016
 <<endif>>
 ===
 title: fuel-running-low
-tags: 
+tags: sub
 colorID: 0
 position: 1092,1244
 ---
-<<set $fuelRunningLowPick = random(7)>>
+<<set $fuelRunningLowPick = random("fuel-running-low", 7)>>
 
 <<if $fuelRunningLowPick == 0>>
     Hasron: Uh oh.
