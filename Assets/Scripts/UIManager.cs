@@ -206,8 +206,10 @@ public class UIManager : MonoBehaviour
         fuelText.color = (Color.white);
         creditText.color = (Color.white);
         playerLocation = "town hub";
-        TownUI.SetActive(true);
-        OverworldUI.SetActive(false);
+        //TownUI.SetActive(true);
+        Director.Dir.StartFadeCanvasGroup(TownUI, "in", .15f);
+        Director.Dir.StartFadeCanvasGroup(OverworldUI, "out", .15f);
+        // OverworldUI.SetActive(false);
     }
     public void LeaveTown(){
         ActivateTownButton(true);
@@ -215,8 +217,10 @@ public class UIManager : MonoBehaviour
         maxHaulText.color = (Color.black);
         fuelText.color = (Color.black);
         creditText.color = (Color.black);
-        TownUI.SetActive(false);
-        OverworldUI.SetActive(true);
+        Director.Dir.StartFadeCanvasGroup(TownUI, "out", .15f);
+        Director.Dir.StartFadeCanvasGroup(OverworldUI, "in", .15f);
+        // TownUI.SetActive(false);
+        // OverworldUI.SetActive(true);
         scrapBuyerReadout.text = "\"Back again?\"";
     }
     public void BackToHub(){
@@ -363,12 +367,14 @@ public class UIManager : MonoBehaviour
         GameObject pauseMenu = gameObject.transform.Find("IntroPanel").gameObject;
         AudioManager.AM.TogglePausedSnapshot();
         if(paused == false){ // they pause the game
-            pauseMenu.SetActive(true);
+            Director.Dir.StartFadeCanvasGroup(pauseMenu, "in", .15f);
+            //pauseMenu.SetActive(true);
             paused = true;
             AudioManager.AM.PlayMiscUIClip("inspect");
         }
         else{                // they unpause the game
-            pauseMenu.SetActive(false);
+            Director.Dir.StartFadeCanvasGroup(pauseMenu, "out", .15f);
+            //pauseMenu.SetActive(false);
             paused = false;
             AudioManager.AM.PlayMiscUIClip("dismiss");
         }

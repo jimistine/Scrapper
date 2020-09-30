@@ -110,7 +110,7 @@ public class ClickDrag : MonoBehaviour
                 PlayerRB.AddForce(gameObject.transform.up * currentSpeed * fuelModifier);
                 float driftForce = Vector2.Dot(PlayerRB.velocity, PlayerRB.GetRelativeVector(Vector2.left)) * 2.0f;
                 Vector2 relativeForce = Vector2.right * driftForce;
-                Debug.Log("Adding force");
+                //Debug.Log("Adding force");
                 PlayerRB.AddForce(PlayerRB.GetRelativeVector(relativeForce));
             }
             if(Input.GetKey(KeyCode.A)){
@@ -132,7 +132,7 @@ public class ClickDrag : MonoBehaviour
     public IEnumerator Break(){
         PlayerRB.drag = breakingPower * 50;
         while(currentSpeed > 0 && Input.GetKey(KeyCode.S)){
-            Debug.Log("Breaking");
+            //Debug.Log("Breaking");
             currentSpeed -= breakingPower;
             yield return new WaitForSeconds(.01f);
          }
@@ -159,7 +159,7 @@ public class ClickDrag : MonoBehaviour
         recovering = true;
         turnIntensity *= turnIntensityModifier;
         for(float intensity = turnIntensityModifier; intensity < 1; intensity+=.01f){
-            Debug.Log("Recovering");
+            //Debug.Log("Recovering");
             turnIntensity = intensity;
             yield return new WaitForSeconds(recoveryTime);
         }

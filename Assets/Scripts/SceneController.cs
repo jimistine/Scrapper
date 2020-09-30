@@ -83,6 +83,7 @@ public class SceneController : MonoBehaviour
     }
 
     public void RestartGame(){
+        Debug.Log("Restarting game");
         SceneManager.LoadScene("ManagerScene");
     }
 }

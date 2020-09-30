@@ -15,7 +15,7 @@ public class StartNodeOnEnter : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.tag == "Player"){
+        if(other.gameObject.tag == "Player" && other.GetType() == typeof(EdgeCollider2D)){
             DialogueRunner.StartDialogue(nodeToTrigger);
         }
     }
