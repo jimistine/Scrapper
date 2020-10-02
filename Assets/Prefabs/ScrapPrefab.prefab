@@ -49,12 +49,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Sha'ak-ji Compact generator
-  description: Great for a personal jump-jet or refrigerated backpack. Once outfitted
-    a customer with a two-in-one.
+  scrapName: Spartak Lite Drone
+  description: Discontinued only a few weeks after they hit the market because of
+    a "feature" that sent the AI after their competitor's machines. A rare find,
+    but be careful reactivating it around other drones.
   image: 0
-  size: 1
-  value: 75
+  size: 1.5
+  value: 112
   material: Titanium
   zoneA_rarity: 90
   zoneB_rarity: 0
@@ -112,8 +113,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -645396595
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.5764706, g: 0.24313726, b: 0, a: 1}
@@ -264,8 +265,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -645396595
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.5377358, g: 0.27056205, b: 0.0033819196, a: 0.14901961}

@@ -12,6 +12,7 @@ TagManager:
   - ob
   - Spawnable
   - placed
+  - Lights
   layers:
   - Default
   - TransparentFX

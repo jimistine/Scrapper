@@ -7,7 +7,8 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
-    private float time;
+    public float time;
+    public float day;
  
      void Update() {
          time += Time.deltaTime;
@@ -17,7 +18,9 @@ public class Timer : MonoBehaviour
          var fraction = (time * 100) % 100;
  
          //update the label value
-         timerText.text = string.Format ("{0:00} : {1:00}", minutes, seconds);
+         if (gameObject.tag == "UI"){
+            timerText.text = string.Format ("{0:00} : {1:00}", minutes, seconds);
+         }
      }
 }
 
