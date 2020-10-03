@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: drone
   priceIncreasePercentBottom: 0.25
-  priceIncreasePercentTop: 2
+  priceIncreasePercentTop: 1
   priceModifier: 3
   priceOffered: 1200
   effectRangeBottom: 0.09

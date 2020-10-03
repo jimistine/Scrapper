@@ -8,7 +8,8 @@ public class DayNight : MonoBehaviour
 
     [Header("Time")]
     [Space(5)]
-    public Timer clock;
+    public Timer clockUI;
+    public int day;
     public float clockTime;
     public float dayLength;
     public float transitionLength;
@@ -16,6 +17,7 @@ public class DayNight : MonoBehaviour
     public bool rising;
     public bool isDay;
     public bool setting;
+    public bool struckMidnight;
     [Header("Lights")]
     [Space(5)]
     public Light2D globalLight;
@@ -29,14 +31,6 @@ public class DayNight : MonoBehaviour
     float t;
     bool startRise;
     bool startSet;
-    bool struckMidnight;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       // clock = GameObject.Find("Timer").GetComponent<Timer>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -52,13 +46,14 @@ public class DayNight : MonoBehaviour
     */
     // GLOBAL LIGHT
 
-        clockTime = clock.time;
+        clockTime += Time.deltaTime;
+        clockUI.day = day;
+
 
         // RISES between 2m and 3m
         if(clockTime >= 120 && clockTime <= (120 + transitionLength)){
             if(rising == false){
                 rising = true;
-                struckMidnight = false;
                 StartCoroutine(Sunrise());
             }
         }
@@ -69,8 +64,6 @@ public class DayNight : MonoBehaviour
         // becomes DAY at 2.5m, stops halfway through sunset
         if(clockTime >= 120 + (transitionLength/2) && clockTime <= 420 + (transitionLength/2)){
             isDay = true;
-            //startRise = false; // reset the coroutine bool gate for rise
-            //rising = false; // reset the coroutine bool gate for rise
         }
         else{
             isDay = false;
@@ -94,15 +87,14 @@ public class DayNight : MonoBehaviour
         else{
             isNight = false;
         }
+
         // reset at midnight, add a day
-        if(clockTime >= dayLength && struckMidnight == false){
-            struckMidnight = true;
+        if(clockTime >= dayLength){
             clockTime = 0;
-            clock.day += 1;
+            day += 1;
 
             daru.transform.position = daruStart;
         }
-    // DARU, THE SUN
     }
 
     IEnumerator Sunrise(){
@@ -141,13 +133,43 @@ public class DayNight : MonoBehaviour
             yield return null;
         }
         Debug.Log("Sunset complete");
-        globalLight.intensity = 0.1f;
+        globalLight.intensity = 0.15f;
         globalLight.color = moonLight;
-        daru.intensity = 1;
+        daru.intensity = 0.15f;
         daru.transform.position = daruEnd;
         daru.color = moonLight;
     }
 
+    public void SetToNight(){
+        clockTime = 420 + (transitionLength/2);
+        isNight = true;
+        isDay = false;
+        setting = false;
+        rising = false;
+        globalLight.intensity = 0.15f;
+        globalLight.color = moonLight;
+        
+        daru.intensity = 0.15f;
+        daru.color = moonLight;
+        daru.transform.position = daruStart;
+    }
+    public void SetToDay(){
+        if(clockTime > (121 + (transitionLength/2))){
+            day += 1;
+        }
+        clockTime = 121 + (transitionLength/2);
+        isNight = false;
+        isDay = true;
+        setting = false;
+        rising = false;
+        globalLight.intensity = 1;
+        globalLight.color = daylight;
+        
+        daru.intensity = 1;
+        daru.color = daylight;
+        daru.transform.position = daruNoon;
+    }
+        // DARU, THE SUN
         // XOLA, THE FIRST MOON OF TALACAN
         // ROPTSU, THE SECOND MOON OF TALACAN
 

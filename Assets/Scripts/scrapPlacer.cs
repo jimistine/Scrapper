@@ -27,6 +27,7 @@ public class scrapPlacer : MonoBehaviour
    public bool spawning = true;
    public bool placing = true;
    public GameObject sampleScrap;
+   public GameObject rareScrap;
    public int totalSpawnableScrap;
    public int totalLiveScrap;
    public float averageScrapValuePerM3;
@@ -158,33 +159,33 @@ public class scrapPlacer : MonoBehaviour
         foreach(GameObject placedObj in placedScrap){
         // find the highest weight of all scrap, that is, the most common
             int maxWeight = JsonReader.scrapInJson.allScrap.Max(x => x.zoneA_rarity);
-            // pick a number somwhere inbetween that max and 0
+            // pick a number somwhere inbetween max and 0
             randomScrapPick = Random.Range(0, maxWeight);
             // shuffle the array so everyone gets a chance
             RandomExtensions.Shuffle(shuffleRandom, JsonReader.scrapInJson.allScrap);
             // iterate through all the scrap in our list and pick the first one that's weighted higher than 
             //   our random value and exit the loop.
             foreach(Scrap scrap in JsonReader.scrapInJson.allScrap){
-                if(scrap.zoneA_rarity >= randomScrapPick){
+                if(scrap.zoneA_rarity >= randomScrapPick && scrap.zoneA_rarity <= 50){
                     incomingScrap = scrap;
                     break;
                 }
             }
             // transfer that sweet sweet data to prefab
-            sampleScrap.GetComponent<ScrapObject>().scrapName = incomingScrap.scrapName;
-            sampleScrap.GetComponent<ScrapObject>().description = incomingScrap.description;
-            sampleScrap.GetComponent<ScrapObject>().image = incomingScrap.image;
-            sampleScrap.GetComponent<ScrapObject>().size = incomingScrap.size;
-            sampleScrap.GetComponent<ScrapObject>().value = incomingScrap.value;
-            sampleScrap.GetComponent<ScrapObject>().material = incomingScrap.material;
-            sampleScrap.GetComponent<ScrapObject>().zoneA_rarity = incomingScrap.zoneA_rarity;
-            sampleScrap.GetComponent<ScrapObject>().zoneB_rarity = incomingScrap.zoneB_rarity;
-            sampleScrap.GetComponent<ScrapObject>().zoneC_rarity = incomingScrap.zoneC_rarity;
-            sampleScrap.GetComponent<ScrapObject>().zoneD_rarity = incomingScrap.zoneD_rarity;
-            sampleScrap.GetComponent<ScrapObject>().carriesComponents = incomingScrap.carriesComponents;
-            sampleScrap.GetComponent<ScrapObject>().isBuried = incomingScrap.isBuried;
+            rareScrap.GetComponent<ScrapObject>().scrapName = incomingScrap.scrapName;
+            rareScrap.GetComponent<ScrapObject>().description = incomingScrap.description;
+            rareScrap.GetComponent<ScrapObject>().image = incomingScrap.image;
+            rareScrap.GetComponent<ScrapObject>().size = incomingScrap.size;
+            rareScrap.GetComponent<ScrapObject>().value = incomingScrap.value;
+            rareScrap.GetComponent<ScrapObject>().material = incomingScrap.material;
+            rareScrap.GetComponent<ScrapObject>().zoneA_rarity = incomingScrap.zoneA_rarity;
+            rareScrap.GetComponent<ScrapObject>().zoneB_rarity = incomingScrap.zoneB_rarity;
+            rareScrap.GetComponent<ScrapObject>().zoneC_rarity = incomingScrap.zoneC_rarity;
+            rareScrap.GetComponent<ScrapObject>().zoneD_rarity = incomingScrap.zoneD_rarity;
+            rareScrap.GetComponent<ScrapObject>().carriesComponents = incomingScrap.carriesComponents;
+            rareScrap.GetComponent<ScrapObject>().isBuried = incomingScrap.isBuried;
 
-            GameObject placedScrap = (Instantiate(sampleScrap, placedObj.transform.position, Quaternion.identity));
+            GameObject placedScrap = (Instantiate(rareScrap, placedObj.transform.position, Quaternion.identity));
             placedScrap.transform.parent = gameObject.transform;
             placedScrap.name = placedScrap.GetComponent<ScrapObject>().scrapName;
             }

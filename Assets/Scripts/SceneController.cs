@@ -58,10 +58,10 @@ public class SceneController : MonoBehaviour
         }
         else{
             StartCoroutine("LoadTown");
-            AudioManager.AM.TransitionToTownExterior();
         }
     }
     public IEnumerator LoadTown(){
+        AudioManager.AM.TransitionToTownExterior();
         PlayerManager.SetPlayerMovement(false);
         PlayerManager.gameObject.GetComponent<ClickDrag>().currentSpeed = 0;
         SceneManager.LoadScene("Town", LoadSceneMode.Additive);

@@ -60,3 +60,6 @@ TagManager:
   - name: Player
     uniqueID: 1414768697
     locked: 0
+  - name: ScrapBuried
+    uniqueID: 3791022989
+    locked: 0

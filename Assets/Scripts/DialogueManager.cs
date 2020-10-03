@@ -101,12 +101,6 @@ public class DialogueManager : MonoBehaviour
         Chip.characterPanel = GameObject.Find("CH1-P Callout");
         Chip.characterPanel.SetActive(false);
         characters.Add(Chip);
-        
-        // Character Ogden = new Character();
-        // Chip.characterName = "Ogden.";
-        // Chip.characterPanel = GameObject.Find("CH1-P Callout");
-        // Chip.characterPanel.SetActive(false);
-        // characters.Add(Chip);
     }
 
     public void LineStarted(){   // if the speaker of this line is different from the last line, swap active panels
@@ -220,6 +214,25 @@ public class DialogueManager : MonoBehaviour
         PlayerManager.PM.fuelManager.currentFuelUnits = PlayerManager.PM.fuelManager.maxFuel;
         PlayerManager.PM.fuelManager.UpdateFuelPercent();
         MerchantManager.UpdateFuelPrice();
+    }
+    [YarnCommand("setObjActive")] // this needs work to get the inactive objs
+    public void disableObj(string objName, bool isObjActive){
+        if(isObjActive == true){
+            GameObject.Find(objName).SetActive(true);
+        }
+        if(isObjActive == false){
+            GameObject.Find(objName).SetActive(false);
+        }
+        Debug.Log("Disabled: " + objName);
+    }
+    [YarnCommand("setFuelButtActive")]
+    public void setFuelButtActive(string isObjActive){
+        if(isObjActive == "true"){
+            UIManager.UIM.fillFuelButt.interactable = true;
+        }
+        if(isObjActive == "false"){
+            UIManager.UIM.fillFuelButt.interactable = false;
+        }
     }
     
     /* 

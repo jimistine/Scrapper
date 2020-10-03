@@ -135,10 +135,6 @@ public class MerchantManager : MonoBehaviour
                 +"\n<size=75%>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " credits has been detucted from your account</size>";
                 PlayerManager.playerCredits -= PlayerManager.playerCredits*towPriceModifier;
         }
-        else{
-        // this should be pulling from a list of welcomes
-        //    UIManager.fuelMerchantReadout.text = "\"Welcome to my establishment, gentlepersons.\"";
-        }
     }
     public void UpdateFuelPrice(){
         fuelToAdd = PlayerManager.fuelManager.maxFuel - PlayerManager.fuelManager.currentFuelUnits;

@@ -89,15 +89,15 @@ public class PlayerManager : MonoBehaviour
             SceneController.SC.RestartGame();
         }
         if(Input.GetKeyDown(KeyCode.P)){
+            Debug.Log("pressed p");
             UIManager.TogglePause();
             if(Director.Dir.gameStarted == false){
+                Debug.Log("calling dir start game");
                 Director.Dir.StartGame();
             }
-           // AudioManager.PlayRandomButton();
         }
         if(Input.GetKeyDown(KeyCode.Space)){
             DialogueManager.DM.ContinueDialogue();
-           // AudioManager.PlayRandomButton();
         }
 
     }

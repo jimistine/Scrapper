@@ -66,6 +66,7 @@ public class UIManager : MonoBehaviour
     [Header("Fuel Merchant")]
     [Space(10)]
     public GameObject fuelMerchant;
+    public Button fillFuelButt;
     public TextMeshProUGUI fuelMerchantReadout;
     public TextMeshProUGUI fillFuelButtonText;
     int characterToTalk;
@@ -130,7 +131,7 @@ public class UIManager : MonoBehaviour
 
     // 5. Player clicks "take" or "leave" and we do what they tell us
     public void TakeScrap(){
-        if((PlayerManager.currentHaul + scrapToTake.size) < PlayerManager.maxHaul){
+        if((PlayerManager.currentHaul + scrapToTake.size) <= PlayerManager.maxHaul){
                 PlayerManager.TakeScrap(scrapToTake);
                 GameObject newTick = Instantiate(scrapTick) as GameObject;
                 newTick.transform.SetParent(scrapTickSlots.transform, false);
@@ -157,32 +158,32 @@ public class UIManager : MonoBehaviour
     public IEnumerator CantFitScrap(){
         if(characterToTalk == 1){
             PlayerManager.hasronCallout.SetActive(true);
-            PlayerManager.hasronCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"Doesn't look like that's gonna fit...\"";
+            PlayerManager.hasronCallout.GetComponentInChildren<TextMeshProUGUI>().text = "Doesn't look like that's gonna fit...";
             yield return new WaitForSeconds(3);
             PlayerManager.hasronCallout.SetActive(false);
         }
         else{
             PlayerManager.chipCallout.SetActive(true);
-            PlayerManager.chipCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"No way we're taking that right now.\"";
+            PlayerManager.chipCallout.GetComponentInChildren<TextMeshProUGUI>().text = "No way we're taking that right now.";
             yield return new WaitForSeconds(3);
             PlayerManager.chipCallout.SetActive(false);
         }
     }
-    public IEnumerator OutOfFuel(){
-        Debug.Log("Character int: " + characterToTalk);
-        if(characterToTalk == 1){
-            PlayerManager.hasronCallout.SetActive(true);
-            PlayerManager.hasronCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"Not this again.\"";
-            yield return new WaitForSeconds(3);
-            PlayerManager.hasronCallout.SetActive(false);
-        }
-        else{
-            PlayerManager.chipCallout.SetActive(true);
-            PlayerManager.chipCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"How do they even know we're out?\"";
-            yield return new WaitForSeconds(3);
-            PlayerManager.chipCallout.SetActive(false);
-        }
-    }
+    // public IEnumerator OutOfFuel(){
+    //     Debug.Log("Character int: " + characterToTalk);
+    //     if(characterToTalk == 1){
+    //         PlayerManager.hasronCallout.SetActive(true);
+    //         PlayerManager.hasronCallout.GetComponentInChildren<TextMeshProUGUI>().text = "Not this again.;
+    //         yield return new WaitForSeconds(3);
+    //         PlayerManager.hasronCallout.SetActive(false);
+    //     }
+    //     else{
+    //         PlayerManager.chipCallout.SetActive(true);
+    //         PlayerManager.chipCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"How do they even know we're out?\"";
+    //         yield return new WaitForSeconds(3);
+    //         PlayerManager.chipCallout.SetActive(false);
+    //     }
+    // }
 
     public int OnTickHover(int tickIndex){
         tickScrap = PlayerManager.playerScrap[tickIndex];
@@ -204,13 +205,11 @@ public class UIManager : MonoBehaviour
         AudioManager.AM.TogglePausedSnapshot();
         if(paused == false){ // they pause the game
             Director.Dir.StartFadeCanvasGroup(pauseMenu, "in", .15f);
-            //pauseMenu.SetActive(true);
             paused = true;
             AudioManager.AM.PlayMiscUIClip("inspect");
         }
         else{                // they unpause the game
             Director.Dir.StartFadeCanvasGroup(pauseMenu, "out", .15f);
-            //pauseMenu.SetActive(false);
             paused = false;
             AudioManager.AM.PlayMiscUIClip("dismiss");
         }
@@ -227,10 +226,8 @@ public class UIManager : MonoBehaviour
         fuelText.color = (Color.white);
         creditText.color = (Color.white);
         playerLocation = "town hub";
-        //TownUI.SetActive(true);
         Director.Dir.StartFadeCanvasGroup(TownUI, "in", .15f);
         Director.Dir.StartFadeCanvasGroup(OverworldUI, "out", .15f);
-        // OverworldUI.SetActive(false);
     }
     public void LeaveTown(){
         ActivateTownButton(true);
@@ -240,8 +237,6 @@ public class UIManager : MonoBehaviour
         creditText.color = (Color.black);
         Director.Dir.StartFadeCanvasGroup(TownUI, "out", .15f);
         Director.Dir.StartFadeCanvasGroup(OverworldUI, "in", .15f);
-        // TownUI.SetActive(false);
-        // OverworldUI.SetActive(true);
         scrapBuyerReadout.text = "\"Back again?\"";
     }
     public void BackToHub(){
@@ -262,12 +257,14 @@ public class UIManager : MonoBehaviour
             inputField.gameObject.SetActive(true);
         }
         else{
-            string waitTime = inputField.text;
-            int waitTimeInt = System.Convert.ToInt32(waitTime) * 3600;
-           // DayNight.clockTime += waitTimeInt;
-            clockTimer.time += waitTimeInt;
+            // each hour in game is 0.42 minutes irl
+            // each minute irl is 2.4 hours in-game
+            string waitTimeInput = inputField.text;
+            int waitTimeHours = System.Convert.ToInt32(waitTimeInput);
+            float secondsToWait = (waitTimeHours * 0.42f) * 60;
+            DayNight.clockTime += secondsToWait;
             inputField.gameObject.SetActive(false);
-            Debug.Log(waitTime);
+            Debug.Log(secondsToWait);
             SceneController.StartLeaveTown();
         }
     }
@@ -354,7 +351,7 @@ public class UIManager : MonoBehaviour
         MerchantManager.EnterFuelMerchant();
     }
     public void BoughtFuel(){
-        fuelMerchantReadout.text = "\"Thank you for the credits. I assure you it will be put to good use.\"";
+        fuelMerchantReadout.text = "\"Thank you for the credits. I assure you they will be put to good use.\"";
         fuelManager.UpdateFuelPercent();
         Debug.Log("Fuel text" + fuelText.text);
     }

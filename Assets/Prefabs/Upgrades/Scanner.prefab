@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: scanner
-  priceIncreasePercentBottom: 1
-  priceIncreasePercentTop: 1.5
+  priceIncreasePercentBottom: 0.5
+  priceIncreasePercentTop: 1
   priceModifier: 2
   priceOffered: 2400
   effectRangeBottom: 0.05

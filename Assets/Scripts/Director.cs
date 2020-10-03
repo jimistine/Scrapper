@@ -62,23 +62,12 @@ public class Director : MonoBehaviour
 
     public void StartWaitToEnterTown(){
         Debug.Log("Starting wait to enter town");
-        //StartCoroutine("WaitToEnterTown");
         waitingToEnterTown = true;
         PlayerManager.PM.SetPlayerMovement(false);
         StartCoroutine(FadeCanvasGroup(UIManager.gameObject, "out", .5f));
         // now we're waiting for dialogue to end which will trigger the town to actually load
     }
-    // IEnumerator WaitToEnterTown(){
-    //     waitingToEnterTown = true;
-    //     float elapsedTime = 0.0f;
-    //     float uiFadeTime = 1.0f;
-    //     while(elapsedTime < uiFadeTime){
-    //         elapsedTime += Time.deltaTime;
-    //         UIManager.gameObject.GetComponent<CanvasGroup>().alpha -= 0.1f;
-    //         Debug.Log("fading");
-    //         yield return null;
-    //     }
-    // }
+    
     public void LoadTownOnDialogueEnd(){
         Debug.Log("Load town on dialogue end called");
         if(waitingToEnterTown){
@@ -90,17 +79,6 @@ public class Director : MonoBehaviour
         }
     }
 
-    // public void FadeElement(GameObject element){
-
-    //     float elapsedTime = 0.0f;
-    //     float fadeTime = 1.0f;
-    //     while(elapsedTime < fadeTime){
-    //         elapsedTime += Time.deltaTime;
-    //         UIManager.gameObject.GetComponent<CanvasGroup>().alpha -= 0.1f;
-    //         Debug.Log("fading");
-    //         yield return null;
-    //     }
-    // }
     public void StartFadeCanvasGroup(GameObject element, string targetVisibility, float fadeTime){
         StartCoroutine(FadeCanvasGroup( element,  targetVisibility, fadeTime));
     }
@@ -133,15 +111,9 @@ public class Director : MonoBehaviour
 
             elapsedTime += Time.deltaTime;
 
-            //element.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(alphaStart, alphaEnd, elapsedTime/fadeTime);
-
             Debug.Log("fading " + element + " " + targetVisibility);
             yield return null;
         }
         element.SetActive(isGroupActive);    
-        // while( element.GetComponent<CanvasGroup>().alpha > alphaEnd){
-            // element.GetComponent<CanvasGroup>().alpha += fadeSpeed
-            //}
-       
     }
 }

@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: storage bay
-  priceIncreasePercentBottom: 2
-  priceIncreasePercentTop: 4.5
+  priceIncreasePercentBottom: 1
+  priceIncreasePercentTop: 1.25
   priceModifier: 2
   priceOffered: 4200
   effectRangeBottom: 0.09

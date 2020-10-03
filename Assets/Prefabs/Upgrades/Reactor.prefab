@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: reactor
-  priceIncreasePercentBottom: 2.5
-  priceIncreasePercentTop: 5
+  priceIncreasePercentBottom: 1
+  priceIncreasePercentTop: 1.5
   priceModifier: 3
   priceOffered: 3200
   effectRangeBottom: 0.5

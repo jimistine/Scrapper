@@ -79,11 +79,13 @@ public class OverworldManager : MonoBehaviour
         }
         yield return new WaitForSeconds(2);
         goingOut = false;
-        PlayerManager.PM.GetComponent<CircleCollider2D>().enabled = false;
+        PlayerManager.PM.GetComponentInChildren<EdgeCollider2D>().enabled = false;
         SetUpTowRig();
     }
     public IEnumerator BringTowRigBack(){
+            //float elapsedTime = 0;
         while(isMoving){
+            //elapsedTime += Time.deltaTime;
             distCovered = (Time.time - startTime) * speed;
             fractionOfJourney = distCovered / journeyLength;
             // move is here
@@ -97,7 +99,7 @@ public class OverworldManager : MonoBehaviour
             yield return null;
         }
         goingOut = true;
-        PlayerManager.PM.GetComponent<CircleCollider2D>().enabled = true;
+        PlayerManager.PM.GetComponentInChildren<EdgeCollider2D>().enabled = true;
         towRig.SetActive(false);
         SceneController.SC.StartLoadTown();
     }
