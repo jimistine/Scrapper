@@ -17,6 +17,7 @@ public class RigManager : MonoBehaviour
 public Camera droneCamera;
 public int zoomIndex;
 public List<float> zoomLevels = new List<float>();
+public GameObject rigLights;
 public static RigManager RM;
 
 

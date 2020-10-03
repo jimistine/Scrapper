@@ -75,6 +75,15 @@ public class PlayerManager : MonoBehaviour
                 AudioManager.ChangeZoom();
             }
         }
+        if(Input.GetKeyDown(KeyCode.F)){
+            AudioManager.ToggleHeadlights();
+            if(RigManager.RM.rigLights.activeSelf == true){
+                RigManager.RM.rigLights.SetActive(false);
+            }
+            else{
+                RigManager.RM.rigLights.SetActive(true);
+            }
+        }
         if(Input.GetKeyDown(KeyCode.R)){
             Debug.Log("restarting");
             SceneController.SC.RestartGame();

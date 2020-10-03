@@ -13,6 +13,7 @@ TagManager:
   - Spawnable
   - placed
   - Lights
+  - merchant
   layers:
   - Default
   - TransparentFX

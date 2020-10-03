@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+//using System;
 [System.Serializable]
 public class UIManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class UIManager : MonoBehaviour
     public MerchantManager MerchantManager;
     public UpgradeManager UpgradeManager;
     public ReadoutManager ReadoutManager;
+    public Timer clockTimer;
+    public DayNight DayNight;
 
     [Header("Statbar")]
     [Space(5)]
@@ -49,6 +52,7 @@ public class UIManager : MonoBehaviour
     public GameObject townHub;
     public Button enterTownButton;
     public string playerLocation;
+    public TMP_InputField inputField;
 
     [Header("Scrap Buyer")]
     [Space(10)]
@@ -194,6 +198,23 @@ public class UIManager : MonoBehaviour
         zoomLevelReadout.text = currentZoom + "x";
     }
 
+    bool paused = true;
+    public void TogglePause(){
+        GameObject pauseMenu = gameObject.transform.Find("IntroPanel").gameObject;
+        AudioManager.AM.TogglePausedSnapshot();
+        if(paused == false){ // they pause the game
+            Director.Dir.StartFadeCanvasGroup(pauseMenu, "in", .15f);
+            //pauseMenu.SetActive(true);
+            paused = true;
+            AudioManager.AM.PlayMiscUIClip("inspect");
+        }
+        else{                // they unpause the game
+            Director.Dir.StartFadeCanvasGroup(pauseMenu, "out", .15f);
+            //pauseMenu.SetActive(false);
+            paused = false;
+            AudioManager.AM.PlayMiscUIClip("dismiss");
+        }
+    }
 
 // TOWN AND MERCHANTS
     public void ActivateTownButton(bool isActive){
@@ -229,11 +250,29 @@ public class UIManager : MonoBehaviour
         }
         if(playerLocation == "fuel merchant"){
             fuelMerchant.SetActive(false);
+            DialogueManager.DM.ContinueDialogue();
         }
         townHub.SetActive(true);
         AudioManager.AM.TransitionToTownExterior();
         playerLocation = "town hub";
     }
+
+    public void Wait(){
+        if(inputField.gameObject.activeSelf == false){
+            inputField.gameObject.SetActive(true);
+        }
+        else{
+            string waitTime = inputField.text;
+            int waitTimeInt = System.Convert.ToInt32(waitTime) * 3600;
+           // DayNight.clockTime += waitTimeInt;
+            clockTimer.time += waitTimeInt;
+            inputField.gameObject.SetActive(false);
+            Debug.Log(waitTime);
+            SceneController.StartLeaveTown();
+        }
+    }
+
+
     public void BoughtUpgrade(Upgrade upgrade){
         // cant afford?
         if(upgrade.type == "engine"){ // more upgrade specific stuff than I would like...
@@ -361,25 +400,4 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-    
-    bool paused = true;
-    public void TogglePause(){
-        GameObject pauseMenu = gameObject.transform.Find("IntroPanel").gameObject;
-        AudioManager.AM.TogglePausedSnapshot();
-        if(paused == false){ // they pause the game
-            Director.Dir.StartFadeCanvasGroup(pauseMenu, "in", .15f);
-            //pauseMenu.SetActive(true);
-            paused = true;
-            AudioManager.AM.PlayMiscUIClip("inspect");
-        }
-        else{                // they unpause the game
-            Director.Dir.StartFadeCanvasGroup(pauseMenu, "out", .15f);
-            //pauseMenu.SetActive(false);
-            paused = false;
-            AudioManager.AM.PlayMiscUIClip("dismiss");
-        }
-    }
-
-
-    
 }

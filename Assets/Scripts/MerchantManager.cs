@@ -128,7 +128,7 @@ public class MerchantManager : MonoBehaviour
     public void EnterFuelMerchant(){
         // put the price on the button
         UpdateFuelPrice();
-    
+        DialogueManager.DM.RunNode("ogden");
         if(PlayerManager.GetComponent<fuel>().currentFuelUnits <= 0 ){
             UIManager.fuelMerchantReadout.text = "\"I am sorry to have retrieved you, but I am glad glad to see that you are unharmed. The fee is appreciated as always." 
                 +"\nPlease, buy your fill of what deuterium I have. \""
@@ -137,7 +137,7 @@ public class MerchantManager : MonoBehaviour
         }
         else{
         // this should be pulling from a list of welcomes
-            UIManager.fuelMerchantReadout.text = "\"Welcome to my establishment, gentlepersons.\"";
+        //    UIManager.fuelMerchantReadout.text = "\"Welcome to my establishment, gentlepersons.\"";
         }
     }
     public void UpdateFuelPrice(){

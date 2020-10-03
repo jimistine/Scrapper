@@ -63,7 +63,8 @@ public class AudioManager : MonoBehaviour
     }
 
     void Update(){
-        masterMixer.SetFloat("RunningVolume", (PlayerManager.PM.GetComponent<ClickDrag>().currentSpeedActual * runningVolumeModifier) - 80);
+        //masterMixer.SetFloat("RunningVolume", (PlayerManager.PM.GetComponent<ClickDrag>().currentSpeedActual));
+        //masterMixer.SetFloat("RunningVolume", (PlayerManager.PM.GetComponent<ClickDrag>().currentSpeedActual * runningVolumeModifier) - 80);
     }
     void FixedUpdate()
     {
@@ -102,9 +103,13 @@ public class AudioManager : MonoBehaviour
     public void FillFuel(){
         UIAudio.PlayOneShot(miscUIClips.Find(x => x.clipName == "fill fuel").clip, 1);
     }
+    public void ToggleHeadlights(){
+        PlayerAudio.PlayOneShot(playerClips.Find(x => x.clipName == "toggle headlights").clip, 1);
+    }
 
 // RIG
     public void PlayRigStart(){
+        Debug.Log("rig start");
         double startDuration = (double)RigStartStop.clip.samples / RigStartStop.clip.frequency;
         RigStartStop.PlayScheduled(AudioSettings.dspTime);
         RigRunning.PlayScheduled(AudioSettings.dspTime + startDuration + startRunningAdjustment);

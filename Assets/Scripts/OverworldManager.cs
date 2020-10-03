@@ -7,6 +7,10 @@ public class OverworldManager : MonoBehaviour
 
     public static OverworldManager OM;
 
+    [Header("Environment")]
+    [Space(5)]
+    public DayNight DayNight;
+    public GameObject worldLights;
     [Header("Tow Rig")]
     [Space(5)]
     public GameObject towRig;
@@ -26,10 +30,21 @@ public class OverworldManager : MonoBehaviour
         OM = this;
     }
 
-    // Update is called once per frame
+    void Start(){
+        DayNight = GameObject.Find("Celestial").GetComponent<DayNight>();
+    }
     void Update()
     {
-        
+        if(DayNight.isDay){
+            worldLights.SetActive(false);
+        }
+        else{
+            worldLights.SetActive(true);
+        }
+        //Debug.Log("Distance is: " + Vector3.Distance(PlayerManager.PM.gameObject.transform.position, town.transform.position));
+        if(Vector3.Distance(PlayerManager.PM.gameObject.transform.position, town.transform.position) > 1.15f){
+            UIManager.UIM.ActivateTownButton(false);
+        }
     }
 
     public void SetUpTowRig(){ // called from fuel

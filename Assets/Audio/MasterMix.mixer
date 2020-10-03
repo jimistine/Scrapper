@@ -233,9 +233,7 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters:
-  - guid: 41141db5eccc66e4fad7c6f48d08908c
-    name: RunningVolume
+  m_ExposedParameters: []
   m_AudioMixerGroupViews:
   - guids:
     - 36b3b2d8faf67a84fa201fe587a8de88
@@ -286,8 +284,8 @@ AudioMixerController:
     - 5c13bb772e32d17479345fb678c887c6
     - 74ff03904ea68bb4491073fe3cedd495
     name: Rig
-  m_CurrentViewIndex: 4
-  m_TargetSnapshot: {fileID: 24500006}
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: -2597962052861911410}
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -337,18 +335,20 @@ AudioMixerSnapshotController:
   m_SnapshotID: e0d4ae9f9c4c32d408c0db631dbb7fb8
   m_FloatValues:
     80d949a09d39f3347a8efc2424948537: -80
-    784f80015831e0a4ab6f99102a3c1747: 22000
+    784f80015831e0a4ab6f99102a3c1747: 10879
     4afb0ce112c7aea4bb8a1cebb32edbb0: 1565
     255dca62a734f05408fbeccd2e003e3a: 22000
     a0bc4c433692f2b40ba65b79f55f6af0: -0.02577656
     1c1a65932dc3e7947a868d702da5b7e3: -19.928473
+    6d7551f32cab38d469d06da0fb7b39ce: 9.423317
     0e5b2c743265b1641b5caf02ba1144e3: -10.345207
     41141db5eccc66e4fad7c6f48d08908c: -9.960263
     eb1bae879d275a641b22d01d7c1bce88: -28.641356
-    ed7ebfd8c4b6511479d10159716d443a: -0.54210395
+    ed7ebfd8c4b6511479d10159716d443a: 2.0905998
     1af1819a6f7d76f45a5d57d3918e50c0: -16.660433
     a7cc339a4d8a1774ab3b55649cc2a97f: -11.535824
-    4032163da404e964084739152e4c38f1: -0.02577656
+    4032163da404e964084739152e4c38f1: -5.3230715
+    7558d5ad79a985c429028f79574a50c2: 1
   m_TransitionOverrides: {}
 --- !u!244 &725121252683833077
 AudioMixerEffectController:
@@ -668,7 +668,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 1122544333965287948}
-  m_UserColorIndex: 6
+  m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0

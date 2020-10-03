@@ -1,0 +1,116 @@
+fileFormatVersion: 2
+guid: edb59d83909eaf84ca7577d369020158
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: 
+  stringIDs:
+  - Dialogue_0.6-intro-0
+  - Dialogue_0.6-intro-1
+  - Dialogue_0.6-intro-2
+  - Dialogue_0.6-intro-3
+  - Dialogue_0.6-intro-4
+  - Dialogue_0.6-intro-5
+  - Dialogue_0.6-intro-6
+  - Dialogue_0.6-intro-7
+  - Dialogue_0.6-intro-8
+  - Dialogue_0.6-intro-9
+  - Dialogue_0.6-intro-10
+  - Dialogue_0.6-intro-11
+  - Dialogue_0.6-intro-12
+  - Dialogue_0.6-intro-13
+  - Dialogue_0.6-intro-14
+  - Dialogue_0.6-intro-15
+  - Dialogue_0.6-intro-16
+  - Dialogue_0.6-intro-17
+  - Dialogue_0.6-intro-18
+  - Dialogue_0.6-intro-19
+  - Dialogue_0.6-intro-20
+  - Dialogue_0.6-intro-21
+  - Dialogue_0.6-intro-22
+  - Dialogue_0.6-intro-23
+  - Dialogue_0.6-intro-24
+  - Dialogue_0.6-intro-25
+  - Dialogue_0.6-intro-26
+  - Dialogue_0.6-intro-27
+  - Dialogue_0.6-intro-28
+  - Dialogue_0.6-intro-29
+  - Dialogue_0.6-intro-30
+  - Dialogue_0.6-intro-31
+  - Dialogue_0.6-close-to-town-32
+  - Dialogue_0.6-close-to-town-33
+  - Dialogue_0.6-close-to-town-34
+  - Dialogue_0.6-close-to-town-35
+  - Dialogue_0.6-close-to-town-36
+  - Dialogue_0.6-close-to-town-37
+  - Dialogue_0.6-close-to-town-38
+  - Dialogue_0.6-close-to-town-39
+  - Dialogue_0.6-close-to-town-40
+  - Dialogue_0.6-transition-41
+  - Dialogue_0.6-transition-42
+  - Dialogue_0.6-transition-43
+  - Dialogue_0.6-transition-44
+  - Dialogue_0.6-scrap-find-45
+  - Dialogue_0.6-scrap-find-46
+  - Dialogue_0.6-scrap-find-47
+  - Dialogue_0.6-scrap-find-48
+  - Dialogue_0.6-scrap-find-49
+  - Dialogue_0.6-scrap-find-50
+  - Dialogue_0.6-scrap-find-51
+  - Dialogue_0.6-scrap-find-52
+  - Dialogue_0.6-scrap-take-53
+  - Dialogue_0.6-scrap-take-54
+  - Dialogue_0.6-scrap-take-55
+  - Dialogue_0.6-scrap-take-56
+  - Dialogue_0.6-scrap-take-57
+  - Dialogue_0.6-scrap-take-58
+  - Dialogue_0.6-scrap-take-59
+  - Dialogue_0.6-scrap-take-60
+  - Dialogue_0.6-scrap-take-61
+  - Dialogue_0.6-scrap-leave-62
+  - Dialogue_0.6-scrap-leave-63
+  - Dialogue_0.6-scrap-leave-64
+  - Dialogue_0.6-scrap-leave-65
+  - Dialogue_0.6-scrap-leave-66
+  - Dialogue_0.6-scrap-leave-67
+  - Dialogue_0.6-scrap-leave-68
+  - Dialogue_0.6-scrap-leave-69
+  - Dialogue_0.6-scrap-leave-70
+  - Dialogue_0.6-fuel-running-low-71
+  - Dialogue_0.6-fuel-running-low-72
+  - Dialogue_0.6-fuel-running-low-73
+  - Dialogue_0.6-fuel-running-low-74
+  - Dialogue_0.6-fuel-running-low-75
+  - Dialogue_0.6-fuel-running-low-76
+  - Dialogue_0.6-fuel-running-low-77
+  - Dialogue_0.6-fuel-running-low-78
+  - Dialogue_0.6-fuel-running-low-79
+  - Dialogue_0.6-fuel-out-80
+  - Dialogue_0.6-fuel-out-81
+  - Dialogue_0.6-fuel-out-82
+  - Dialogue_0.6-fuel-out-83
+  - Dialogue_0.6-fuel-out-84
+  - Dialogue_0.6-fuel-out-85
+  - Dialogue_0.6-fuel-out-86
+  - Dialogue_0.6-fuel-out-87
+  - Dialogue_0.6-fuel-out-88
+  - Dialogue_0.6-fuel-out-89
+  - Dialogue_0.6-fuel-out-90
+  - Dialogue_0.6-fuel-out-91
+  - Dialogue_0.6-fuel-out-92
+  - Dialogue_0.6-fuel-out-93
+  - Dialogue_0.6-fuel-out-94
+  - Dialogue_0.6-fuel-out-95
+  - Dialogue_0.6-ogden-96
+  - Dialogue_0.6-ogden-97
+  - Dialogue_0.6-ogden-98
+  compilationStatus: 1
+  isSuccesfullyCompiled: 1
+  compilationErrorMessage: 
+  baseLanguage: {instanceID: 0}
+  localizations: []

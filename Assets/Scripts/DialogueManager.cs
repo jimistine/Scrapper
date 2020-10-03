@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
 
     public ScrapDialogueUI ui;
     public DialogueRunner DR;
+    public MerchantManager MerchantManager;
     //public DialogueRunner DialogueRunner_2;
 
     public bool isDialogueRunner1Running;
@@ -78,22 +79,7 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("Random line number is: " + numberToReturn);
             return numberToReturn;
         });
-        // DialogueRunner_2.AddFunction("random", 2, delegate(Yarn.Value[] parameters){
-        //     var requestingNode = parameters[0];
-        //     var maxNum = parameters[1];
-        //     int numberToReturn = (int)Random.Range(0, Mathf.Round(maxNum.AsNumber));
-
-        //     if(!randomLinePulls.ContainsKey(requestingNode.AsString)){
-        //         randomLinePulls.Add(requestingNode.AsString, numberToReturn);
-        //     }
-        //     else if(randomLinePulls[requestingNode.AsString] == numberToReturn){
-        //         while(randomLinePulls[requestingNode.AsString] == numberToReturn){
-        //             numberToReturn = (int)Random.Range(0, Mathf.Round(maxNum.AsNumber));
-        //         }
-        //     }
-        //     Debug.Log("Random line number is: " + numberToReturn);
-        //     return numberToReturn;
-        // });
+        
 
     }
 
@@ -115,6 +101,12 @@ public class DialogueManager : MonoBehaviour
         Chip.characterPanel = GameObject.Find("CH1-P Callout");
         Chip.characterPanel.SetActive(false);
         characters.Add(Chip);
+        
+        // Character Ogden = new Character();
+        // Chip.characterName = "Ogden.";
+        // Chip.characterPanel = GameObject.Find("CH1-P Callout");
+        // Chip.characterPanel.SetActive(false);
+        // characters.Add(Chip);
     }
 
     public void LineStarted(){   // if the speaker of this line is different from the last line, swap active panels
@@ -189,13 +181,14 @@ public class DialogueManager : MonoBehaviour
     private void ConversationEnded(){
         DR.Stop();
         Debug.Log("conversation ended");
-        activeSpeakerPanel.SetActive(false);
+        if(activeSpeakerPanel.tag != "merchant"){
+            activeSpeakerPanel.SetActive(false);
+        }
         speakerNameLast = null;
         if(lineQueue.Count > 0){
             Debug.Log("starting transition");
             DR.StartDialogue("transition");
         }
-        // return control etc
     }
 
 // Commands
@@ -221,8 +214,13 @@ public class DialogueManager : MonoBehaviour
             lineQueueIDs.Clear();
         }
     }
-
-
+    [YarnCommand("fillFuel")]
+    public void fillFuel(){
+        Debug.Log("FilledFuel");
+        PlayerManager.PM.fuelManager.currentFuelUnits = PlayerManager.PM.fuelManager.maxFuel;
+        PlayerManager.PM.fuelManager.UpdateFuelPercent();
+        MerchantManager.UpdateFuelPrice();
+    }
     
     /* 
     Sorry to inturrupt...
