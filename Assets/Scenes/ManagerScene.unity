@@ -9573,7 +9573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yarnScripts:
-  - {fileID: 2480198943629176163, guid: 4a5f6d18970c6a94cb59abf98f0c1b6b, type: 3}
+  - {fileID: 2480198943629176163, guid: 74fb605d5889b5e4381d184cb3af8514, type: 3}
   textLanguage: en-US
   variableStorage: {fileID: 1000250097}
   dialogueUI: {fileID: 1000250096}
@@ -9691,7 +9691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c1426ebc9f38a4b953a8e83d949f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFile: {fileID: 4900000, guid: 7cf71db316ed247c29e3fb25c70d9c8f, type: 3}
+  jsonFile: {fileID: 4900000, guid: 9993c2fc08c7b1146b03b64d0231389b, type: 3}
   scrapInJson:
     allScrap: []
 --- !u!114 &1005310152
@@ -9707,10 +9707,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JsonReader: {fileID: 1005310151}
-  spawning: 1
-  placing: 1
   sampleScrap: {fileID: 5283757986021271520, guid: 563599bed92065c458ee03a298bfbefd, type: 3}
   rareScrap: {fileID: 5283757986021271520, guid: 435c002ff2b485242af205b2ca8a56cd, type: 3}
+  scrapGlow: {fileID: 4899507014425068736, guid: 674666a86de4416458afcd8b1edae338, type: 3}
   totalSpawnableScrap: 300
   totalLiveScrap: 0
   averageScrapValuePerM3: 0
@@ -10515,7 +10514,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 19.911865, y: 0.000061035}
+  m_AnchoredPosition: {x: 0, y: 0.000061035}
   m_SizeDelta: {x: -19.911865, y: 2101.5583}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1077139173
@@ -14980,9 +14979,9 @@ MonoBehaviour:
     Here
     are some handy things to know before getting started.
 
-    -<indent=15> Use
-    ''W'' to move forward, ''S'' to brake, and the pointer to steer. Pressing ''2''
-    will change steering to ''A'' and ''D'', and ''1'' will change it back.</indent>
+    -<indent=15> Use ''W''
+    to move forward, ''S'' to brake, and the pointer to steer. Pressing ''2'' will
+    change steering to ''A'' and ''D'', and ''1'' will change it back.</indent>
 
 
     -<indent=15>
@@ -15013,7 +15012,7 @@ MonoBehaviour:
 
     </indent>
 
-    
+
 
     <b>NEW
     FEATURES</b> - October 3, 2020
@@ -15023,23 +15022,23 @@ MonoBehaviour:
     our two characters.</indent>
 
 
-    -<indent=15> Intro. The beginning of the
-    thing should feel a lot more "real" as I test out this temp intro sequence and
-    dialogue as you make your way to town.</indent>
+    -<indent=15> Intro. The beginning of the thing
+    should feel a lot more "real" as I test out this temp intro sequence and dialogue
+    as you make your way to town.</indent>
 
 
-    -<indent=15> Day/Night
-    Cycle. You gotta a love a sunset. Night doesn''t offer much reward for the time
-    being, but there will be much more valuable glowing scrap added later. In town
-    you can also wait until sunrise or sunset. The day counter is now live as well.
-    For referecnce, you''ll have about 10 days to complete the game.</indent>
+    -<indent=15> Day/Night Cycle. You
+    gotta a love a sunset. Night doesn''t offer much reward for the time being, but
+    there will be much more valuable glowing scrap added later. In town you can also
+    wait until sunrise or sunset. The day counter is now live as well. For referecnce,
+    you''ll have about 10 days to complete the game.</indent>
 
 
     -<indent=15>
     Balance. Fuel is a bit cheaper now, and finding scrap is a little easier. Subsequent
     upgrades are also much less expensive.</indent>
 
-    
+
 
     Narrative context:
 

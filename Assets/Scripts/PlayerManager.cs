@@ -110,7 +110,15 @@ public class PlayerManager : MonoBehaviour
             if(other.gameObject.GetComponent<ScrapObject>().isBuried == true){
                 other.gameObject.GetComponent<ScrapObject>().isBuried = false;
                 AudioManager.PlayPlayerClip("found scrap");
-                DialogueManager.DM.RunNode("scrap-find");
+                if(newScrap.scrapName == "Land speeder (unknown)"){
+                    DialogueManager.DM.RunNode("land-speeder");
+                }
+                else if(newScrap.scrapName == "Chunk of raw cordonite"){
+                    DialogueManager.DM.RunNode("chunk-of-raw-cordonite");
+                }
+                else{
+                    DialogueManager.DM.RunNode("scrap-find");
+                }
                 Debug.Log("Found scrap");
             }
             other.gameObject.GetComponent<ProximityCheck>().IsInRange(true);

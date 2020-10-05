@@ -24,10 +24,11 @@ public class scrapPlacer : MonoBehaviour
 
 
    public JsonReader JsonReader;
-   public bool spawning = true;
-   public bool placing = true;
+
    public GameObject sampleScrap;
    public GameObject rareScrap;
+   public GameObject scrapGlow;
+
    public int totalSpawnableScrap;
    public int totalLiveScrap;
    public float averageScrapValuePerM3;
@@ -35,6 +36,8 @@ public class scrapPlacer : MonoBehaviour
    public float minDistance;
    public float spawningBoundX;
    public float spawningBoundY;
+   public GameObject[] placedScrap;
+
    Rect spawningRect;
    int counter = 0;
    float totalSpawningWeight;
@@ -44,7 +47,6 @@ public class scrapPlacer : MonoBehaviour
    float totalScrapValue;
    float totalScrapVolume;
    GameObject[] currentLiveScrap;
-   public GameObject[] placedScrap;
    RaycastHit2D scrapPosRay;
    Vector3 position;
    bool generatingPosition;
@@ -141,6 +143,11 @@ public class scrapPlacer : MonoBehaviour
             GameObject copiedScrap = (Instantiate(sampleScrap, position, Quaternion.identity));
             copiedScrap.transform.parent = gameObject.transform;
             copiedScrap.name = copiedScrap.GetComponent<ScrapObject>().scrapName;
+            // and add a glow if it's this specific one.
+            if(copiedScrap.name == "Chunk of raw cordonite"){
+                GameObject glowToAttach = (GameObject) Instantiate(scrapGlow, copiedScrap.transform.position, copiedScrap.transform.rotation);
+                glowToAttach.transform.parent = copiedScrap.transform;
+            }
         /*
             //check if it has components
             if (copiedScrap.GetComponent<ScrapObject>().carriesComponents){
@@ -188,6 +195,10 @@ public class scrapPlacer : MonoBehaviour
             GameObject placedScrap = (Instantiate(rareScrap, placedObj.transform.position, Quaternion.identity));
             placedScrap.transform.parent = gameObject.transform;
             placedScrap.name = placedScrap.GetComponent<ScrapObject>().scrapName;
+            if(placedScrap.name == "Chunk of raw cordonite"){
+                GameObject glowToAttach = (GameObject) Instantiate(scrapGlow, placedScrap.transform.position, placedScrap.transform.rotation);
+                glowToAttach.transform.parent = placedScrap.transform;
+            }
             }
         }
 

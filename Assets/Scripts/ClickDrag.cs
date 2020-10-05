@@ -167,7 +167,6 @@ public class ClickDrag : MonoBehaviour
     }
     public IEnumerator OutOfFuel(){
         // once they run out, slow them down for ~drama~
-        UIManager.UIM.Callout("OutOfFuel");
         fuelModifier = fuel.noFuelSpeedModifier;
         moveEnabled = false;
         for (float i = currentSpeed; i > 0; i -= fuel.outOfFuelSlowRate){
