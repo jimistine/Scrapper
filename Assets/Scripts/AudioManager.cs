@@ -128,7 +128,9 @@ public class AudioManager : MonoBehaviour
 // AMBIENT
     // Snapshot Transitions
     public void TransitionToTownExterior(){
-        AmbientTown.Play();
+        if(AmbientTown.isPlaying == false){
+            AmbientTown.Play();
+        }
         townExterior.TransitionTo(0.25f);
         currentSnapShot = townExterior;
     }

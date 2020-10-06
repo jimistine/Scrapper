@@ -99,9 +99,7 @@ public class PlayerManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){
             DialogueManager.DM.ContinueDialogue();
         }
-
     }
-
     
     void OnTriggerEnter2D(Collider2D other){
     // 1. Pop goes the scrap!  If our search radius hits the small EdgeCollider on the scrap, it pops
@@ -115,6 +113,9 @@ public class PlayerManager : MonoBehaviour
                 }
                 else if(newScrap.scrapName == "Chunk of raw cordonite"){
                     DialogueManager.DM.RunNode("chunk-of-raw-cordonite");
+                }
+                else if(newScrap.scrapName == "Sha'ak-ji Holospace Generator"){
+                    DialogueManager.DM.RunNode("holospace-generator");
                 }
                 else{
                     DialogueManager.DM.RunNode("scrap-find");

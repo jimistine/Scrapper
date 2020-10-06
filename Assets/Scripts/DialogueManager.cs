@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Yarn.Unity;
 using TMPro;
+using System.Text.RegularExpressions;
 using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour
@@ -16,9 +17,10 @@ public class DialogueManager : MonoBehaviour
     public MerchantManager MerchantManager;
     //public DialogueRunner DialogueRunner_2;
 
-    public bool isDialogueRunner1Running;
     //public bool isDialogueRunner2Running;
     public SceneController SceneController;
+    [Space(5)]
+    public bool isDialogueRunner1Running;
 
     public System.Action testAction;
     
@@ -33,6 +35,10 @@ public class DialogueManager : MonoBehaviour
     public List<Yarn.Line> lineQueue = new List<Yarn.Line>();
     public List<string> lineQueueIDs = new List<string>();
     public Yarn.Line queuedLine;
+    [Header("Images")]
+    [Space(10)]
+    public Sprite continueIcon;
+    public Sprite finishedIcon;
 
     GameObject activeSpeakerPanel;
     string speakerNameLast;
@@ -55,12 +61,14 @@ public class DialogueManager : MonoBehaviour
         ui.onLineStart.AddListener(LineStarted);
         ui.onLineUpdate.AddListener(LineUpdate);
         ui.onLineEnd.AddListener(LineEnd);
+        ui.onLineFinishDisplaying.AddListener(FinishedDisplayingText);
         DR.onDialogueComplete.AddListener(ConversationEnded);
         
         DR = GameObject.Find("YarnManager").GetComponent<DialogueRunner>();
         ui = GameObject.Find("YarnManager").GetComponent<ScrapDialogueUI>();
 
 // Functions
+    // when we need unity to tell yarn something in the middle of a conversation
         // adds the node requesting the random to a dictionary to make sure
         //   we don't play the same random line for that node twice in a row
         DR.AddFunction("random", 2, delegate(Yarn.Value[] parameters){
@@ -104,28 +112,49 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void LineStarted(){   // if the speaker of this line is different from the last line, swap active panels
+        if(activeSpeakerPanel != null){
+            if(activeSpeakerPanel.tag == "merchant"){
+                ui.textSpeed = 0.05f;
+            }
+            else{
+                ui.textSpeed = 0.025f;
+            }
+        }
         if(speakerNameLast != ui.speakerName || speakerNameLast == null){
-            if(activeSpeakerPanel != null){
+            if(activeSpeakerPanel != null && activeSpeakerPanel.tag != "merchant"){
                 activeSpeakerPanel.SetActive(false);
             } 
             activeSpeakerPanel = characters.Find(x => x.characterName == ui.speakerName).characterPanel;
-            activeSpeakerPanel.SetActive(true);
+            if(activeSpeakerPanel.tag != "merchant"){
+                Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel,"in", 0.1f);
+            }
         }
 
         speakerNameLast = ui.speakerName;
-        
+        //prefill the dynamic textbox with invisible text
+        string prefit = DR.strings[ui.currentLine.ID];
+        prefit = Regex.Replace(prefit, ui.speakerName + ": ", "");
+        activeSpeakerPanel.GetComponentsInChildren<TextMeshProUGUI>()[1].text = prefit;
     }
-
     private void LineUpdate(string line){
-        activeSpeakerPanel.GetComponentInChildren<TextMeshProUGUI>().text = line;
+        activeSpeakerPanel.GetComponentsInChildren<TextMeshProUGUI>()[0].text = line;
+    }
+    public void FinishedDisplayingText(){
+        // time out panel after a beat once the line is there.
+        // if the node being run has the sub tag, start the counter
+        string tagsLine = string.Join(" ", DR.GetTagsForNode(DR.CurrentNodeName));
+        if(tagsLine.Contains("sub")){
+            Debug.Log("starting speaker panel timeout");
+            StartCoroutine(TimeOutSpeakerPanel());
+        }
+    }
+    public IEnumerator TimeOutSpeakerPanel(){
+        yield return new WaitForSeconds(2);
+        ContinueDialogue();
     }
 
     public void LineEnd(){
-       // time out panel after a beat once the line is there.
-
-    //    if (DialogueRunner_2.IsDialogueRunning == false){
-    //        DialogueRunner_2.StartDialogue(DR.CurrentNodeName);
-    //    }
+       // Debug.Log("Line ended");
     }
 
     public void scrapOnComplete(){
@@ -142,16 +171,20 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void RunNode(string nodeToRun){
+
         // tage a look at those tags
         var tags = string.Join(" ", DR.GetTagsForNode(nodeToRun));
-        // if we're already talking, and this isn't that important, don't say anything
-        // if we aren't talking, and it's a bark, roll to see if we play the bark
-        if(DR.IsDialogueRunning && tags.Contains("sub")){
+        if(DR.CurrentNodeName != null){
+            var tagsCurrent = string.Join(" ", DR.GetTagsForNode(DR.CurrentNodeName));
+            if(DR.IsDialogueRunning && tagsCurrent.Contains("main")){ // if we're already talking about a main plot point, don't inturrupt
+                return;
+            }
+        }
+        else if(DR.IsDialogueRunning && tags.Contains("sub")){ // if we're already talking, and this isn't that important, don't inturrupt
             return;
         }
-        else if(!DR.IsDialogueRunning && tags.Contains("sub")){
+        else if(!DR.IsDialogueRunning && tags.Contains("sub")){ // if we aren't talking, and it's a bark, roll to see if we play the bark
             int randomRoll = Random.Range(0, 2);
-            //int randomRoll = 0;
             Debug.Log("Rolled:" + randomRoll);
             if(randomRoll == 0){
                 DR.StartDialogue(nodeToRun);
@@ -176,7 +209,8 @@ public class DialogueManager : MonoBehaviour
         DR.Stop();
         Debug.Log("conversation ended");
         if(activeSpeakerPanel.tag != "merchant"){
-            activeSpeakerPanel.SetActive(false);
+            Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel, "out", 0.25f);
+            //activeSpeakerPanel.SetActive(false);
         }
         speakerNameLast = null;
         if(lineQueue.Count > 0){
@@ -186,6 +220,7 @@ public class DialogueManager : MonoBehaviour
     }
 
 // Commands
+    // when we need yarn to tell unity to do something
     [YarnCommand("setPanelVisibility")]
     public void setPanelVisibility(string characterName, string isPanelVisible){
         Debug.Log("setting " + characterName + "'s " + "panel visibility to " + isPanelVisible);

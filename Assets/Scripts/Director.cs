@@ -16,7 +16,7 @@ public class Director : MonoBehaviour
     public AudioManager AudioManager;
     public UIManager UIManager;
     public Image screenCover;
-
+    public bool playIntroDialogue;
     public bool gameStarted;
     public bool waitingToEnterTown;
     public float fadeDuration;
@@ -56,8 +56,9 @@ public class Director : MonoBehaviour
         }
         screenCover.gameObject.SetActive(false);
         yield return new WaitForSeconds(3);
-        DialogueManager.RunNode("intro");
-
+        if(playIntroDialogue){
+            DialogueManager.RunNode("intro");
+        }
     }
 
     public void StartWaitToEnterTown(){
@@ -69,7 +70,7 @@ public class Director : MonoBehaviour
     }
     
     public void LoadTownOnDialogueEnd(){
-        Debug.Log("Load town on dialogue end called");
+        //Debug.Log("Load town on dialogue end called");
         if(waitingToEnterTown){
         Debug.Log("entering town");
             SceneController.StartCoroutine("LoadTown");

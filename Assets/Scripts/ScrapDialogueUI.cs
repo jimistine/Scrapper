@@ -48,8 +48,6 @@ namespace Yarn.Unity
 
             speakerName = Regex.Match(text, @"^.*?(?=:)").Value;
 
-            // if(currentLine != null){
-            // }
             lastLine = currentLine;
             currentLine = line;
             
@@ -73,6 +71,7 @@ namespace Yarn.Unity
             // The final text we'll be showing for this line.
             string text = localisationProvider.GetLocalisedTextForLine(line);
             text = Regex.Replace(text, speakerName + ": ", "");
+            
 
           
             if (text == null) {

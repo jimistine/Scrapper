@@ -109,14 +109,14 @@ public class UIManager : MonoBehaviour
 
     // 2. PlayerManager has found scrap 
     public ScrapObject ShowScrap(ScrapObject newScrap){
-        Debug.Log("Showing: " + newScrap.scrapName);
+        //Debug.Log("Showing: " + newScrap.scrapName);
         newScrap.GetComponent<SpriteRenderer>().enabled = true;
         newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.5764706f,0.2431373f,0,1);
         scrapToTake = newScrap;
         return newScrap;
     }
     public ScrapObject OutOfRangeScrap(ScrapObject newScrap){
-        Debug.Log(newScrap.scrapName + " is now out of range");
+        //Debug.Log(newScrap.scrapName + " is now out of range");
         newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.6509434f,0.5183763f,0.4216803f,1);
         return newScrap;
     }
@@ -124,7 +124,8 @@ public class UIManager : MonoBehaviour
     // 4. Player has clicked on scrap
     public ScrapObject ShowReadout(ScrapObject newScrap){
         ReadoutManager.UpdateReadout(newScrap);
-        readoutPanel.SetActive(true);
+        //readoutPanel.SetActive(true);
+        Director.Dir.StartFadeCanvasGroup(readoutPanel, "in", 0.05f);
         AudioManager.AM.PlayMiscUIClip("inspect");
         return newScrap;
     }
@@ -135,7 +136,8 @@ public class UIManager : MonoBehaviour
                 PlayerManager.TakeScrap(scrapToTake);
                 GameObject newTick = Instantiate(scrapTick) as GameObject;
                 newTick.transform.SetParent(scrapTickSlots.transform, false);
-                readoutPanel.SetActive(false);
+                Director.Dir.StartFadeCanvasGroup(readoutPanel, "out", 0.05f);
+                //readoutPanel.SetActive(false);
                 AudioManager.AM.PlayPlayerClip("pick up scrap");
                 DialogueManager.DM.RunNode("scrap-take");
         }
@@ -145,7 +147,8 @@ public class UIManager : MonoBehaviour
         }
     }
     public void LeaveScrap(){
-        readoutPanel.SetActive(false);
+        //readoutPanel.SetActive(false);
+        Director.Dir.StartFadeCanvasGroup(readoutPanel, "out", 0.05f);
         AudioManager.AM.PlayMiscUIClip("dismiss");
         DialogueManager.DM.RunNode("scrap-leave");
     }
@@ -169,21 +172,6 @@ public class UIManager : MonoBehaviour
             PlayerManager.chipCallout.SetActive(false);
         }
     }
-    // public IEnumerator OutOfFuel(){
-    //     Debug.Log("Character int: " + characterToTalk);
-    //     if(characterToTalk == 1){
-    //         PlayerManager.hasronCallout.SetActive(true);
-    //         PlayerManager.hasronCallout.GetComponentInChildren<TextMeshProUGUI>().text = "Not this again.;
-    //         yield return new WaitForSeconds(3);
-    //         PlayerManager.hasronCallout.SetActive(false);
-    //     }
-    //     else{
-    //         PlayerManager.chipCallout.SetActive(true);
-    //         PlayerManager.chipCallout.GetComponentInChildren<TextMeshProUGUI>().text = "\"How do they even know we're out?\"";
-    //         yield return new WaitForSeconds(3);
-    //         PlayerManager.chipCallout.SetActive(false);
-    //     }
-    // }
 
     public int OnTickHover(int tickIndex){
         tickScrap = PlayerManager.playerScrap[tickIndex];
@@ -245,7 +233,6 @@ public class UIManager : MonoBehaviour
         }
         if(playerLocation == "fuel merchant"){
             fuelMerchant.SetActive(false);
-            DialogueManager.DM.ContinueDialogue();
         }
         townHub.SetActive(true);
         AudioManager.AM.TransitionToTownExterior();
@@ -325,11 +312,10 @@ public class UIManager : MonoBehaviour
         townHub.SetActive(false);
         scrapBuyer.SetActive(true);
         playerLocation = "scrap buyer";
-        // this should be pulling from a list of welcomes
-        scrapBuyerReadout.text = "\"How are you all doing?\"";
+        DialogueManager.DM.RunNode("chundr");
     }
     public void cantSellScrap(){
-        scrapBuyerReadout.text = "\"You two ah, don't have any scrap out there.\"";
+        scrapBuyerReadout.text = "You two ah, don't have any scrap out there.";
         AudioManager.AM.PlayMiscUIClip("reject");
     }
     public void SoldScrap(){  // Called from Merchant Manager
