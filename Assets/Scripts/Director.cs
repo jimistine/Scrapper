@@ -112,7 +112,7 @@ public class Director : MonoBehaviour
 
             elapsedTime += Time.deltaTime;
 
-            Debug.Log("fading " + element + " " + targetVisibility);
+            //Debug.Log("fading " + element + " " + targetVisibility);
             yield return null;
         }
         element.SetActive(isGroupActive);    

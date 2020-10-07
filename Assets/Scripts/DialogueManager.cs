@@ -51,7 +51,6 @@ public class DialogueManager : MonoBehaviour
         DM = this;
         SceneController.initCharacters.AddListener(InitCharacters);
         SceneController.overworldLoaded.AddListener(RunOverwolrdDialogue);
-        testAction += scrapOnComplete;
     }
     
     void Start(){
@@ -62,7 +61,9 @@ public class DialogueManager : MonoBehaviour
         ui.onLineUpdate.AddListener(LineUpdate);
         ui.onLineEnd.AddListener(LineEnd);
         ui.onLineFinishDisplaying.AddListener(FinishedDisplayingText);
+        ui.onDialogueEnd.AddListener(scrapOnDialogueComplete);
         DR.onDialogueComplete.AddListener(ConversationEnded);
+        //DR.onNodeComplete.AddListener(NodeEnded);
         
         DR = GameObject.Find("YarnManager").GetComponent<DialogueRunner>();
         ui = GameObject.Find("YarnManager").GetComponent<ScrapDialogueUI>();
@@ -114,7 +115,7 @@ public class DialogueManager : MonoBehaviour
     public void LineStarted(){   // if the speaker of this line is different from the last line, swap active panels
         if(activeSpeakerPanel != null){
             if(activeSpeakerPanel.tag == "merchant"){
-                ui.textSpeed = 0.05f;
+                ui.textSpeed = 0.025f;
             }
             else{
                 ui.textSpeed = 0.025f;
@@ -132,14 +133,23 @@ public class DialogueManager : MonoBehaviour
 
         speakerNameLast = ui.speakerName;
         //prefill the dynamic textbox with invisible text
+        Debug.Log(ui.currentLine.ID);
         string prefit = DR.strings[ui.currentLine.ID];
         prefit = Regex.Replace(prefit, ui.speakerName + ": ", "");
         activeSpeakerPanel.GetComponentsInChildren<TextMeshProUGUI>()[1].text = prefit;
+        // set the end icon
+        if(activeSpeakerPanel.tag == "merchant"){
+            activeSpeakerPanel.GetComponentsInChildren<Image>()[1].sprite = continueIcon;
+        }
+
     }
     private void LineUpdate(string line){
         activeSpeakerPanel.GetComponentsInChildren<TextMeshProUGUI>()[0].text = line;
     }
     public void FinishedDisplayingText(){
+        // Show the continue or period icon if there is or isn't more dialogue repectively
+
+
         // time out panel after a beat once the line is there.
         // if the node being run has the sub tag, start the counter
         string tagsLine = string.Join(" ", DR.GetTagsForNode(DR.CurrentNodeName));
@@ -154,11 +164,15 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void LineEnd(){
-       // Debug.Log("Line ended");
+        // Debug.Log("Line ended");
+        
     }
 
-    public void scrapOnComplete(){
-        
+    public void scrapOnDialogueComplete(){
+        if(activeSpeakerPanel.tag == "merchant"){
+            activeSpeakerPanel.GetComponentsInChildren<Image>()[1].sprite = finishedIcon;
+        }
+        Debug.Log("Dialogue complete");
     }
 
     public void ContinueDialogue(){
@@ -205,7 +219,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void ConversationEnded(){
+    public void ConversationEnded(){
         DR.Stop();
         Debug.Log("conversation ended");
         if(activeSpeakerPanel.tag != "merchant"){
@@ -217,6 +231,9 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("starting transition");
             DR.StartDialogue("transition");
         }
+    }
+    public void NodeEnded(){
+
     }
 
 // Commands

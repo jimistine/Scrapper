@@ -99,6 +99,9 @@ public class UIManager : MonoBehaviour
         if(PlayerManager.currentHaul != 0){
             haulText.text = "Space left: " + (PlayerManager.maxHaul - PlayerManager.currentHaul).ToString("#,#") + " m<sup>3</sup>";
         }
+        else if(PlayerManager.currentHaul == PlayerManager.maxHaul){
+            haulText.text = "Space left: 0" + " m<sup>3</sup>";
+        }
         else{
             haulText.text = "Space left: " + PlayerManager.maxHaul;
         }
@@ -142,7 +145,8 @@ public class UIManager : MonoBehaviour
                 DialogueManager.DM.RunNode("scrap-take");
         }
         else{
-            Callout("CantFitScrap");
+            //Callout("CantFitScrap");
+            DialogueManager.DM.RunNode("scrap-wont-fit");
             AudioManager.AM.PlayMiscUIClip("reject");
         }
     }
@@ -158,20 +162,20 @@ public class UIManager : MonoBehaviour
         Debug.Log("Character int: " + characterToTalk);
         StartCoroutine(callout);
     }
-    public IEnumerator CantFitScrap(){
-        if(characterToTalk == 1){
-            PlayerManager.hasronCallout.SetActive(true);
-            PlayerManager.hasronCallout.GetComponentInChildren<TextMeshProUGUI>().text = "Doesn't look like that's gonna fit...";
-            yield return new WaitForSeconds(3);
-            PlayerManager.hasronCallout.SetActive(false);
-        }
-        else{
-            PlayerManager.chipCallout.SetActive(true);
-            PlayerManager.chipCallout.GetComponentInChildren<TextMeshProUGUI>().text = "No way we're taking that right now.";
-            yield return new WaitForSeconds(3);
-            PlayerManager.chipCallout.SetActive(false);
-        }
-    }
+    // public IEnumerator CantFitScrap(){
+    //     if(characterToTalk == 1){
+    //         PlayerManager.hasronCallout.SetActive(true);
+    //         PlayerManager.hasronCallout.GetComponentInChildren<TextMeshProUGUI>().text = "Doesn't look like that's gonna fit...";
+    //         yield return new WaitForSeconds(3);
+    //         PlayerManager.hasronCallout.SetActive(false);
+    //     }
+    //     else{
+    //         PlayerManager.chipCallout.SetActive(true);
+    //         PlayerManager.chipCallout.GetComponentInChildren<TextMeshProUGUI>().text = "No way we're taking that right now.";
+    //         yield return new WaitForSeconds(3);
+    //         PlayerManager.chipCallout.SetActive(false);
+    //     }
+    // }
 
     public int OnTickHover(int tickIndex){
         tickScrap = PlayerManager.playerScrap[tickIndex];
@@ -223,9 +227,10 @@ public class UIManager : MonoBehaviour
         maxHaulText.color = (Color.black);
         fuelText.color = (Color.black);
         creditText.color = (Color.black);
+        DialogueManager.DM.ConversationEnded();
         Director.Dir.StartFadeCanvasGroup(TownUI, "out", .15f);
         Director.Dir.StartFadeCanvasGroup(OverworldUI, "in", .15f);
-        scrapBuyerReadout.text = "\"Back again?\"";
+        //scrapBuyerReadout.text = "\"Back again?\"";
     }
     public void BackToHub(){
         if(playerLocation == "scrap buyer"){
@@ -238,7 +243,7 @@ public class UIManager : MonoBehaviour
         AudioManager.AM.TransitionToTownExterior();
         playerLocation = "town hub";
     }
-
+    // for setting the time to sunrise or sundown in town
     public void Wait(){
         if(inputField.gameObject.activeSelf == false){
             inputField.gameObject.SetActive(true);
@@ -256,34 +261,38 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
     public void BoughtUpgrade(Upgrade upgrade){
         // cant afford?
         if(upgrade.type == "engine"){ // more upgrade specific stuff than I would like...
             panelIndex = 0;
             effectSuffix = " kph";
-            scrapBuyerReadout.text = "\"Careful installing that thing, ok?\"";
+            DialogueManager.DM.RunNode("engine");
+            //scrapBuyerReadout.text = "\"Careful installing that thing, ok?\"";
         }
         if(upgrade.type == "reactor"){
             panelIndex = 1;
             effectSuffix = " deuterium cassets";
-            scrapBuyerReadout.text = "\"Be sure to go see Ogden to have that thing tuned.\"";
+            DialogueManager.DM.RunNode("reactor");
+            //scrapBuyerReadout.text = "\"Be sure to go see Ogden to have that thing tuned.\"";
         }
         if(upgrade.type == "storage bay"){
             panelIndex = 2;
             effectSuffix = " m<sup>3</sup>";
-            scrapBuyerReadout.text = "\"Gonna fit a lot of scrap in there for me?\"";
+            //scrapBuyerReadout.text = "\"Gonna fit a lot of scrap in there for me?\"";
+            DialogueManager.DM.RunNode("storage-bay");
             maxHaulText.text = "max: " + PlayerManager.maxHaul.ToString("#,#") + " m<sup>3</sup>";
         }
         if(upgrade.type == "scanner"){
             panelIndex = 3;
             effectSuffix = " m";
-            scrapBuyerReadout.text = "\"That should help you two find some real good scrap out there.\"";
+            DialogueManager.DM.RunNode("scanner");
+            //scrapBuyerReadout.text = "\"That should help you two find some real good scrap out there.\"";
         }
         if(upgrade.type == "drone"){
             panelIndex = 4;
             effectSuffix = "x zoom";
-            scrapBuyerReadout.text = "\"Got a big eye up there, huh?\"\n <sub>right click to change zoom level</sub>";
+            DialogueManager.DM.RunNode("drone");
+            //scrapBuyerReadout.text = "\"Got a big eye up there, huh?\"\n <sub>right click to change zoom level</sub>";
         }
         Debug.Log("Panel index: " + panelIndex);  // Which panel do we change?
         upgradePanels[panelIndex].transform.Find("Name").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorName;

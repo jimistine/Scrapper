@@ -61,8 +61,8 @@ MonoBehaviour:
   upgradeLevel: 0
   upgradeLevelMax: 2
   flavorTexts:
-  - flavorName: Storage Bay I
-    flavorDesc: This increases your maximum haul capacity.
+  - flavorName: Rundoth Bay
+    flavorDesc: A sizable hold that any scrapper would be proud to fill
   - flavorName: Storage Bay II
     flavorDesc: This increases your maximum haul capacity.
   - flavorName: Storage Bay III

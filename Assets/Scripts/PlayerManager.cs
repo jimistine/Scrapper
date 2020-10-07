@@ -151,7 +151,7 @@ public class PlayerManager : MonoBehaviour
         return null;
     }
     public void DropScrap(int tickScrapIndex){
-        Debug.Log("Index Called: " + tickScrapIndex);
+        //Debug.Log("Index Called: " + tickScrapIndex);
         Debug.Log("Object at index on player: " + playerScrap[tickScrapIndex].scrapName);
         scrapPlacer.SP.SpawnDroppedScrap(playerScrap[tickScrapIndex]);
         playerScrap.RemoveAt(tickScrapIndex);

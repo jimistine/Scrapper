@@ -132,14 +132,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Spartak Lite Drone
-  description: Discontinued only a few weeks after they hit the market because of
-    a "feature" that sent the AI after their competitor's machines. A rare find,
-    but be careful reactivating it around other drones.
+  scrapName: Enliven Tokamak VII
+  description: One of the old style, but something about the shape makes Hasron feel
+    at home.
   image: 0
-  size: 1.5
-  value: 112
-  material: Titanium
+  size: 3
+  value: 600
+  material: Cartilo
   zoneA_rarity: 90
   zoneB_rarity: 0
   zoneC_rarity: 0

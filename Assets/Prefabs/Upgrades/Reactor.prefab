@@ -61,9 +61,13 @@ MonoBehaviour:
   upgradeLevel: 0
   upgradeLevelMax: 2
   flavorTexts:
-  - flavorName: Reactor I
-    flavorDesc: These increase your max fuel
-  - flavorName: Reactor II
-    flavorDesc: These increase your max fuel
-  - flavorName: Reactor III
-    flavorDesc: These increase your max fuel
+  - flavorName: Jansin Reactor No. 3
+    flavorDesc: A local brand, Jansin has made some of the most popular fusion reactors
+      ever to run on Talacan.
+  - flavorName: Youngtide 86-H
+    flavorDesc: Once highly experimental, the Youngtide 86-H set the standard for
+      reactor tech in the Maelstrom Galaxy.
+  - flavorName: Hellmuth Re-Caster
+    flavorDesc: No one seems to know where this reactor came from, nor do they know
+      how it was made. It's lengthy bill of sale, however, suggests a questionable,
+      if storied, reliability.

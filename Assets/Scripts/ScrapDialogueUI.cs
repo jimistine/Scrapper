@@ -205,6 +205,7 @@ namespace Yarn.Unity
         public override void DialogueComplete ()
         {
             onDialogueEnd?.Invoke();
+            
 
             // Hide the dialogue interface.
             // if (dialogueContainer != null)

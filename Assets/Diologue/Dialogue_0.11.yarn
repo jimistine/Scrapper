@@ -404,28 +404,12 @@ position: 1718,495
     <<endif>> 
 <<endif>>
 ===
-title: engine
+title: Node
 tags: 
 colorID: 0
 position: 1730,748
 ---
-<<if visited("engine") is false>>
-    Chundr: Careful installing that thing, ok? Churn isn't exactally known for their safty standards and I bought that thing off of a scrapper I hadn't seen before.
-    Chundr: Ran it last week ok, but, yeah, be careful.
-    <<set $engine_level to 0>> 
-<<elseif $engine_level is 0>>
-    Chundr: Was hoping someone would finally pick up the Mark VII. Good engine, that.
-    <<set $engine_level to 1>> 
-<<elseif $engine_level is 1>>
-    Chundr: That was actually in a rig I used to ride only a month or so ago. Smooth as butter but needed something a little less tame.
-    <<set $engine_level to 2>> 
-<<elseif $engine_level is 2>>
-    Chundr: The Yaak is top of the line, and I mean that quite literally.
-    Chundr: Took me two months to get that thing running again. 
-    Chundr: A scrapper wandered in here with that thing covered in oil and some kind of mucus. Never saw them again.
-    Chundr: That thing is a beast, might've even come from one.
-    <<set $engine_level to 3>> 
-<<endif>>
+Empty Text
 ===
 title: scrap-wont-fit
 tags: sub
@@ -453,51 +437,4 @@ position: 1114,1235
 <<elseif $wontFitPick == 7>>
     CH1-P: We need to drop something for that to fit.
 <<endif>>
-===
-title: reactor
-tags: 
-colorID: 0
-position: 1744,1006
----
-<<if visited("reactor") is false>>
-    Chundr: Used to know a guy who worked at Jansin. Always used to complain about the pay, but he was never shy about whatever new piece of tech they gave out to the engineers.
-    <<set $reactor_level to 0>> 
-<<elseif $engine_level is 0>>
-    Chundr: First time I heard about the Youngtide I thought the designers were reckless.
-    Chundr: I guess a little recklessness is what you need to wrangle a new kind of reactor.
-    <<set $reactor_level to 1>> 
-<<elseif $reactor_level is 1>>
-    Chundr: That thing will take you quite a ways out there. Just be sure you know the way back, ok?
-    <<set $reactor_level to 2>> 
-<<endif>>
-===
-title: storage-bay
-tags: 
-colorID: 0
-position: 1751,1234
----
-Empty Text
-===
-title: scanner
-tags: 
-colorID: 0
-position: 1744,1467
----
-<<if visited("scanner") is false>>
-    Chundr: I think the name speaks for itself.
-    <<set $scanner_level to 0>> 
-<<elseif $scanner_level is 0>>
-    Chundr: Goltan make good stuff, I think you'll get some good use out of that thing.
-    <<set $scanner_level to 1>> 
-<<elseif $scanner_level is 1>>
-    Chundr: I won't lie to you, I used to use that very scanner, but truth be told it turned up more than I could handle.
-    <<set $scanner_level to 2>> 
-<<endif>>
-===
-title: drone
-tags: 
-colorID: 0
-position: 1750,1704
----
-Empty Text
 ===

@@ -101,10 +101,10 @@ public class DayNight : MonoBehaviour
         float elapsedTime = 0;
         Debug.Log("Sunrise starting");
         while(elapsedTime < transitionLength){
-            globalLight.intensity = Mathf.Lerp(0.15f, 1, elapsedTime/transitionLength);
+            globalLight.intensity = Mathf.Lerp(0.035f, 1, elapsedTime/transitionLength);
             globalLight.color = Color.Lerp(moonLight, daylight, elapsedTime/transitionLength);
            
-            daru.intensity = Mathf.Lerp(0.15f, 1, elapsedTime/transitionLength);
+            daru.intensity = Mathf.Lerp(0.035f, 1, elapsedTime/transitionLength);
             daru.color = Color.Lerp(moonLight, daylight, elapsedTime/transitionLength);
             daru.transform.position = Vector3.Lerp(daruStart, daruNoon, elapsedTime/transitionLength);
            
@@ -122,10 +122,10 @@ public class DayNight : MonoBehaviour
         float elapsedTime = 0;
         Debug.Log("Sunset starting");
         while(elapsedTime < transitionLength){
-            globalLight.intensity = Mathf.Lerp(1f, 0.15f, elapsedTime/transitionLength);
+            globalLight.intensity = Mathf.Lerp(1f, 0.035f, elapsedTime/transitionLength);
             globalLight.color = Color.Lerp(daylight, moonLight, elapsedTime/transitionLength);
 
-            daru.intensity = Mathf.Lerp(1, 0.15f, elapsedTime/transitionLength);
+            daru.intensity = Mathf.Lerp(1, 0.035f, elapsedTime/transitionLength);
             daru.color = Color.Lerp(daylight, moonLight, elapsedTime/transitionLength);
             daru.transform.position = Vector3.Lerp(daruNoon, daruEnd, elapsedTime/transitionLength);
 
@@ -133,9 +133,9 @@ public class DayNight : MonoBehaviour
             yield return null;
         }
         Debug.Log("Sunset complete");
-        globalLight.intensity = 0.15f;
+        globalLight.intensity = 0.035f;
         globalLight.color = moonLight;
-        daru.intensity = 0.15f;
+        daru.intensity = 0.035f;
         daru.transform.position = daruEnd;
         daru.color = moonLight;
     }
@@ -146,10 +146,10 @@ public class DayNight : MonoBehaviour
         isDay = false;
         setting = false;
         rising = false;
-        globalLight.intensity = 0.15f;
+        globalLight.intensity = 0.035f;
         globalLight.color = moonLight;
         
-        daru.intensity = 0.15f;
+        daru.intensity = 0.035f;
         daru.color = moonLight;
         daru.transform.position = daruStart;
     }
