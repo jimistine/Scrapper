@@ -295,9 +295,14 @@ public class UIManager : MonoBehaviour
             //scrapBuyerReadout.text = "\"Got a big eye up there, huh?\"\n <sub>right click to change zoom level</sub>";
         }
         Debug.Log("Panel index: " + panelIndex);  // Which panel do we change?
-        upgradePanels[panelIndex].transform.Find("Name").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorName;
-        upgradePanels[panelIndex].transform.Find("Desc.").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorDesc;
-        upgradePanels[panelIndex].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = upgrade.priceOffered.ToString("#,#") + " cr.";
+        if(upgradePanels[panelIndex] == null){
+            return;
+        }
+        else{
+            upgradePanels[panelIndex].transform.Find("Name").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorName;
+            upgradePanels[panelIndex].transform.Find("Desc.").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorDesc;
+            upgradePanels[panelIndex].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = upgrade.priceOffered.ToString("#,#") + " cr.";
+        }
         if(upgrade.type == "engine"){
             upgrade.effectOffered *= 1000; // this is some stupid shit
             upgradePanels[panelIndex].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = "+" + upgrade.effectOffered.ToString("F") + effectSuffix;
@@ -308,11 +313,17 @@ public class UIManager : MonoBehaviour
         }
     }
     public void UpgradeAlreadyMaxed(Upgrade upgrade){
-        scrapBuyerReadout.text = "\"Look, you've bought all I got on that one. Maybe try the next town over, ha.\"";
+        //scrapBuyerReadout.text = "\"Look, you've bought all I got on that one. Maybe try the next town over, ha.\"";
         upgradePanels[panelIndex].gameObject.GetComponent<Image>().color = Color.black;
+        upgradePanels[panelIndex].gameObject.GetComponent<Button>().interactable = false;
     }
     public void CantAffordUpgrade(Upgrade upgrade){
-        scrapBuyerReadout.text = "\"As much as I'd like to, I can't sell that " + upgrade.type + " for anything less.\"";
+        if(playerLocation == "scrap buyer"){
+            DialogueManager.DM.RunNode("chundr-cant-afford");
+        }
+        else if(playerLocation == "fuel merchant"){
+            DialogueManager.DM.RunNode("ogden-cant-afford");
+        }
     }
 
     // SCRAP BUYER
@@ -346,18 +357,19 @@ public class UIManager : MonoBehaviour
         MerchantManager.EnterFuelMerchant();
     }
     public void BoughtFuel(){
-        fuelMerchantReadout.text = "\"Thank you for the credits. I assure you they will be put to good use.\"";
+        fuelMerchantReadout.text = "Thank you for the credits. I assure you they will be put to good use.";
         fuelManager.UpdateFuelPercent();
         Debug.Log("Fuel text" + fuelText.text);
     }
     public void FuelAlreadyFull(){
-        fuelMerchantReadout.text = "\"It seems that your reactor is already at maximum capacity.\"";
+        fuelMerchantReadout.text = "It seems that your reactor is already at maximum capacity.";
     }
     public void CantAffordFill(){
-        fuelMerchantReadout.text = "\"I am sorry, friend, but that is only enough for a partial fuel refill. I will provide for you what I can.\"";
+        DialogueManager.DM.RunNode("ogden-cant-afford");
+        //fuelMerchantReadout.text = "\"I am sorry, friend, but that is only enough for a partial fuel refill. I will provide for you what I can.\"";
     }
     public void TweakedReactor(){
-        fuelMerchantReadout.text = "\"I am not capable of adjusting your reactor, yet.\"";
+        fuelMerchantReadout.text = "I am not capable of adjusting your reactor, yet.";
     }
 
 // SETUP

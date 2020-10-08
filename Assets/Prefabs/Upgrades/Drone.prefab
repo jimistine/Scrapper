@@ -62,12 +62,11 @@ MonoBehaviour:
   upgradeLevelMax: 2
   flavorTexts:
   - flavorName: Kion Glass 1-01
-    flavorDesc: Slot this thing onto your observer drone and you'll get a better
-      lay of the land with the press of a button.
+    flavorDesc: Slot this onto your observer drone and you'll get a better lay of
+      the land with the press of a button.
   - flavorName: Ground Ta'lith Crystal
-    flavorDesc: '"Pried this thing out of a mechanoid. Think it belonged to some
-      kind of wildlife researcher, don''t know who else would need one of these not
-      strapped to a weapon.""'
+    flavorDesc: Shaped by hand on Ta'lith IX, this these crystals have been used
+      in everything from war-beam configuation to hobbyist baking.
   - flavorName: Fractal booster
-    flavorDesc: '"I know the crystal is nice and all, but if you buy this little
-      guy it''ll add that much more viewing power from way up high.""'
+    flavorDesc: Cold, clinical, and it producest the sharpest image yet known to
+      sapient life.

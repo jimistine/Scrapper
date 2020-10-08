@@ -110,7 +110,8 @@ public class MerchantManager : MonoBehaviour
         Upgrade upgradeToCalculate = UpgradeManager.upgrades.Find(x => x.type == upgrade);
         if(PlayerManager.playerCredits >= upgradeToCalculate.priceOffered){
             if(upgradeToCalculate.upgradeLevel == upgradeToCalculate.upgradeLevelMax){
-                UIManager.UpgradeAlreadyMaxed(upgradeToCalculate);
+                AudioManager.AM.PlayMiscUIClip("reject");
+                //UIManager.UpgradeAlreadyMaxed(upgradeToCalculate);
             }
             else{
                 PlayerManager.playerCredits -= upgradeToCalculate.priceOffered;
@@ -121,6 +122,9 @@ public class MerchantManager : MonoBehaviour
         else{
             UIManager.CantAffordUpgrade(upgradeToCalculate);
             AudioManager.AM.PlayMiscUIClip("reject");
+        }
+        if(upgradeToCalculate.upgradeLevel == upgradeToCalculate.upgradeLevelMax){
+            UIManager.UIM.UpgradeAlreadyMaxed(upgradeToCalculate);
         }
     }
 

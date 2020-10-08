@@ -63,7 +63,10 @@ MonoBehaviour:
   flavorTexts:
   - flavorName: Rundoth Bay
     flavorDesc: A sizable hold that any scrapper would be proud to fill
-  - flavorName: Storage Bay II
-    flavorDesc: This increases your maximum haul capacity.
-  - flavorName: Storage Bay III
-    flavorDesc: This increases your maximum haul capacity.
+  - flavorName: Baytech Super Fitter
+    flavorDesc: Surprisingly enough, each Baytech SF is built by hand. Though omongulons
+      are known to have rather large hands.
+  - flavorName: The Enourmus Arms of Yun
+    flavorDesc: The technology behind the Enourmous Arms is a close kept secret,
+      and understandabley so. Much, much more can fit in them than one would first
+      assume.

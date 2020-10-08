@@ -5379,8 +5379,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 285.44086, y: -30.57}
-  m_SizeDelta: {x: 570.8817, y: 41.14}
+  m_AnchoredPosition: {x: 291.68176, y: -30.57}
+  m_SizeDelta: {x: 583.3635, y: 41.14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &582845918
 MonoBehaviour:
@@ -9535,7 +9535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yarnScripts:
-  - {fileID: 2480198943629176163, guid: 313da426ec70d384eb1b4f5ec54a97f6, type: 3}
+  - {fileID: 2480198943629176163, guid: f8c06c920379ae447bdd515d23a51568, type: 3}
   textLanguage: en-US
   variableStorage: {fileID: 1000250097}
   dialogueUI: {fileID: 1000250096}
