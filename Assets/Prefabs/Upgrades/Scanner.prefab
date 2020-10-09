@@ -59,13 +59,15 @@ MonoBehaviour:
   effectModifier: 1.5
   statAffected: searchRadius
   upgradeLevel: 0
-  upgradeLevelMax: 2
+  upgradeLevelMax: 3
   flavorTexts:
   - flavorName: Wide Eye
     flavorDesc: A wider search radius is all most scrappers ever ask for.
   - flavorName: Goltan Sensor Nine
-    flavorDesc: The ninth and final of Goltans famous scanners, this piece of tech
+    flavorDesc: The ninth and final of Goltan's famous scanners, this piece of tech
       has been called the scrapper's bloodhound. What exactally a bloodhourd is,
       however, remains a mystery.
   - flavorName: Sunder Echo
     flavorDesc: The Echo will find much that should never have been found.
+  - flavorName: SOLD OUT
+    flavorDesc: You can find all that there is to find.

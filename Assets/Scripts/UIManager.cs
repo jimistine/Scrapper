@@ -56,13 +56,15 @@ public class UIManager : MonoBehaviour
 
     [Header("Scrap Buyer")]
     [Space(10)]
+    public GameObject sellScrapButt;
     public GameObject scrapBuyer;
-    public TextMeshProUGUI scrapBuyerReadout;
     public ScrapObject scrapToTake;
     [Space(5)]
     public List<GameObject> upgradePanels = new List<GameObject>();
     public int panelIndex;
     public string effectSuffix;
+    [Space(5)]
+    public List<GameObject> upgradeButtons = new List<GameObject>();
     [Header("Fuel Merchant")]
     [Space(10)]
     public GameObject fuelMerchant;
@@ -275,7 +277,7 @@ public class UIManager : MonoBehaviour
             DialogueManager.DM.RunNode("reactor");
             //scrapBuyerReadout.text = "\"Be sure to go see Ogden to have that thing tuned.\"";
         }
-        if(upgrade.type == "storage bay"){
+        if(upgrade.type == "storage-bay"){
             panelIndex = 2;
             effectSuffix = " m<sup>3</sup>";
             //scrapBuyerReadout.text = "\"Gonna fit a lot of scrap in there for me?\"";
@@ -314,8 +316,9 @@ public class UIManager : MonoBehaviour
     }
     public void UpgradeAlreadyMaxed(Upgrade upgrade){
         //scrapBuyerReadout.text = "\"Look, you've bought all I got on that one. Maybe try the next town over, ha.\"";
-        upgradePanels[panelIndex].gameObject.GetComponent<Image>().color = Color.black;
-        upgradePanels[panelIndex].gameObject.GetComponent<Button>().interactable = false;
+        upgradePanels[panelIndex].gameObject.GetComponent<Image>().color = Color.gray;
+        DialogueManager.DM.RunNode(upgrade.type);
+        //upgradeButtons[panelIndex].gameObject.GetComponent<Button>().interactable = false;
     }
     public void CantAffordUpgrade(Upgrade upgrade){
         if(playerLocation == "scrap buyer"){
@@ -333,19 +336,31 @@ public class UIManager : MonoBehaviour
         scrapBuyer.SetActive(true);
         playerLocation = "scrap buyer";
         DialogueManager.DM.RunNode("chundr");
+        UpdateSellScrapButtText();
     }
     public void cantSellScrap(){
-        scrapBuyerReadout.text = "You two ah, don't have any scrap out there.";
+        //scrapBuyerReadout.text = "You two ah, don't have any scrap out there.";
+        DialogueManager.DM.RunNode("cant-sell-scrap");
         AudioManager.AM.PlayMiscUIClip("reject");
     }
     public void SoldScrap(){  // Called from Merchant Manager
         AudioManager.AM.PlayMiscUIClip("sold scrap");
-        scrapBuyerReadout.text = "\"It's yours\"\nYou made: " + 
-            "<color=#D44900>" + MerchantManager.scrapValue.ToString("#,#") + " credits.";
+        UpdateSellScrapButtText();
+        DialogueManager.DM.RunNode("sold-all-scrap");
+        // scrapBuyerReadout.text = "It's yours\nYou made: " + 
+        //     "<color=#D44900>" + MerchantManager.scrapValue.ToString("#,#") + " credits.";
         for(int i = scrapTickSlots.transform.childCount - 1; i >= 0; i--){
             GameObject.Destroy(scrapTickSlots.transform.GetChild(i).gameObject);
         }
         scrapTick = scrapTickBackup;
+    }
+    public void UpdateSellScrapButtText(){
+        if(PlayerManager.playerScrap.Count != 0){
+            sellScrapButt.GetComponentInChildren<TextMeshProUGUI>().text = "Sell all scrap for " + PlayerManager.evaluateCurrentHaul().ToString("#,#") + " credits";
+        }
+        else{
+            sellScrapButt.GetComponentInChildren<TextMeshProUGUI>().text = "No scrap to sell";
+        }
     }
     
     // FUEL MERCHANT
@@ -357,19 +372,22 @@ public class UIManager : MonoBehaviour
         MerchantManager.EnterFuelMerchant();
     }
     public void BoughtFuel(){
-        fuelMerchantReadout.text = "Thank you for the credits. I assure you they will be put to good use.";
+        //fuelMerchantReadout.text = "Thank you for the credits. I assure you they will be put to good use.";
+        DialogueManager.DM.RunNode("bought-fuel");
         fuelManager.UpdateFuelPercent();
         Debug.Log("Fuel text" + fuelText.text);
     }
     public void FuelAlreadyFull(){
-        fuelMerchantReadout.text = "It seems that your reactor is already at maximum capacity.";
+        DialogueManager.DM.RunNode("fuel-already-full");
+        //fuelMerchantReadout.text = "It seems that your reactor is already at maximum capacity.";
     }
     public void CantAffordFill(){
         DialogueManager.DM.RunNode("ogden-cant-afford");
         //fuelMerchantReadout.text = "\"I am sorry, friend, but that is only enough for a partial fuel refill. I will provide for you what I can.\"";
     }
     public void TweakedReactor(){
-        fuelMerchantReadout.text = "I am not capable of adjusting your reactor, yet.";
+        DialogueManager.DM.RunNode("tweaked-reactor");
+        //fuelMerchantReadout.text = "I am not capable of adjusting your reactor, yet.";
     }
 
 // SETUP
@@ -394,6 +412,7 @@ public class UIManager : MonoBehaviour
             upgradePanels[i].transform.Find("Name").GetComponent<TextMeshProUGUI>().text = UpgradeManager.upgradesStarter[i].flavorTexts[0].flavorName;
             upgradePanels[i].transform.Find("Desc.").GetComponent<TextMeshProUGUI>().text = UpgradeManager.upgradesStarter[i].flavorTexts[0].flavorDesc;
             upgradePanels[i].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = UpgradeManager.upgradesStarter[i].priceOffered.ToString("#,#") + " cr.";
+           
             if(UpgradeManager.upgradesStarter[i].type == "engine"){
                 UpgradeManager.upgradesStarter[i].effectOffered *= 1000; // this is still some stupid shit
                 upgradePanels[i].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = "+" + UpgradeManager.upgradesStarter[i].effectOffered.ToString("F") + effectSuffix;

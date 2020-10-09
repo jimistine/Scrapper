@@ -59,11 +59,12 @@ MonoBehaviour:
   effectModifier: 2
   statAffected: maxFuel
   upgradeLevel: 0
-  upgradeLevelMax: 2
+  upgradeLevelMax: 3
   flavorTexts:
   - flavorName: Jansin Reactor No. 3
     flavorDesc: A local brand, Jansin has made some of the most popular fusion reactors
-      ever to run on Talacan.
+      ever to run on Talacan. Their popularity is in no small part due to the extended
+      range they offer their pilots.
   - flavorName: Youngtide 86-H
     flavorDesc: Once highly experimental, the Youngtide 86-H set the standard for
       reactor tech in the Maelstrom Galaxy.
@@ -71,3 +72,5 @@ MonoBehaviour:
     flavorDesc: No one seems to know where this reactor came from, nor do they know
       how it was made. It's lengthy bill of sale, however, suggests a questionable,
       if storied, reliability.
+  - flavorName: SOLD OUT
+    flavorDesc: Even Ogden doesn't have anything more.

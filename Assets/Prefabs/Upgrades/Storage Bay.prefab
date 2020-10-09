@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872d5006793e62e4cb25046872caafa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: storage bay
+  type: storage-bay
   priceIncreasePercentBottom: 1
   priceIncreasePercentTop: 1.25
   priceModifier: 2
@@ -59,14 +59,15 @@ MonoBehaviour:
   effectModifier: 1.5
   statAffected: maxHaul
   upgradeLevel: 0
-  upgradeLevelMax: 2
+  upgradeLevelMax: 3
   flavorTexts:
   - flavorName: Rundoth Bay
-    flavorDesc: A sizable hold that any scrapper would be proud to fill
+    flavorDesc: A sizable hold that any scrapper would be proud to fill.
   - flavorName: Baytech Super Fitter
     flavorDesc: Surprisingly enough, each Baytech SF is built by hand. Though omongulons
       are known to have rather large hands.
-  - flavorName: The Enourmus Arms of Yun
-    flavorDesc: The technology behind the Enourmous Arms is a close kept secret,
-      and understandabley so. Much, much more can fit in them than one would first
-      assume.
+  - flavorName: The Enormous Arms of Yun
+    flavorDesc: The technology behind the Enormous Arms is a close kept secret, and
+      understandabley so. Much, much more can fit in them than one would first assume.
+  - flavorName: SOLD OUT
+    flavorDesc: Nothing bigger on Talacan than the Enormous Arms of Yun.

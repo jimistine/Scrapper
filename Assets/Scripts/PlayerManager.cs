@@ -125,7 +125,7 @@ public class PlayerManager : MonoBehaviour
             other.gameObject.GetComponent<ProximityCheck>().IsInRange(true);
             UIManager.ShowScrap(newScrap);
         }
-        if(other.gameObject.name == "Town"){
+        if(other.gameObject.name == "Town" && OverworldManager.OM.towRig.activeSelf == false){
             UIManager.ActivateTownButton(true);
         }
     }
@@ -159,7 +159,7 @@ public class PlayerManager : MonoBehaviour
         UpdateCurrentHaul();
         UIManager.tickReadout.SetActive(false);
     }
-
+// UTILITY
     // For whenever we need to stop em in their tracks
     public void SetPlayerMovement(bool letPlayerMove){
         ClickDrag.moveEnabled = letPlayerMove;
@@ -170,5 +170,13 @@ public class PlayerManager : MonoBehaviour
         foreach(ScrapObject scrap in playerScrap){
             currentHaul += scrap.size;
         }
+    }
+
+    public float evaluateCurrentHaul(){
+        float currentHaulValaue = 0;
+        foreach(ScrapObject scrap in playerScrap){                
+                currentHaulValaue += scrap.value;
+            }
+        return currentHaulValaue;
     }
 }

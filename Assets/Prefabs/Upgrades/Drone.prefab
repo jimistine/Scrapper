@@ -59,7 +59,7 @@ MonoBehaviour:
   effectModifier: 1
   statAffected: droneZoom
   upgradeLevel: 0
-  upgradeLevelMax: 2
+  upgradeLevelMax: 3
   flavorTexts:
   - flavorName: Kion Glass 1-01
     flavorDesc: Slot this onto your observer drone and you'll get a better lay of
@@ -70,3 +70,5 @@ MonoBehaviour:
   - flavorName: Fractal booster
     flavorDesc: Cold, clinical, and it producest the sharpest image yet known to
       sapient life.
+  - flavorName: SOLD OUT
+    flavorDesc: No shaped glass at the outpost.

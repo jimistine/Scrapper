@@ -68,6 +68,7 @@ public class MerchantManager : MonoBehaviour
     public float fuelToAdd;
     public float creditsToTakeFuel;
     public float towPriceModifier;
+    public bool ogdenVisited;
 
 
     void Start()
@@ -132,12 +133,18 @@ public class MerchantManager : MonoBehaviour
     public void EnterFuelMerchant(){
         // put the price on the button
         UpdateFuelPrice();
-        DialogueManager.DM.RunNode("ogden");
+        
+        if(ogdenVisited == false){
+            DialogueManager.DM.RunNode("ogden-intro");
+            ogdenVisited = true;
+        }
+        else{
+            DialogueManager.DM.RunNode("ogden-enter");
+        }
         if(PlayerManager.GetComponent<fuel>().currentFuelUnits <= 0 ){
-            UIManager.fuelMerchantReadout.text = "\"I am sorry to have retrieved you, but I am glad glad to see that you are unharmed. The fee is appreciated as always." 
-                +"\nPlease, buy your fill of what deuterium I have. \""
-                +"\n<size=75%>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " credits has been detucted from your account</size>";
-                PlayerManager.playerCredits -= PlayerManager.playerCredits*towPriceModifier;
+            DialogueManager.DM.RunNode("ogden-towed");
+            UIManager.fuelMerchantReadout.text += "\n<size=75%>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " credits has been detucted from your account</size>";
+            PlayerManager.playerCredits -= PlayerManager.playerCredits*towPriceModifier;
         }
     }
     public void UpdateFuelPrice(){

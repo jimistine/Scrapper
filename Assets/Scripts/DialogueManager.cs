@@ -133,7 +133,7 @@ public class DialogueManager : MonoBehaviour
 
         speakerNameLast = ui.speakerName;
         //prefill the dynamic textbox with invisible text
-        Debug.Log(ui.currentLine.ID);
+        //Debug.Log(ui.currentLine.ID);
         string prefit = DR.strings[ui.currentLine.ID];
         prefit = Regex.Replace(prefit, ui.speakerName + ": ", "");
         activeSpeakerPanel.GetComponentsInChildren<TextMeshProUGUI>()[1].text = prefit;
@@ -165,7 +165,6 @@ public class DialogueManager : MonoBehaviour
 
     public void LineEnd(){
         // Debug.Log("Line ended");
-        
     }
 
     public void scrapOnDialogueComplete(){
@@ -193,8 +192,11 @@ public class DialogueManager : MonoBehaviour
             if(DR.IsDialogueRunning && tagsCurrent.Contains("main")){ // if we're already talking about a main plot point, don't inturrupt
                 return;
             }
+            else{
+                DR.StartDialogue(nodeToRun); // otherwise run it
+            }
         }
-        else if(DR.IsDialogueRunning && tags.Contains("sub")){ // if we're already talking, and this isn't that important, don't inturrupt
+        else if(DR.IsDialogueRunning && tags.Contains("sub")){ // if we're already talking, and it's a bark, don't inturrupt
             return;
         }
         else if(!DR.IsDialogueRunning && tags.Contains("sub")){ // if we aren't talking, and it's a bark, roll to see if we play the bark
@@ -266,6 +268,7 @@ public class DialogueManager : MonoBehaviour
         PlayerManager.PM.fuelManager.currentFuelUnits = PlayerManager.PM.fuelManager.maxFuel;
         PlayerManager.PM.fuelManager.UpdateFuelPercent();
         MerchantManager.UpdateFuelPrice();
+        AudioManager.AM.FillFuel();
     }
     [YarnCommand("setObjActive")] // this needs work to get the inactive objs
     public void disableObj(string objName, bool isObjActive){
