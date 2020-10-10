@@ -649,12 +649,11 @@ position: 1739,2407
 <<elseif $soldAllScrap == 4>>
     Chundr: At this rate I'm wondering if you're in league with the junk haulers that drop all this stuff down on us.
 <<elseif $soldAllScrap == 5>>
-    Chundr: We should leave it.
+    Chundr: That should get you a touch closer to buying those tickets, yeah?
 <<elseif $soldAllScrap == 6>>
-    Chundr: Yeah, no.
+    Chundr: This is a good relationship we have going here.
 <<elseif $soldAllScrap == 7>>
-    Chundr: Maybe later.
-    Chundr: If we can find it again...
+    Chundr: Can't wait to look through all this. Thanks.
 
 <<endif>>
 ===

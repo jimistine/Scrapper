@@ -33,6 +33,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Overworld Readouts")]
     [Space(5)]
+    public GameObject onScrapPanel;
+    public GameObject recentScrap;
     public GameObject readoutPanel;
     public TextMeshProUGUI readoutName;
     public TextMeshProUGUI readoutMat;
@@ -110,6 +112,10 @@ public class UIManager : MonoBehaviour
         if(fuelManager.currentFuelUnits == fuelManager.maxFuel){
             fillFuelButtonText.text = "Cassets full.";
         }
+        if(onScrapPanel.activeSelf){
+            Vector3 scrapPos = Camera.main.WorldToScreenPoint(recentScrap.transform.position);
+            onScrapPanel.transform.position = scrapPos;
+        }
     }
 
     // 2. PlayerManager has found scrap 
@@ -118,21 +124,35 @@ public class UIManager : MonoBehaviour
         newScrap.GetComponent<SpriteRenderer>().enabled = true;
         newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.5764706f,0.2431373f,0,1);
         scrapToTake = newScrap;
+        Director.Dir.StartFadeCanvasGroup(onScrapPanel, "in", 0.1f);
+        if(newScrap.isBuried == false){
+            onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = 
+                newScrap.scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + newScrap.size.ToString("#,#") + " m<sup>3</sup></size>";
+        }
+        else{
+            onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = "?";
+        }
+        recentScrap = newScrap.gameObject;
+        recentScrap.transform.position = newScrap.transform.position;
         return newScrap;
     }
-    public ScrapObject OutOfRangeScrap(ScrapObject newScrap){
+    public void OutOfRangeScrap(ScrapObject newScrap){
         //Debug.Log(newScrap.scrapName + " is now out of range");
         newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.6509434f,0.5183763f,0.4216803f,1);
-        return newScrap;
+        Director.Dir.StartFadeCanvasGroup(onScrapPanel, "out", 0.15f);
+        Director.Dir.StartFadeCanvasGroup(readoutPanel, "out", 0.15f);
+        //LeaveScrap();
     }
 
     // 4. Player has clicked on scrap
-    public ScrapObject ShowReadout(ScrapObject newScrap){
-        ReadoutManager.UpdateReadout(newScrap);
-        //readoutPanel.SetActive(true);
+    public void ShowReadout(/*ScrapObject newScrap*/){
+        //ReadoutManager.UpdateReadout(newScrap);
+        ReadoutManager.UpdateReadout(recentScrap.GetComponent<ScrapObject>());
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "in", 0.05f);
         AudioManager.AM.PlayMiscUIClip("inspect");
-        return newScrap;
+        //newScrap.isBuried = false;
+        recentScrap.GetComponent<ScrapObject>().isBuried = false;
+        //return newScrap;
     }
 
     // 5. Player clicks "take" or "leave" and we do what they tell us
@@ -142,18 +162,15 @@ public class UIManager : MonoBehaviour
                 GameObject newTick = Instantiate(scrapTick) as GameObject;
                 newTick.transform.SetParent(scrapTickSlots.transform, false);
                 Director.Dir.StartFadeCanvasGroup(readoutPanel, "out", 0.05f);
-                //readoutPanel.SetActive(false);
                 AudioManager.AM.PlayPlayerClip("pick up scrap");
                 DialogueManager.DM.RunNode("scrap-take");
         }
         else{
-            //Callout("CantFitScrap");
             DialogueManager.DM.RunNode("scrap-wont-fit");
             AudioManager.AM.PlayMiscUIClip("reject");
         }
     }
     public void LeaveScrap(){
-        //readoutPanel.SetActive(false);
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "out", 0.05f);
         AudioManager.AM.PlayMiscUIClip("dismiss");
         DialogueManager.DM.RunNode("scrap-leave");

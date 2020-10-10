@@ -24,6 +24,9 @@ public class OverworldManager : MonoBehaviour
     public float journeyLength;
     public float fractionOfJourney;
     public float distanceToEnd;
+    // [Header("UI")]
+    // [Space(5)]
+    // public GameObject onScrapPanel;
     
     void Awake()
     {

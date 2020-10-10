@@ -60,7 +60,8 @@ public class PlayerManager : MonoBehaviour
             if(hit.collider != null){
                 if (hit.collider.tag == "Scrap" && hit.collider.gameObject.GetComponent<ProximityCheck>().interactable == true) {
                     ScrapObject newScrap = hit.collider.GetComponent<ScrapObject>();
-                    UIManager.ShowReadout(newScrap);
+                    //UIManager.ShowReadout(newScrap);
+                    UIManager.ShowReadout();
                 }
             }    
         }
@@ -105,8 +106,8 @@ public class PlayerManager : MonoBehaviour
     // 1. Pop goes the scrap!  If our search radius hits the small EdgeCollider on the scrap, it pops
         if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(EdgeCollider2D)){
             ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
-            if(other.gameObject.GetComponent<ScrapObject>().isBuried == true){
-                other.gameObject.GetComponent<ScrapObject>().isBuried = false;
+            other.gameObject.GetComponent<ProximityCheck>().IsInRange(true);
+            if(other.gameObject.GetComponent<SpriteRenderer>().enabled == false){
                 AudioManager.PlayPlayerClip("found scrap");
                 if(newScrap.scrapName == "Land speeder (unknown)"){
                     DialogueManager.DM.RunNode("land-speeder");
@@ -122,8 +123,24 @@ public class PlayerManager : MonoBehaviour
                 }
                 Debug.Log("Found scrap");
             }
-            other.gameObject.GetComponent<ProximityCheck>().IsInRange(true);
             UIManager.ShowScrap(newScrap);
+            // if(other.gameObject.GetComponent<ScrapObject>().isBuried == true){
+            //     other.gameObject.GetComponent<ScrapObject>().isBuried = false;
+            //     AudioManager.PlayPlayerClip("found scrap");
+            //     if(newScrap.scrapName == "Land speeder (unknown)"){
+            //         DialogueManager.DM.RunNode("land-speeder");
+            //     }
+            //     else if(newScrap.scrapName == "Chunk of raw cordonite"){
+            //         DialogueManager.DM.RunNode("chunk-of-raw-cordonite");
+            //     }
+            //     else if(newScrap.scrapName == "Sha'ak-ji Holospace Generator"){
+            //         DialogueManager.DM.RunNode("holospace-generator");
+            //     }
+            //     else{
+            //         DialogueManager.DM.RunNode("scrap-find");
+            //     }
+            //     Debug.Log("Found scrap");
+            // }
         }
         if(other.gameObject.name == "Town" && OverworldManager.OM.towRig.activeSelf == false){
             UIManager.ActivateTownButton(true);
