@@ -158,9 +158,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -17}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &10982930
 MonoBehaviour:
@@ -1711,7 +1711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &146625940
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8375,79 +8375,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 859168763}
   m_CullTransparentMesh: 0
---- !u!1 &890955719
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 890955720}
-  - component: {fileID: 890955721}
-  - component: {fileID: 890955722}
-  m_Layer: 0
-  m_Name: Dialogue Runner 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &890955720
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890955719}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1000250099}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &890955721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890955719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yarnScripts:
-  - {fileID: 2480198943629176163, guid: 328c1084ab48bbd4980a7d74c733e5f3, type: 3}
-  textLanguage: en0US
-  variableStorage: {fileID: 1000250097}
-  dialogueUI: {fileID: 1000250096}
-  startNode: 
-  startAutomatically: 0
-  onNodeStart:
-    m_PersistentCalls:
-      m_Calls: []
-  onNodeComplete:
-    m_PersistentCalls:
-      m_Calls: []
-  onDialogueComplete:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &890955722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890955719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3414bb16e3354487c869122a1d6b873e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueRunner: {fileID: 890955721}
 --- !u!1 &905110976
 GameObject:
   m_ObjectHideFlags: 0
@@ -9748,8 +9675,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -594.1986, y: -500.6217, z: 25.154005}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 890955720}
+  m_Children: []
   m_Father: {fileID: 1841734413}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9762,7 +9688,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000250095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3414bb16e3354487c869122a1d6b873e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1bbe3e9736e6342c990ab0e389a15d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueRunner: {fileID: 1000250098}
@@ -10640,8 +10566,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 19.911865, y: 0.000061035}
-  m_SizeDelta: {x: -19.911865, y: 2101.5583}
+  m_AnchoredPosition: {x: 19.911867, y: 0.000061035}
+  m_SizeDelta: {x: -19.911865, y: 2205.9485}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1077139173
 GameObject:
@@ -15253,8 +15179,8 @@ RectTransform:
   m_Father: {fileID: 1532633199}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.65719426}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15366,8 +15292,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00039672852, y: 0.00012207031}
-  m_SizeDelta: {x: 790.67773, y: 2101.5586}
+  m_AnchoredPosition: {x: -0.00039672852, y: -0.00012207031}
+  m_SizeDelta: {x: 790.67773, y: 2205.9482}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1534649992
 MonoBehaviour:
@@ -15394,7 +15320,6 @@ MonoBehaviour:
     Thanks so much for trying out this very in progress
     game. It will continue to be updated until I collapse from exhaustion.
 
-
     Here
     are some handy things to know before getting started.
 
@@ -15402,73 +15327,90 @@ MonoBehaviour:
     to move forward, ''S'' to brake, and the pointer to steer. Pressing ''2'' will
     change steering to ''A'' and ''D'', and ''1'' will change it back.</indent>
 
-
     -<indent=15>
     Use ''R'' or the button in the top right to restart. Restarting also re-seeds
-    the overworld with different scrap in different places.
-
-    </indent>
+    the overworld with different scrap in different places.</indent>
 
     -<indent=15>
-    Use ''F'' to toggle your sick-ass headlights.
+    Use ''F'' to toggle your sick-ass headlights.</indent>
+
+    -<indent=15> Use
+    ''SPACE'' to advance dialogue.</indent>
+
+    -<indent=15> The timer in the top
+    right is to keep track of "days". I''d love to know how much you made and how
+    quickly. Exploit explanations appreciated.</indent>
+
+    -<indent=15> Find and
+    collect as much scrap as you can without running out of fuel, head back to town
+    where you started to sell your scrap, refuel, and buy upgrades.
 
     </indent>
+
+    <b><size=125%>NEW
+    FEATURES</size>
+
+    October 10, 2020</b>
+
+    <indent=15><b>Merchant dialogue</b>
+
+    -
+    Expect to get to know Ogden and Chundr a whole lot better this time around, starting
+    with their actual names!
+
+    </indent>
+
+    <indent=15><b>Updated scrap collection
+    loop</b>
+
+    - Much bigger buttons for collecting scrap.
+
+    - If you uncover
+    something you can''t take, returning to that piece of scrap will show a pop-up
+    with its name and size so you don''t need to re-investigate it.
+
+    - Don''t
+    want the scrap? Just drive away and the (now much larger) readout panel will
+    get the message and go away on its own.
+
+    - "Scrap ticks" (the squares in
+    the bottom left that represent your inventory) are also a lot bigger so maybe
+    you''ll actually notice them?
+
+    </indent>
+
+
+    October 3, 2020
 
     -<indent=15>
-    Use ''SPACE'' to advance dialogue.
-
-    </indent>
-
-    -<indent=15> The timer
-    in the top right is to keep track of "days". I''d love to know how much you made
-    and how quickly. Exploit explanations appreciated.
-
-    </indent>
+    Dialogue. That''s right, we''re using an actual dialogue sysem now so there will
+    be way more little lines from our two characters.</indent>
 
     -<indent=15>
-    Find and collect as much scrap as you can without running out of fuel, head back
-    to town where you started to sell your scrap, refuel, and buy upgrades.
-
-    </indent>
-
-
-
-    <b>NEW
-    FEATURES</b> - October 3, 2020
-
-    -<indent=15> Dialogue. That''s right, we''re
-    using an actual dialogue sysem now so there will be way more little lines from
-    our two characters.</indent>
-
-
-    -<indent=15> Intro. The beginning of the thing
-    should feel a lot more "real" as I test out this temp intro sequence and dialogue
-    as you make your way to town.</indent>
-
-
-    -<indent=15> Day/Night Cycle. You
-    gotta a love a sunset. Night doesn''t offer much reward for the time being, but
-    there will be much more valuable glowing scrap added later. In town you can also
-    wait until sunrise or sunset. The day counter is now live as well. For referecnce,
-    you''ll have about 10 days to complete the game.</indent>
-
+    Intro. The beginning of the thing should feel a lot more "real" as I test out
+    this temp intro sequence and dialogue as you make your way to town.</indent>
 
     -<indent=15>
-    Balance. Fuel is a bit cheaper now, and finding scrap is a little easier. Subsequent
-    upgrades are also much less expensive.</indent>
+    Day/Night Cycle. You gotta a love a sunset. Night doesn''t offer much reward
+    for the time being, but there will be much more valuable glowing scrap added
+    later. In town you can also wait until sunrise or sunset. The day counter is
+    now live as well. For referecnce, you''ll have about 10 days to complete the
+    game.</indent>
+
+    -<indent=15> Balance. Fuel is a bit cheaper now, and finding
+    scrap is a little easier. Subsequent upgrades are also much less expensive.</indent>
 
 
+    Narrative
+    context:
 
-    Narrative context:
-
-    You
-    are two friends. Hasron is a humanoid from the planet you''re on, and CH1-P is
-    a bionic, exiled from the machine worlds. They''ve recently teamed up to make
-    some money by heading to a remote desert outpost surrounded by wastes filled
-    with scrap fallen from the interstellar highways above. They want to see a galaxy-wide
-    race called the Maelstrom Cup, which is in 10 days. Tickets to get them there
-    and into the event are 49,999 credits each. Your goal is to make enough for one
-    or both to go.
+    You are two friends. Hasron is a humanoid from the planet you''re
+    on, and CH1-P is a bionic, exiled from the machine worlds. They''ve recently
+    teamed up to make some money by heading to a remote desert outpost surrounded
+    by wastes filled with scrap fallen from the interstellar highways above. They
+    want to see a galaxy-wide race called the Maelstrom Cup, which is in 10 days.
+    Tickets to get them there and into the event are 49,999 credits each. Your goal
+    is to make enough for one or both to go.
 
     <b><align=center>''P'' to continue.</b>
 
@@ -15536,7 +15478,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 20, y: 20, z: 20, w: 1.7255325}
+  m_margin: {x: 4.670327, y: 20, z: 20, w: 1.7255325}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -15985,9 +15927,9 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 13.187256, y: -17}
+  m_SizeDelta: {x: 13.187256, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1576305735
 MonoBehaviour:
@@ -16032,7 +15974,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1523567910}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.3428057
+  m_Size: 0.32658342
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18911,7 +18853,7 @@ MonoBehaviour:
   AudioManager: {fileID: 793839227}
   UIManager: {fileID: 1270326781}
   screenCover: {fileID: 146625941}
-  playIntroDialogue: 0
+  playIntroDialogue: 1
   gameStarted: 0
   waitingToEnterTown: 0
   fadeDuration: 3
@@ -19501,7 +19443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1981903081
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20912,7 +20854,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -134,6 +134,7 @@ public class DialogueManager : MonoBehaviour
         speakerNameLast = ui.speakerName;
         //prefill the dynamic textbox with invisible text
         //Debug.Log(ui.currentLine.ID);
+        //string prefit = "hank";//DR.strings[ui.currentLine.ID];
         string prefit = DR.strings[ui.currentLine.ID];
         prefit = Regex.Replace(prefit, ui.speakerName + ": ", "");
         activeSpeakerPanel.GetComponentsInChildren<TextMeshProUGUI>()[1].text = prefit;
@@ -141,7 +142,6 @@ public class DialogueManager : MonoBehaviour
         if(activeSpeakerPanel.tag == "merchant"){
             activeSpeakerPanel.GetComponentsInChildren<Image>()[1].sprite = continueIcon;
         }
-
     }
     private void LineUpdate(string line){
         activeSpeakerPanel.GetComponentsInChildren<TextMeshProUGUI>()[0].text = line;

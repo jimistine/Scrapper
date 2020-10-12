@@ -10,7 +10,8 @@ public class JsonReader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       scrapInJson = JsonUtility.FromJson<AllScrap>(jsonFile.text);
+        scrapInJson = JsonUtility.FromJson<AllScrap>(jsonFile.text);
+       //scrapInJson = JsonUtility.FromJson<AllScrap>(jsonFile.text);
 
         // foreach (Scrap scrap in scrapInJson.allScrap){
         //     Debug.Log("Found scrap: " + scrap.scrapName + ". With description: " + scrap.description);

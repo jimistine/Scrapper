@@ -17,6 +17,7 @@ public class ClickDrag : MonoBehaviour
     public bool moveEnabled = true;
     public bool recovering;
     public bool accelerating;
+    public bool breaking;
     public string moveType = "PointerSteer";
     Rigidbody2D  PlayerRB;
     Vector2 direction;
@@ -58,9 +59,11 @@ public class ClickDrag : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.S)){
                 dragStored = PlayerRB.drag;
+                breaking = true;
                 StartCoroutine("Break");
             }
             if(Input.GetKeyUp(KeyCode.S)){
+                breaking = false;
                 PlayerRB.drag = dragStored;
                 StopCoroutine("Break");
             }
@@ -83,13 +86,18 @@ public class ClickDrag : MonoBehaviour
                 accelerating = false;
             }
             if(Input.GetKeyDown(KeyCode.S)){
+                breaking = true;
                 dragStored = PlayerRB.drag;
                 StartCoroutine("Break");
             }
             if(Input.GetKeyUp(KeyCode.S)){
+                breaking = false;
                 PlayerRB.drag = dragStored;
                 StopCoroutine("Break");
             }
+        }
+        if(!breaking){
+            PlayerRB.drag = 1;
         }
     }
     // Update is called once per frame
