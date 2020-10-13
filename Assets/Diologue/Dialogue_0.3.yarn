@@ -140,7 +140,7 @@ position: 1118,750
 title: scrap-leave
 tags: sub
 colorID: 0
-position: 1118,999
+position: 1118,997
 ---
 <<set $scrapLeavePick = random("scrap-take", 7)>>
 
@@ -231,38 +231,20 @@ position: 1111,1697
 
 <<endif>>
 ===
-title: ogden
-tags: merchant
+title: ogden-intro
+tags: main merchant
 colorID: 0
-position: 1441,501
+position: 1441,500
 ---
-<<if visited("ogden") is false>> 
+<<if visited("ogden-intro") is false>> 
     <<setFuelButtActive DialogueManager false>> 
     Ogden: It seems that you two have come quite a long way.
     Ogden: Please, allow me to replenish your supply of deuterium as a welcome gift. It seems that your cassettes are running low.
     <<fillFuel DialogueManager>> 
     <<setFuelButtActive DialogueManager true>> 
+    Ogden: Welcome to The Outpost.
 <<else>>
-    <<set $ogdenPick = random("ogden", 7)>>
-
-    <<if $ogdenPick == 0>>
-        Ogden: Welcome back. I hope your hunt has borne fruit.
-    <<elseif $ogdenPick == 1>>
-        Ogden: You are in need of excitable matter, yes?
-    <<elseif $ogdenPick == 2>>
-        Ogden: Ah, I was just wondering when you two would wander in next!
-    <<elseif $ogdenPick == 3>>
-        Ogden: I've set aside some fully saturated cassettes just for you.
-    <<elseif $ogdenPick == 4>>
-        Ogden: Please take care with this deuterium, improper storage can lead to quite the mess.
-    <<elseif $ogdenPick == 5>>
-        Ogden: Tell Chundr I say 'hello' next time you see him.
-        Ogden: And that he still owes me a significant amount of credits for, well, he will know.
-    <<elseif $ogdenPick == 6>>
-        Ogden: I would stay away from the slab at the cantina tonight, but I am afraid you will have to take my word on it.
-    <<elseif $ogdenPick == 7>>
-        Ogden: Hello again.
-    <<endif>> 
+   [[ogden-enter]]
 <<endif>>
 ===
 title: chunk-of-raw-cordonite
@@ -382,12 +364,12 @@ position: 1718,495
 <<if visited("chundr") is false>> 
     Chundr: Welcome to the outpost.
     Chundr: They call me Chundr, it's good to meet you. We don't get a lot of new faces around here.
-    Chundr: Well, that's not exactaly true. Plenty come and go, though few ask for lodging. But don't worry, it's pleasant enough around here.
-    Chundr: Anyway, things arn't very complicated, you bring in scrap, I'll buy it. Doesn't matter what it is as long as it isn't--and never was--alive.
+    Chundr: Well, that's not exactly true. Plenty come and go, though few ask for lodging. But don't worry, it's pleasant enough around here.
+    Chundr: Anyway, things aren't very complicated, you bring in scrap, I'll buy it. Doesn't matter what it is as long as it isn't-and never was-alive.
     Chundr: I can also sell you new or spare parts to outfit your scrapping rig should you need them.
-    Chundr: I know you two are trying to get tickets to the 'Strom Race, but a few enhancements can go a long way.
+    Chundr: I know you two are saving up for tickets to the 'Strom Race, but a few enhancements can go a long way.
 <<else>>
-    <<set $chundrPick = random("Chundr", 5)>>
+    <<set $chundrPick = random("chundr", 5)>>
 
     <<if $chundrPick == 0>>
         Chundr: Welcome back. Find anything good?
@@ -410,7 +392,7 @@ colorID: 0
 position: 1730,748
 ---
 <<if visited("engine") is false>>
-    Chundr: Careful installing that thing, ok? Churn isn't exactally known for their safty standards and I bought that thing off of a scrapper I hadn't seen before.
+    Chundr: Careful installing that thing, ok? Churn isn't exactly known for their safety standards and I bought that thing off of a scrapper I hadn't seen before.
     Chundr: Ran it last week ok, but, yeah, be careful.
     <<set $engine_level to 0>> 
 <<elseif $engine_level is 0>>
@@ -425,6 +407,8 @@ position: 1730,748
     Chundr: A scrapper wandered in here with that thing covered in oil and some kind of mucus. Never saw them again.
     Chundr: That thing is a beast, might've even come from one.
     <<set $engine_level to 3>> 
+<<elseif $engine_level is 3>>
+    Chundr: I'm afraid those are all the engines I have put together. 
 <<endif>>
 ===
 title: scrap-wont-fit
@@ -460,15 +444,18 @@ colorID: 0
 position: 1744,1006
 ---
 <<if visited("reactor") is false>>
-    Chundr: Used to know a guy who worked at Jansin. Always used to complain about the pay, but he was never shy about whatever new piece of tech they gave out to the engineers.
+    Chundr: That should let you get a good bit further out before you're out of fuel.
+    Chundr: You know, I used to know a guy who worked at Jansin. Always used to complain about the pay, but he was never shy about whatever new piece of tech they gave out to the engineers.
     <<set $reactor_level to 0>> 
-<<elseif $engine_level is 0>>
+<<elseif $reactor_level is 0>>
     Chundr: First time I heard about the Youngtide I thought the designers were reckless.
     Chundr: I guess a little recklessness is what you need to wrangle a new kind of reactor.
     <<set $reactor_level to 1>> 
 <<elseif $reactor_level is 1>>
     Chundr: That thing will take you quite a ways out there. Just be sure you know the way back, ok?
     <<set $reactor_level to 2>> 
+<<else>>
+    Chundr: No more reactors left, as much as I'd love to sell you one.
 <<endif>>
 ===
 title: storage-bay
@@ -476,7 +463,22 @@ tags:
 colorID: 0
 position: 1751,1234
 ---
-Empty Text
+<<if visited("storage-bay") is false>>
+    Chundr: Once went on vacation to a place called Rundoth bay. 
+    Chundr: I was hoping for some connection to the storage tech group, but no, just a coincidence.
+    <<set $storage_level to 0>> 
+<<elseif $storage_level is 0>>
+    Chundr: If you've never met an omongulon, I'd highly recommend it. Kindest folk I know, as long as they remember how small the rest of us are.
+    Chundr: Overzealous omongulon hugs have broken quite a few ribs as I understand it.
+    <<set $storage_level to 1>> 
+<<elseif $storage_level is 1>>
+    Chundr: It's killing me to sell that set of Enormous Arms, but I'd be lying if I said I needed them.
+    Chundr: At the rate you two have been bringing in the scrap, though, I think they're just what you need.
+    <<set $storage_level to 2>> 
+<<else>>
+    Chundr: You really think you need more space?
+    Chundr: Must be bigger scrap out there than I realized. Sorry to say that's as big as I have.
+<<endif>>
 ===
 title: scanner
 tags: 
@@ -487,11 +489,15 @@ position: 1744,1467
     Chundr: I think the name speaks for itself.
     <<set $scanner_level to 0>> 
 <<elseif $scanner_level is 0>>
-    Chundr: Goltan make good stuff, I think you'll get some good use out of that thing.
+    Chundr: Goltan make good stuff, I think you'll get some good use out of that lens.
     <<set $scanner_level to 1>> 
 <<elseif $scanner_level is 1>>
-    Chundr: I won't lie to you, I used to use that very scanner, but truth be told it turned up more than I could handle.
+    Chundr: I won't lie to you, I used to use that very scanner, but truth be told it turned up more than I wanted to see.
     <<set $scanner_level to 2>> 
+<<else>>
+    Chundr: You know I had a Direculator that would have been perfect you you two, but it went missing about a month ago.
+    Chundr: There was a band of scrappers came through one week, and they were very generous with the rounds of slab at The Safe House...
+    Chundr: I guess they knew me better than I thought...
 <<endif>>
 ===
 title: drone
@@ -499,5 +505,183 @@ tags:
 colorID: 0
 position: 1750,1704
 ---
-Empty Text
+<<if visited("drone") is false>>
+    Chundr: Kion glass is some of the sturdiest stuff out there, I'm sure that'll help you quite a bit out in the wastes.
+    <<set $drone_level to 0>> 
+<<elseif $drone_level is 0>>
+    Chundr: Pried this thing out of a mechanoid. I think it belonged to some kind of wildlife researcher, don't know who else would need one of these not strapped to a weapon.
+    <<set $drone_level to 1>> 
+<<elseif $drone_level is 1>>
+    Chundr: I know the crystal is nice and all, but if you buy this little guy it'll show you more than you can handle.
+    Chundr: If such a thing is possible.
+    <<set $drone_level to 2>> 
+<<else>>
+    Chundr: Sorry, friends, but if you need a wider image, you'll have to nab your own satellite.
+<<endif>>
+===
+title: chundr-cant-afford
+tags: 
+colorID: 0
+position: 1741,1929
+---
+<<set $chundrCantAffordPick = random("chundr-cant-afford", 3)>>
+
+<<if $chundrCantAffordPick == 0>>
+    Chundr: As much as I'd like to, I can't sell that for anything less.
+<<elseif $chundrCantAffordPick == 1>>
+    Chundr: Doesn't look like you've got quite enough credits on hand for that.
+<<elseif $chundrCantAffordPick == 2>>
+    Chundr: If you've got some scrap to sell, that might cover the difference. Otherwise you're a bit short on the credits.
+<<elseif $chundrCantAffordPick == 3>>
+    Chundr: Sorry gang, but I need to sell this for more than what you've got.
+<<endif>>
+===
+title: ogden-cant-afford
+tags: 
+colorID: 0
+position: 1448,1015
+---
+<<set $ogdenCantAffordPick = random("ogden-cant-afford", 3)>>
+
+<<if $ogdenCantAffordPick == 0>>
+    Ogden: I am sorry, but it appears that you do not have any credits at the present moment.
+<<elseif $ogdenCantAffordPick == 1>>
+    Ogden: Perhaps you might see Chundr to sell your wares. He will gladly pay for your scrap materials.
+<<elseif $ogdenCantAffordPick == 2>>
+    Ogden: Right awa- oh.
+    Ogden: My apologies but I cannot give you deuterium for free.
+<<elseif $ogdenCantAffordPick == 3>>
+    Ogden: Were loans not made illegal by the Galactic Council, I would gladly lend you some replenished cassettes.
+<<endif>>
+===
+title: cant-sell-scrap
+tags: 
+colorID: 0
+position: 1751,2164
+---
+<<set $cantSellScrap = random("cant-sell-scrap", 3)>>
+
+<<if $cantSellScrap == 0>>
+    Chundr: You to ah, don't have any scrap out there.
+<<elseif $cantSellScrap == 1>>
+    Chundr: Come on back when you've got more scrap. Always my favorite time of day when you come in with wild finds.
+<<elseif $cantSellScrap == 2>>
+    Chundr: I'm sorry if this is a good joke where you come from, but I don't really know what you're getting at.
+<<elseif $cantSellScrap == 3>>
+    Chundr: Sorry, but you gotta have scrap if you want any credits.
+<<endif>>
+===
+title: bought-fuel
+tags: 
+colorID: 0
+position: 1457,1279
+---
+<<set $boughtFuelPick = random("bought-fuel", 4)>>
+
+<<if $boughtFuelPick == 0>>
+    Ogden: There you are.
+<<elseif $boughtFuelPick == 1>>
+    Ogden: Thank you for the credits. I assure you they will be put to good use.
+<<elseif $boughtFuelPick == 2>>
+    Ogden: Your deuterium cassettes have been replenished and are ready for further fusion.
+<<elseif $boughtFuelPick == 3>>
+    Ogden: Please be careful with these saturated cassettes.
+    Ogden: I'm sure you're aware of the danger they pose in certain situations, but one can't be too careful.
+<<elseif $boughtFuelPick == 4>>
+    Ogden: They do seem to run out rather quickly, don't they?
+<<endif>>
+===
+title: fuel-already-full
+tags: 
+colorID: 0
+position: 1455,1523
+---
+<<set $alreadyFullPick = random("fuel-already-full", 3)>>
+
+<<if $alreadyFullPick == 0>>
+    Ogden: Your reactor appears to alredy be at maximum capacity.
+<<elseif $alreadyFullPick == 1>>
+    Ogden: As much as I would love to provide you with more fuel, I do not have the storage vessels needed to transport it long distance.
+<<elseif $alreadyFullPick == 2>>
+    Ogden: Apologies friends, but I cannot sell you anything more.
+<<elseif $alreadyFullPick == 3>>
+    Ogden: If you'd like to spend credits, I would suggest The Safe House. Most life around here seems to spend quite a bit there.
+<<endif>>
+===
+title: tweaked-reactor
+tags: 
+colorID: 0
+position: 1444,2002
+---
+Ogden: I am not capable of adjusting the performance of your reactor, yet.
+===
+title: ogden-towed
+tags: 
+colorID: 0
+position: 1447,1761
+---
+<<set $ogdenTowedPick = random("ogden-towed", 2)>>
+
+<<if $ogdenTowedPick == 0>>
+    Ogden: I am sorry to have retrieved you, but I am glad glad to see that you are unharmed. The fee is appreciated as always. 
+    Ogden: Please, buy your fill of what deuterium I have.
+<<elseif $ogdenTowedPick == 1>>
+    Ogden: Hope that the journey back was not too uncomfortable for you two.
+<<elseif $ogdenTowedPick == 2>>
+    Ogden: I might suggest seeing if Chundr has any working reactors to sell. He only stocks those with the highest fuel capacity.
+<<endif>>
+===
+title: sold-all-scrap
+tags: 
+colorID: 0
+position: 1739,2407
+---
+<<set $soldAllScrap = random("sold-all-scrap", 7)>>
+
+<<if $soldAllScrap == 0>>
+    Chundr: Hope you put all these credits to good use.
+<<elseif $soldAllScrap == 1>>
+    Chundr: Think I'll have a field day with all that scrap, thank you.
+<<elseif $soldAllScrap == 2>>
+    Chundr: Looks like you have some good finds in that haul.
+<<elseif $soldAllScrap == 3>>
+    Chundr: I knew the basin had it's fair share of scrap, but you two just keep on bringing it in.
+<<elseif $soldAllScrap == 4>>
+    Chundr: At this rate I'm wondering if you're in league with the junk haulers that drop all this stuff down on us.
+<<elseif $soldAllScrap == 5>>
+    Chundr: That should get you a touch closer to buying those tickets, yeah?
+<<elseif $soldAllScrap == 6>>
+    Chundr: This is a good relationship we have going here.
+<<elseif $soldAllScrap == 7>>
+    Chundr: Can't wait to look through all this. Thanks.
+
+<<endif>>
+===
+title: ogden-enter
+tags: merchant
+colorID: 0
+position: 1440,760
+---
+<<setFuelButtActive DialogueManager true>>
+<<set $ogdenPick = random("ogden-enter", 7)>>
+
+<<if $ogdenPick == 0>>
+    Ogden: Welcome back. I hope your hunt has borne fruit.
+<<elseif $ogdenPick == 1>>
+    Ogden: You are in need of excitable matter, yes?
+<<elseif $ogdenPick == 2>>
+    Ogden: Ah, I was just wondering when you two would wander in next!
+<<elseif $ogdenPick == 3>>
+    Ogden: I've set aside some fully saturated cassettes just for you.
+<<elseif $ogdenPick == 4>>
+    Ogden: Please take care with this deuterium, improper storage can lead to quite the mess.
+<<elseif $ogdenPick == 5>>
+    Ogden: Tell Chundr I say 'hello' next time you see him.
+    Ogden: And that he still owes me a significant amount of credits for, well, he will know.
+<<elseif $ogdenPick == 6>>
+    Ogden: I would stay away from the slab at the cantina tonight, but I am afraid you will have to take my word on it.
+<<elseif $ogdenPick == 7>>
+    Ogden: Hello again.
+
+<<endif>>
 ===

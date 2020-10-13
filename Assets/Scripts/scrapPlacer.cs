@@ -173,7 +173,7 @@ public class scrapPlacer : MonoBehaviour
             // iterate through all the scrap in our list and pick the first one that's weighted higher than 
             //   our random value and exit the loop.
             foreach(Scrap scrap in JsonReader.scrapInJson.allScrap){
-                if(scrap.zoneA_rarity >= randomScrapPick && scrap.zoneA_rarity <= 50){
+                if(scrap.zoneA_rarity >= randomScrapPick && scrap.zoneA_rarity <= 45){
                     incomingScrap = scrap;
                     break;
                 }

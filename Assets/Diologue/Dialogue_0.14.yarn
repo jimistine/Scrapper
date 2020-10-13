@@ -234,7 +234,7 @@ position: 1111,1697
 title: ogden-intro
 tags: main merchant
 colorID: 0
-position: 1441,501
+position: 1441,500
 ---
 <<if visited("ogden-intro") is false>> 
     <<setFuelButtActive DialogueManager false>> 
@@ -660,8 +660,9 @@ position: 1739,2407
 title: ogden-enter
 tags: merchant
 colorID: 0
-position: 1442,760
+position: 1440,760
 ---
+<<setFuelButtActive DialogueManager true>>
 <<set $ogdenPick = random("ogden-enter", 7)>>
 
 <<if $ogdenPick == 0>>

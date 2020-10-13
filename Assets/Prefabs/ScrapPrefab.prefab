@@ -132,19 +132,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Enliven Tokamak VII
-  description: One of the old style, but something about the shape makes Hasron feel
-    at home.
-  image: 0
-  size: 3
-  value: 600
-  material: Cartilo
-  zoneA_rarity: 90
+  scrapName: Accelerator ring
+  description: Every small lightspeed craft needs an accelerator ring, but what excellerates
+    the exerator?
+  image: 1
+  size: 6
+  value: 450
+  material: Titanium
+  zoneA_rarity: 50
   zoneB_rarity: 0
   zoneC_rarity: 0
   zoneD_rarity: 0
   carriesComponents: 0
-  isBuried: 1
+  isBuried: 0
 --- !u!114 &8142259534611466276
 MonoBehaviour:
   m_ObjectHideFlags: 0
