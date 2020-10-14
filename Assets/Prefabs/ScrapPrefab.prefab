@@ -132,14 +132,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Accelerator ring
-  description: Every small lightspeed craft needs an accelerator ring, but what excellerates
-    the exerator?
-  image: 1
-  size: 6
-  value: 450
-  material: Titanium
-  zoneA_rarity: 50
+  scrapName: Fenz9 Optical Sensor
+  description: Neither of you can figure out why this simple aluminum block has the
+    common word "Sensor" written on every face of it. CH1-P presses each of their
+    limbs against the form for a few minutes each. Nothing.
+  image: 0
+  size: 2
+  value: 100
+  material: Aluminum
+  zoneA_rarity: 80
   zoneB_rarity: 0
   zoneC_rarity: 0
   zoneD_rarity: 0
