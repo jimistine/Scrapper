@@ -16,13 +16,21 @@ public class Director : MonoBehaviour
     public AudioManager AudioManager;
     public UIManager UIManager;
     public Image screenCover;
-    public bool playIntroDialogue;
-    public bool gameStarted;
     public bool waitingToEnterTown;
     public float fadeDuration;
 
     public Color coverColor;
     public Color fadeColor;
+    [Header("Tutorial")]
+    [Space(10)]
+    public bool playIntroDialogue;
+    [Space(4)]
+    public bool gameStarted;
+    public bool waitingForAcceleration;
+    public bool introCompleted;
+    public bool ogdenVisited;
+    public bool chundrVisited;
+    public bool outOfFuelCompleted;
 
 
     void Awake(){

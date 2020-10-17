@@ -132,15 +132,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Fenz9 Optical Sensor
-  description: Neither of you can figure out why this simple aluminum block has the
-    common word "Sensor" written on every face of it. CH1-P presses each of their
-    limbs against the form for a few minutes each. Nothing.
-  image: 0
-  size: 2
-  value: 100
+  scrapName: Reed Industries Hyper Hydrator nozzle
+  description: The nozzle might appear benign and agrarian, but Reed Industries has
+    likely stolen more water than just about any other known corporation to supply
+    their hydrofarms
+  image: 1
+  size: 10
+  value: 500
   material: Aluminum
-  zoneA_rarity: 80
+  zoneA_rarity: 85
   zoneB_rarity: 0
   zoneC_rarity: 0
   zoneD_rarity: 0

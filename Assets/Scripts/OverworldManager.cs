@@ -7,6 +7,9 @@ public class OverworldManager : MonoBehaviour
 
     public static OverworldManager OM;
 
+    [Header("General")]
+    [Space(5)]
+    public GameObject overworldCamera;
     [Header("Environment")]
     [Space(5)]
     public DayNight DayNight;
@@ -15,10 +18,12 @@ public class OverworldManager : MonoBehaviour
     [Space(5)]
     public GameObject towRig;
     public GameObject town;
+    public bool waitingOnDialogue;
     public bool isMoving;
     public bool goingOut = true;
     public float distCovered;
     public Vector3 startPos;
+    public float rotationSpeed;
     public float speed;
     public float startTime;
     public float journeyLength;
@@ -51,12 +56,19 @@ public class OverworldManager : MonoBehaviour
     }
 
     public void SetUpTowRig(){ // called from fuel
+        
         startPos = towRig.gameObject.transform.position;
         startTime = Time.time;
         isMoving = true;
 
         if(goingOut){
             Debug.Log("Going out");
+            if(Director.Dir.outOfFuelCompleted == false){
+                DialogueManager.DM.RunNode("tutorial-out-of-fuel");
+            }
+            else{
+                DialogueManager.DM.RunNode("fuel-out");
+            }
             towRig.SetActive(true);
             journeyLength = Vector3.Distance(towRig.transform.position, PlayerManager.PM.gameObject.transform.position);
             StartCoroutine(SendTowRig());
@@ -71,30 +83,46 @@ public class OverworldManager : MonoBehaviour
         Debug.Log("Tow rig sent");
         while(isMoving){
             distCovered = (Time.time - startTime) * speed;
-            fractionOfJourney = distCovered / journeyLength;
-            // move is here
+            fractionOfJourney = distCovered / journeyLength;          
+            
+            float angle = Mathf.Atan2(PlayerManager.PM.transform.position.y - towRig.transform.position.y, PlayerManager.PM.transform.position.x - towRig.transform.position.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            towRig.transform.rotation = Quaternion.RotateTowards(towRig.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             towRig.transform.position = Vector3.Lerp(towRig.transform.position, PlayerManager.PM.gameObject.transform.position, fractionOfJourney);
+           
             distanceToEnd = Vector3.Distance(towRig.transform.position, PlayerManager.PM.gameObject.transform.position);
             if(distanceToEnd < .1f){
                 isMoving = false;
             }
             yield return null;
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         goingOut = false;
         PlayerManager.PM.GetComponentInChildren<EdgeCollider2D>().enabled = false;
         SetUpTowRig();
     }
     public IEnumerator BringTowRigBack(){
             //float elapsedTime = 0;
+        while(waitingOnDialogue){
+            yield return null;
+        }
+        PlayerManager.PM.dropHeavyScrap();
+        overworldCamera.GetComponent<cameraFollow>().enabled = false;
+        startTime = Time.time;
+        
         while(isMoving){
             //elapsedTime += Time.deltaTime;
             distCovered = (Time.time - startTime) * speed;
             fractionOfJourney = distCovered / journeyLength;
             // move is here
+            float angle = Mathf.Atan2(town.transform.position.y - towRig.transform.position.y, town.transform.position.x - towRig.transform.position.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            towRig.transform.rotation = Quaternion.RotateTowards(towRig.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             towRig.transform.position = Vector3.Lerp(towRig.transform.position, town.transform.position, fractionOfJourney);
             // take player too
             PlayerManager.PM.transform.position = Vector3.Lerp(PlayerManager.PM.transform.position, town.transform.position, fractionOfJourney);
+            // and the camera lol
+            overworldCamera.transform.position = Vector3.Lerp(overworldCamera.transform.position, town.transform.position, fractionOfJourney);
             distanceToEnd = Vector3.Distance(towRig.transform.position, town.transform.position);
             if(distanceToEnd < .1f){
                 isMoving = false;
@@ -105,5 +133,6 @@ public class OverworldManager : MonoBehaviour
         PlayerManager.PM.GetComponentInChildren<EdgeCollider2D>().enabled = true;
         towRig.SetActive(false);
         SceneController.SC.StartLoadTown();
+        overworldCamera.GetComponent<cameraFollow>().enabled = true;
     }
 }

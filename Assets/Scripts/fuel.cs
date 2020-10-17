@@ -44,7 +44,6 @@ bool lowFuel;
             canBeTowed = false;
             AudioManager.AM.PlayRigStop();
             ClickDrag.StartCoroutine("OutOfFuel");
-            DialogueManager.DM.RunNode("fuel-out");
         }
         else if(currentFuelUnits > 0){
             canBeTowed = true;

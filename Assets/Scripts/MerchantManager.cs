@@ -134,13 +134,6 @@ public class MerchantManager : MonoBehaviour
         // put the price on the button
         UpdateFuelPrice();
         
-        if(ogdenVisited == false){
-            DialogueManager.DM.RunNode("ogden-intro");
-            ogdenVisited = true;
-        }
-        else{
-            DialogueManager.DM.RunNode("ogden-enter");
-        }
         if(PlayerManager.GetComponent<fuel>().currentFuelUnits <= 0 ){
             DialogueManager.DM.RunNode("ogden-towed");
             UIManager.fuelMerchantReadout.text += "\n<size=75%>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " credits has been detucted from your account</size>";

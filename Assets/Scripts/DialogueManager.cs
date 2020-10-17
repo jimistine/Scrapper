@@ -37,10 +37,7 @@ public class DialogueManager : MonoBehaviour
     public List<Yarn.Line> lineQueue = new List<Yarn.Line>();
     public List<string> lineQueueIDs = new List<string>();
     public Yarn.Line queuedLine;
-    [Header("Tutorial")]
-    [Space(10)]
-    public bool waitingForAcceleration;
-    public bool introCompleted;
+    
     [Header("Images")]
     [Space(10)]
     public Sprite continueIcon;
@@ -127,20 +124,16 @@ public class DialogueManager : MonoBehaviour
     public void LineStarted(){   // if the speaker of this line is different from the last line, swap active panels
         
         if(speakerNameLast != ui.speakerName || speakerNameLast == null){
-            if(activeSpeakerPanel != null /*&& activeSpeakerPanel.tag != "merchant"*/){
+            if(activeSpeakerPanel != null){
                 activeSpeakerPanel.SetActive(false);
             } 
-            if(UIManager.UIM.playerLocation != "overworld" && ui.speakerName == "CH1-P" || UIManager.UIM.playerLocation != "overworld" && ui.speakerName == "Hasron"){
+            if(UIManager.UIM.playerLocation != "overworld" && ui.speakerName != "Chundr"){
                 activeSpeakerPanel = characters.Find(x => x.characterName == ui.speakerName).characterPanelTown;
                 Debug.Log("Using town panels. Current active panel is " + activeSpeakerPanel.name);
             }
             else{
                 activeSpeakerPanel = characters.Find(x => x.characterName == ui.speakerName).characterPanel;
             }
-
-            // if(activeSpeakerPanel.tag != "merchant"){
-            //     Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel,"in", 0.1f);
-            // }
             Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel,"in", 0.1f);
         }
         if(UIManager.UIM.playerLocation == "overworld" && activeSpeakerPanel.tag == "merchant"){
@@ -233,7 +226,12 @@ public class DialogueManager : MonoBehaviour
                 }
             }
             else{
-                DR.StartDialogue(nodeToRun); 
+                if(tagsCurrent.Contains("main")){
+                    return;
+                }
+                else{
+                    DR.StartDialogue(nodeToRun); 
+                }
             }
         }
         else{
@@ -248,30 +246,7 @@ public class DialogueManager : MonoBehaviour
                 DR.StartDialogue(nodeToRun);
             }
         }
-        // if(DR.CurrentNodeName != null){
-        //     var tagsCurrent = string.Join(" ", DR.GetTagsForNode(DR.CurrentNodeName));
-        //     if(DR.IsDialogueRunning && tagsCurrent.Contains("main")){ // if we're already talking about a main plot point, don't inturrupt
-        //         return;
-        //     }
-        //     else{
-        //         DR.StartDialogue(nodeToRun); // otherwise run it
-        //     }
-        // }
-        // else if(DR.IsDialogueRunning && tags.Contains("sub")){ // if we're already talking, and it's a bark, don't inturrupt
-        //     return;
-        // }
-        // else if(!DR.IsDialogueRunning && tags.Contains("sub")){ // if we aren't talking, and it's a bark, roll to see if we play the bark
-        //     int randomRoll = Random.Range(0, 2);
-        //     Debug.Log("Rolled:" + randomRoll);
-        //     if(randomRoll == 0){
-        //         DR.StartDialogue(nodeToRun);
-        //     }
-        // }
-        // else{
-        //     DR.StartDialogue(nodeToRun);
-        // }
     }
-
 
     public void InturruptCheck(){
         Debug.Log("Checking inturrupt");
@@ -285,9 +260,11 @@ public class DialogueManager : MonoBehaviour
     public void ConversationEnded(){
         DR.Stop();
         Debug.Log("conversation ended");
-        if(activeSpeakerPanel.tag != "merchant"){
+        if(UIManager.UIM.playerLocation == "town hub"){
+            activeSpeakerPanel.SetActive(false);
+        }
+        else{
             Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel, "out", 0.25f);
-            //activeSpeakerPanel.SetActive(false);
         }
         speakerNameLast = null;
         if(lineQueue.Count > 0){
@@ -359,11 +336,32 @@ public class DialogueManager : MonoBehaviour
     }
     [YarnCommand("introWaitingForAcceleration")]
     public void introWaitingForAcceleration(){
-        waitingForAcceleration = true;
+        Director.Dir.waitingForAcceleration = true;
     }
     [YarnCommand("introComplete")]
     public void introComplete(){
-        introCompleted = true;
+        Director.Dir.introCompleted = true;
+    }
+    [YarnCommand("ogdenVisited")]
+    public void ogdenVisited(){
+        Director.Dir.ogdenVisited = true;
+    }
+    [YarnCommand("ogdenVisited")]
+    public void chundrVisited(){
+        Director.Dir.chundrVisited = true;
+    }
+    [YarnCommand("outOfFuelTutorialCompleted")]
+    public void completedOutOfFuelTut(){
+        Director.Dir.outOfFuelCompleted = true;
+    }
+    [YarnCommand("towReady")]
+    public void dialogueTowReady(string isTowReady){
+        if(isTowReady == "true"){
+            OverworldManager.OM.waitingOnDialogue = false;
+        }
+        if(isTowReady == "false"){
+            OverworldManager.OM.waitingOnDialogue = true;
+        }
     }
     
     /* 

@@ -89,10 +89,6 @@ public class PlayerManager : MonoBehaviour
                 RigManager.RM.rigLights.SetActive(true);
             }
         }
-        if(Input.GetKeyDown(KeyCode.R)){
-            Debug.Log("restarting");
-            SceneController.SC.RestartGame();
-        }
         if(Input.GetKeyDown(KeyCode.P)){
             Debug.Log("pressed p");
             UIManager.TogglePause();
@@ -103,6 +99,14 @@ public class PlayerManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space)){
             DialogueManager.DM.ContinueDialogue();
+        }
+        if(Input.GetKeyDown(KeyCode.R)){
+            Debug.Log("restarting");
+            SceneController.SC.RestartGame();
+        }
+        if(Input.GetKeyDown(KeyCode.Semicolon)){
+            //Debug.Log("restarting");
+            DialogueManager.DM.RunNode("left-town-ogden");
         }
     }
     
@@ -122,7 +126,7 @@ public class PlayerManager : MonoBehaviour
                 else if(newScrap.scrapName == "Sha'ak-ji Holospace Generator"){
                     DialogueManager.DM.RunNode("holospace-generator");
                 }
-                else if(firstScrapFound == false && DialogueManager.DM.introCompleted){
+                else if(firstScrapFound == false && Director.Dir.introCompleted){
                     DialogueManager.DM.RunNode("tutorial-find-scrap");
                     firstScrapFound = true;
                 }
@@ -156,7 +160,7 @@ public class PlayerManager : MonoBehaviour
         foreach(ScrapObject scrap in playerScrap){
             Debug.Log("Player has: " + scrap.GetComponent<ScrapObject>().scrapName);
         }
-        if(firstScrapTaken == false && DialogueManager.DM.introCompleted){
+        if(firstScrapTaken == false && Director.Dir.introCompleted){
             DialogueManager.DM.RunNode("tutorial-take-scrap");
             firstScrapTaken = true;
         }
@@ -189,5 +193,17 @@ public class PlayerManager : MonoBehaviour
                 currentHaulValaue += scrap.value;
             }
         return currentHaulValaue;
+    }
+
+    public void dropHeavyScrap(){
+        foreach(ScrapObject scrap in playerScrap){
+            if(scrap.size >= 10){
+                scrapPlacer.SP.SpawnDroppedScrap(scrap);
+            }
+        }
+        playerScrap.RemoveAll(t => t.size >= 10);
+        UpdateCurrentHaul();
+        UIManager.UpdateScrapTicks();
+        AudioManager.PlayPlayerClip("drop scrap");
     }
 }

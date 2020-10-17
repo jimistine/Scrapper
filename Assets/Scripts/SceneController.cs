@@ -67,6 +67,9 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("Town", LoadSceneMode.Additive);
         OverworldCamera.SetActive(false);
         UIManager.EnterTown();
+        if(PlayerManager.PM.GetComponent<fuel>().currentFuelUnits <= 0){
+            UIManager.UIM.enterFuelMerchant();
+        }
         yield return null;
     }
     public void StartLeaveTown(){
