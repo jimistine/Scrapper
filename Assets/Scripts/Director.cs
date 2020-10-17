@@ -57,7 +57,8 @@ public class Director : MonoBehaviour
         screenCover.gameObject.SetActive(false);
         yield return new WaitForSeconds(3);
         if(playIntroDialogue){
-            DialogueManager.RunNode("intro");
+            DialogueManager.RunNode("intro-2-1");
+            Debug.Log("sending intro node");
         }
     }
 

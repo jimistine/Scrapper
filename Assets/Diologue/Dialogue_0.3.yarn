@@ -1,7 +1,7 @@
 title: intro
 tags: main
 colorID: 0
-position: 499,761
+position: 228,524
 ---
 <<if visited("intro") is false>> 
     CH1-P: Are you sure this road will get us to the outpost?
@@ -13,31 +13,37 @@ position: 499,761
     Hasron: Uh, well then I won't be as sure.
     Hasron: But I have a good feeling about this canyon!
     CH1-P: It is a lot more windy than the last few, I'll give you that.
-    CH1-P: Anyway we should keep moving.
+    CH1-P: Anyway we should keep moving. Day won't last forever.
     Hasron: Right.
 
     <<setPanelVisibility DialogueManager Hasron false>>
     <<wait 7>> 
     <<setPanelVisibility DialogueManager Hasron true>>
-    Hasron: So you actually think we can make the big creds out there?
-    CH1-P: We'll see. But I have a good feeling. 
+    Hasron: So you actually think we can make the big creds out here?
+    CH1-P: We'll see. Supposedly the merchants out here pay well for scrap
+    Hasron: Right.
+    CH1-P: Just a matter of finding it I guess. But I have a good feeling. 
     Hasron: Oh! Let me guess...
+    CH1-P: What?
     Hasron: You can feel it in your...
     Hasron: Shoulder?
     CH1-P: Which one?
     Hasron: Umm...
     Hasron: If you could just take off your--
-    CH1-P: Uh-uh-uh! The desert robe stays on!
+    CH1-P: Uh-uh-uh! No cheating! The desert robe stays on!
     CH1-P: You really don't remember which is which?
     <<wait .05>>
     Hasron: Left!
     <<wait .05>>
-    CH1-P: Nope. I replaced the right one. Because of that dislocation on the exodus ship? Pure cartilo now.
+    CH1-P: Nope. I replaced the right one.
+    CH1-P: Because of that dislocation on the exodus ship? Pure cartilo now.
+    <<setPanelVisibility DialogueManager CH1-P false>>
+    <<wait 3>> 
+    <<setPanelVisibility DialogueManager CH1-P true>>
     CH1-P: I've told you that story right?
     Hasron: Yeah. Crazy to think you didn't even feel it.
     CH1-P: You're telling me.
-    <<wait 1>>
-    CH1-P: So many have told me that I'm a fool for going bionic because of all the pain organics deal with.
+    CH1-P: People always tell me I'm a fool for going bionic because of all the pain organics deal with.
     Hasron: I mean...
     CH1-P: It's not that I like the pain itself. Believe me I wish I had less of it at all the merges.
     CH1-P: But being able to feel? And not just like the simulation of feeling, but feeling that actually matters?
@@ -49,7 +55,7 @@ position: 499,761
 title: close-to-town
 tags: main
 colorID: 0
-position: 495,512
+position: 231,763
 ---
 <<if visited("close-to-town") is false>> 
     CH1-P: Well I'll be damned, we made it.
@@ -85,7 +91,7 @@ position: -19,523
 title: scrap-find
 tags: sub
 colorID: 0
-position: 1122,516
+position: 1489,520
 ---
 <<set $scrapFindPick = random("scrap-find", 7)>>
 
@@ -112,7 +118,7 @@ position: 1122,516
 title: scrap-take
 tags: sub
 colorID: 0
-position: 1118,750
+position: 1485,754
 ---
 <<set $scraptakepick = random("scrap-take", 7)>>
 
@@ -140,7 +146,7 @@ position: 1118,750
 title: scrap-leave
 tags: sub
 colorID: 0
-position: 1118,997
+position: 1485,1001
 ---
 <<set $scrapLeavePick = random("scrap-take", 7)>>
 
@@ -168,7 +174,7 @@ position: 1118,997
 title: fuel-running-low
 tags: sub
 colorID: 0
-position: 1113,1476
+position: 1480,1480
 ---
 <<set $fuelRunningLowPick = random("fuel-running-low", 7)>>
 
@@ -196,7 +202,7 @@ position: 1113,1476
 title: fuel-out
 tags: sub
 colorID: 0
-position: 1111,1697
+position: 1478,1701
 ---
 <<set $fuelOutPick = random("fuel-out", 7)>>
 
@@ -234,7 +240,7 @@ position: 1111,1697
 title: ogden-intro
 tags: main merchant
 colorID: 0
-position: 1441,500
+position: 1808,504
 ---
 <<if visited("ogden-intro") is false>> 
     <<setFuelButtActive DialogueManager false>> 
@@ -248,9 +254,9 @@ position: 1441,500
 <<endif>>
 ===
 title: chunk-of-raw-cordonite
-tags: scrap
+tags: world
 colorID: 0
-position: 856,523
+position: 856,522
 ---
 <<if visited("chunk-of-raw-cordonite") is false>>
     Hasron: What the hell is that?
@@ -285,7 +291,7 @@ position: 856,523
 <<endif>>
 ===
 title: land-speeder
-tags: scrap
+tags: world
 colorID: 0
 position: 849,775
 ---
@@ -309,7 +315,7 @@ position: 849,775
 <<endif>>
 ===
 title: holospace-generator
-tags: scrap
+tags: world
 colorID: 0
 position: 845,1013
 ---
@@ -359,7 +365,7 @@ position: 845,1013
 title: chundr
 tags: merchant
 colorID: 0
-position: 1718,495
+position: 2085,499
 ---
 <<if visited("chundr") is false>> 
     Chundr: Welcome to the outpost.
@@ -389,7 +395,7 @@ position: 1718,495
 title: engine
 tags: 
 colorID: 0
-position: 1730,748
+position: 2097,752
 ---
 <<if visited("engine") is false>>
     Chundr: Careful installing that thing, ok? Churn isn't exactly known for their safety standards and I bought that thing off of a scrapper I hadn't seen before.
@@ -414,7 +420,7 @@ position: 1730,748
 title: scrap-wont-fit
 tags: sub
 colorID: 0
-position: 1114,1235
+position: 1481,1239
 ---
 <<set $wontFitPick = random("scrap-wont-fit", 7)>>
 
@@ -441,7 +447,7 @@ position: 1114,1235
 title: reactor
 tags: 
 colorID: 0
-position: 1744,1006
+position: 2111,1010
 ---
 <<if visited("reactor") is false>>
     Chundr: That should let you get a good bit further out before you're out of fuel.
@@ -461,7 +467,7 @@ position: 1744,1006
 title: storage-bay
 tags: 
 colorID: 0
-position: 1751,1234
+position: 2118,1238
 ---
 <<if visited("storage-bay") is false>>
     Chundr: Once went on vacation to a place called Rundoth bay. 
@@ -483,7 +489,7 @@ position: 1751,1234
 title: scanner
 tags: 
 colorID: 0
-position: 1744,1467
+position: 2111,1471
 ---
 <<if visited("scanner") is false>>
     Chundr: I think the name speaks for itself.
@@ -503,7 +509,7 @@ position: 1744,1467
 title: drone
 tags: 
 colorID: 0
-position: 1750,1704
+position: 2117,1708
 ---
 <<if visited("drone") is false>>
     Chundr: Kion glass is some of the sturdiest stuff out there, I'm sure that'll help you quite a bit out in the wastes.
@@ -522,7 +528,7 @@ position: 1750,1704
 title: chundr-cant-afford
 tags: 
 colorID: 0
-position: 1741,1929
+position: 2108,1933
 ---
 <<set $chundrCantAffordPick = random("chundr-cant-afford", 3)>>
 
@@ -539,7 +545,7 @@ position: 1741,1929
 title: ogden-cant-afford
 tags: 
 colorID: 0
-position: 1448,1015
+position: 1815,1019
 ---
 <<set $ogdenCantAffordPick = random("ogden-cant-afford", 3)>>
 
@@ -557,7 +563,7 @@ position: 1448,1015
 title: cant-sell-scrap
 tags: 
 colorID: 0
-position: 1751,2164
+position: 2118,2168
 ---
 <<set $cantSellScrap = random("cant-sell-scrap", 3)>>
 
@@ -574,7 +580,7 @@ position: 1751,2164
 title: bought-fuel
 tags: 
 colorID: 0
-position: 1457,1279
+position: 1824,1283
 ---
 <<set $boughtFuelPick = random("bought-fuel", 4)>>
 
@@ -594,7 +600,7 @@ position: 1457,1279
 title: fuel-already-full
 tags: 
 colorID: 0
-position: 1455,1523
+position: 1822,1527
 ---
 <<set $alreadyFullPick = random("fuel-already-full", 3)>>
 
@@ -611,14 +617,14 @@ position: 1455,1523
 title: tweaked-reactor
 tags: 
 colorID: 0
-position: 1444,2002
+position: 1811,2006
 ---
 Ogden: I am not capable of adjusting the performance of your reactor, yet.
 ===
 title: ogden-towed
 tags: 
 colorID: 0
-position: 1447,1761
+position: 1814,1765
 ---
 <<set $ogdenTowedPick = random("ogden-towed", 2)>>
 
@@ -634,7 +640,7 @@ position: 1447,1761
 title: sold-all-scrap
 tags: 
 colorID: 0
-position: 1739,2407
+position: 2106,2411
 ---
 <<set $soldAllScrap = random("sold-all-scrap", 7)>>
 
@@ -660,7 +666,7 @@ position: 1739,2407
 title: ogden-enter
 tags: merchant
 colorID: 0
-position: 1440,760
+position: 1807,764
 ---
 <<setFuelButtActive DialogueManager true>>
 <<set $ogdenPick = random("ogden-enter", 7)>>
@@ -684,4 +690,104 @@ position: 1440,760
     Ogden: Hello again.
 
 <<endif>>
+===
+title: intro-2
+tags: main
+colorID: 0
+position: 526,763
+---
+Hasron: Are you sure you need a break from piloting?
+CH1-P: Yeah my eye is starting to lock up from the sand I think.
+Hasron: Oh I didn't realize. It's the um...
+CH1-P: Organic one, yeah. From the sand.
+Hasron: Yeah. Ok.
+Hasron: So how does this thing work?
+CH1-P: You don't know?
+Hasron: It's been a while! 
+CH1-P: Alright so you've got acceleration on W, and deceleration on S
+Hasron: Ok, ok.
+//set a flag true now to wait until they press w for the first time, then run 2-2
+===
+title: intro-2-2
+tags: main
+colorID: 0
+position: 538,998
+---
+Hasron: This thing is slower than I realized.
+CH1-P: Hey you built it, not me.
+Hasron: I know, I know, it's disturbing. Definitely the slowest rig I've built.
+CH1-P: And then steering is with the mouse pointer.
+Hasron: Cool, that at least is pretty responsive.
+CH1-P: You can also change to using A and D to turn left and right by pressing 2, and pressing 1 will change it back.
+Hasron: Got it, 2 for WASD, 1 for pointer steering. Glad I added that.
+CH1-P: Me too actually, pretty hand little feature.
+Hasron: Thank you, thank you.
+Hasron: Oh and I think headlights are on F, right?
+CH1-P: Should be, yeah.
+// then to the main intro?
+===
+title: tutorial-find-scrap
+tags: 
+colorID: 0
+position: 1164,517
+---
+Hasron: Hey I think that's some scrap!
+CH1-P: I guess this scanner works after all.
+CH1-P: Here's hoping the digging arm follows suit.
+Hasron: One way to find out!
+===
+title: getting-dark
+tags: sub
+colorID: 0
+position: 1470,1981
+---
+<<if visited("getting-dark") is false>> 
+    CH1-P: Sure gets dark quick out here, huh?
+    Hasron: Hm? Oh, yeah. Always has.
+    Hasron: I've heard other planets have some really long sunsets, right?
+    CH1-P: Yeah they do.
+    CH1-P: They're beautiful.
+    CH1-P: And in some places the sun is always setting.
+    CH1-P: Or rising. I can never remember which.
+    <<set $gettingDarkProgress to 0>>
+<<if $gettingDarkPick is 0>>
+    Hasron: What do you see when the sun set?
+    CH1-P: What do I see?
+    Hasron: Yeah. You know like what does it make you think of?
+    CH1-P: Um...
+    CH1-P: Explosions?
+    Hasron: Explosions?
+    CH1-P: Yeah, you know, like when a carrier ship goes up in low orbit?
+    Hasron: What? You've seen that?
+    CH1-P: Just the once, but it's something that stays with you.
+    Hasron: What happened?
+    CH1-P: Another night, Has. Another night.
+    <<set $gettingDarkProgress to 1>> 
+<<elseif $gettingDarkProgress is 1>>
+    CH1-P: Sun's going down.
+    Hasron: So it is. Another day down.
+    CH1-P: Think we should stay out tonight?
+    Hasron: Can't hurt, right?
+    CH1-P: Not unless we get lost.
+    Hasron: Right...
+    CH1-P: Or waste all our fuel looking for scrap that we can't really see.
+    Hasron: Also true.
+    <<set $gettingDarkProgress to 2>> 
+<<elseif $gettingDarkProgress is 2>>
+    Hasron: You think this stuff might actually be dangerous?
+    CH1-P: You know I was wondering that after the last one we brought in.
+    CH1-P: I don't know, I feel fine though. You?
+    Hasron: Yeah...I guess so.
+    <<set $gettingDarkProgress to 3>> 
+<<endif>>
+===
+title: tutorial-take-scrap
+tags: 
+colorID: 0
+position: 1166,781
+---
+Hasron: Loaded up and ready for scrappin'!
+CH1-P: As long as we have room and some deuterium left in the reactor we should keep looking for more.
+Hasron: Totally.
+Hasron: I think we're going to get along just fine with Mr. Chundr.
 ===

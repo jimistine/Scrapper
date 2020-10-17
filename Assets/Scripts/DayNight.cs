@@ -121,6 +121,7 @@ public class DayNight : MonoBehaviour
     IEnumerator Sunset(){
         float elapsedTime = 0;
         Debug.Log("Sunset starting");
+        DialogueManager.DM.RunNode("getting-dark");
         while(elapsedTime < transitionLength){
             globalLight.intensity = Mathf.Lerp(1f, 0.035f, elapsedTime/transitionLength);
             globalLight.color = Color.Lerp(daylight, moonLight, elapsedTime/transitionLength);

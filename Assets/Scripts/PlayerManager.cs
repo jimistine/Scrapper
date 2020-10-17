@@ -26,6 +26,7 @@ public class PlayerManager : MonoBehaviour
     public float currentHaul;
     public float maxHaul;
     public float playerCredits;
+    public bool scannerActive;
     public List<ScrapObject> playerScrap = new List<ScrapObject>();
 
     [Header("UI")]
@@ -34,6 +35,9 @@ public class PlayerManager : MonoBehaviour
     public GameObject chipCallout;
     public int tickReadoutIndex;
 
+    // Tutorial bools
+    public bool firstScrapFound;
+    public bool firstScrapTaken;
 
     // Start is called before the first frame update
     void Awake()
@@ -104,7 +108,7 @@ public class PlayerManager : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other){
     // 1. Pop goes the scrap!  If our search radius hits the small EdgeCollider on the scrap, it pops
-        if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(EdgeCollider2D)){
+        if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(EdgeCollider2D) && scannerActive){
             ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
             other.gameObject.GetComponent<ProximityCheck>().IsInRange(true);
             if(other.gameObject.GetComponent<SpriteRenderer>().enabled == false){
@@ -118,36 +122,23 @@ public class PlayerManager : MonoBehaviour
                 else if(newScrap.scrapName == "Sha'ak-ji Holospace Generator"){
                     DialogueManager.DM.RunNode("holospace-generator");
                 }
+                else if(firstScrapFound == false && DialogueManager.DM.introCompleted){
+                    DialogueManager.DM.RunNode("tutorial-find-scrap");
+                    firstScrapFound = true;
+                }
                 else{
                     DialogueManager.DM.RunNode("scrap-find");
                 }
                 Debug.Log("Found scrap");
             }
             UIManager.ShowScrap(newScrap);
-            // if(other.gameObject.GetComponent<ScrapObject>().isBuried == true){
-            //     other.gameObject.GetComponent<ScrapObject>().isBuried = false;
-            //     AudioManager.PlayPlayerClip("found scrap");
-            //     if(newScrap.scrapName == "Land speeder (unknown)"){
-            //         DialogueManager.DM.RunNode("land-speeder");
-            //     }
-            //     else if(newScrap.scrapName == "Chunk of raw cordonite"){
-            //         DialogueManager.DM.RunNode("chunk-of-raw-cordonite");
-            //     }
-            //     else if(newScrap.scrapName == "Sha'ak-ji Holospace Generator"){
-            //         DialogueManager.DM.RunNode("holospace-generator");
-            //     }
-            //     else{
-            //         DialogueManager.DM.RunNode("scrap-find");
-            //     }
-            //     Debug.Log("Found scrap");
-            // }
         }
         if(other.gameObject.name == "Town" && OverworldManager.OM.towRig.activeSelf == false){
             UIManager.ActivateTownButton(true);
         }
     }
     void OnTriggerExit2D(Collider2D other){ // Only consider out of range when we exit the larger collider on scrap
-        if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(CircleCollider2D)){
+        if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(CircleCollider2D) && scannerActive){
             ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
             other.gameObject.GetComponent<ProximityCheck>().IsInRange(false);
             UIManager.OutOfRangeScrap(newScrap);
@@ -158,14 +149,17 @@ public class PlayerManager : MonoBehaviour
     }
    
     // 5. If they clicked Take (UIM) and they could fit it, take it
-    public ScrapObject TakeScrap(ScrapObject takenScrap){
-            takenScrap.gameObject.SetActive(false);
-            playerScrap.Add(takenScrap);
-            UpdateCurrentHaul();
-            foreach(ScrapObject scrap in playerScrap){
-                Debug.Log("Player has: " + scrap.GetComponent<ScrapObject>().scrapName);
-            }
-        return null;
+    public void TakeScrap(ScrapObject takenScrap){
+        takenScrap.gameObject.SetActive(false);
+        playerScrap.Add(takenScrap);
+        UpdateCurrentHaul();
+        foreach(ScrapObject scrap in playerScrap){
+            Debug.Log("Player has: " + scrap.GetComponent<ScrapObject>().scrapName);
+        }
+        if(firstScrapTaken == false && DialogueManager.DM.introCompleted){
+            DialogueManager.DM.RunNode("tutorial-take-scrap");
+            firstScrapTaken = true;
+        }
     }
     public void DropScrap(int tickScrapIndex){
         //Debug.Log("Index Called: " + tickScrapIndex);

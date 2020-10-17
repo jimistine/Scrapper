@@ -132,6 +132,10 @@ public class ClickDrag : MonoBehaviour
 
     public IEnumerator Accelerate(){
         currentSpeed = 0;
+        if(DialogueManager.DM.waitingForAcceleration == true){
+            DialogueManager.DM.RunNode("intro-2-2");
+            DialogueManager.DM.waitingForAcceleration = false;
+        }
         while(currentSpeed < topSpeed){
             currentSpeed += acceleration;
             yield return new WaitForSeconds(.01f);

@@ -335,7 +335,7 @@ position: 845,1013
     CH1-P: Thought it looked familiar.
     <<setPanelVisibility DialogueManager CH1-P false>>
     <<wait 6>> 
-    <<setPanelVisibility DialogueManager CH1-P true>>
+    <<setPanelVisibilty DialogueManager CH1-P true>>
     CH1-P: What kind of stuff did you used to play in those?
     Hasron: All kinds of stuff really.
     Hasron: My favorite were always the nature ones though.
@@ -363,6 +363,7 @@ position: 1718,495
 ---
 <<if visited("chundr") is false>> 
     Chundr: Welcome to the outpost.
+    Hasron: Testing 1 - 2 - 1 - 2.
     Chundr: They call me Chundr, it's good to meet you. We don't get a lot of new faces around here.
     Chundr: Well, that's not exactly true. Plenty come and go, though few ask for lodging. But don't worry, it's pleasant enough around here.
     Chundr: Anyway, things aren't very complicated, you bring in scrap, I'll buy it. Doesn't matter what it is as long as it isn't-and never was-alive.

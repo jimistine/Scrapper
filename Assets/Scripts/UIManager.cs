@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
     public GameObject TownUI;
     public GameObject townHub;
     public Button enterTownButton;
-    public string playerLocation;
+    public string playerLocation = "overworld";
     public TMP_InputField inputField;
 
     [Header("Scrap Buyer")]
@@ -247,6 +247,7 @@ public class UIManager : MonoBehaviour
         fuelText.color = (Color.black);
         creditText.color = (Color.black);
         DialogueManager.DM.ConversationEnded();
+        playerLocation = "overworld";
         Director.Dir.StartFadeCanvasGroup(TownUI, "out", .15f);
         Director.Dir.StartFadeCanvasGroup(OverworldUI, "in", .15f);
         //scrapBuyerReadout.text = "\"Back again?\"";

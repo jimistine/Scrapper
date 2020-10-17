@@ -28,19 +28,24 @@ public class DialogueManager : MonoBehaviour
     public struct Character{
         public string characterName;
         public GameObject characterPanel;
+        public GameObject characterPanelTown;
     }
 
+    public GameObject activeSpeakerPanel;
     public List<Character> characters = new List<Character>();
 
     public List<Yarn.Line> lineQueue = new List<Yarn.Line>();
     public List<string> lineQueueIDs = new List<string>();
     public Yarn.Line queuedLine;
+    [Header("Tutorial")]
+    [Space(10)]
+    public bool waitingForAcceleration;
+    public bool introCompleted;
     [Header("Images")]
     [Space(10)]
     public Sprite continueIcon;
     public Sprite finishedIcon;
 
-    GameObject activeSpeakerPanel;
     string speakerNameLast;
     Dictionary<string, int> randomLinePulls = new Dictionary<string, int>();
 
@@ -70,7 +75,7 @@ public class DialogueManager : MonoBehaviour
 
 // Functions
     // when we need unity to tell yarn something in the middle of a conversation
-        // adds the node requesting the random to a dictionary to make sure
+        // adds the node requesting the random numebr    to a dictionary to make sure
         //   we don't play the same random line for that node twice in a row
         DR.AddFunction("random", 2, delegate(Yarn.Value[] parameters){
             var requestingNode = parameters[0];
@@ -82,8 +87,10 @@ public class DialogueManager : MonoBehaviour
             }
             else if(randomLinePulls[requestingNode.AsString] == numberToReturn){
                 while(randomLinePulls[requestingNode.AsString] == numberToReturn){
+                    Debug.Log("updating node number to speak");
                     numberToReturn = (int)Random.Range(0, Mathf.Round(maxNum.AsNumber));
                 }
+                randomLinePulls[requestingNode.AsString] = numberToReturn;
             }
             Debug.Log("Random line number is: " + numberToReturn);
             return numberToReturn;
@@ -99,36 +106,45 @@ public class DialogueManager : MonoBehaviour
     
     public void InitCharacters(){
         //Debug.Log("Initializing characters");
+        
         Character Hasron = new Character();
         Hasron.characterName = "Hasron";
         Hasron.characterPanel = GameObject.Find("Hasron Callout");
+        Hasron.characterPanelTown = GameObject.Find("Hasron Callout Town");
         Hasron.characterPanel.SetActive(false);
+        Hasron.characterPanelTown.SetActive(false);
         characters.Add(Hasron);
 
         Character Chip = new Character();
         Chip.characterName = "CH1-P";
         Chip.characterPanel = GameObject.Find("CH1-P Callout");
+        Chip.characterPanelTown = GameObject.Find("CH1-P Callout Town");
         Chip.characterPanel.SetActive(false);
+        Chip.characterPanelTown.SetActive(false);
         characters.Add(Chip);
     }
 
     public void LineStarted(){   // if the speaker of this line is different from the last line, swap active panels
-        if(activeSpeakerPanel != null){
-            if(activeSpeakerPanel.tag == "merchant"){
-                ui.textSpeed = 0.025f;
-            }
-            else{
-                ui.textSpeed = 0.025f;
-            }
-        }
+        
         if(speakerNameLast != ui.speakerName || speakerNameLast == null){
-            if(activeSpeakerPanel != null && activeSpeakerPanel.tag != "merchant"){
+            if(activeSpeakerPanel != null /*&& activeSpeakerPanel.tag != "merchant"*/){
                 activeSpeakerPanel.SetActive(false);
             } 
-            activeSpeakerPanel = characters.Find(x => x.characterName == ui.speakerName).characterPanel;
-            if(activeSpeakerPanel.tag != "merchant"){
-                Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel,"in", 0.1f);
+            if(UIManager.UIM.playerLocation != "overworld" && ui.speakerName == "CH1-P" || UIManager.UIM.playerLocation != "overworld" && ui.speakerName == "Hasron"){
+                activeSpeakerPanel = characters.Find(x => x.characterName == ui.speakerName).characterPanelTown;
+                Debug.Log("Using town panels. Current active panel is " + activeSpeakerPanel.name);
             }
+            else{
+                activeSpeakerPanel = characters.Find(x => x.characterName == ui.speakerName).characterPanel;
+            }
+
+            // if(activeSpeakerPanel.tag != "merchant"){
+            //     Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel,"in", 0.1f);
+            // }
+            Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel,"in", 0.1f);
+        }
+        if(UIManager.UIM.playerLocation == "overworld" && activeSpeakerPanel.tag == "merchant"){
+            activeSpeakerPanel = characters.Find(x => x.characterName == ui.speakerName).characterPanel; 
         }
 
         speakerNameLast = ui.speakerName;
@@ -188,27 +204,72 @@ public class DialogueManager : MonoBehaviour
         // tage a look at those tags
         var tags = string.Join(" ", DR.GetTagsForNode(nodeToRun));
         if(DR.CurrentNodeName != null){
+            Debug.Log("Got tags");
             var tagsCurrent = string.Join(" ", DR.GetTagsForNode(DR.CurrentNodeName));
-            if(DR.IsDialogueRunning && tagsCurrent.Contains("main")){ // if we're already talking about a main plot point, don't inturrupt
-                return;
+            if(tags.Contains("main")){ // MAIN is never interrupted and interrupts anything else, including Main
+                Debug.Log("running MAIN dialogue");
+                DR.StartDialogue(nodeToRun);
+            }
+            else if(tags.Contains("world")){ // WORLD is only interrupted by Main and World, only interrupts Sub and World
+                if(DR.IsDialogueRunning && tagsCurrent.Contains("main")){
+                    return;
+                }
+                else{
+                    Debug.Log("running WORLD dialogue");
+                    DR.StartDialogue(nodeToRun); 
+                }
+            }
+            else if(tags.Contains("sub")){ // SUB is interrupted by anything, and does not interrupt anything
+                if(DR.IsDialogueRunning){
+                    return;
+                }
+                else{
+                   // Debug.Log("running SUB dialogue");
+                    int randomRoll = Random.Range(0, 3);
+                    Debug.Log("Rolled: " + randomRoll);
+                    if(randomRoll == 0){
+                        DR.StartDialogue(nodeToRun);
+                    }
+                }
             }
             else{
-                DR.StartDialogue(nodeToRun); // otherwise run it
-            }
-        }
-        else if(DR.IsDialogueRunning && tags.Contains("sub")){ // if we're already talking, and it's a bark, don't inturrupt
-            return;
-        }
-        else if(!DR.IsDialogueRunning && tags.Contains("sub")){ // if we aren't talking, and it's a bark, roll to see if we play the bark
-            int randomRoll = Random.Range(0, 2);
-            Debug.Log("Rolled:" + randomRoll);
-            if(randomRoll == 0){
-                DR.StartDialogue(nodeToRun);
+                DR.StartDialogue(nodeToRun); 
             }
         }
         else{
-            DR.StartDialogue(nodeToRun);
+            if(tags.Contains("sub")){
+                int randomRoll = Random.Range(0, 4);
+                Debug.Log("Rolled: " + randomRoll);
+                if(randomRoll == 0){
+                    DR.StartDialogue(nodeToRun);
+                }
+            }
+            else{
+                DR.StartDialogue(nodeToRun);
+            }
         }
+        // if(DR.CurrentNodeName != null){
+        //     var tagsCurrent = string.Join(" ", DR.GetTagsForNode(DR.CurrentNodeName));
+        //     if(DR.IsDialogueRunning && tagsCurrent.Contains("main")){ // if we're already talking about a main plot point, don't inturrupt
+        //         return;
+        //     }
+        //     else{
+        //         DR.StartDialogue(nodeToRun); // otherwise run it
+        //     }
+        // }
+        // else if(DR.IsDialogueRunning && tags.Contains("sub")){ // if we're already talking, and it's a bark, don't inturrupt
+        //     return;
+        // }
+        // else if(!DR.IsDialogueRunning && tags.Contains("sub")){ // if we aren't talking, and it's a bark, roll to see if we play the bark
+        //     int randomRoll = Random.Range(0, 2);
+        //     Debug.Log("Rolled:" + randomRoll);
+        //     if(randomRoll == 0){
+        //         DR.StartDialogue(nodeToRun);
+        //     }
+        // }
+        // else{
+        //     DR.StartDialogue(nodeToRun);
+        // }
     }
 
 
@@ -244,10 +305,12 @@ public class DialogueManager : MonoBehaviour
     public void setPanelVisibility(string characterName, string isPanelVisible){
         Debug.Log("setting " + characterName + "'s " + "panel visibility to " + isPanelVisible);
         if(isPanelVisible == "false"){
-            characters.Find(x => x.characterName == ui.speakerName).characterPanel.SetActive(false);
+            Director.Dir.StartFadeCanvasGroup(characters.Find(x => x.characterName == ui.speakerName).characterPanel, "out", 0.1f);
+            //characters.Find(x => x.characterName == ui.speakerName).characterPanel.SetActive(false);
         }
         if(isPanelVisible == "true"){
-            characters.Find(x => x.characterName == ui.speakerName).characterPanel.SetActive(true);
+            Director.Dir.StartFadeCanvasGroup(characters.Find(x => x.characterName == ui.speakerName).characterPanel, "in", 0.1f);
+            //characters.Find(x => x.characterName == ui.speakerName).characterPanel.SetActive(true);
         }
     }
     [YarnCommand("resume")]
@@ -288,6 +351,19 @@ public class DialogueManager : MonoBehaviour
         if(isObjActive == "false"){
             UIManager.UIM.fillFuelButt.interactable = false;
         }
+    }
+    [YarnCommand("giveScanner")]
+    public void giveScanner(){
+        PlayerManager.PM.scannerActive =  true;
+        AudioManager.AM.PlayRandomUpgrade();
+    }
+    [YarnCommand("introWaitingForAcceleration")]
+    public void introWaitingForAcceleration(){
+        waitingForAcceleration = true;
+    }
+    [YarnCommand("introComplete")]
+    public void introComplete(){
+        introCompleted = true;
     }
     
     /* 
