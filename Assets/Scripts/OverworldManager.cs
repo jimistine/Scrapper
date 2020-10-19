@@ -132,6 +132,7 @@ public class OverworldManager : MonoBehaviour
         goingOut = true;
         PlayerManager.PM.GetComponentInChildren<EdgeCollider2D>().enabled = true;
         towRig.SetActive(false);
+        overworldCamera.transform.position = new Vector3(0,0,-10);
         SceneController.SC.StartLoadTown();
         overworldCamera.GetComponent<cameraFollow>().enabled = true;
     }

@@ -103,19 +103,20 @@ public class MerchantManager : MonoBehaviour
         }
     }
 
-    // Upgrades
-    public void BuyUpgrade(string upgrade){ // button passes name of upgrade as string
-        // upgrade values are in a list on Upgrade Manager, edit Updgrades starter in inspector 
+// Upgrades
+    // u.1 button passes name of upgrade as string
+    public void BuyUpgrade(string upgrade){ 
+        // upgrade values are in a list of specific upgrade items on Upgrade Manager, edit Updgrades starter in inspector 
         //    and we populate the rest as we go.
         // Check progress of upgrades as childeren of Merchant Manager object
         Upgrade upgradeToCalculate = UpgradeManager.upgrades.Find(x => x.type == upgrade);
-        if(PlayerManager.playerCredits >= upgradeToCalculate.priceOffered){
+        if(PlayerManager.playerCredits >= upgradeToCalculate.upgradeItemValues[upgradeToCalculate.upgradeLevel].price){
             if(upgradeToCalculate.upgradeLevel == upgradeToCalculate.upgradeLevelMax){
                 AudioManager.AM.PlayMiscUIClip("reject");
                 //UIManager.UpgradeAlreadyMaxed(upgradeToCalculate);
             }
             else{
-                PlayerManager.playerCredits -= upgradeToCalculate.priceOffered;
+                PlayerManager.playerCredits -= upgradeToCalculate.upgradeItemValues[upgradeToCalculate.upgradeLevel].price;
                 UpgradeManager.CalculateUpgrade(upgradeToCalculate);
                 AudioManager.AM.PlayRandomUpgrade();
             }

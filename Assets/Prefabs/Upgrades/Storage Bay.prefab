@@ -49,25 +49,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: storage-bay
-  priceIncreasePercentBottom: 1
-  priceIncreasePercentTop: 1.25
-  priceModifier: 2
-  priceOffered: 4200
-  effectRangeBottom: 0.09
-  effectRangeTop: 0.12
-  effectOffered: 10
-  effectModifier: 1.5
   statAffected: maxHaul
   upgradeLevel: 0
   upgradeLevelMax: 3
-  flavorTexts:
+  upgradeItemValues:
   - flavorName: Rundoth Bay
     flavorDesc: A sizable hold that any scrapper would be proud to fill.
+    effectValue: 75
+    price: 3500
   - flavorName: Baytech Super Fitter
     flavorDesc: Surprisingly enough, each Baytech SF is built by hand. Though omongulons
       are known to have rather large hands.
+    effectValue: 125
+    price: 5000
   - flavorName: The Enormous Arms of Yun
     flavorDesc: The technology behind the Enormous Arms is a close kept secret, and
-      understandabley so. Much, much more can fit in them than one would first assume.
-  - flavorName: SOLD OUT
+      understandably so. Much, much more can fit in their embrace than one would
+      first assume.
+    effectValue: 250
+    price: 10000
+  - flavorName: 'SOLD OUT '
     flavorDesc: Nothing bigger on Talacan than the Enormous Arms of Yun.
+    effectValue: 0
+    price: 0

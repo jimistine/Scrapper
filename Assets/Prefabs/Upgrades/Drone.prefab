@@ -49,26 +49,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: drone
-  priceIncreasePercentBottom: 0.25
-  priceIncreasePercentTop: 1
-  priceModifier: 3
-  priceOffered: 1200
-  effectRangeBottom: 0.09
-  effectRangeTop: 0.12
-  effectOffered: 4.5
-  effectModifier: 1
   statAffected: droneZoom
   upgradeLevel: 0
   upgradeLevelMax: 3
-  flavorTexts:
+  upgradeItemValues:
   - flavorName: Kion Glass 1-01
     flavorDesc: Slot this onto your observer drone and you'll get a better lay of
       the land with the press of a button.
+    effectValue: 4.5
+    price: 1500
   - flavorName: Ground Ta'lith Crystal
     flavorDesc: Shaped by hand on Ta'lith IX, this these crystals have been used
-      in everything from war-beam configuation to hobbyist baking.
+      in everything from war-beam configuration to hobbyist baking.
+    effectValue: 6.75
+    price: 2500
   - flavorName: Fractal booster
-    flavorDesc: Cold, clinical, and it producest the sharpest image yet known to
-      sapient life.
+    flavorDesc: Cold, clinical, and it produces the sharpest image yet known to sentient
+      life. Something so clean and delicate seems out of place among the grease-slick
+      metal and cracked glass of the scrap shop.
+    effectValue: 8.5
+    price: 5000
   - flavorName: SOLD OUT
-    flavorDesc: No shaped glass at the outpost.
+    flavorDesc: No shaped glass left at the outpost.
+    effectValue: 0
+    price: 0

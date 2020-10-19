@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Text;
 //using System;
 [System.Serializable]
 public class UIManager : MonoBehaviour
@@ -54,7 +55,7 @@ public class UIManager : MonoBehaviour
     public GameObject townHub;
     public Button enterTownButton;
     public string playerLocation = "overworld";
-    public TMP_InputField inputField;
+    //public TMP_InputField inputField;
 
     [Header("Scrap Buyer")]
     [Space(10)]
@@ -64,7 +65,7 @@ public class UIManager : MonoBehaviour
     [Space(5)]
     public List<GameObject> upgradePanels = new List<GameObject>();
     public int panelIndex;
-    public string effectSuffix;
+    public string effectReadout;
     [Space(5)]
     public List<GameObject> upgradeButtons = new List<GameObject>();
     [Header("Fuel Merchant")]
@@ -107,7 +108,7 @@ public class UIManager : MonoBehaviour
             haulText.text = "Space left: 0" + " m<sup>3</sup>";
         }
         else{
-            haulText.text = "Space left: " + PlayerManager.maxHaul;
+            haulText.text = "Space left: " + PlayerManager.maxHaul+ " m<sup>3</sup>";
         }
         if(fuelManager.currentFuelUnits == fuelManager.maxFuel){
             fillFuelButtonText.text = "Cassets full.";
@@ -141,18 +142,14 @@ public class UIManager : MonoBehaviour
         newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.6509434f,0.5183763f,0.4216803f,1);
         Director.Dir.StartFadeCanvasGroup(onScrapPanel, "out", 0.15f);
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "out", 0.15f);
-        //LeaveScrap();
     }
 
     // 4. Player has clicked on scrap
-    public void ShowReadout(/*ScrapObject newScrap*/){
-        //ReadoutManager.UpdateReadout(newScrap);
+    public void ShowReadout(){
         ReadoutManager.UpdateReadout(recentScrap.GetComponent<ScrapObject>());
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "in", 0.05f);
         AudioManager.AM.PlayMiscUIClip("inspect");
-        //newScrap.isBuried = false;
         recentScrap.GetComponent<ScrapObject>().isBuried = false;
-        //return newScrap;
     }
 
     // 5. Player clicks "take" or "leave" and we do what they tell us
@@ -160,8 +157,6 @@ public class UIManager : MonoBehaviour
         if((PlayerManager.currentHaul + scrapToTake.size) <= PlayerManager.maxHaul){
                 PlayerManager.TakeScrap(scrapToTake);
                 UpdateScrapTicks();
-                // GameObject newTick = Instantiate(scrapTick) as GameObject;
-                // newTick.transform.SetParent(scrapTickSlots.transform, false);
                 Director.Dir.StartFadeCanvasGroup(readoutPanel, "out", 0.05f);
                 AudioManager.AM.PlayPlayerClip("pick up scrap");
                 DialogueManager.DM.RunNode("scrap-take");
@@ -258,74 +253,78 @@ public class UIManager : MonoBehaviour
         AudioManager.AM.TransitionToTownExterior();
         playerLocation = "town hub";
     }
-    // for setting the time to sunrise or sundown in town
+    // for setting the time to a specific time in town, not used, current configuration uses set day/night on DayNight.cs
     public void Wait(){
-        if(inputField.gameObject.activeSelf == false){
-            inputField.gameObject.SetActive(true);
-        }
-        else{
-            // each hour in game is 0.42 minutes irl
-            // each minute irl is 2.4 hours in-game
-            string waitTimeInput = inputField.text;
-            int waitTimeHours = System.Convert.ToInt32(waitTimeInput);
-            float secondsToWait = (waitTimeHours * 0.42f) * 60;
-            DayNight.clockTime += secondsToWait;
-            inputField.gameObject.SetActive(false);
-            Debug.Log(secondsToWait);
-            SceneController.StartLeaveTown();
-        }
+        // if(inputField.gameObject.activeSelf == false){
+        //     inputField.gameObject.SetActive(true);
+        // }
+        // else{
+        //     // each hour in game is 0.42 minutes irl
+        //     // each minute irl is 2.4 hours in-game
+        //     string waitTimeInput = inputField.text;
+        //     int waitTimeHours = System.Convert.ToInt32(waitTimeInput);
+        //     float secondsToWait = (waitTimeHours * 0.42f) * 60;
+        //     DayNight.clockTime += secondsToWait;
+        //     inputField.gameObject.SetActive(false);
+        //     Debug.Log(secondsToWait);
+        //     SceneController.StartLeaveTown();
+        // }
     }
-
+    // u.3 called from UpgradeManager
     public void BoughtUpgrade(Upgrade upgrade){
         // cant afford?
         if(upgrade.type == "engine"){ // more upgrade specific stuff than I would like...
             panelIndex = 0;
-            effectSuffix = " kph";
+            effectReadout = (PlayerManager.gameObject.GetComponent<ClickDrag>().topSpeed * 100).ToString("#,#") + " →" + (upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue * 100).ToString("#,#") + " kph top speed";
             DialogueManager.DM.RunNode("engine");
         }
         if(upgrade.type == "reactor"){
             panelIndex = 1;
-            effectSuffix = " deuterium cassets";
+            effectReadout = (PlayerManager.gameObject.GetComponent<fuel>().maxFuel/100).ToString("#,#") + " →" + (upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue/100).ToString("#,#") + " deuterium cassets";
             DialogueManager.DM.RunNode("reactor");
         }
         if(upgrade.type == "storage-bay"){
             panelIndex = 2;
-            effectSuffix = " m<sup>3</sup>";
+            effectReadout = PlayerManager.maxHaul.ToString("#,#") + " →" + upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue.ToString("#,#") + " m<sup>3</sup> max haul";
             DialogueManager.DM.RunNode("storage-bay");
             maxHaulText.text = "max: " + PlayerManager.maxHaul.ToString("#,#") + " m<sup>3</sup>";
         }
         if(upgrade.type == "scanner"){
             panelIndex = 3;
-            effectSuffix = " m";
+            effectReadout = (PlayerManager.searchRadius.radius * 10).ToString("F") + " →" + (upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue * 10).ToString("F") + " meter radius";
             DialogueManager.DM.RunNode("scanner");
         }
         if(upgrade.type == "drone"){
             panelIndex = 4;
-            effectSuffix = "x zoom";
             DialogueManager.DM.RunNode("drone");
+            zoomLevels = "";
+            int i = 1;
+            foreach(float zoomLevel in PlayerManager.gameObject.GetComponentInChildren<RigManager>().zoomLevels){
+                if(i == PlayerManager.gameObject.GetComponentInChildren<RigManager>().zoomLevels.Count){
+                    zoomLevels += zoomLevel.ToString("N1") + "x";
+                }
+                else{
+                    zoomLevels += zoomLevel.ToString("N1") + "x, ";
+                }
+                i++;
+            }
+            effectReadout = zoomLevels + " → +" + upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue.ToString("N1") + "x zoom";
         }
+
         Debug.Log("Panel index: " + panelIndex);  // Which panel do we change?
         if(upgradePanels[panelIndex] == null){
             return;
         }
         else{
-            upgradePanels[panelIndex].transform.Find("Name").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorName;
-            upgradePanels[panelIndex].transform.Find("Desc.").GetComponent<TextMeshProUGUI>().text = upgrade.flavorTexts[upgrade.upgradeLevel].flavorDesc;
-            upgradePanels[panelIndex].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = upgrade.priceOffered.ToString("#,#") + " cr.";
-        }
-        if(upgrade.type == "engine"){
-            upgrade.effectOffered *= 1000; // this is some stupid shit
-            upgradePanels[panelIndex].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = "+" + upgrade.effectOffered.ToString("F") + effectSuffix;
-            upgrade.effectOffered /= 1000;
-        }
-        else{
-            upgradePanels[panelIndex].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = "+" + upgrade.effectOffered.ToString("F") + effectSuffix;
+            upgradePanels[panelIndex].transform.Find("Name").GetComponent<TextMeshProUGUI>().text = upgrade.upgradeItemValues[upgrade.upgradeLevel].flavorName;
+            upgradePanels[panelIndex].transform.Find("Desc.").GetComponent<TextMeshProUGUI>().text = upgrade.upgradeItemValues[upgrade.upgradeLevel].flavorDesc;
+            upgradePanels[panelIndex].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = "Price: " + upgrade.upgradeItemValues[upgrade.upgradeLevel].price.ToString("#,#") + " cr.";
+            upgradePanels[panelIndex].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = effectReadout;
         }
     }
     public void UpgradeAlreadyMaxed(Upgrade upgrade){
         upgradePanels[panelIndex].gameObject.GetComponent<Image>().color = Color.gray;
         DialogueManager.DM.RunNode(upgrade.type);
-        //upgradeButtons[panelIndex].gameObject.GetComponent<Button>().interactable = false;
     }
     public void CantAffordUpgrade(Upgrade upgrade){
         if(playerLocation == "scrap buyer"){
@@ -346,7 +345,6 @@ public class UIManager : MonoBehaviour
         UpdateSellScrapButtText();
     }
     public void cantSellScrap(){
-        //scrapBuyerReadout.text = "You two ah, don't have any scrap out there.";
         DialogueManager.DM.RunNode("cant-sell-scrap");
         AudioManager.AM.PlayMiscUIClip("reject");
     }
@@ -354,8 +352,6 @@ public class UIManager : MonoBehaviour
         AudioManager.AM.PlayMiscUIClip("sold scrap");
         UpdateSellScrapButtText();
         DialogueManager.DM.RunNode("sold-all-scrap");
-        // scrapBuyerReadout.text = "It's yours\nYou made: " + 
-        //     "<color=#D44900>" + MerchantManager.scrapValue.ToString("#,#") + " credits.";
         for(int i = scrapTickSlots.transform.childCount - 1; i >= 0; i--){
             GameObject.Destroy(scrapTickSlots.transform.GetChild(i).gameObject);
         }
@@ -380,55 +376,44 @@ public class UIManager : MonoBehaviour
         MerchantManager.EnterFuelMerchant();
     }
     public void BoughtFuel(){
-        //fuelMerchantReadout.text = "Thank you for the credits. I assure you they will be put to good use.";
         DialogueManager.DM.RunNode("bought-fuel");
         fuelManager.UpdateFuelPercent();
         Debug.Log("Fuel text" + fuelText.text);
     }
     public void FuelAlreadyFull(){
         DialogueManager.DM.RunNode("fuel-already-full");
-        //fuelMerchantReadout.text = "It seems that your reactor is already at maximum capacity.";
     }
     public void CantAffordFill(){
         DialogueManager.DM.RunNode("ogden-cant-afford");
-        //fuelMerchantReadout.text = "\"I am sorry, friend, but that is only enough for a partial fuel refill. I will provide for you what I can.\"";
     }
     public void TweakedReactor(){
         DialogueManager.DM.RunNode("tweaked-reactor");
-        //fuelMerchantReadout.text = "I am not capable of adjusting your reactor, yet.";
     }
 
 // SETUP
+    string zoomLevels;
     public void InitUpgradePanels(){
         for(int i = 0; i < upgradePanels.Count; i++){
             if(UpgradeManager.upgradesStarter[i].type == "engine"){ // more upgrade specific stuff than I would like...
-                effectSuffix = " kph";
+                effectReadout = (PlayerManager.gameObject.GetComponent<ClickDrag>().topSpeed * 1000).ToString("#,#") + " → " + UpgradeManager.upgradesStarter[i].upgradeItemValues[0].effectValue.ToString("#,#") + " kph top speed";
             }
-            if(UpgradeManager.upgradesStarter[i].type == "reactor"){
-                effectSuffix = " deuterium cassets";
+            else if(UpgradeManager.upgradesStarter[i].type == "reactor"){
+                effectReadout = (PlayerManager.GetComponent<fuel>().maxFuel/100).ToString("#,#") + " → " + (UpgradeManager.upgradesStarter[i].upgradeItemValues[0].effectValue/100).ToString("#,#") + " deuterium cassets";
             }
-            if(UpgradeManager.upgradesStarter[i].type == "storage-bay"){
-                effectSuffix = " m<sup>3</sup>";
+            else if(UpgradeManager.upgradesStarter[i].type == "storage-bay"){
+                effectReadout = PlayerManager.maxHaul.ToString("#,#") + " → " + UpgradeManager.upgradesStarter[i].upgradeItemValues[0].effectValue.ToString("#,#") + "m<sup>3</sup> max haul";
             }
-            if(UpgradeManager.upgradesStarter[i].type == "scanner"){
-                effectSuffix = " m";
+            else if(UpgradeManager.upgradesStarter[i].type == "scanner"){
+                effectReadout = (PlayerManager.searchRadius.radius * 10).ToString("F") + " → " + (UpgradeManager.upgradesStarter[i].upgradeItemValues[0].effectValue * 10).ToString("F") + " meter radius";
             }
-            if(UpgradeManager.upgradesStarter[i].type == "drone"){
-                effectSuffix = "x zoom";
+            else if(UpgradeManager.upgradesStarter[i].type == "drone"){
+                zoomLevels = PlayerManager.gameObject.GetComponentInChildren<RigManager>().zoomLevels[0].ToString("N1") + "x ";
+                effectReadout = zoomLevels + "→ +" + UpgradeManager.upgradesStarter[i].upgradeItemValues[0].effectValue.ToString("N1") + "x zoom"; 
             }
-
-            upgradePanels[i].transform.Find("Name").GetComponent<TextMeshProUGUI>().text = UpgradeManager.upgradesStarter[i].flavorTexts[0].flavorName;
-            upgradePanels[i].transform.Find("Desc.").GetComponent<TextMeshProUGUI>().text = UpgradeManager.upgradesStarter[i].flavorTexts[0].flavorDesc;
-            upgradePanels[i].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = UpgradeManager.upgradesStarter[i].priceOffered.ToString("#,#") + " cr.";
-           
-            if(UpgradeManager.upgradesStarter[i].type == "engine"){
-                UpgradeManager.upgradesStarter[i].effectOffered *= 1000; // this is still some stupid shit
-                upgradePanels[i].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = "+" + UpgradeManager.upgradesStarter[i].effectOffered.ToString("F") + effectSuffix;
-                UpgradeManager.upgradesStarter[i].effectOffered /= 1000;
-            }
-            else{
-                upgradePanels[i].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = "+" + UpgradeManager.upgradesStarter[i].effectOffered.ToString("F") + effectSuffix;
-            }
+            upgradePanels[i].transform.Find("Name").GetComponent<TextMeshProUGUI>().text = UpgradeManager.upgradesStarter[i].upgradeItemValues[0].flavorName;
+            upgradePanels[i].transform.Find("Desc.").GetComponent<TextMeshProUGUI>().text = UpgradeManager.upgradesStarter[i].upgradeItemValues[0].flavorDesc;
+            upgradePanels[i].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = "Price: " + UpgradeManager.upgradesStarter[i].upgradeItemValues[0].price.ToString("#,#") + " cr.";
+            upgradePanels[i].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = effectReadout;
         }
     }
 }

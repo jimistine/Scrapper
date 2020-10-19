@@ -9,13 +9,13 @@ public class LightPulse : MonoBehaviour
     public float speed;
     public float maxIntensity;
     public float minIntensity;
-    Light2D light;
+    Light2D thisLight;
     float startIntensity;
     // Start is called before the first frame update
     void Start()
     {
-        light = gameObject.GetComponent<Light2D>();
-        startIntensity = light.intensity;
+        thisLight = gameObject.GetComponent<Light2D>();
+        startIntensity = thisLight.intensity;
     }
 
     // Update is called once per frame
@@ -27,6 +27,6 @@ public class LightPulse : MonoBehaviour
         // }
         // light.intensity = startIntensity * intensity;
 
-        light.intensity = Mathf.PingPong((Time.time)*speed, maxIntensity)+ minIntensity;
+        thisLight.intensity = Mathf.PingPong((Time.time)*speed, maxIntensity)+ minIntensity;
     }
 }

@@ -358,7 +358,7 @@ position: 847,774
 <<elseif $land_speeder is 1>>
     Hasron: Hey I think my mom used to have one of these back in the day.
     CH1-P: Really?
-    Hasron: Yeah they were pretty popular on Talacan for a while I think. Before I was around though.
+    Hasron: Yeah they were pretty popular on Talacan for a while I think. But that was before I was around.
     Hasron: No idea what they're called though.
     CH1-P: Doesn't look like there's any way to ID this one either.
     CH1-P: Crazy what sand and wind can do to metal plating, given the time.
@@ -382,7 +382,7 @@ position: 845,1013
     Hasron: Haven't been in one since I was a kid, but, good times.
     CH1-P: So that would have been what, like a year ago?
     Hasron: Very funny.
-    Hasron: Feels like a few years at least since we left Tanak.
+    Hasron: Feels like a few years at least since we left Hanro.
     CH1-P: I'll give you that.
     <<set $holospace_generator to 0>> 
 <<elseif $holospace_generator is 0>>
@@ -406,7 +406,7 @@ position: 845,1013
 <<elseif $holospace_generator is 1>>
     CH1-P: What other kind of holospace stuff did you like growing up?
     Hasron: Well there was this one about a talking cargo freighter.
-    CH1-P: It talked? Like what using its AI?
+    CH1-P: It talked? Like what using its AI over the comms?
     Hasron: No like, it had a mouth and stuff. It was awsome.
     CH1-P: A mouth?? That's just not right.
     Hasron: Yeah now that you mention it, eleven year old me hand-waived a lot of that stuff...
@@ -824,8 +824,8 @@ position: 835,1265
     CH1-P: And in some places the sun is always setting.
     CH1-P: Or rising. I can never remember which.
     <<set $gettingDarkProgress to 0>>
-<<elseif $gettingDarkPick is 0>>
-    Hasron: What do you see when the sun set?
+<<elseif $gettingDarkProgress is 0>>
+    Hasron: What do you see when the sun sets?
     CH1-P: What do I see?
     Hasron: Yeah. You know like what does it make you think of?
     CH1-P: Um...

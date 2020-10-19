@@ -132,20 +132,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Reed Industries Hyper Hydrator nozzle
-  description: The nozzle might appear benign and agrarian, but Reed Industries has
-    likely stolen more water than just about any other known corporation to supply
-    their hydrofarms
-  image: 1
-  size: 10
-  value: 500
-  material: Aluminum
-  zoneA_rarity: 85
+  scrapName: Sha'ak-ji Compact generator
+  description: Great for a personal jump-jet or refrigerated backpack. Both at once
+    seems doable, but you'd be hard pressed to find a mechanic insane enough to try
+    it.
+  image: 0
+  size: 1
+  value: 75
+  material: Titanium
+  zoneA_rarity: 90
   zoneB_rarity: 0
   zoneC_rarity: 0
   zoneD_rarity: 0
   carriesComponents: 0
-  isBuried: 0
+  isBuried: 1
 --- !u!114 &8142259534611466276
 MonoBehaviour:
   m_ObjectHideFlags: 0
