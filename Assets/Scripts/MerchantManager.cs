@@ -96,6 +96,7 @@ public class MerchantManager : MonoBehaviour
             PlayerManager.UpdateCurrentHaul();
             Debug.Log("cleared inventory");
             UIManager.SoldScrap();
+            Director.Dir.AddSale(scrapValue);
             scrapValue = 0;
         }
         else{
@@ -117,6 +118,7 @@ public class MerchantManager : MonoBehaviour
             }
             else{
                 PlayerManager.playerCredits -= upgradeToCalculate.upgradeItemValues[upgradeToCalculate.upgradeLevel].price;
+                Director.Dir.totalCreditsSpent += upgradeToCalculate.upgradeItemValues[upgradeToCalculate.upgradeLevel].price;
                 UpgradeManager.CalculateUpgrade(upgradeToCalculate);
                 AudioManager.AM.PlayRandomUpgrade();
             }
@@ -134,11 +136,12 @@ public class MerchantManager : MonoBehaviour
     public void EnterFuelMerchant(){
         // put the price on the button
         UpdateFuelPrice();
-        
+        //Director.Dir.StartFadeDip(0.5f, 0, 0.5f);
         if(PlayerManager.GetComponent<fuel>().currentFuelUnits <= 0 ){
             DialogueManager.DM.RunNode("ogden-towed");
             UIManager.fuelMerchantReadout.text += "\n<size=75%>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " credits has been detucted from your account</size>";
             PlayerManager.playerCredits -= PlayerManager.playerCredits*towPriceModifier;
+            Director.Dir.totalCreditsSpent += PlayerManager.playerCredits*towPriceModifier;
         }
     }
     public void UpdateFuelPrice(){
@@ -151,11 +154,12 @@ public class MerchantManager : MonoBehaviour
         // Can they afford a fill?
         if(PlayerManager.playerCredits >= creditsToTakeFuel){
             if (PlayerManager.fuelManager.currentFuelUnits == PlayerManager.fuelManager.maxFuel){
-                UIManager.FuelAlreadyFull();
                 AudioManager.AM.PlayMiscUIClip("reject");
+                DialogueManager.DM.RunNode("fuel-already-full");
             }
             else{
                 PlayerManager.playerCredits -= creditsToTakeFuel;
+                Director.Dir.totalCreditsSpent +=creditsToTakeFuel;
                 PlayerManager.fuelManager.currentFuelUnits = PlayerManager.fuelManager.maxFuel;
                 UpdateFuelPrice();
                 fuelManager.UpdateFuelPercent();
@@ -168,14 +172,16 @@ public class MerchantManager : MonoBehaviour
             PlayerManager.fuelManager.currentFuelUnits += fuelToAdd;
             if(PlayerManager.playerCredits == 0){
                 AudioManager.AM.PlayMiscUIClip("reject");
+                DialogueManager.DM.RunNode("ogden-cant-afford");
             }
             else{
                 AudioManager.AM.PlayMiscUIClip("fill fuel");
+                DialogueManager.DM.RunNode("ogden-partial-fill");
             }
             PlayerManager.playerCredits = 0;
+            Director.Dir.totalCreditsSpent +=creditsToTakeFuel;
             UpdateFuelPrice();
             fuelManager.UpdateFuelPercent();
-            UIManager.CantAffordFill();
         }
     }
     public void TweakReactor(){

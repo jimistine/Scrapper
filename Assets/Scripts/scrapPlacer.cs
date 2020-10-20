@@ -46,7 +46,7 @@ public class scrapPlacer : MonoBehaviour
    Random shuffleRandom;
    float totalScrapValue;
    float totalScrapVolume;
-   GameObject[] currentLiveScrap;
+   public GameObject[] currentLiveScrap;
    RaycastHit2D scrapPosRay;
    Vector3 position;
    bool generatingPosition;
@@ -77,7 +77,7 @@ public class scrapPlacer : MonoBehaviour
         totalLiveScrap = currentLiveScrap.Count();
     }
     
-    void UpdateAverageScrapValue(){
+    public void UpdateAverageScrapValue(){
         foreach(GameObject scrap in currentLiveScrap){
             totalScrapValue += scrap.GetComponent<ScrapObject>().value;
             totalScrapVolume += scrap.GetComponent<ScrapObject>().size;
@@ -217,9 +217,10 @@ public class scrapPlacer : MonoBehaviour
             droppedScrapObj.GetComponent<ScrapObject>().zoneC_rarity = droppedScrap.zoneC_rarity;
             droppedScrapObj.GetComponent<ScrapObject>().zoneD_rarity = droppedScrap.zoneD_rarity;
             droppedScrapObj.GetComponent<ScrapObject>().carriesComponents = droppedScrap.carriesComponents;
-            droppedScrapObj.GetComponent<ScrapObject>().isBuried = droppedScrap.isBuried;
+            droppedScrapObj.GetComponent<ScrapObject>().isBuried = false;
             droppedScrapObj.SetActive(true);
             Instantiate(droppedScrapObj, PlayerManager.PM.gameObject.transform.position, Quaternion.identity);
-            droppedScrap.transform.parent = PlayerManager.PM.gameObject.transform;
+            //droppedScrap.transform.parent = PlayerManager.PM.gameObject.transform;
+            droppedScrap.transform.parent = gameObject.transform;
     }
  }

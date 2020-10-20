@@ -60,12 +60,12 @@ public class PlayerManager : MonoBehaviour
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
             RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
 
-            // 3. If player clicked something, and that something was scrap, and it's in range, show the readout panel
+            //3. If player clicked something, and that something was scrap, and it's in range, show the readout panel
             if(hit.collider != null){
                 if (hit.collider.tag == "Scrap" && hit.collider.gameObject.GetComponent<ProximityCheck>().interactable == true) {
-                    ScrapObject newScrap = hit.collider.GetComponent<ScrapObject>();
-                    //UIManager.ShowReadout(newScrap);
-                    UIManager.ShowReadout();
+                    GameObject newScrap = hit.collider.gameObject;
+                    UIManager.ShowReadout(newScrap);
+                    //UIManager.ShowReadout();
                 }
             }    
         }
@@ -106,7 +106,9 @@ public class PlayerManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Semicolon)){
             //Debug.Log("restarting");
-            DialogueManager.DM.RunNode("left-town-ogden");
+            //DialogueManager.DM.RunNode("left-town-ogden");
+            scrapPlacer.SP.UpdateAverageScrapValue();
+            //Debug.Log(Random.Range(0,3));
         }
     }
     
@@ -145,7 +147,9 @@ public class PlayerManager : MonoBehaviour
         if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(CircleCollider2D) && scannerActive){
             ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
             other.gameObject.GetComponent<ProximityCheck>().IsInRange(false);
-            UIManager.OutOfRangeScrap(newScrap);
+            
+            UIManager.OutOfRangeScrap(other.gameObject.GetComponent<ScrapObject>());
+            //UIManager.OutOfRangeScrap(newScrap);
         }
         if(other.gameObject.name == "Town"){
             UIManager.ActivateTownButton(false);
@@ -164,10 +168,15 @@ public class PlayerManager : MonoBehaviour
             DialogueManager.DM.RunNode("tutorial-take-scrap");
             firstScrapTaken = true;
         }
+        // foreach(GameObject scrap in scrapPlacer.SP.currentLiveScrap){
+        //     if (Vector3.Distance(scrap.transform.position, gameObject.transform.position) <= 0.1f){
+        //         UIManager.ShowScrap(scrap.GetComponent<ScrapObject>());
+        //     }
+        // }
     }
     public void DropScrap(int tickScrapIndex){
         //Debug.Log("Index Called: " + tickScrapIndex);
-        Debug.Log("Object at index on player: " + playerScrap[tickScrapIndex].scrapName);
+        //Debug.Log("Object at index on player: " + playerScrap[tickScrapIndex].scrapName);
         scrapPlacer.SP.SpawnDroppedScrap(playerScrap[tickScrapIndex]);
         playerScrap.RemoveAt(tickScrapIndex);
         GameObject.Destroy(UIManager.scrapTickSlots.transform.GetChild(tickScrapIndex).gameObject);

@@ -109,7 +109,7 @@ public class AudioManager : MonoBehaviour
 
 // RIG
     public void PlayRigStart(){
-        Debug.Log("rig start");
+        //Debug.Log("rig start");
         double startDuration = (double)RigStartStop.clip.samples / RigStartStop.clip.frequency;
         RigStartStop.PlayScheduled(AudioSettings.dspTime);
         RigRunning.PlayScheduled(AudioSettings.dspTime + startDuration + startRunningAdjustment);
@@ -121,7 +121,7 @@ public class AudioManager : MonoBehaviour
         RigStartStop.Stop();
         RigRunning.Stop();
         RigStartStop.PlayOneShot(rigStop);
-        Debug.Log("Playing Stop");
+        //Debug.Log("Playing Stop");
     }
 
 

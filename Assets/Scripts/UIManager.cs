@@ -145,11 +145,26 @@ public class UIManager : MonoBehaviour
     }
 
     // 4. Player has clicked on scrap
-    public void ShowReadout(){
+    public void ShowReadout(GameObject scrap = default(GameObject)){ // this one is for clicking on the scrap itself
+        Director.Dir.StartFadeCanvasGroup(onScrapPanel, "out", 0.1f);
+        if(scrap != null){
+            recentScrap = scrap;
+        }
         ReadoutManager.UpdateReadout(recentScrap.GetComponent<ScrapObject>());
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "in", 0.05f);
         AudioManager.AM.PlayMiscUIClip("inspect");
         recentScrap.GetComponent<ScrapObject>().isBuried = false;
+        // onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = 
+        //     scrap.GetComponent<ScrapObject>().scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + scrap.GetComponent<ScrapObject>().size.ToString("#,#") + " m<sup>3</sup></size>";
+    }
+    public void ShowReadoutButton(){ // and this one is for the on scrap panel. i hate it.
+        Director.Dir.StartFadeCanvasGroup(onScrapPanel, "out", 0.1f);
+        ReadoutManager.UpdateReadout(recentScrap.GetComponent<ScrapObject>());
+        Director.Dir.StartFadeCanvasGroup(readoutPanel, "in", 0.05f);
+        AudioManager.AM.PlayMiscUIClip("inspect");
+        recentScrap.GetComponent<ScrapObject>().isBuried = false;
+        // onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = 
+        //     recentScrap.GetComponent<ScrapObject>().scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + recentScrap.GetComponent<ScrapObject>().size.ToString("#,#") + " m<sup>3</sup></size>";
     }
 
     // 5. Player clicks "take" or "leave" and we do what they tell us
@@ -176,6 +191,9 @@ public class UIManager : MonoBehaviour
         }
     }
     public void LeaveScrap(){
+        onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = 
+            recentScrap.GetComponent<ScrapObject>().scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + recentScrap.GetComponent<ScrapObject>().size.ToString("#,#") + " m<sup>3</sup></size>";
+        Director.Dir.StartFadeCanvasGroup(onScrapPanel, "in", 0.1f);
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "out", 0.05f);
         AudioManager.AM.PlayMiscUIClip("dismiss");
         DialogueManager.DM.RunNode("scrap-leave");
@@ -209,17 +227,25 @@ public class UIManager : MonoBehaviour
             Director.Dir.StartFadeCanvasGroup(pauseMenu, "in", .15f);
             paused = true;
             AudioManager.AM.PlayMiscUIClip("inspect");
+            Director.Dir.gamePaused = true;
         }
         else{                // they unpause the game
             Director.Dir.StartFadeCanvasGroup(pauseMenu, "out", .15f);
             paused = false;
             AudioManager.AM.PlayMiscUIClip("dismiss");
+            Director.Dir.gamePaused = false;
         }
     }
 
 // TOWN AND MERCHANTS
     public void ActivateTownButton(bool isActive){
-        enterTownButton.gameObject.SetActive(isActive);
+        if(isActive == true){
+            Director.Dir.StartFadeCanvasGroup(enterTownButton.gameObject,"in", 0.25f);
+        }
+        else if(isActive == false){
+            Director.Dir.StartFadeCanvasGroup(enterTownButton.gameObject,"out", 0.25f);
+        }
+        //enterTownButton.gameObject.SetActive(isActive);
     }
     public void EnterTown(){
         ActivateTownButton(false);
@@ -228,8 +254,10 @@ public class UIManager : MonoBehaviour
         fuelText.color = (Color.white);
         creditText.color = (Color.white);
         playerLocation = "town hub";
-        Director.Dir.StartFadeCanvasGroup(TownUI, "in", .15f);
-        Director.Dir.StartFadeCanvasGroup(OverworldUI, "out", .15f);
+        TownUI.SetActive(true);
+        OverworldUI.SetActive(false);
+        // Director.Dir.StartFadeCanvasGroup(TownUI, "in", .15f);
+        // Director.Dir.StartFadeCanvasGroup(OverworldUI, "out", .15f);
     }
     public void LeaveTown(){
         ActivateTownButton(true);
@@ -237,10 +265,11 @@ public class UIManager : MonoBehaviour
         maxHaulText.color = (Color.black);
         fuelText.color = (Color.black);
         creditText.color = (Color.black);
-        DialogueManager.DM.ConversationEnded();
         playerLocation = "overworld";
-        Director.Dir.StartFadeCanvasGroup(TownUI, "out", .15f);
-        Director.Dir.StartFadeCanvasGroup(OverworldUI, "in", .15f);
+        TownUI.SetActive(false);
+        OverworldUI.SetActive(true);
+        // Director.Dir.StartFadeCanvasGroup(TownUI, "out", .15f);
+        // Director.Dir.StartFadeCanvasGroup(OverworldUI, "in", .15f);
     }
     public void BackToHub(){
         if(playerLocation == "scrap buyer"){
@@ -380,12 +409,7 @@ public class UIManager : MonoBehaviour
         fuelManager.UpdateFuelPercent();
         Debug.Log("Fuel text" + fuelText.text);
     }
-    public void FuelAlreadyFull(){
-        DialogueManager.DM.RunNode("fuel-already-full");
-    }
-    public void CantAffordFill(){
-        DialogueManager.DM.RunNode("ogden-cant-afford");
-    }
+    
     public void TweakedReactor(){
         DialogueManager.DM.RunNode("tweaked-reactor");
     }
@@ -395,7 +419,7 @@ public class UIManager : MonoBehaviour
     public void InitUpgradePanels(){
         for(int i = 0; i < upgradePanels.Count; i++){
             if(UpgradeManager.upgradesStarter[i].type == "engine"){ // more upgrade specific stuff than I would like...
-                effectReadout = (PlayerManager.gameObject.GetComponent<ClickDrag>().topSpeed * 1000).ToString("#,#") + " → " + UpgradeManager.upgradesStarter[i].upgradeItemValues[0].effectValue.ToString("#,#") + " kph top speed";
+                effectReadout = (PlayerManager.gameObject.GetComponent<ClickDrag>().topSpeed * 100).ToString("#,#") + " → " + (UpgradeManager.upgradesStarter[i].upgradeItemValues[0].effectValue * 100).ToString("#,#") + " kph top speed";
             }
             else if(UpgradeManager.upgradesStarter[i].type == "reactor"){
                 effectReadout = (PlayerManager.GetComponent<fuel>().maxFuel/100).ToString("#,#") + " → " + (UpgradeManager.upgradesStarter[i].upgradeItemValues[0].effectValue/100).ToString("#,#") + " deuterium cassets";

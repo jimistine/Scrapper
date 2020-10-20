@@ -61,30 +61,17 @@ public class SceneController : MonoBehaviour
         }
     }
     public IEnumerator LoadTown(){
-        AudioManager.AM.TransitionToTownExterior();
-        PlayerManager.SetPlayerMovement(false);
-        PlayerManager.gameObject.GetComponent<ClickDrag>().currentSpeed = 0;
         SceneManager.LoadScene("Town", LoadSceneMode.Additive);
-        OverworldCamera.SetActive(false);
-        UIManager.EnterTown();
-        if(PlayerManager.PM.GetComponent<fuel>().currentFuelUnits <= 0){
-            UIManager.UIM.enterFuelMerchant();
-        }
         yield return null;
     }
     public void StartLeaveTown(){
         StartCoroutine("LeaveTown");
-        AudioManager.AM.TransitionToOverworld();
         overworldLoaded?.Invoke();
     }
     public IEnumerator LeaveTown(){
-        PlayerManager.SetPlayerMovement(true);
         SceneManager.UnloadSceneAsync("Town");
-        OverworldCamera.SetActive(true);
-        UIManager.LeaveTown();
-        yield return new WaitForSeconds(0.05f);
+        yield return null;
     }
-
     public void RestartGame(){
         Debug.Log("Restarting game");
         SceneManager.LoadScene("ManagerScene");

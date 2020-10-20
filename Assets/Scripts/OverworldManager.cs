@@ -123,17 +123,19 @@ public class OverworldManager : MonoBehaviour
             PlayerManager.PM.transform.position = Vector3.Lerp(PlayerManager.PM.transform.position, town.transform.position, fractionOfJourney);
             // and the camera lol
             overworldCamera.transform.position = Vector3.Lerp(overworldCamera.transform.position, town.transform.position, fractionOfJourney);
+            overworldCamera.transform.position = new Vector3(overworldCamera.transform.position.x, overworldCamera.transform.position.y, -10);
             distanceToEnd = Vector3.Distance(towRig.transform.position, town.transform.position);
             if(distanceToEnd < .1f){
                 isMoving = false;
             }
             yield return null;
         }
+        Director.Dir.StartEnterTown();
+        yield return new WaitForSeconds(0.5f);
         goingOut = true;
         PlayerManager.PM.GetComponentInChildren<EdgeCollider2D>().enabled = true;
         towRig.SetActive(false);
         overworldCamera.transform.position = new Vector3(0,0,-10);
-        SceneController.SC.StartLoadTown();
         overworldCamera.GetComponent<cameraFollow>().enabled = true;
     }
 }
