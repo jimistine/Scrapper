@@ -167,6 +167,9 @@ public class DialogueManager : MonoBehaviour
             //Debug.Log("starting speaker panel timeout");
             StartCoroutine(TimeOutSpeakerPanel());
         }
+        if(Director.Dir.showTip_1){
+            Director.Dir.StartFadeCanvasGroup(GameObject.Find("Tip_1"), "in", 1f, 1f);
+        }
     }
     public IEnumerator TimeOutSpeakerPanel(){
         yield return new WaitForSeconds(2);
@@ -174,6 +177,10 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void LineEnd(){
+        if(Director.Dir.showTip_1){
+            Director.Dir.StartFadeCanvasGroup(GameObject.Find("Tip_1"), "out",1f);
+            Director.Dir.showTip_1 = false;
+        }
         // Debug.Log("Line ended");
     }
 

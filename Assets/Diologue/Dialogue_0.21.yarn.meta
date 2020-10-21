@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a3f01a8056db6cd459f068ab66dd9b45
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: 
+  stringIDs: []
+  compilationStatus: 0
+  isSuccesfullyCompiled: 0
+  compilationErrorMessage: "Error on line 1068 at position 8:\nmismatched input 'if
+    ' expecting COMMAND_END\r\n<<else if $leftTownCount == 3>>\r\n       ^^^"
+  baseLanguage: {instanceID: 0}
+  localizations: []

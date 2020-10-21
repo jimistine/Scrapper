@@ -34,10 +34,12 @@ public class Director : MonoBehaviour
     public bool ogdenVisited;
     public bool chundrVisited;
     public bool outOfFuelCompleted;
+    public bool showTip_1;
     [Header("Debugging")]
     [Space(10)]
-    public bool playIntroDialogue;
+    public bool skipIntroDialogue;
     public bool lotsOfCredits;
+    public bool scannerActive;
     public bool lowFuel;
     public bool nearTown;
     public float totalCreditsEarned;
@@ -81,6 +83,12 @@ public class Director : MonoBehaviour
         else{
             PlayerManager.PM.gameObject.transform.position = new Vector3(23, -44, 0);
         }
+        if(scannerActive){
+            PlayerManager.PM.scannerActive = true;
+        }
+        else{
+            PlayerManager.PM.scannerActive = false;
+        }
     }
     public void AddSale(float amount){
         Sale newSale;
@@ -100,7 +108,10 @@ public class Director : MonoBehaviour
         AudioManager.TransitionToOverworld();
         StartFadeCanvasGroup(screenCover.gameObject,"out", fadeDuration);
         yield return new WaitForSeconds(fadeDuration + 3);
-        if(playIntroDialogue){
+        if(skipIntroDialogue){
+            yield return null;;
+        }
+        else{
             DialogueManager.RunNode("intro-2-1");
             Debug.Log("sending intro node");
         }
@@ -112,6 +123,14 @@ public class Director : MonoBehaviour
         PlayerManager.PM.SetPlayerMovement(false);
         StartCoroutine(FadeCanvasGroup(UIManager.gameObject, "out", .5f));
         // now we're waiting for dialogue to end which will trigger the town to actually load
+    }
+    public void LoadTownOnDialogueEnd(){
+        //Debug.Log("Load town on dialogue end called");
+        if(waitingToEnterTown){
+            waitingToEnterTown = false;
+            Debug.Log("entering town");
+            StartCoroutine(EnterTown());
+        }
     }
     public void StartEnterTown(){
         if(DialogueManager.DM.isDialogueRunner1Running){
@@ -125,6 +144,8 @@ public class Director : MonoBehaviour
         screenCover.color = myBlack;
         StartFadeCanvasGroup(screenCover.gameObject, "in", 0.5f);
         yield return new WaitForSeconds(0.75f);
+        UIManager.gameObject.SetActive(true);
+        UIManager.gameObject.GetComponent<CanvasGroup>().alpha = 1;
         AudioManager.AM.TransitionToTownExterior();
         PlayerManager.PM.SetPlayerMovement(false);
         PlayerManager.PM.gameObject.GetComponent<ClickDrag>().currentSpeed = 0;
@@ -137,16 +158,6 @@ public class Director : MonoBehaviour
         StartFadeCanvasGroup(screenCover.gameObject, "out", 0.5f);
     }
     
-    public void LoadTownOnDialogueEnd(){
-        //Debug.Log("Load town on dialogue end called");
-        if(waitingToEnterTown){
-            Debug.Log("entering town");
-            SceneController.StartCoroutine("LoadTown");
-            StartCoroutine(FadeCanvasGroup(UIManager.gameObject, "in", 1f));
-            UIManager.EnterTown();
-            waitingToEnterTown = false;
-        }
-    }
     public void StartLeaveTown(){
         StartCoroutine(LeaveTown());
     }
@@ -161,6 +172,9 @@ public class Director : MonoBehaviour
         OverworldManager.OM.overworldCamera.SetActive(true);
         UIManager.LeaveTown();
         StartFadeCanvasGroup(screenCover.gameObject, "out", 0.5f);
+        float timeToWait =Random.Range(2, 5);
+        yield return new WaitForSeconds(timeToWait);
+        DialogueManager.DM.RunNode("left-town-ogden");
     }
 
     
@@ -179,7 +193,45 @@ public class Director : MonoBehaviour
     public void StartFadeCanvasGroup(GameObject element, string targetVisibility, float fadeTime){
         StartCoroutine(FadeCanvasGroup( element,  targetVisibility, fadeTime));
     }
+    public void StartFadeCanvasGroup(GameObject element, string targetVisibility, float delayTime, float fadeTime){
+        StartCoroutine(FadeCanvasGroup( element,  targetVisibility, delayTime, fadeTime));
+    }
     public IEnumerator FadeCanvasGroup(GameObject element, string targetVisibility, float fadeTime){
+        float elapsedTime = 0.0f;
+        float alphaStart;
+        float alphaEnd;
+        bool isGroupActive;
+        bool lerping = true;
+
+        if(targetVisibility == "in"){
+            alphaStart = 0;
+            alphaEnd = 1;
+            isGroupActive = true;
+            element.SetActive(true);    
+        }
+        else{
+            alphaStart = 1;
+            alphaEnd = 0;
+            isGroupActive = false;    
+        }
+
+        while(lerping){
+            
+            element.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(alphaStart, alphaEnd, elapsedTime/fadeTime);
+
+            if(fadeTime < elapsedTime){
+                lerping = false;
+            }
+
+            elapsedTime += Time.deltaTime;
+
+            //Debug.Log("fading " + element + " " + targetVisibility);
+            yield return null;
+        }
+        element.SetActive(isGroupActive);    
+    }
+    public IEnumerator FadeCanvasGroup(GameObject element, string targetVisibility, float delayTime, float fadeTime){
+        yield return new WaitForSeconds(delayTime);
         float elapsedTime = 0.0f;
         float alphaStart;
         float alphaEnd;
