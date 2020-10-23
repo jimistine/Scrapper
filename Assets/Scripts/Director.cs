@@ -81,7 +81,7 @@ public class Director : MonoBehaviour
             PlayerManager.PM.gameObject.transform.position = new Vector3(0, -2, 0);
         }
         else{
-            PlayerManager.PM.gameObject.transform.position = new Vector3(23, -44, 0);
+            PlayerManager.PM.gameObject.transform.position = new Vector3(19, -44, 0);
         }
         if(scannerActive){
             PlayerManager.PM.scannerActive = true;

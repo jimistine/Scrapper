@@ -1,0 +1,1104 @@
+title: intro-2-3
+tags: main
+colorID: 0
+position: 249,1024
+---
+<<if visited("intro-2-3") is false>> 
+    CH1-P: Are you sure this road will get us to the outpost?
+    Hasron: No, not really.
+    CH1-P: Ah. I was wondering.
+    Hasron: Well, I mean if it's around this bend, then I know exactly where we are. 
+    Hasron: And if it isn't...
+    CH1-P: Yes?
+    Hasron: Uh, well then I won't be as sure.
+    Hasron: But I have a good feeling about this canyon!
+    CH1-P: It is a lot more windy than the last few, I'll give you that.
+    CH1-P: Anyway we should keep moving. Day won't last forever.
+    Hasron: Right.
+
+    <<setPanelVisibility DialogueManager Hasron false>>
+    <<wait 3>> 
+    <<setPanelVisibility DialogueManager Hasron true>>
+    Hasron: So you actually think we can make the big creds out here?
+    CH1-P: We'll see. Supposedly the merchants out here pay well for scrap.
+    Hasron: Right.
+    CH1-P: Just a matter of finding it I guess. But I have a good feeling. 
+    Hasron: Oh! Let me guess...
+    CH1-P: What?
+    Hasron: You can feel it in your...
+    Hasron: Shoulder?
+    CH1-P: Which one?
+    Hasron: Umm...
+    Hasron: If you could just take off your--
+    CH1-P: Uh-uh-uh! No cheating! The cool new robe stays on!
+    CH1-P: You really don't remember which is which?
+    Hasron: No, no, I'll think of it. Just might take a bit.
+    <<introComplete DialogueManager>> 
+<<endif>>
+===
+title: close-to-town
+tags: world
+colorID: 0
+position: 242,1283
+---
+<<if visited("close-to-town") is false>> 
+    CH1-P: Well I'll be damned, we made it.
+    Hasron: Not gonna lie, I was getting pretty nervous there.
+    CH1-P: Oh I know.
+    CH1-P: You're looking pretty dehydrated from all that sweating.
+    Hasron: They'll have more water in town, right?
+    CH1-P: You never know. Did the guide say if this place was organic friendly?
+    Hasron: CH1-P...
+    Hasron: There's no guide for anywhere on Talacan.
+    CH1-P: Well then I guess we'll just have to find out.
+    <<introComplete DialogueManager>> 
+<<endif>>
+===
+title: transition
+tags: 
+colorID: 0
+position: -399,518
+---
+<<set $transToPlay = random("transition", 3)>> 
+
+<<if $transToPlay == 0>>
+    Hasron: What were we talking about again?
+<<elseif $transToPlay == 1>>
+    Hasron: Weren't we just talking about something else?
+<<elseif $transToPlay == 2>>
+    CH1-P: What's that we were talking about just a second ago?
+<<elseif $transToPlay == 3>>
+    CH1-P: Anyway...
+<<endif>> 
+
+<<resume DialogueManager>>
+===
+title: scrap-find
+tags: sub
+colorID: 0
+position: 1470,507
+---
+<<set $scrapFindPick = random("scrap-find", 15)>>
+
+<<if $scrapFindPick == 0>>
+    Hasron: Beep beep!
+<<elseif $scrapFindPick == 1>>
+    Hasron: There's something.
+<<elseif $scrapFindPick == 2>>
+    Hasron: Should we check it out?
+<<elseif $scrapFindPick == 3>>
+    Hasron: Hey CH1-P, over there!
+
+<<elseif $scrapFindPick == 4>>
+    CH1-P: Well look at that.
+<<elseif $scrapFindPick == 5>>
+    CH1-P: We should check that out.
+<<elseif $scrapFindPick == 6>>
+    CH1-P: Might be something good.
+<<elseif $scrapFindPick == 7>>
+    CH1-P: There's another.
+
+<<elseif $scrapFindPick == 8>>
+    CH1-P: More scrap here.
+<<elseif $scrapFindPick == 9>>
+    CH1-P: Wonder what it is.
+<<elseif $scrapFindPick == 10>>
+    CH1-P: Scanner picked something up here.
+<<elseif $scrapFindPick == 11>>
+    CH1-P: Hope it's not another skeleton.
+
+<<elseif $scrapFindPick == 12>>
+    Hasron: Think we got some scrap there.
+<<elseif $scrapFindPick == 13>>
+    Hasron: Looking pretty scrappy over there if you ask me.
+<<elseif $scrapFindPick == 14>>
+    Hasron: Ooo my favorite sound!
+<<elseif $scrapFindPick == 15>>
+    Hasron: I really hope there aren't any skeletons in this one.
+
+<<endif>>
+===
+title: scrap-take
+tags: sub
+colorID: 0
+position: 1466,741
+---
+<<set $scraptakepick = random("scrap-take", 7)>>
+
+<<if $scraptakepick == 0>>
+    Hasron: Load er up!
+<<elseif $scraptakepick == 1>>
+    Hasron: Ca-ching!
+<<elseif $scraptakepickk == 2>>
+    Hasron: Wonder where this came from...
+<<elseif $scraptakepick == 3>>
+    Hasron: One more for the haul.
+
+<<elseif $scraptakepick == 4>>
+    CH1-P: Should be room for that.
+<<elseif $scraptakepick == 5>>
+    CH1-P: Careful loading that up.
+<<elseif $scraptakepick == 6>>
+    CH1-P: Has, could you lend me a hand?
+    Hasron: You got it.
+<<elseif $scraptakepick == 7>>
+    CH1-P: Credits in the bank.
+
+<<endif>>
+===
+title: scrap-leave
+tags: sub
+colorID: 0
+position: 1466,988
+---
+<<set $scrapLeavePick = random("scrap-take", 7)>>
+
+<<if $scrapLeavePick == 0>>
+    Hasron: Yeah probably not.
+<<elseif $scrapLeavePick == 1>>
+    Hasron: Never mind I guess.
+<<elseif $scrapLeavePick == 2>>
+    Hasron: Not today, scrappy.
+<<elseif $scrapLeavePick == 3>>
+    Hasron: Maybe we should grab it later.
+
+<<elseif $scrapLeavePick == 4>>
+    CH1-P: I don't think so.
+<<elseif $scrapLeavePick == 5>>
+    CH1-P: We should leave it.
+<<elseif $scrapLeavePick == 6>>
+    CH1-P: Yeah, no.
+<<elseif $scrapLeavePick == 7>>
+    CH1-P: Maybe later.
+    Hasron: If we can find it again...
+
+<<endif>>
+===
+title: fuel-running-low
+tags: sub
+colorID: 0
+position: 1461,1467
+---
+<<set $fuelRunningLowPick = random("fuel-running-low", 7)>>
+
+<<if $fuelRunningLowPick == 0>>
+    Hasron: Uh oh.
+<<elseif $fuelRunningLowPick == 1>>
+    CH1-P: We should really start heading back.
+    Hasron: I know, I know.
+<<elseif $fuelRunningLowPick == 2>>
+    Hasron: Hope we make it back in time...
+<<elseif $fuelRunningLowPick == 3>>
+    Hasron: Really don't wanna see that tow-rig right now.
+
+<<elseif $fuelRunningLowPick == 4>>
+    CH1-P: That's not the good beep, is it?
+<<elseif $fuelRunningLowPick == 5>>
+    CH1-P: Not again...
+<<elseif $fuelRunningLowPick == 6>>
+    CH1-P: We gotta get more cassettes.
+<<elseif $fuelRunningLowPick == 7>>
+    CH1-P: Almost out of deuterium, Hasron.
+
+<<endif>>
+===
+title: fuel-out
+tags: sub
+colorID: 0
+position: 1459,1688
+---
+<<set $fuelOutPick = random("fuel-out", 7)>>
+<<if $fuelOutPick == 0>>
+    Hasron: Ah crap.
+<<elseif $fuelOutPick == 1>>
+    Hasron: How does this keep happening?
+    CH1-P: Umm...
+    Hasron: Don't say it!
+    CH1-P: Wouldn't dream of it.
+<<elseif $fuelOutPick == 2>>
+    Hasron: Gues we should call in for a tow...
+<<elseif $fuelOutPick == 3>>
+    Hasron: Well at least we get a free ride.
+    CH1-P: Has, we pay for these.
+    CH1-P: Did you not know that?
+    Hasron: ...
+    CH1-P: You owe me a couple rounds of slab when we're back.
+<<elseif $fuelOutPick == 4>>
+    CH1-P: Well this is just great.
+<<elseif $fuelOutPick == 5>>
+    CH1-P: You've gotta be kidding me.
+<<elseif $fuelOutPick == 6>>
+    CH1-P: Damn this thing is thirsty.
+<<elseif $fuelOutPick == 7>>
+    CH1-P: We should stay closer to town.
+    Hasron: But there's so much to see out here!
+    CH1-P: Yeah...
+    Hasron: And you never know what else might be out there.
+    CH1-P: I wouldn't mind keeping it that way.
+<<endif>>
+===
+title: ogden-intro
+tags: main merchant
+colorID: 0
+position: 1789,491
+---
+<<if visited("ogden-intro") is false>>
+    <<setFuelButtActive DialogueManager false>>
+    <<if visited ("tutorial-out-of-fuel") is true>>
+        Hasron: Hey thanks again for towing us in back there. Should have been keeping a closer eye on the reactor.
+        Ogden: You are most welcome. These things happen from time to time.
+        Ogden: Just so that you are aware, I will unfortunately need to charge a fee for any subsequent rescues.
+        Ogden: I do not like doing so, but if I do not, I become creditless very quickly.
+        CH1-P: It's no trouble at all.
+        Ogden: Thank you very much. You are new to this region, yes?
+        Hasron: Yeah, we just got in. I'm actually from the Hanro region, but I've never come this far south.
+        Ogden: Well then welcome! My name is Ogden.
+        CH1-P: CH1-P, good to meet you.
+        Hasron: And I'm Hasron, happy to be here.
+        Ogden: I am glad you are present also. Hanro is quite a long way from this place.
+        Ogden: Please, allow me to replenish your supply of deuterium as a welcome gift. Empty cassettes are the scrapper's worst enemy.
+        <<fillFuel DialogueManager>> 
+        <<setFuelButtActive DialogueManager true>> 
+        Ogden: Welcome to the outpost.
+        CH1-P: Thank you. You're too generous.
+        Ogden: It is not often that we have new faces in town who wish to converse about more than a deal or bargain.
+        Ogden: Will you two be staying long?
+        Hasron: We plan to catch the last transport bound for the Maelstrom Cup. And that's in um...
+        CH1-P: Ten days.
+        Hasron: Right.
+        Ogden: I see. And you have lodging? There are few places that can tend to needs both organic and synthetic.
+        CH1-P: I can maintain myself.
+        CH1-P: But thank you.
+        Ogden: Of course. Should you need additional desalination methods I have perfected a few over the years. 
+        CH1-P: Thanks again, I'll keep that in mind. The sand was causing some problems earlier...
+        Ogden: Yes, it does, doesn't it? And yet here we are.
+        CH1-P: Here we are.
+    <<else>> 
+        Ogden: Hello.
+        CH1-P: Um, hi. Is this where we can re-fuel?
+        Ogden: It is.
+        Ogden: I do not recognize you. You are new to this region, yes?
+        Hasron: Yeah, we just got in. I'm actually from the Hanro region, but I've never come this far south.
+        Ogden: Well then welcome! My name is Ogden.
+        CH1-P: CH1-P, good to meet you.
+        Hasron: And I'm Hasron, it's good to be here.
+        Ogden: I am glad you are here also. Hanro is quite a long way from here.
+        Ogden: Please, allow me to replenish your supply of deuterium as a welcome gift. It seems that your cassettes are running low.
+        <<fillFuel DialogueManager>> 
+        <<setFuelButtActive DialogueManager true>> 
+        Ogden: Welcome to the outpost.
+        CH1-P: Thank you. That's very kind.
+        Ogden: It is not often that we have new faces in town who wish to converse about more than a deal or bargain.
+        Ogden: Will you two be staying long?
+        Hasron: We plan to catch the last transport bound for the Maelstrom Cup. And that's in um...
+        CH1-P: Ten days.
+        Hasron: Right.
+        Ogden: I see. And you have lodging? There are few places that can tend to needs both organic and synthetic.
+        CH1-P: I can maintain myself.
+        CH1-P: But thank you.
+        Ogden: Of course. Should you need additional desalination methods I have perfected a few over the years. 
+        CH1-P: Thanks again, I'll keep that in mind. The sand was causing some problems earlier...
+        Ogden: Yes, it does, doesn't it? And yet here we are.
+        CH1-P: Here we are.
+    <<endif>> 
+<<ogdenVisited DialogueManager>> 
+<<else>>
+   [[ogden-enter]]
+<<endif>>
+===
+title: chunk-of-raw-cordonite
+tags: world
+colorID: 0
+position: 856,522
+---
+<<if visited("chunk-of-raw-cordonite") is false>>
+    Hasron: What the hell is that?
+    CH1-P: I'm not actually sure.
+    CH1-P: It's pretty though, isn't it?
+    Hasron: Yeah.
+    Hasron: Wow.
+    CH1-P: I think it's that cordonite stuff they mentioned.
+    Hasron: They never said that it glowed in the dark!
+    CH1-P: Well, I guess this stuff is unrefind or something.
+    Hasron: Do we have space to take it? It's sorta big.
+    CH1-P: I think we should make space if we don't have any.
+    Hasron: Yeah, sounds good.
+    <<set $cordonite_chunk to 0>> 
+<<elseif $cordonite_chunk is 0>>
+    CH1-P: Hasron, more cordonite.
+    Hasron: That's more like it.
+    Hasron: That last chunk sold for what, three grand?
+    CH1-P: Three and a half.
+    Hasron: Even better.
+    Hasron: We'll have to buy everyone a round of slab when we're back at the outpost.
+    CH1-P: Since when did you like slab?
+    Hasron: Well, I don't. But everyone else seems to!
+    CH1-P: Fair enough, I'll let you buy me around any day.
+    <<set $cordonite_chunk to 1>> 
+<<elseif $cordonite_chunk is 1>>
+    Hasron: You think this stuff might actually be dangerous?
+    CH1-P: You know I was wondering that after the last one we brought in.
+    CH1-P: I don't know, I feel fine though. You?
+    Hasron: Yeah...I guess so.
+    <<set $cordonite_chunk to 2>> 
+<<endif>>
+===
+title: land-speeder
+tags: world
+colorID: 0
+position: 847,774
+---
+<<if visited("land-speeder") is false>>
+    CH1-P: What could they have possibly crashed into out here?
+    Hasron: Not sure, but I don't think I want to find out.
+    CH1-P: Likewise, let's keep moving.
+    <<set $land_speeder to 0>> 
+<<elseif $land_speeder is 0>>
+    Hasron: Another speeder. This one looks pretty nice too.
+    CH1-P: Yeah it must have been a nice ride back when it wasn't in thousands of tiny pieces.
+    <<set $land_speeder to 1>> 
+<<elseif $land_speeder is 1>>
+    Hasron: Hey I think my mom used to have one of these back in the day.
+    CH1-P: Really?
+    Hasron: Yeah they were pretty popular on Talacan for a while I think. But that was before I was around.
+    Hasron: No idea what they're called though.
+    CH1-P: Doesn't look like there's any way to ID this one either.
+    CH1-P: Crazy what sand and wind can do to metal plating, given the time.
+    <<set $land_speeder to 2>> 
+<<endif>>
+===
+title: holospace-generator
+tags: world
+colorID: 0
+position: 845,1013
+---
+<<if visited("holospace-generator") is false>>
+    Hasron: Wooaaahhh.
+    CH1-P: What? You recognize this hunk of scrap?
+    Hasron: Yeah!
+    Hasron: You don't??
+    CH1-P: Uh, no? I don't think so anyway.
+    Hasron: It's an old holospace generator.
+    CH1-P: Oh I see it now. Never really got into those.
+    Hasron: Aw man they're great.
+    Hasron: Haven't been in one since I was a kid, but, good times.
+    CH1-P: So that would have been what, like a year ago?
+    Hasron: Very funny.
+    Hasron: Feels like a few years at least since we left Hanro.
+    CH1-P: I'll give you that.
+    <<set $holospace_generator to 0>> 
+<<elseif $holospace_generator is 0>>
+    CH1-P: Wait don't tell me...
+    CH1-P: Holospace generator?
+    Hasron: Bingo!
+    CH1-P: Thought it looked familiar.
+    <<setPanelVisibility DialogueManager CH1-P false>>
+    <<wait 6>> 
+    <<setPanelVisibility DialogueManager CH1-P true>>
+    CH1-P: What kind of stuff did you used to play in those?
+    Hasron: All kinds of stuff really.
+    Hasron: My favorite were always the nature ones though.
+    Hasron: I could never get enough of this one serires that went all over the galaxy to different hyper-dense biomes.
+    CH1-P: Hyper-dense?
+    Hasron: Yeah you know, like "jungles" or sectoid colonies, that kind of thing.
+    CH1-P: Huh, I guess I could see the appeal if you grew up here.
+    Hasron: Yeah.
+    Hasron: Can't wait to see some of it in person.
+    <<set $holospace_generator to 1>> 
+<<elseif $holospace_generator is 1>>
+    CH1-P: What other kind of holospace stuff did you like growing up?
+    Hasron: Well there was this one about a talking cargo freighter.
+    CH1-P: It talked? Like what using its AI over the comms?
+    Hasron: No like, it had a mouth and stuff. It was awsome.
+    CH1-P: A mouth?? That's just not right.
+    Hasron: Yeah now that you mention it, eleven year old me hand-waived a lot of that stuff...
+    <<set $holospace_generator to 2>> 
+<<endif>>
+===
+title: chundr
+tags: main merchant
+colorID: 0
+position: 2066,486
+---
+<<if visited("chundr") is false>> 
+    Chundr: Hey there. Welcome to Outpost SKJ-29.
+    Chundr: You two must be our newest scrappers, hm?
+    Hasron: That's right! It's good to meet you. I'm Hasron.
+    Chundr: Nice to meet you, Hasron, and you are?
+    CH1-P: Hi, CH1-P. Nice to meet you as well.
+    CH1-P: You're the scrap buyer here, is that right?
+    Chundr: It is. They call me Chundr.
+    Chundr: Things aren't very complicated, you bring in scrap, I'll buy it. Doesn't matter what it is as long as it isn't—and never was—alive.
+    Chundr: I can also sell you new or spare parts to outfit your scrapping rig should you need them.
+    Hasron: Oh, thanks, but we're saving up for a couple Maelstrom Cup packages.
+    Chundr: Is that so! Those go for quite a few credits don't they? Transport and a ticket adds up.
+    CH1-P: Well the race is as close to Talacan as it's been in a lifetime, so the price isn't quite as bad...
+    Chundr: What's that bring it to, then?
+    CH1-P: 49,999 credits a piece.
+    Chundr: Ha, I can see why you'd want to be saving up. But a few enhancements can go a long way.
+    Chundr: You two have a scanner, right?
+    Hasron: Um...
+    CH1-P: Just a standard proximity scanner, why?
+    Chundr: Hm, I bet you drove past a haul full of scrap just on your way in! You'll need a proper structural scanner if you want to find anything.
+    Chundr: Here, take this one.
+    <<giveScanner DialogueManager>> 
+    Chundr: That should do it.
+    Hasron: Wow, really?
+    CH1-P: That's very kind of you. We'll be sure to bring our finds your way.
+    Chundr: Least I could do. If you want something with a wider radius, I have a couple other working units for sale. The Wide Eye is a classic.
+    Hasron: Thanks again.
+    Chundr: Of course. And say, if you don't make it to the 'Strom Race, we always have a good festival here to watch and celebrate.
+    Chundr: And good luck out there.
+    <<chundrVisited DialogueManager>> 
+<<else>>
+     [[chundr-enter]]
+<<endif>>
+===
+title: engine
+tags: merchant
+colorID: 0
+position: 2078,1005
+---
+<<if visited("engine") is false>>
+    Chundr: Careful installing that engine, ok? Churn isn't exactly known for their safety standards and I bought that thing off of a scrapper I hadn't seen before.
+    Chundr: Ran it last week ok, but, yeah, be careful.
+    <<set $engine_level to 0>> 
+<<elseif $engine_level is 0>>
+    Chundr: Was hoping someone would finally pick up the Mark VII. Good engine, that.
+    <<set $engine_level to 1>> 
+<<elseif $engine_level is 1>>
+    Chundr: That was actually in a rig I used to ride only a month or so ago. Smooth as butter but needed something a little less tame.
+    <<set $engine_level to 2>> 
+<<elseif $engine_level is 2>>
+    Chundr: The Yaak is top of the line, and I mean that quite literally.
+    Chundr: Took me two months to get that thing running again. 
+    Chundr: A scrapper wandered in here with that thing covered in oil and some kind of mucus. Never saw them again.
+    Chundr: That thing is a beast, might've even come from one.
+    <<set $engine_level to 3>> 
+<<elseif $engine_level is 3>>
+    Chundr: I'm afraid those are all the engines I have put together. 
+<<endif>>
+===
+title: scrap-wont-fit
+tags: sub
+colorID: 0
+position: 1462,1226
+---
+<<set $wontFitPick = random("scrap-wont-fit", 7)>>
+
+<<if $wontFitPick == 0>>
+    Hasron: Looks like we're out of room.
+<<elseif $wontFitPick == 1>>
+    Hasron: Think we have enough space for that?
+    CH1-P: Doesn't look like it.
+<<elseif $wontFitPick == 2>>
+    Hasron: We should come back for that later.
+<<elseif $wontFitPick == 3>>
+    Hasron: Ah, think that's too big.
+<<elseif $wontFitPick == 4>>
+    CH1-P: Don't bother, Has, storage bay's full.
+<<elseif $wontFitPick == 5>>
+    CH1-P: That looks a little big.
+<<elseif $wontFitPick == 6>>
+    CH1-P: We'd need a compactor for that one.
+    Hasron: Not a bad idea.
+<<elseif $wontFitPick == 7>>
+    CH1-P: We need to drop something for that to fit.
+<<endif>>
+===
+title: reactor
+tags: merchant
+colorID: 0
+position: 2092,1263
+---
+<<if visited("reactor") is false>>
+    Chundr: That should let you get a good bit further out before you're out of fuel.
+    Chundr: You know, I used to know a guy who worked at Jansin. Always used to complain about the pay, but he was never shy about whatever new piece of tech they gave out to the engineers.
+    <<set $reactor_level to 0>> 
+<<elseif $reactor_level is 0>>
+    Chundr: First time I heard about the Youngtide I thought the designers were reckless.
+    Chundr: I guess a little recklessness is what you need to wrangle a new kind of reactor.
+    <<set $reactor_level to 1>> 
+<<elseif $reactor_level is 1>>
+    Chundr: That thing will take you quite a ways out there. Just be sure you know the way back, ok?
+    <<set $reactor_level to 2>> 
+<<else>>
+    Chundr: No more reactors left, as much as I'd love to sell you one.
+<<endif>>
+===
+title: storage-bay
+tags: merchant
+colorID: 0
+position: 2099,1491
+---
+<<if visited("storage-bay") is false>>
+    Chundr: Once went on vacation to a place called Rundoth bay. 
+    Chundr: I was hoping for some connection to the storage tech group, but no, just a coincidence.
+    <<set $storage_level to 0>> 
+<<elseif $storage_level is 0>>
+    Chundr: If you've never met an omongulon, I'd highly recommend it. Kindest folk I know, as long as they remember how small the rest of us are.
+    Chundr: Overzealous omongulon hugs have broken quite a few ribs as I understand it.
+    <<set $storage_level to 1>> 
+<<elseif $storage_level is 1>>
+    Chundr: It's killing me to sell that set of Enormous Arms, but I'd be lying if I said I needed them.
+    Chundr: At the rate you two have been bringing in the scrap, though, I think they're just what you need.
+    <<set $storage_level to 2>> 
+<<else>>
+    Chundr: You really think you need more space?
+    Chundr: Must be bigger scrap out there than I realized. Sorry to say that's as big as I have.
+<<endif>>
+===
+title: scanner
+tags: merchant
+colorID: 0
+position: 2092,1724
+---
+<<if visited("scanner") is false>>
+    Chundr: I think the name speaks for itself.
+    <<set $scanner_level to 0>> 
+<<elseif $scanner_level is 0>>
+    Chundr: Goltan make good stuff, I think you'll get some good use out of that lens.
+    <<set $scanner_level to 1>> 
+<<elseif $scanner_level is 1>>
+    Chundr: I won't lie to you, I used to use that very scanner, but truth be told it turned up more than I wanted to see.
+    <<set $scanner_level to 2>> 
+<<else>>
+    Chundr: You know I had a Direculator that would have been perfect you you two, but it went missing about a month ago.
+    Chundr: There was a band of scrappers came through one week, and they were very generous with the rounds of slab at The Safe House...
+    Chundr: I guess they knew me better than I thought...
+<<endif>>
+===
+title: drone
+tags: merchant
+colorID: 0
+position: 2098,1961
+---
+<<if visited("drone") is false>>
+    Chundr: Kion glass is some of the sturdiest stuff out there, I'm sure that'll help you quite a bit out in the wastes.
+    <<set $drone_level to 0>> 
+<<elseif $drone_level is 0>>
+    Chundr: Pried this thing out of a mechanoid. I think it belonged to some kind of wildlife researcher, don't know who else would need one of these not strapped to a weapon.
+    <<set $drone_level to 1>> 
+<<elseif $drone_level is 1>>
+    Chundr: I know the crystal is nice and all, but if you buy this little guy it'll show you more than you can handle.
+    Chundr: If such a thing is possible.
+    <<set $drone_level to 2>> 
+<<else>>
+    Chundr: Sorry, friends, but if you need a wider image, you'll have to nab your own satellite.
+<<endif>>
+===
+title: chundr-cant-afford
+tags: merchant
+colorID: 0
+position: 2089,2186
+---
+<<set $chundrCantAffordPick = random("chundr-cant-afford", 3)>>
+
+<<if $chundrCantAffordPick == 0>>
+    Chundr: As much as I'd like to, I can't sell that for anything less.
+<<elseif $chundrCantAffordPick == 1>>
+    Chundr: Doesn't look like you've got quite enough credits on hand for that.
+<<elseif $chundrCantAffordPick == 2>>
+    Chundr: If you've got some scrap to sell, that might cover the difference. Otherwise you're a bit short on the credits.
+<<elseif $chundrCantAffordPick == 3>>
+    Chundr: Sorry gang, but I need to sell this for more than what you've got.
+<<endif>>
+===
+title: ogden-cant-afford
+tags: merchant
+colorID: 0
+position: 1796,1006
+---
+<<set $ogdenCantAffordPick = random("ogden-cant-afford", 3)>>
+
+<<if $ogdenCantAffordPick == 0>>
+    Ogden: I am sorry, but it appears that you do not have any credits at the present moment.
+<<elseif $ogdenCantAffordPick == 1>>
+    Ogden: Perhaps you might see Chundr to sell your wares. He will gladly pay for your scrap materials.
+<<elseif $ogdenCantAffordPick == 2>>
+    Ogden: Right awa- oh.
+    Ogden: My apologies but I cannot give you deuterium for free.
+<<elseif $ogdenCantAffordPick == 3>>
+    Ogden: Were loans not made illegal by the Galactic Council, I would gladly lend you some replenished cassettes.
+<<endif>>
+===
+title: cant-sell-scrap
+tags: merchant
+colorID: 0
+position: 2099,2421
+---
+<<set $cantSellScrap = random("cant-sell-scrap", 3)>>
+
+<<if $cantSellScrap == 0>>
+    Chundr: You to ah, don't have any scrap out there.
+<<elseif $cantSellScrap == 1>>
+    Chundr: Come on back when you've got more scrap. Always my favorite time of day when you come in with wild finds.
+<<elseif $cantSellScrap == 2>>
+    Chundr: I'm sorry if this is a good joke where you come from, but I don't really know what you're getting at.
+<<elseif $cantSellScrap == 3>>
+    Chundr: Sorry, but you gotta have scrap if you want any credits.
+<<endif>>
+===
+title: bought-fuel
+tags: merchant
+colorID: 0
+position: 1805,1270
+---
+<<set $boughtFuelPick = random("bought-fuel", 4)>>
+
+<<if $boughtFuelPick == 0>>
+    Ogden: There you are.
+<<elseif $boughtFuelPick == 1>>
+    Ogden: Thank you for the credits. I assure you they will be put to good use.
+<<elseif $boughtFuelPick == 2>>
+    Ogden: Your deuterium cassettes have been replenished and are ready for further fusion.
+<<elseif $boughtFuelPick == 3>>
+    Ogden: Please be careful with these saturated cassettes.
+    Ogden: I am sure you are aware of the danger they pose in certain situations, but one cannot be too careful.
+<<elseif $boughtFuelPick == 4>>
+    Ogden: They do seem to run out rather quickly, do they not?
+<<endif>>
+===
+title: fuel-already-full
+tags: merchant
+colorID: 0
+position: 1803,1514
+---
+<<set $alreadyFullPick = random("fuel-already-full", 3)>>
+
+<<if $alreadyFullPick == 0>>
+    Ogden: Your reactor appears to alredy be at maximum capacity.
+<<elseif $alreadyFullPick == 1>>
+    Ogden: As much as I would love to provide you with more fuel, I do not have the storage vessels needed to transport it long distance.
+<<elseif $alreadyFullPick == 2>>
+    Ogden: Apologies friends, but I cannot sell you anything more.
+<<elseif $alreadyFullPick == 3>>
+    Ogden: If you would like to spend credits, I would suggest The Safe House. Most life around here seems to spend quite a bit there.
+<<endif>>
+===
+title: tweaked-reactor
+tags: merchant
+colorID: 0
+position: 1792,1957
+---
+Ogden: I am not capable of adjusting the performance of your reactor, yet.
+===
+title: ogden-towed
+tags: merchant
+colorID: 0
+position: 1793,2180
+---
+<<set $ogdenTowedPick = random("ogden-towed", 2)>>
+
+<<if $ogdenTowedPick == 0>>
+    Ogden: I am sorry to have retrieved you, but I am glad glad to see that you are unharmed. The fee is appreciated as always. 
+    Ogden: Please, buy your fill of what deuterium I have.
+<<elseif $ogdenTowedPick == 1>>
+    Ogden: I hope that the journey back was not too uncomfortable for you two.
+<<elseif $ogdenTowedPick == 2>>
+    Ogden: I might suggest seeing if Chundr has any working reactors to sell. He only stocks those with the highest fuel capacity.
+<<endif>>
+===
+title: sold-all-scrap
+tags: merchant
+colorID: 0
+position: 2087,2664
+---
+<<set $soldAllScrap = random("sold-all-scrap", 7)>>
+
+<<if $soldAllScrap == 0>>
+    Chundr: Hope you put all these credits to good use.
+<<elseif $soldAllScrap == 1>>
+    Chundr: Think I'll have a field day with all that scrap, thank you.
+<<elseif $soldAllScrap == 2>>
+    Chundr: Looks like you have some good finds in that haul.
+<<elseif $soldAllScrap == 3>>
+    Chundr: I knew the basin had it's fair share of scrap, but you two just keep on bringing it in.
+<<elseif $soldAllScrap == 4>>
+    Chundr: At this rate I'm wondering if you're in league with the junk haulers that drop all this stuff down on us.
+<<elseif $soldAllScrap == 5>>
+    Chundr: That should get you a touch closer to buying those tickets, yeah?
+<<elseif $soldAllScrap == 6>>
+    Chundr: This is a good relationship we have going here.
+<<elseif $soldAllScrap == 7>>
+    Chundr: Can't wait to look through all this. Thanks.
+
+<<endif>>
+===
+title: ogden-enter
+tags: merchant
+colorID: 0
+position: 1788,751
+---
+<<setFuelButtActive DialogueManager true>>
+<<set $ogdenPick = random("ogden-enter", 7)>>
+
+<<if $ogdenPick == 0>>
+    Ogden: Welcome back. I hope your hunt has borne fruit.
+<<elseif $ogdenPick == 1>>
+    Ogden: You are in need of excitable matter, yes?
+<<elseif $ogdenPick == 2>>
+    Ogden: Ah, I was just wondering when you two would wander in next!
+<<elseif $ogdenPick == 3>>
+    Ogden: I've set aside some fully saturated cassettes just for you.
+<<elseif $ogdenPick == 4>>
+    Ogden: Please take care with this deuterium, improper storage can lead to quite the mess.
+<<elseif $ogdenPick == 5>>
+    Ogden: Tell Chundr I say 'hello' next time you see him.
+    Ogden: And that he still owes me a significant amount of credits for, well, he will know.
+<<elseif $ogdenPick == 6>>
+    Ogden: I would stay away from the slab at The Safe House tonight, but that never seems to stop anyone from going.
+<<elseif $ogdenPick == 7>>
+    Ogden: Hello again.
+
+<<endif>>
+===
+title: intro-2-1
+tags: main
+colorID: 0
+position: 251,520
+---
+<<if visited("intro-2-1") is false>>
+    Hasron: Are you sure you want me to take over the piloting?
+    CH1-P: Yeah my eye is starting to lock up from the sand I think.
+    Hasron: Oh I didn't realize. It's the um...
+    CH1-P: Robotic one, yeah. From the sand.
+    Hasron: Yeah. Ok.
+    Hasron: So how does this thing work?
+    CH1-P: You don't know?
+    Hasron: It's been a while! 
+    CH1-P: Alright so you've got acceleration on W, and deceleration on S.
+    Hasron: Ok, ok.
+<<endif>> 
+<<introWaitingForAcceleration DialogueManager>> 
+//set a flag true now to wait until they press w for the first time, then run 2-2
+===
+title: intro-2-2
+tags: main
+colorID: 0
+position: 244,755
+---
+<<if visited ("intro-2-2") is false>> 
+    <<wait 2>> 
+    Hasron: This thing is slower than I realized.
+    CH1-P: Hey you built it, not me.
+    Hasron: I know, I know, it's disturbing. Definitely the slowest rig I've built.
+    CH1-P: And then steering is with the mouse pointer.
+    Hasron: Cool, that at least is pretty responsive.
+    CH1-P: You can also change to using A and D to turn left and right by pressing 2, and pressing 1 will change it back.
+    Hasron: Got it, 2 for WASD, 1 for pointer steering. Glad I added that.
+    CH1-P: Me too actually, pretty hand little feature.
+    Hasron: Oh and I think headlights are on F, right?
+    CH1-P: Should be, yeah.
+<<endif>> 
+
+<<setPanelVisibility DialogueManager CH1-P false>>
+<<wait 5>> 
+<<setPanelVisibility DialogueManager CH1-P true>>
+ 
+[[intro-2-3]]
+===
+title: tutorial-find-scrap
+tags: world
+colorID: 0
+position: 1164,517
+---
+<<if visited("tutorial-find-scrap") is false>>
+    Hasron: Hey I think that's some of that fabled scrap!
+    CH1-P: I guess this scanner works after all.
+    CH1-P: Here's hoping the digging arm follows suit.
+    Hasron: One way to find out!
+<<endif>>
+===
+title: getting-dark
+tags: world
+colorID: 0
+position: 835,1265
+---
+<<wait 5>> 
+<<if visited("getting-dark") is false>> 
+    CH1-P: Sure gets dark quick out here, huh?
+    Hasron: Hm? Oh, yeah. Always has.
+    Hasron: I've heard other planets have some really long sunsets, right?
+    CH1-P: Yeah they do.
+    CH1-P: They're beautiful.
+    CH1-P: And in some places the sun is always setting.
+    CH1-P: Or rising. I can never remember which.
+    <<set $gettingDarkProgress to 0>>
+<<elseif $gettingDarkProgress is 0>>
+    Hasron: What do you see when the sun sets?
+    CH1-P: What do I see?
+    Hasron: Yeah. You know like what does it make you think of?
+    CH1-P: Um...
+    CH1-P: Explosions?
+    Hasron: Explosions?
+    CH1-P: Yeah, you know, like when a carrier ship goes up in low orbit?
+    Hasron: What? You've seen that?
+    CH1-P: Just the once, but it's something that stays with you.
+    Hasron: What happened?
+    CH1-P: Another night, Has. Another night.
+    <<set $gettingDarkProgress to 1>> 
+<<elseif $gettingDarkProgress is 1>>
+    CH1-P: Sun's going down.
+    Hasron: So it is. Another day down.
+    CH1-P: Think we should stay out tonight?
+    Hasron: Can't hurt, right?
+    CH1-P: Not unless we get lost.
+    Hasron: Right...
+    CH1-P: Or waste all our fuel looking for scrap that we can't really see.
+    Hasron: Also true.
+    <<set $gettingDarkProgress to 2>> 
+<<elseif $gettingDarkProgress is 2>>
+    Hasron: You think this stuff might actually be dangerous?
+    CH1-P: You know I was wondering that after the last one we brought in.
+    CH1-P: I don't know, I feel fine though. You?
+    Hasron: Yeah...I guess so.
+    <<set $gettingDarkProgress to 3>> 
+<<endif>>
+===
+title: tutorial-take-scrap
+tags: world
+colorID: 0
+position: 1166,781
+---
+<<if visited("tutorial-take-scrap") is false>>
+    Hasron: Loaded up and ready for scrappin'!
+    CH1-P: As long as we have room and some deuterium left in the reactor we should keep looking for more.
+    Hasron: Totally.
+    Hasron: I think we're going to get along just fine with Mr. Chundr.
+    CH1-P: I can't believe we needed a sctructure scanner this whole time.
+    Hasron: I know. I really feel like I should have thought of that. Both of my uncles were scrappers.
+    Hasron: But they had these cool optical scanners that they would always carry around—
+    CH1-P: Like the one on the console here?
+    Hasron: Yeah, kinda, but bigger. I just thought they would like stand on top of their rigs and look for scrap with those.
+    CH1-P: I mean that makes sense. I guess.
+    Hasron: Yeah, thanks.
+    CH1-P: I mean it!
+    Hasron: Ok, ok. Let's just hope this scanner works. Can't say the free gear I've gotten in the past has had the best track record.
+<<endif>>
+===
+title: chundr-enter
+tags: merchant
+colorID: 0
+position: 2073,741
+---
+<<set $chundrPick = random("chundr", 7)>>
+
+<<if $chundrPick == 0>>
+    Chundr: Welcome back. Find anything good?
+<<elseif $chundrPick == 1>>
+    Chundr: Never get tired of seeing you two walk in. What's in the haul?
+<<elseif $chundrPick == 2>>
+    Chundr: Got scrap?
+<<elseif $chundrPick == 3>>
+    Chundr: Tried reassembling that armature you brought earlier. Didn't work out, but at least I don't have to shave my brows...
+<<elseif $chundrPick == 4>>
+    Chundr: How are you all doing today? Not too sunburnt I hope?
+<<elseif $chundrPick == 5>>
+    Chundr: If Ogden tells you I owe them for, well, nevermind.
+<<elseif $chundrPick == 6>>
+    Chundr: What's it looking like out there.
+    CH1-P: Same as it ever was.
+<<elseif $chundrPick == 7>>
+    Hasron: Hey Chundr, how's the day going?
+    Chundr: Well I can say it's a bit better seeing you all in here.
+<<endif>>
+===
+title: left-town-ogden
+tags: main
+colorID: 0
+position: 532,509
+---
+<<if visited ("left-town-ogden") is false>> 
+    Hasron: Odgen seemed nice.
+    CH1-P: Mhm.
+    Hasron: What's up?
+    CH1-P: What?
+    Hasron: You just seemed a little off in there.
+    CH1-P: Oh. Well, you know. Still getting used to being around sapient AI again I guess.
+    Hasron: Oh right, sorry.
+    CH1-P: It's ok. It really shoulnd't be such a big deal.
+    CH1-P: It's not like Ogden is trying to drag me back to the Machine Worlds or anything.
+    Hasron: Do you think they know you're from the Worlds?
+    CH1-P: I doubt it. Probably didn't even cross their mind.
+    CH1-P: But it crossed mine.
+    <<setPanelVisibility DialogueManager CH1-P false>>
+    <<wait 5>>
+    Hasron: You gonna be ok working with all this scrap?
+    CH1-P: I think so. Spent long enough on Talacan to get used to building things again anyway. 
+    CH1-P: Thanks though.
+    Hasron: Yeah, of course.
+    Hasron: Let me know if you ever, you know, like, need help with any of that.
+    CH1-P: Sure thing.
+<<else>>
+    [[left-town]]
+<<endif>>
+===
+title: tutorial-out-of-fuel
+tags: main
+colorID: 0
+position: 1182,1021
+---
+<<if visited ("tutorial-out-of-fuel") is false>>
+    <<towReady DialogueManager false>> 
+    Hasron: Wait what the hell is going on? We lost power!
+    CH1-P: We're out of fuel.
+    Hasron: Out of fuel?!?
+    CH1-P: Yes. I'll put out a distress signal. I don't think we're that far from the outpost.
+    CH1-P: I can't imagine we'd be the first to get stranded out here. They should have a tow rig.
+    Hasron: Ok. Ok. We're gonna be fine.
+    CH1-P: Probably.
+    Hasron: Probably??
+    CH1-P: Hey I think I see someone coming already.
+    <<if visited("ogden-intro") is false && visited("chundr") is false>>
+        Ogden: Hello there!
+        Ogden: I received a signal requesting aide! Are you in need of help?
+        CH1-P: Yes! We seem to have run out of fuel.
+        Hasron: Are you from the outpost?
+        Ogden: I am indeed.
+        Ogden: I can tow you and your rig back, but you'll have to drop any large scrap that you might have with you.
+        Hasron: Oh, that's ok, we havn't picked any up yet.
+        Ogden: Right, that is for the best. One may not always find so easily what they have left behind.
+        Ogden: Let us go. We may speak more once we are sheltered from the wastes.
+    <<elseif visited("ogden-intro") is false && visited("chundr") is true>> 
+        Ogden: Hello there!
+        Ogden: I received a signal requesting aide! Are you in need of help?
+        CH1-P: Yes! We seem to have run out of fuel.
+        Hasron: Are you from the outpost?
+        Ogden: I am indeed.
+        Ogden: I can tow you and your rig back, but you'll have to drop any large scrap that you might have with you.
+        Hasron: Oh. Ok, got it.
+        Ogden: I am sorry to make you part with your belongings in this way, but it is more safe with a lighter load and a less attractive target in tow.
+        CH1-P: A target?
+        Ogden: Let us go. We may speak more once we are sheltered from the wastes.
+    <<elseif visited("ogden-intro") is true>>
+        Ogden: Hello again, travelers. You signaled for help?
+        CH1-P: Hi, uh, yeah.
+        Hasron: We're out of fuel.
+        Ogden: You are not the first to be in such a predicament.
+        Ogden: I can take you safely back to the outpost. But you must drop any large scrap that you have with you.
+        CH1-P: Really?
+        Ogden: I am sorry to make you part with your belongings in this way, but it is more safe with a lighter load and a less attractive target in tow.
+        Hasron: A target?
+        Ogden: Let us go. We may speak more once we are sheltered from the wastes.
+    <<endif>>
+    <<towReady DialogueManager true>> 
+    <<outOfFuelTutorialCompleted DialogueManager>>
+<<endif>>
+===
+title: tutorial-out-of-fuel-2
+tags: main
+colorID: 0
+position: 1175,1251
+---
+<<if visited("ogden-intro" is false) && visited("chundr") is false>>
+    Ogden: Hello there!
+    Ogden: I received a signal requesting aide! Are you in need of help?
+    CH1-P: Yes! We seem to have run out of fuel.
+    Hasron: Are you from the outpost?
+    Ogden: I am indeed.
+    Ogden: I can tow you and your rig back, but you'll have to drop any large scrap that you might have with you.
+    Hasron: Oh, that's ok, we havn't picked any up yet.
+    Ogden: Right, that is for the best. One may not always find so easily what they have left behind.
+    Ogden: Let us go. We may speak more once we are sheltered from the wastes.
+<<elseif visited("ogden-intro" is false) && visited("chundr") is true>> 
+    Ogden: Hello there!
+    Ogden: I received a signal requesting aide! Are you in need of help?
+    CH1-P: Yes! We seem to have run out of fuel.
+    Hasron: Are you from the outpost?
+    Ogden: I am indeed.
+    Ogden: I can tow you and your rig back, but you'll have to drop any large scrap that you might have with you.
+    Hasron: Oh. Ok, got it.
+    Ogden: I am sorry to make you part with your belongings in this way, but it is more safe with a lighter load and a less attractive target in tow.
+    CH1-P: A target?
+    Ogden: Let us go. We may speak more once we are sheltered from the wastes.
+<<elseif visited("ogden-intro") is true>>
+    Ogden: Hello again, travelers. You signaled for help?
+    CH1-P: Hi, uh, yeah.
+    Hasron: We're out of fuel.
+    Ogden: You are not the first to be in such a predicament.
+    Ogden: I can take you safely back to the outpost. But you must drop any large scrap that you have with you.
+    CH1-P: Really?
+    Ogden: I am sorry to make you part with your belongings in this way, but it is more safe with a lighter load and a less attractive target in tow.
+    Hasron: A target?
+    Ogden: Let us go. We may speak more once we are sheltered from the wastes.
+<<endif>>
+<<towReady DialogueManager>> 
+<<outOfFuelTutorialCompleted DialogueManager>>
+===
+title: ogden-partial-fill
+tags: merchant
+colorID: 0
+position: 1797,1731
+---
+<<if visited("ogden-partial-fill") is false>>
+    Ogden: I am sorry, friends, but that is only enough for a partial fill. I will give you what I can, but it will not fully satisfy your reactor's needs.
+    Hasron: Oh, that's alright, we're a little tight on credits at the moment heh...
+    <<set $partial_fill to 0>> 
+<<elseif $partial_fill is 0>>
+    CH1-P: That fill it up?
+    Ogden: I am afraid not, CH1-P. But it is enough to get you moving again at full speed.
+    <<set $partial_fill to 1>> 
+<<elseif $partial_fill is 1>>
+    Ogden:It appears that you lack the credits needed to completely saturate your deuterium cassettes.
+    Hasron: Yeah, figured as much. Just give em what you can.
+    Ogden: Of course.
+    <<set $partial_fill to 2>> 
+<<elseif $partial_fill is 2>>
+    Ogden: You do not have enough credits in your combined account to completely re-fuel. Would you still like to buy what you can.
+    CH1-P: Ah damn, yeah. Gotta have something in there.
+    <<set $partial_fill to 0>> 
+<<endif>>
+===
+title: left-town
+tags: main
+colorID: 0
+position: 530,776
+---
+<<set $leftTownCount += 1>>
+<<if $leftTownCount == 2>> 
+    Hasron: Left!
+    CH1-P: What?
+    Hasron: Your shoulder, that's the one you switched for, what was it...
+    Hasron: Miniature omongulon?
+    CH1-P: Ha! Not even close.
+    CH1-P: First off it's my right shoulder.
+    Hasron: Oh my bad.
+    CH1-P: And second, where in the void do you think I would have come by a miniature omongulon shoulder no one was using? 
+    Hasron: That's a great point. Could have sworn that's what it was though.
+    CH1-P: No, it's human.
+    Hasron: Right, right. A bit easier to maintain?
+    CH1-P: Depends on the system, but yeah usually.
+    <<setPanelVisibility DialogueManager CH1-P false>>
+    <<wait 3>> 
+    <<setPanelVisibility DialogueManager CH1-P true>>
+    CH1-P: I've told you that story right?
+    Hasron: That was from your exodus, right?
+    CH1-P: Yeah, it was the first piece of me to really leave.
+    Hasron: Crazy to think you didn't even feel it.
+    CH1-P: You're telling me.
+    CH1-P: People always tell me I'm a fool for becoming bionic because of all the pain organics deal with.
+    Hasron: I mean...
+    CH1-P: It's not that I like the pain itself.
+    CH1-P: Believe me I wish I had less of it at all the merges.
+    CH1-P: But being able to feel? And not just like the simulation of feeling, but feeling that actually matters?
+    CH1-P: Can't imagine life without it now.
+<<elseif $leftTownCount == 3>>
+    Hasron: Got a good feeling about this trip.
+    CH1-P: Well now we're screwed.
+    Hasron: With that attitude I suppose we are!
+    CH1-P: Let's just see what we can see.
+<<elseif $leftTownCount == 5>>
+    Hasron: This is the run.
+    CH1-P: What?
+    Hasron: You know, "this is the run"?
+    Hasron: Like the one where we get something really cool.
+    CH1-P: Hey we get lots of cool stuff!
+    Hasron: But I mean like really really cool.
+    Hasron: Maybe even cooler than cool!
+    CH1-P: Don't be ridiculous now.
+    Hasron: I'm just saying it could happen.
+    CH1-P: This is the run, huh?
+    Hasron: This is the run.
+<<endif>>
+===

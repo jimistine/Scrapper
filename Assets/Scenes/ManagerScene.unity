@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &650502
 RectTransform:
   m_ObjectHideFlags: 0
@@ -271,9 +271,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -17}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &10982930
 MonoBehaviour:
@@ -441,9 +441,9 @@ RectTransform:
   m_Father: {fileID: 1857571985}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -47.246124}
   m_SizeDelta: {x: 99.71756, y: 19.623325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &24886098
@@ -2047,7 +2047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &146625940
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2284,9 +2284,9 @@ RectTransform:
   m_Father: {fileID: 1857571985}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -34.732006}
   m_SizeDelta: {x: 99.59204, y: 8.8044815}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &151934181
@@ -9419,7 +9419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702413238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.03, y: -44.09, z: 0}
+  m_LocalPosition: {x: 19, y: -44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -14616,7 +14616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yarnScripts:
-  - {fileID: 2480198943629176163, guid: a3f01a8056db6cd459f068ab66dd9b45, type: 3}
+  - {fileID: 2480198943629176163, guid: e2c290959c88e9a438029686062badd0, type: 3}
   textLanguage: en-US
   variableStorage: {fileID: 1000250097}
   dialogueUI: {fileID: 1000250096}
@@ -15774,7 +15774,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 19.911867, y: 0.000061035}
-  m_SizeDelta: {x: -19.911865, y: 2006.5159}
+  m_SizeDelta: {x: -19.911865, y: 2771.805}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1077139173
 GameObject:
@@ -21447,8 +21447,8 @@ RectTransform:
   m_Father: {fileID: 1532633199}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.64095664}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -21560,8 +21560,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00039672852, y: -0.00024414062}
-  m_SizeDelta: {x: 790.67773, y: 2006.5154}
+  m_AnchoredPosition: {x: -0.00039672852, y: -0.00012207031}
+  m_SizeDelta: {x: 790.67773, y: 2771.8044}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1534649992
 MonoBehaviour:
@@ -21588,41 +21588,73 @@ MonoBehaviour:
     Thanks so much for trying out this very in progress
     game. It will continue to be updated until I collapse from exhaustion.
 
-    Here
-    are some handy things to know before getting started.
 
-    -<indent=15> Use ''R''
-    or the button in the top right to restart. Restarting also re-seeds the overworld
-    with different scrap in different places.</indent>
-
-    -<indent=15> Use ''SPACE''
-    to advance dialogue.</indent>
+    If
+    anything should go horribly wrong, please press <color=#EB8258>"R"</color> or
+    the button in the top right to restart. Restarting also re-seeds the overworld
+    with different scrap in different places.
 
 
-    <b><size=125%>NEW FEATURES</size>
+    <b><size=125%>NEW FEATURES</size></b>
 
-    October
-    10, 2020</b>
+    <b><color=#FAF8D4>October
+    20, 2020</color></b>
 
-    <indent=15><b>Merchant dialogue</b>
+    <b>All new level design</b>
 
-    - Expect to get to
-    know Ogden and Chundr a whole lot better this time around, starting with their
-    actual names!
+    -<indent=15>There''s
+    a lot more to be found now in the basin, even when sight itself is most inhibited.</indent>
+
+    -<indent=15>The
+    overall space has contracted in order to foster a little more exploration within
+    the canyons themselves.</indent>
+
+
+    <b>Turorialize It</b>
+
+    -<indent=15>Most
+    of the instructions for how to play this game are no longer in this panel, and
+    are instead woven into the game itself. </indent>
+
+    -<indent=15>There have
+    also been significant additions to the narrative introduction to the game itself.</indent>
+
+    -<indent=15>Merchant
+    dialog is now more of a conversation as our protagonists can now chime in.</indent>
+
+
+    <b>Balance</b>
+
+    -<indent=15>Upgrades
+    have recieved a big update in that I actually took 20 minutes (or maybe it was
+    120?) to balance them properly.</indent>
+
+    -<indent=15>As always there are
+    a few new pieces of scrap added to balance out your cash flow</indent>
+
+
+    <b><color=#FAF8D4>October
+    10, 2020</color></b>
+
+    <b>Merchant dialogue</b>
+
+    -<indent=15>Expect to
+    get to know Ogden and Chundr a whole lot better this time around, starting with
+    their actual names!
 
     </indent>
 
-    <indent=15><b>Updated scrap collection loop</b>
+    <b>Updated scrap collection loop</b>
 
-    -
-    Much bigger buttons for collecting scrap.
+    -<indent=15>Much
+    bigger buttons for collecting scrap.</indent>
 
-    - If you uncover something you
-    can''t take, returning to that piece of scrap will show a pop-up with its name
-    and size so you don''t need to re-investigate it.
+    - If you uncover something
+    you can''t take, returning to that piece of scrap will show a pop-up with its
+    name and size so you don''t need to re-investigate it.
 
-    - Don''t want the scrap?
-    Just drive away and the (now much larger) readout panel will get the message
+    - Don''t want the
+    scrap? Just drive away and the (now much larger) readout panel will get the message
     and go away on its own.
 
     - "Scrap ticks" (the squares in the bottom left
@@ -21632,15 +21664,15 @@ MonoBehaviour:
     </indent>
 
 
-    <b>October 3, 2020</b>
+    <b><color=#FAF8D4>October 3, 2020</color></b>
 
-    -<indent=15> Dialogue.
-    That''s right, we''re using an actual dialogue sysem now so there will be way
-    more little lines from our two characters.</indent>
+    -<indent=15>
+    Dialogue. That''s right, we''re using an actual dialogue sysem now so there will
+    be way more little lines from our two characters.</indent>
 
-    -<indent=15> Intro.
-    The beginning of the thing should feel a lot more "real" as I test out this temp
-    intro sequence and dialogue as you make your way to town.</indent>
+    -<indent=15>
+    Intro. The beginning of the thing should feel a lot more "real" as I test out
+    this temp intro sequence and dialogue as you make your way to town.</indent>
 
     -<indent=15>
     Day/Night Cycle. You gotta a love a sunset. Night doesn''t offer much reward
@@ -21653,22 +21685,24 @@ MonoBehaviour:
     scrap is a little easier. Subsequent upgrades are also much less expensive.</indent>
 
 
-    Narrative
-    context:
+    <b>Narrative
+    context</b>
 
-    You are two friends. Hasron is a humanoid from the planet you''re
-    on, and CH1-P is a bionic, exiled from the machine worlds. They''ve recently
-    teamed up to make some money by heading to a remote desert outpost surrounded
-    by wastes filled with scrap fallen from the interstellar highways above. They
-    want to see a galaxy-wide race called the Maelstrom Cup, which is in 10 days.
-    Tickets to get them there and into the event are 49,999 credits each. Your goal
-    is to make enough for one or both to go.
+    <i>Mild spoilers!</i>
+
+    You are two friends. Hasron is a
+    humanoid from the planet you''re on, and CH1-P is a bionic, exiled from the machine
+    worlds. They''ve recently teamed up to make some money by heading to a remote
+    desert outpost surrounded by wastes filled with scrap fallen from the interstellar
+    highways above. They want to see a galaxy-wide race called the Maelstrom Cup,
+    which is in 10 days. Tickets to get them there and into the event are 49,999
+    credits each. Your goal is to make enough for one or both to go.
 
 
-    <b><align=center>''P'' to continue.</b>
+    <b><align=center><color=#EB8258>''P''
+    to continue.</color></b>
 
-    <size=75%>and
-    to see this again if you want
+    <size=75%>and to see this again if you want
 
 '
   m_isRightToLeft: 0
@@ -22691,9 +22725,9 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 13.187256, y: -17}
+  m_SizeDelta: {x: 13.187256, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1576305735
 MonoBehaviour:
@@ -22738,7 +22772,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1523567910}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.35904336
+  m_Size: 0.2599123
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -26965,12 +26999,12 @@ MonoBehaviour:
   ogdenVisited: 0
   chundrVisited: 0
   outOfFuelCompleted: 0
-  showTip_1: 0
-  skipIntroDialogue: 1
+  showTip_1: 1
+  skipIntroDialogue: 0
   lotsOfCredits: 0
   scannerActive: 0
   lowFuel: 0
-  nearTown: 1
+  nearTown: 0
   totalCreditsEarned: 0
   totalCreditsSpent: 0
   Sales: []
@@ -27569,7 +27603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1981903081
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29872,9 +29906,9 @@ RectTransform:
   m_Father: {fileID: 1857571985}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -27.047329}
   m_SizeDelta: {x: 100, y: 9.964439}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2099306174
@@ -29970,7 +30004,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}

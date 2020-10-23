@@ -168,7 +168,7 @@ public class DialogueManager : MonoBehaviour
             StartCoroutine(TimeOutSpeakerPanel());
         }
         if(Director.Dir.showTip_1){
-            Director.Dir.StartFadeCanvasGroup(GameObject.Find("Tip_1"), "in", 1f, 1f);
+            Director.Dir.StartFadeCanvasGroup(GameObject.Find("Tip_1"), "in", 0.5f, 1f);
         }
     }
     public IEnumerator TimeOutSpeakerPanel(){
@@ -177,9 +177,9 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void LineEnd(){
-        if(Director.Dir.showTip_1){
-            Director.Dir.StartFadeCanvasGroup(GameObject.Find("Tip_1"), "out",1f);
+        if(GameObject.Find("Tip_1") != null){
             Director.Dir.showTip_1 = false;
+            Director.Dir.StartFadeCanvasGroup(GameObject.Find("Tip_1"), "out",1f);
         }
         // Debug.Log("Line ended");
     }

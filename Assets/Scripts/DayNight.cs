@@ -50,7 +50,7 @@ public class DayNight : MonoBehaviour
         // Timer.time/clockUI.time is total time
         if(Director.Dir.gamePaused == false){
             if(UIManager.UIM.playerLocation != "overworld"){
-                clockTime += Time.deltaTime/2; 
+                clockTime += Time.deltaTime/4; 
             }
             else{
                 clockTime += Time.deltaTime; 
