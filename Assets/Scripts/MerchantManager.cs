@@ -88,8 +88,11 @@ public class MerchantManager : MonoBehaviour
         if(PlayerManager.playerScrap.Count != 0){
             foreach(ScrapObject scrap in PlayerManager.playerScrap){
                 scrapValue += scrap.value;
+                if(SoldScrap.Contains(scrap) == false){
+                    UIManager.AddScrapToLog(scrap);
+                    Debug.Log("Added a: " + scrap.scrapName);
+                }
                 SoldScrap.Add(scrap);
-                Debug.Log("Sold a: " + scrap.scrapName);
             }
             PlayerManager.playerCredits += scrapValue;
             PlayerManager.playerScrap.Clear();

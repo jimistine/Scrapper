@@ -47,6 +47,12 @@ public class UIManager : MonoBehaviour
     public ScrapObject tickScrap;
     public TextMeshProUGUI zoomLevelReadout;
 
+    [Header("Pause Screen")]
+    [Space(5)]
+    public GameObject pauseScreen;
+    public GameObject scrapLog;
+    public GameObject scrapLogItemPrefab;
+
     
     [Header("Town")]
     [Space(5)]
@@ -154,17 +160,16 @@ public class UIManager : MonoBehaviour
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "in", 0.05f);
         AudioManager.AM.PlayMiscUIClip("inspect");
         recentScrap.GetComponent<ScrapObject>().isBuried = false;
-        // onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = 
-        //     scrap.GetComponent<ScrapObject>().scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + scrap.GetComponent<ScrapObject>().size.ToString("#,#") + " m<sup>3</sup></size>";
+       
     }
     public void ShowReadoutButton(){ // and this one is for the on scrap panel. i hate it.
         Director.Dir.StartFadeCanvasGroup(onScrapPanel, "out", 0.1f);
         ReadoutManager.UpdateReadout(recentScrap.GetComponent<ScrapObject>());
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "in", 0.05f);
         AudioManager.AM.PlayMiscUIClip("inspect");
+        
         recentScrap.GetComponent<ScrapObject>().isBuried = false;
-        // onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = 
-        //     recentScrap.GetComponent<ScrapObject>().scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + recentScrap.GetComponent<ScrapObject>().size.ToString("#,#") + " m<sup>3</sup></size>";
+     
     }
 
     // 5. Player clicks "take" or "leave" and we do what they tell us
@@ -198,7 +203,11 @@ public class UIManager : MonoBehaviour
         AudioManager.AM.PlayMiscUIClip("dismiss");
         DialogueManager.DM.RunNode("scrap-leave");
     }
-
+    public void AddScrapToLog(ScrapObject scrapToAdd){
+        GameObject newLogItem = Instantiate(scrapLogItemPrefab) as GameObject;
+        newLogItem.transform.SetParent(scrapLog.transform, false);
+        ReadoutManager.FillScrapLogItem(newLogItem, scrapToAdd);
+    }
     public void Callout(string callout){
         characterToTalk = Random.Range(1,3);
         Debug.Log("Character int: " + characterToTalk);
@@ -221,16 +230,15 @@ public class UIManager : MonoBehaviour
 
     bool paused = true;
     public void TogglePause(){
-        GameObject pauseMenu = gameObject.transform.Find("IntroPanel").gameObject;
         AudioManager.AM.TogglePausedSnapshot();
         if(paused == false){ // they pause the game
-            Director.Dir.StartFadeCanvasGroup(pauseMenu, "in", .15f);
+            Director.Dir.StartFadeCanvasGroup(pauseScreen, "in", .15f);
             paused = true;
             AudioManager.AM.PlayMiscUIClip("inspect");
             Director.Dir.gamePaused = true;
         }
         else{                // they unpause the game
-            Director.Dir.StartFadeCanvasGroup(pauseMenu, "out", .15f);
+            Director.Dir.StartFadeCanvasGroup(pauseScreen, "out", .15f);
             paused = false;
             AudioManager.AM.PlayMiscUIClip("dismiss");
             Director.Dir.gamePaused = false;

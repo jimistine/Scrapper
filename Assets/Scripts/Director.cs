@@ -265,4 +265,7 @@ public class Director : MonoBehaviour
         }
         element.SetActive(isGroupActive);    
     }
+    public void QuitGame(){
+        Application.Quit();
+    }
 }

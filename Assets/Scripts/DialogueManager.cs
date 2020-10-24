@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
     public SceneController SceneController;
     [Space(5)]
     public bool isDialogueRunner1Running;
+    public bool autoAdvanceOverWorldText;
 
     public System.Action testAction;
     
@@ -163,13 +164,16 @@ public class DialogueManager : MonoBehaviour
         // time out panel after a beat once the line is there.
         // if the node being run has the sub tag, start the counter
         string tagsLine = string.Join(" ", DR.GetTagsForNode(DR.CurrentNodeName));
-        if(tagsLine.Contains("sub")){
+        if(tagsLine.Contains("sub") || autoAdvanceOverWorldText == true){
             //Debug.Log("starting speaker panel timeout");
             StartCoroutine(TimeOutSpeakerPanel());
         }
         if(Director.Dir.showTip_1){
             Director.Dir.StartFadeCanvasGroup(GameObject.Find("Tip_1"), "in", 0.5f, 1f);
         }
+    }
+    public void toggleAutoAdvance(bool setting){
+        autoAdvanceOverWorldText = setting;
     }
     public IEnumerator TimeOutSpeakerPanel(){
         yield return new WaitForSeconds(2);
