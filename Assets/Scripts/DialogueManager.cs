@@ -281,6 +281,7 @@ public class DialogueManager : MonoBehaviour
             }
             else{
                 Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel, "out", 0.25f);
+                //Debug.Log("Fading on convo end");
             }
         }
         speakerNameLast = null;
@@ -325,6 +326,7 @@ public class DialogueManager : MonoBehaviour
         PlayerManager.PM.fuelManager.currentFuelUnits = PlayerManager.PM.fuelManager.maxFuel;
         PlayerManager.PM.fuelManager.UpdateFuelPercent();
         MerchantManager.UpdateFuelPrice();
+        UIManager.UIM.UpdateCassettes();
         AudioManager.AM.FillFuel();
     }
     [YarnCommand("setObjActive")] // this needs work to get the inactive objs

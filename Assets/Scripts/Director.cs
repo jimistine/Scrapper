@@ -172,9 +172,11 @@ public class Director : MonoBehaviour
         OverworldManager.OM.overworldCamera.SetActive(true);
         UIManager.LeaveTown();
         StartFadeCanvasGroup(screenCover.gameObject, "out", 0.5f);
-        float timeToWait =Random.Range(2, 5);
+        float timeToWait = Random.Range(2, 5);
         yield return new WaitForSeconds(timeToWait);
-        DialogueManager.DM.RunNode("left-town-ogden");
+        if(ogdenVisited){
+            DialogueManager.DM.RunNode("left-town-ogden");
+        }
     }
 
     
@@ -237,6 +239,7 @@ public class Director : MonoBehaviour
         float alphaEnd;
         bool isGroupActive;
         bool lerping = true;
+        //Debug.Log("Fading: " + element.name);
 
         if(targetVisibility == "in"){
             alphaStart = 0;
@@ -267,5 +270,15 @@ public class Director : MonoBehaviour
     }
     public void QuitGame(){
         Application.Quit();
+    }
+    public void ToggleFullscreen(bool setting){
+        if(setting == true){
+            OverworldManager.OM.overworldCamera.GetComponent<AspectRatioControllerScalable>().enabled = false;
+            Screen.fullScreen = true;
+        }
+        if(setting == false){
+            OverworldManager.OM.overworldCamera.GetComponent<AspectRatioControllerScalable>().enabled = true;
+            Screen.fullScreen = false;
+        }
     }
 }

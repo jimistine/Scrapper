@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class fuel : MonoBehaviour
 {
@@ -31,6 +32,7 @@ bool lowFuel;
             ClickDrag.fuelModifier = 1;
             currentFuelUnits -= fuelEfficiency * ClickDrag.currentSpeedActual;
             currentFuelPercent = (currentFuelUnits/maxFuel) * 100;
+            UIManager.UIM.GetComponent<ReactorController>().currentCassette.GetComponent<Slider>().value -= (fuelEfficiency * ClickDrag.currentSpeedActual)/100;
         }
         if(currentFuelPercent <= 10f && lowFuel == false){
             lowFuel = true;

@@ -88,11 +88,14 @@ public class MerchantManager : MonoBehaviour
         if(PlayerManager.playerScrap.Count != 0){
             foreach(ScrapObject scrap in PlayerManager.playerScrap){
                 scrapValue += scrap.value;
-                if(SoldScrap.Contains(scrap) == false){
+                if(SoldScrap.Exists(x => x.scrapName == scrap.scrapName) == false){
+                    SoldScrap.Add(scrap);
                     UIManager.AddScrapToLog(scrap);
                     Debug.Log("Added a: " + scrap.scrapName);
                 }
-                SoldScrap.Add(scrap);
+                else{
+                    SoldScrap.Add(scrap);
+                }
             }
             PlayerManager.playerCredits += scrapValue;
             PlayerManager.playerScrap.Clear();
@@ -167,6 +170,7 @@ public class MerchantManager : MonoBehaviour
                 UpdateFuelPrice();
                 fuelManager.UpdateFuelPercent();
                 UIManager.BoughtFuel();
+                UIManager.UpdateCassettes();
                 AudioManager.AM.FillFuel();
             }
         }

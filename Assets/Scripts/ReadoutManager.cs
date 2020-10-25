@@ -59,9 +59,8 @@ public class ReadoutManager : MonoBehaviour
         scrapLogReadout.transform.Find("Name").gameObject.GetComponent<TextMeshProUGUI>().text = newScrap.scrapName;
         scrapLogReadout.transform.Find("Material").gameObject.GetComponent<TextMeshProUGUI>().text = newScrap.material;
         scrapLogReadout.transform.Find("Image").gameObject.GetComponent<Image>().sprite = (Sprite)scrapImages[newScrap.image];
-        scrapLogReadout.transform.Find("Description").gameObject.GetComponent<TextMeshProUGUI>().text = newScrap.description;
         scrapLogReadout.transform.Find("Size").gameObject.GetComponent<TextMeshProUGUI>().text = newScrap.size.ToString("Size: "+ "#,#" + " m<sup>3</sup>");
         scrapLogReadout.transform.Find("Value").gameObject.GetComponent<TextMeshProUGUI>().text = newScrap.value.ToString("Value: " + "#,#" + " cr.");
-
+        scrapLogReadout.transform.Find("Description").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = newScrap.description;
     }
 }

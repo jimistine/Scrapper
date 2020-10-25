@@ -21,19 +21,33 @@ public class UIManager : MonoBehaviour
     public Timer clockTimer;
     public DayNight DayNight;
 
-    [Header("Statbar")]
-    [Space(5)]
-    public GameObject statBar;
+    [Header("Minimal")]
+    [Header("New HUD")]
+    public Slider fuelSlider;
+    public Slider haulSlider;
     public TextMeshProUGUI haulText;
     public TextMeshProUGUI maxHaulText;
-    public TextMeshProUGUI fuelText;
+    [Header("Details")]
+    public GameObject detailsPanel;
+    public GameObject detailsButt;
+    public TextMeshProUGUI reactorNameTag;
+    public GameObject cassetteParent;
+    public GameObject cassettePrefab;
+    public List<GameObject> cassettes;
+    float numCassettes;
     public TextMeshProUGUI creditText;
+    public TextMeshProUGUI storageBayNameTag;
     public GameObject scrapTick;
     public GameObject scrapTickBackup;
     public GameObject scrapTickSlots;
 
-    [Header("Overworld Readouts")]
+    [Header("Old HUD")]
     [Space(5)]
+    public GameObject statBar;
+    public TextMeshProUGUI fuelText;
+
+    [Header("Overworld Readouts")]
+    [Space(10)]
     public GameObject onScrapPanel;
     public GameObject recentScrap;
     public GameObject readoutPanel;
@@ -93,28 +107,35 @@ public class UIManager : MonoBehaviour
         SceneController = SceneController.SC;
         scrapTickBackup = scrapTick;
         ReadoutManager = this.GetComponent<ReadoutManager>();
-        maxHaulText.text = "max: " + PlayerManager.maxHaul.ToString("#,#") + " m<sup>3</sup>";
+        maxHaulText.text = PlayerManager.maxHaul.ToString("#,#") + " m<sup>3</sup>";
         InitUpgradePanels();
+        InitCassettes();
     }
 
 // OVERWORLD AND GAMEPLAY
     void Update()
     {   // updating stats at runtime
-        fuelText.text = "Fuel: " + fuelManager.currentFuelPercent.ToString("N0") + "%";
+        //fuelText.text = "Fuel: " + fuelManager.currentFuelPercent.ToString("N0") + "%";
+        fuelSlider.value = fuelManager.currentFuelPercent/100;
+        haulSlider.value = PlayerManager.currentHaulPercent/100;
+
         if(PlayerManager.playerCredits == 0){
-            creditText.text = "Credits: 0 cr.";
+            creditText.text = "CREDITS           <color=#777777>————</color>  0 cr.";
         }
         else{
-            creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#") + " cr.";
+            creditText.text = "CREDITS           <color=#777777>————</color>  " + PlayerManager.playerCredits.ToString("#,#") + " cr.";
+            //creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#") + " cr.";
         }
         if(PlayerManager.currentHaul != 0){
-            haulText.text = "Space left: " + (PlayerManager.maxHaul - PlayerManager.currentHaul).ToString("#,#") + " m<sup>3</sup>";
+            //haulText.text = "Space left: " + (PlayerManager.maxHaul - PlayerManager.currentHaul).ToString("#,#") + " m<sup>3</sup>";
+            haulText.text = PlayerManager.currentHaul.ToString("#,#") + "/" + PlayerManager.maxHaul.ToString("#,#") + "<size=75%>m</size><sup>3</sup>";
         }
         else if(PlayerManager.currentHaul == PlayerManager.maxHaul){
-            haulText.text = "Space left: 0" + " m<sup>3</sup>";
+            //haulText.text = "Space left: 0" + " m<sup>3</sup>";
         }
         else{
-            haulText.text = "Space left: " + PlayerManager.maxHaul+ " m<sup>3</sup>";
+            haulText.text = "0/" + PlayerManager.maxHaul.ToString("#,#") + "<size=75%>m</size><sup>3</sup>";
+            //haulText.text = "Space left: " + PlayerManager.maxHaul+ " m<sup>3</sup>";
         }
         if(fuelManager.currentFuelUnits == fuelManager.maxFuel){
             fillFuelButtonText.text = "Cassets full.";
@@ -122,6 +143,16 @@ public class UIManager : MonoBehaviour
         if(onScrapPanel.activeSelf){
             Vector3 scrapPos = Camera.main.WorldToScreenPoint(recentScrap.transform.position);
             onScrapPanel.transform.position = scrapPos;
+        }
+    }
+    // HUD
+    public void OpenHUDDetails(){
+        if(detailsPanel != null){
+            Animator animator = detailsPanel.GetComponent<Animator>();
+            if(animator != null){
+                bool isOpen = animator.GetBool("openDetails");
+                animator.SetBool("openDetails", !isOpen);
+            }
         }
     }
 
@@ -257,10 +288,10 @@ public class UIManager : MonoBehaviour
     }
     public void EnterTown(){
         ActivateTownButton(false);
-        haulText.color = (Color.white);
-        maxHaulText.color = (Color.white);
-        fuelText.color = (Color.white);
-        creditText.color = (Color.white);
+        // haulText.color = (Color.white);
+        // maxHaulText.color = (Color.white);
+        // fuelText.color = (Color.white);
+        // creditText.color = (Color.white);
         playerLocation = "town hub";
         TownUI.SetActive(true);
         OverworldUI.SetActive(false);
@@ -269,10 +300,10 @@ public class UIManager : MonoBehaviour
     }
     public void LeaveTown(){
         ActivateTownButton(true);
-        haulText.color = (Color.black);
-        maxHaulText.color = (Color.black);
-        fuelText.color = (Color.black);
-        creditText.color = (Color.black);
+        // haulText.color = (Color.black);
+        // maxHaulText.color = (Color.black);
+        // fuelText.color = (Color.black);
+        // creditText.color = (Color.black);
         playerLocation = "overworld";
         TownUI.SetActive(false);
         OverworldUI.SetActive(true);
@@ -318,13 +349,15 @@ public class UIManager : MonoBehaviour
         if(upgrade.type == "reactor"){
             panelIndex = 1;
             effectReadout = (PlayerManager.gameObject.GetComponent<fuel>().maxFuel/100).ToString("#,#") + " →" + (upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue/100).ToString("#,#") + " deuterium cassets";
+            reactorNameTag.text = upgrade.upgradeItemValues[upgrade.upgradeLevel - 1].flavorName + "\n<size=50%>cassettes: " + numCassettes + "</size>";
             DialogueManager.DM.RunNode("reactor");
         }
         if(upgrade.type == "storage-bay"){
             panelIndex = 2;
             effectReadout = PlayerManager.maxHaul.ToString("#,#") + " →" + upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue.ToString("#,#") + " m<sup>3</sup> max haul";
             DialogueManager.DM.RunNode("storage-bay");
-            maxHaulText.text = "max: " + PlayerManager.maxHaul.ToString("#,#") + " m<sup>3</sup>";
+            maxHaulText.text = PlayerManager.maxHaul.ToString("#,#") + " m<sup>3</sup>";
+            storageBayNameTag.text = upgrade.upgradeItemValues[upgrade.upgradeLevel - 1].flavorName;
         }
         if(upgrade.type == "scanner"){
             panelIndex = 3;
@@ -403,6 +436,22 @@ public class UIManager : MonoBehaviour
         }
     }
     
+    public void UpdateCassettes(){
+        foreach(Transform cassette in cassetteParent.transform){
+            Destroy(cassette.gameObject);
+            cassettes.Clear();
+        }
+        numCassettes = fuelManager.maxFuel/100;
+        for(float i = 1; i <= numCassettes; i++){
+            GameObject newCassette = Instantiate(cassettePrefab) as GameObject;
+            newCassette.transform.SetParent(cassetteParent.transform, false);
+            newCassette.GetComponent<Slider>().value = 1;
+            newCassette.GetComponentInChildren<TextMeshProUGUI>().text = i.ToString();
+            cassettes.Add(newCassette);
+        }
+        Debug.Log("Updated cassettes");
+    }
+
     // FUEL MERCHANT
     public void enterFuelMerchant(){
         AudioManager.AM.TransitionToTownInterior();
@@ -446,6 +495,11 @@ public class UIManager : MonoBehaviour
             upgradePanels[i].transform.Find("Desc.").GetComponent<TextMeshProUGUI>().text = UpgradeManager.upgradesStarter[i].upgradeItemValues[0].flavorDesc;
             upgradePanels[i].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = "Price: " + UpgradeManager.upgradesStarter[i].upgradeItemValues[0].price.ToString("#,#") + " cr.";
             upgradePanels[i].transform.Find("Effect").GetComponent<TextMeshProUGUI>().text = effectReadout;
+        }
+    }
+    public void InitCassettes(){
+        foreach(Transform cassette in cassetteParent.transform){
+            cassettes.Add(cassette.gameObject);
         }
     }
 }

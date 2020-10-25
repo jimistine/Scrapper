@@ -35,6 +35,7 @@ public class UpgradeManager : MonoBehaviour
             PlayerManager.gameObject.GetComponent<fuel>().maxFuel = upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue;
             PlayerManager.fuelManager.currentFuelUnits = PlayerManager.fuelManager.maxFuel;
             PlayerManager.gameObject.GetComponent<fuel>().UpdateFuelPercent();
+            UIM.UpdateCassettes();
         }
         if(upgrade.type == "storage-bay"){
             PlayerManager.maxHaul = upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue;

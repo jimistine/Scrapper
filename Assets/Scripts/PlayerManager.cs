@@ -24,6 +24,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Player Inventory")]
     [Space(5)]
     public float currentHaul;
+    public float currentHaulPercent;
     public float maxHaul;
     public float playerCredits;
     public bool scannerActive;
@@ -54,6 +55,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
+        currentHaulPercent = (currentHaul/maxHaul) * 100;
 // INTERACTIONS
         if (Input.GetMouseButtonDown(0)) {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -96,6 +98,10 @@ public class PlayerManager : MonoBehaviour
                 Debug.Log("calling dir start game");
                 Director.Dir.StartGame();
             }
+        }
+        if(Input.GetKeyDown(KeyCode.I)){
+            Debug.Log("pressed i");
+            UIManager.OpenHUDDetails();
         }
         if(Input.GetKeyDown(KeyCode.Space)){
             DialogueManager.DM.ContinueDialogue();
