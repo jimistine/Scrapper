@@ -77,7 +77,7 @@ public class ClickDrag : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.W)){
                 accelerating = true;
-                //AudioManager.AM.PlayRigStart();
+                AudioManager.AM.PlayRigStart();
                 StartCoroutine("Accelerate");
             }
             if(Input.GetKeyUp(KeyCode.W)){

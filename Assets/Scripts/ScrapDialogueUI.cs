@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine.Events;
 
+
 namespace Yarn.Unity 
 {
     public class ScrapDialogueUI : Yarn.Unity.DialogueUIBehaviour
@@ -28,7 +29,7 @@ namespace Yarn.Unity
         public string speakerName;
         public Line currentLine;
         public Line lastLine;
-
+        
         void Awake(){
             sDUI = this;
         }
@@ -85,6 +86,8 @@ namespace Yarn.Unity
 
                 foreach (char c in text) {
                     stringBuilder.Append (c);
+
+                    AudioManager.AM.PlayVoiceClip();
                     onLineUpdate?.Invoke(stringBuilder.ToString ());
                     if (userRequestedNextLine) {
                         // We've requested a skip of the entire line.

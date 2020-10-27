@@ -17,7 +17,7 @@ position: 249,1024
     Hasron: Right.
 
     <<setPanelVisibility DialogueManager Hasron false>>
-    <<wait 7>> 
+    <<wait 3>> 
     <<setPanelVisibility DialogueManager Hasron true>>
     Hasron: So you actually think we can make the big creds out here?
     CH1-P: We'll see. Supposedly the merchants out here pay well for scrap.
@@ -30,31 +30,14 @@ position: 249,1024
     CH1-P: Which one?
     Hasron: Umm...
     Hasron: If you could just take off your--
-    CH1-P: Uh-uh-uh! No cheating! The desert robe stays on!
+    CH1-P: Uh-uh-uh! No cheating! The cool new robe stays on!
     CH1-P: You really don't remember which is which?
-    <<wait .05>>
-    Hasron: Left!
-    <<wait .05>>
-    CH1-P: Nope. I replaced the right one.
-    CH1-P: Because of that dislocation on the exodus ship? Pure cartilo now.
-    <<setPanelVisibility DialogueManager CH1-P false>>
-    <<wait 3>> 
-    <<setPanelVisibility DialogueManager CH1-P true>>
-    CH1-P: I've told you that story right?
-    Hasron: Yeah. Crazy to think you didn't even feel it.
-    CH1-P: You're telling me.
-    CH1-P: People always tell me I'm a fool for going bionic because of all the pain organics deal with.
-    Hasron: I mean...
-    CH1-P: It's not that I like the pain itself. Believe me I wish I had less of it at all the merges.
-    CH1-P: But being able to feel? And not just like the simulation of feeling, but feeling that actually matters?
-    CH1-P: Can't imagine life without it now.
+    Hasron: No, no, I'll think of it. Just might take a bit.
     <<introComplete DialogueManager>> 
-<<else>>
-    Hasron: Here's hoping.
 <<endif>>
 ===
 title: close-to-town
-tags: main
+tags: world
 colorID: 0
 position: 242,1283
 ---
@@ -64,10 +47,11 @@ position: 242,1283
     CH1-P: Oh I know.
     CH1-P: You're looking pretty dehydrated from all that sweating.
     Hasron: They'll have more water in town, right?
-    CH1-P: You never know. Did the guide say if this place was run by droids?
+    CH1-P: You never know. Did the guide say if this place was organic friendly?
     Hasron: CH1-P...
     Hasron: There's no guide for anywhere on Talacan.
     CH1-P: Well then I guess we'll just have to find out.
+    <<introComplete DialogueManager>> 
 <<endif>>
 ===
 title: transition
@@ -94,7 +78,7 @@ tags: sub
 colorID: 0
 position: 1470,507
 ---
-<<set $scrapFindPick = random("scrap-find", 7)>>
+<<set $scrapFindPick = random("scrap-find", 15)>>
 
 <<if $scrapFindPick == 0>>
     Hasron: Beep beep!
@@ -113,6 +97,24 @@ position: 1470,507
     CH1-P: Might be something good.
 <<elseif $scrapFindPick == 7>>
     CH1-P: There's another.
+
+<<elseif $scrapFindPick == 8>>
+    CH1-P: More scrap here.
+<<elseif $scrapFindPick == 9>>
+    CH1-P: Wonder what it is.
+<<elseif $scrapFindPick == 10>>
+    CH1-P: Scanner picked something up here.
+<<elseif $scrapFindPick == 11>>
+    CH1-P: Hope it's not another skeleton.
+
+<<elseif $scrapFindPick == 12>>
+    Hasron: Think we got some scrap there.
+<<elseif $scrapFindPick == 13>>
+    Hasron: Looking pretty scrappy over there if you ask me.
+<<elseif $scrapFindPick == 14>>
+    Hasron: Ooo my favorite sound!
+<<elseif $scrapFindPick == 15>>
+    Hasron: I really hope there aren't any skeletons in this one.
 
 <<endif>>
 ===
@@ -253,7 +255,7 @@ position: 1789,491
         Ogden: Well then welcome! My name is Ogden.
         CH1-P: CH1-P, good to meet you.
         Hasron: And I'm Hasron, happy to be here.
-        Ogden: I am glad you are present also. Hanro is quite a long way from here.
+        Ogden: I am glad you are present also. Hanro is quite a long way from this place.
         Ogden: Please, allow me to replenish your supply of deuterium as a welcome gift. Empty cassettes are the scrapper's worst enemy.
         <<fillFuel DialogueManager>> 
         <<setFuelButtActive DialogueManager true>> 
@@ -358,7 +360,7 @@ position: 847,774
 <<elseif $land_speeder is 1>>
     Hasron: Hey I think my mom used to have one of these back in the day.
     CH1-P: Really?
-    Hasron: Yeah they were pretty popular on Talacan for a while I think. Before I was around though.
+    Hasron: Yeah they were pretty popular on Talacan for a while I think. But that was before I was around.
     Hasron: No idea what they're called though.
     CH1-P: Doesn't look like there's any way to ID this one either.
     CH1-P: Crazy what sand and wind can do to metal plating, given the time.
@@ -382,7 +384,7 @@ position: 845,1013
     Hasron: Haven't been in one since I was a kid, but, good times.
     CH1-P: So that would have been what, like a year ago?
     Hasron: Very funny.
-    Hasron: Feels like a few years at least since we left Tanak.
+    Hasron: Feels like a few years at least since we left Hanro.
     CH1-P: I'll give you that.
     <<set $holospace_generator to 0>> 
 <<elseif $holospace_generator is 0>>
@@ -406,7 +408,7 @@ position: 845,1013
 <<elseif $holospace_generator is 1>>
     CH1-P: What other kind of holospace stuff did you like growing up?
     Hasron: Well there was this one about a talking cargo freighter.
-    CH1-P: It talked? Like what using its AI?
+    CH1-P: It talked? Like what using its AI over the comms?
     Hasron: No like, it had a mouth and stuff. It was awsome.
     CH1-P: A mouth?? That's just not right.
     Hasron: Yeah now that you mention it, eleven year old me hand-waived a lot of that stuff...
@@ -677,14 +679,14 @@ position: 1803,1514
 title: tweaked-reactor
 tags: merchant
 colorID: 0
-position: 1792,1993
+position: 1792,1957
 ---
 Ogden: I am not capable of adjusting the performance of your reactor, yet.
 ===
 title: ogden-towed
 tags: merchant
 colorID: 0
-position: 1795,1752
+position: 1793,2180
 ---
 <<set $ogdenTowedPick = random("ogden-towed", 2)>>
 
@@ -760,7 +762,7 @@ position: 251,520
     Hasron: Are you sure you want me to take over the piloting?
     CH1-P: Yeah my eye is starting to lock up from the sand I think.
     Hasron: Oh I didn't realize. It's the um...
-    CH1-P: Organic one, yeah. From the sand.
+    CH1-P: Robotic one, yeah. From the sand.
     Hasron: Yeah. Ok.
     Hasron: So how does this thing work?
     CH1-P: You don't know?
@@ -786,7 +788,6 @@ position: 244,755
     CH1-P: You can also change to using A and D to turn left and right by pressing 2, and pressing 1 will change it back.
     Hasron: Got it, 2 for WASD, 1 for pointer steering. Glad I added that.
     CH1-P: Me too actually, pretty hand little feature.
-    Hasron: Thank you, thank you.
     Hasron: Oh and I think headlights are on F, right?
     CH1-P: Should be, yeah.
 <<endif>> 
@@ -824,8 +825,8 @@ position: 835,1265
     CH1-P: And in some places the sun is always setting.
     CH1-P: Or rising. I can never remember which.
     <<set $gettingDarkProgress to 0>>
-<<elseif $gettingDarkPick is 0>>
-    Hasron: What do you see when the sun set?
+<<elseif $gettingDarkProgress is 0>>
+    Hasron: What do you see when the sun sets?
     CH1-P: What do I see?
     Hasron: Yeah. You know like what does it make you think of?
     CH1-P: Um...
@@ -865,6 +866,15 @@ position: 1166,781
     CH1-P: As long as we have room and some deuterium left in the reactor we should keep looking for more.
     Hasron: Totally.
     Hasron: I think we're going to get along just fine with Mr. Chundr.
+    CH1-P: I can't believe we needed a sctructure scanner this whole time.
+    Hasron: I know. I really feel like I should have thought of that. Both of my uncles were scrappers.
+    Hasron: But they had these cool optical scanners that they would always carry around—
+    CH1-P: Like the one on the console here?
+    Hasron: Yeah, kinda, but bigger. I just thought they would like stand on top of their rigs and look for scrap with those.
+    CH1-P: I mean that makes sense. I guess.
+    Hasron: Yeah, thanks.
+    CH1-P: I mean it!
+    Hasron: Ok, ok. Let's just hope this scanner works. Can't say the free gear I've gotten in the past has had the best track record.
 <<endif>>
 ===
 title: chundr-enter
@@ -872,7 +882,7 @@ tags: merchant
 colorID: 0
 position: 2073,741
 ---
-<<set $chundrPick = random("chundr", 5)>>
+<<set $chundrPick = random("chundr", 7)>>
 
 <<if $chundrPick == 0>>
     Chundr: Welcome back. Find anything good?
@@ -886,6 +896,12 @@ position: 2073,741
     Chundr: How are you all doing today? Not too sunburnt I hope?
 <<elseif $chundrPick == 5>>
     Chundr: If Ogden tells you I owe them for, well, nevermind.
+<<elseif $chundrPick == 6>>
+    Chundr: What's it looking like out there.
+    CH1-P: Same as it ever was.
+<<elseif $chundrPick == 7>>
+    Hasron: Hey Chundr, how's the day going?
+    Chundr: Well I can say it's a bit better seeing you all in here.
 <<endif>>
 ===
 title: left-town-ogden
@@ -901,7 +917,7 @@ position: 532,509
     Hasron: You just seemed a little off in there.
     CH1-P: Oh. Well, you know. Still getting used to being around sapient AI again I guess.
     Hasron: Oh right, sorry.
-    CH1-P: It's ok. It really shoulnd't be such a big deal.
+    CH1-P: It's ok. It really shouldn't be such a big deal.
     CH1-P: It's not like Ogden is trying to drag me back to the Machine Worlds or anything.
     Hasron: Do you think they know you're from the Worlds?
     CH1-P: I doubt it. Probably didn't even cross their mind.
@@ -914,23 +930,8 @@ position: 532,509
     Hasron: Yeah, of course.
     Hasron: Let me know if you ever, you know, like, need help with any of that.
     CH1-P: Sure thing.
-<<endif>>
-===
-title: left-town-chundr
-tags: main
-colorID: 0
-position: 521,753
----
-<<if visited ("left-town-chundr") is false>>
-    CH1-P: I can't believe we needed a sctructure scanner this whole time.
-    Hasron: I know. I really feel like I should have thought of that. Both of my uncles were scrappers.
-    Hasron: But they had these cool optical scanners that they would always carry around—
-    CH1-P: Like the one on the console here?
-    Hasron: Yeah, kinda, but bigger. I just thought they would like stand on top of their rigs and look for scrap with those.
-    CH1-P: I mean that makes sense. I guess.
-    Hasron: Yeah, thanks.
-    CH1-P: I mean it!
-    Hasron: Ok, ok. Let's just hope this scanner works. Can't say the free gear I've gotten in the past has had the best track record.
+<<else>>
+    [[left-town]]
 <<endif>>
 ===
 title: tutorial-out-of-fuel
@@ -1024,4 +1025,80 @@ position: 1175,1251
 <<endif>>
 <<towReady DialogueManager>> 
 <<outOfFuelTutorialCompleted DialogueManager>>
+===
+title: ogden-partial-fill
+tags: merchant
+colorID: 0
+position: 1797,1731
+---
+<<if visited("ogden-partial-fill") is false>>
+    Ogden: I am sorry, friends, but that is only enough for a partial fill. I will give you what I can, but it will not fully satisfy your reactor's needs.
+    Hasron: Oh, that's alright, we're a little tight on credits at the moment heh...
+    <<set $partial_fill to 0>> 
+<<elseif $partial_fill is 0>>
+    CH1-P: That fill it up?
+    Ogden: I am afraid not, CH1-P. But it is enough to get you moving again at full speed.
+    <<set $partial_fill to 1>> 
+<<elseif $partial_fill is 1>>
+    Ogden:It appears that you lack the credits needed to completely saturate your deuterium cassettes.
+    Hasron: Yeah, figured as much. Just give em what you can.
+    Ogden: Of course.
+    <<set $partial_fill to 2>> 
+<<elseif $partial_fill is 2>>
+    Ogden: You do not have enough credits in your combined account to completely re-fuel. Would you still like to buy what you can.
+    CH1-P: Ah damn, yeah. Gotta have something in there.
+    <<set $partial_fill to 0>> 
+<<endif>>
+===
+title: left-town
+tags: main
+colorID: 0
+position: 530,776
+---
+<<set $leftTownCount += 1>>
+<<if $leftTownCount == 2>> 
+    Hasron: Left!
+    CH1-P: What?
+    Hasron: Your shoulder, that's the one you switched for, what was it...
+    Hasron: Miniature omongulon?
+    CH1-P: Ha! Not even close.
+    CH1-P: First off it's my right shoulder.
+    Hasron: Oh my bad.
+    CH1-P: And second, where in the void do you think I would have come by a miniature omongulon shoulder no one was using? 
+    Hasron: That's a great point. Could have sworn that's what it was though.
+    CH1-P: No, it's human.
+    Hasron: Right, right. A bit easier to maintain?
+    CH1-P: Depends on the system, but yeah usually.
+    <<setPanelVisibility DialogueManager CH1-P false>>
+    <<wait 3>> 
+    <<setPanelVisibility DialogueManager CH1-P true>>
+    CH1-P: I've told you that story right?
+    Hasron: That was from your exodus, right?
+    CH1-P: Yeah, it was the first piece of me to really leave.
+    Hasron: Crazy to think you didn't even feel it.
+    CH1-P: You're telling me.
+    CH1-P: People always tell me I'm a fool for becoming bionic because of all the pain organics deal with.
+    Hasron: I mean...
+    CH1-P: It's not that I like the pain itself.
+    CH1-P: Believe me I wish I had less of it at all the merges.
+    CH1-P: But being able to feel? And not just like the simulation of feeling, but feeling that actually matters?
+    CH1-P: Can't imagine life without it now.
+<<elseif $leftTownCount == 3>>
+    Hasron: Got a good feeling about this trip.
+    CH1-P: Well now we're screwed.
+    Hasron: With that attitude I suppose we are!
+    CH1-P: Let's just see what we can see.
+<<elseif $leftTownCount == 5>>
+    Hasron: This is the run.
+    CH1-P: What?
+    Hasron: You know, "this is the run"?
+    Hasron: Like the one where we get something really cool.
+    CH1-P: Hey we get lots of cool stuff!
+    Hasron: But I mean like really really cool.
+    Hasron: Maybe even cooler than cool!
+    CH1-P: Don't be ridiculous now.
+    Hasron: I'm just saying it could happen.
+    CH1-P: This is the run, huh?
+    Hasron: This is the run.
+<<endif>>
 ===

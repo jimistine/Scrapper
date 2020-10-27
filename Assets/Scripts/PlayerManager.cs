@@ -99,7 +99,7 @@ public class PlayerManager : MonoBehaviour
                 Director.Dir.StartGame();
             }
         }
-        if(Input.GetKeyDown(KeyCode.I)){
+        if(Input.GetKeyDown(KeyCode.I)||Input.GetKeyDown(KeyCode.E)){
             Debug.Log("pressed i");
             UIManager.OpenHUDDetails();
         }
@@ -147,6 +147,11 @@ public class PlayerManager : MonoBehaviour
         }
         if(other.gameObject.name == "Town" && OverworldManager.OM.towRig.activeSelf == false){
             UIManager.ActivateTownButton(true);
+        }
+    }
+    void OnCollisionEnter2D(Collision2D other){
+        if(other.gameObject.tag == "ob"){
+            AudioManager.AM.PlayRandomRigHit();
         }
     }
     void OnTriggerExit2D(Collider2D other){ // Only consider out of range when we exit the larger collider on scrap

@@ -30,11 +30,11 @@ public class DialogueManager : MonoBehaviour
         public string characterName;
         public GameObject characterPanel;
         public GameObject characterPanelTown;
+        public AudioClip voiceClip;
     }
-
     public GameObject activeSpeakerPanel;
     public List<Character> characters = new List<Character>();
-
+    [Space(5)]
     public List<Yarn.Line> lineQueue = new List<Yarn.Line>();
     public List<string> lineQueueIDs = new List<string>();
     public Yarn.Line queuedLine;
@@ -112,6 +112,7 @@ public class DialogueManager : MonoBehaviour
         Hasron.characterPanelTown = GameObject.Find("Hasron Callout Town");
         Hasron.characterPanel.SetActive(false);
         Hasron.characterPanelTown.SetActive(false);
+        Hasron.voiceClip = AudioManager.AM.hasronVoice;
         characters.Add(Hasron);
 
         Character Chip = new Character();
@@ -120,7 +121,13 @@ public class DialogueManager : MonoBehaviour
         Chip.characterPanelTown = GameObject.Find("CH1-P Callout Town");
         Chip.characterPanel.SetActive(false);
         Chip.characterPanelTown.SetActive(false);
+        Chip.voiceClip = AudioManager.AM.CH1PVoice;
         characters.Add(Chip);
+
+        // Character Ogden = new Character();
+        // Ogden.voiceClip
+        // characters.Find(x => x.characterName == "Ogden").voiceClip = AudioManager.AM.ogdenVoice;
+
     }
 
     public void LineStarted(){   // if the speaker of this line is different from the last line, swap active panels

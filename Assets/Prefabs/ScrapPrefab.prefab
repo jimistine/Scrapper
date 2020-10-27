@@ -132,14 +132,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Oil canister
-  description: Not many of these have survived from the old days, and only the decrepit
-    and reviled barons of those times were sad to see them go.
-  image: 0
+  scrapName: Dazzak City public air tram car
+  description: The model of the car suggests it's relatively new. Why it's laying
+    in a valley of dunes is anyone's guess.
+  image: 1
   size: 20
-  value: 1000
-  material: Aluminum
-  zoneA_rarity: 30
+  value: 1500
+  material: Titanium
+  zoneA_rarity: 20
   zoneB_rarity: 0
   zoneC_rarity: 0
   zoneD_rarity: 0

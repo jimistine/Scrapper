@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     public Slider fuelSlider;
     public Slider haulSlider;
     public TextMeshProUGUI haulText;
-    public TextMeshProUGUI maxHaulText;
+    public TextMeshProUGUI haulTextRemaining;
     [Header("Details")]
     public GameObject detailsPanel;
     public GameObject detailsButt;
@@ -35,8 +35,10 @@ public class UIManager : MonoBehaviour
     public GameObject cassettePrefab;
     public List<GameObject> cassettes;
     float numCassettes;
+    public GameObject statsParent;
     public TextMeshProUGUI creditText;
     public TextMeshProUGUI storageBayNameTag;
+    public TextMeshProUGUI maxHaulText;
     public GameObject scrapTick;
     public GameObject scrapTickBackup;
     public GameObject scrapTickSlots;
@@ -127,11 +129,11 @@ public class UIManager : MonoBehaviour
             //creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#") + " cr.";
         }
         if(PlayerManager.currentHaul != 0){
-            //haulText.text = "Space left: " + (PlayerManager.maxHaul - PlayerManager.currentHaul).ToString("#,#") + " m<sup>3</sup>";
             haulText.text = PlayerManager.currentHaul.ToString("#,#") + "/" + PlayerManager.maxHaul.ToString("#,#") + "<size=75%>m</size><sup>3</sup>";
+            haulTextRemaining.text = (PlayerManager.maxHaul - PlayerManager.currentHaul).ToString("#,#") + "<size=70%>m</size><sup>3</sup>";
         }
         else if(PlayerManager.currentHaul == PlayerManager.maxHaul){
-            //haulText.text = "Space left: 0" + " m<sup>3</sup>";
+            haulTextRemaining.text = "0<size=70%>m</size><sup>3</sup>";
         }
         else{
             haulText.text = "0/" + PlayerManager.maxHaul.ToString("#,#") + "<size=75%>m</size><sup>3</sup>";
@@ -151,6 +153,12 @@ public class UIManager : MonoBehaviour
             Animator animator = detailsPanel.GetComponent<Animator>();
             if(animator != null){
                 bool isOpen = animator.GetBool("openDetails");
+                if(isOpen){
+                    AudioManager.AM.PlayMiscUIClip("hud close");
+                }
+                else{
+                    AudioManager.AM.PlayMiscUIClip("hud open");
+                }
                 animator.SetBool("openDetails", !isOpen);
             }
         }
@@ -345,6 +353,7 @@ public class UIManager : MonoBehaviour
             panelIndex = 0;
             effectReadout = (PlayerManager.gameObject.GetComponent<ClickDrag>().topSpeed * 100).ToString("#,#") + " →" + (upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue * 100).ToString("#,#") + " kph top speed";
             DialogueManager.DM.RunNode("engine");
+            statsParent.transform.Find("Top Speed").GetComponent<TextMeshProUGUI>().text = "Top Speed        <color=#777777>————</color>  " + (upgrade.upgradeItemValues[upgrade.upgradeLevel - 1].effectValue * 100).ToString("#,#") + "kph";
         }
         if(upgrade.type == "reactor"){
             panelIndex = 1;
@@ -358,11 +367,13 @@ public class UIManager : MonoBehaviour
             DialogueManager.DM.RunNode("storage-bay");
             maxHaulText.text = PlayerManager.maxHaul.ToString("#,#") + " m<sup>3</sup>";
             storageBayNameTag.text = upgrade.upgradeItemValues[upgrade.upgradeLevel - 1].flavorName;
+            statsParent.transform.Find("Max Haul").GetComponent<TextMeshProUGUI>().text = "Max Haul         <color=#777777>————</color>  " + upgrade.upgradeItemValues[upgrade.upgradeLevel - 1].effectValue.ToString("#,#") + "m<sup>3</sup>";
         }
         if(upgrade.type == "scanner"){
             panelIndex = 3;
             effectReadout = (PlayerManager.searchRadius.radius * 10).ToString("F") + " →" + (upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue * 10).ToString("F") + " meter radius";
             DialogueManager.DM.RunNode("scanner");
+            statsParent.transform.Find("Search Radius").GetComponent<TextMeshProUGUI>().text = "Search Radius  <color=#777777>————</color>  " + (upgrade.upgradeItemValues[upgrade.upgradeLevel - 1].effectValue * 10).ToString("F") + "m";
         }
         if(upgrade.type == "drone"){
             panelIndex = 4;
@@ -379,6 +390,7 @@ public class UIManager : MonoBehaviour
                 i++;
             }
             effectReadout = zoomLevels + " → +" + upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue.ToString("N1") + "x zoom";
+            statsParent.transform.Find("Drone Lenses").GetComponent<TextMeshProUGUI>().text = "Drone Lenses   <color=#777777>————</color>  " + zoomLevels;
         }
 
         Debug.Log("Panel index: " + panelIndex);  // Which panel do we change?
