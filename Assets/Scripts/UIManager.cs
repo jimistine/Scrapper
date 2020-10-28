@@ -296,27 +296,15 @@ public class UIManager : MonoBehaviour
     }
     public void EnterTown(){
         ActivateTownButton(false);
-        // haulText.color = (Color.white);
-        // maxHaulText.color = (Color.white);
-        // fuelText.color = (Color.white);
-        // creditText.color = (Color.white);
         playerLocation = "town hub";
         TownUI.SetActive(true);
         OverworldUI.SetActive(false);
-        // Director.Dir.StartFadeCanvasGroup(TownUI, "in", .15f);
-        // Director.Dir.StartFadeCanvasGroup(OverworldUI, "out", .15f);
     }
     public void LeaveTown(){
         ActivateTownButton(true);
-        // haulText.color = (Color.black);
-        // maxHaulText.color = (Color.black);
-        // fuelText.color = (Color.black);
-        // creditText.color = (Color.black);
         playerLocation = "overworld";
         TownUI.SetActive(false);
         OverworldUI.SetActive(true);
-        // Director.Dir.StartFadeCanvasGroup(TownUI, "out", .15f);
-        // Director.Dir.StartFadeCanvasGroup(OverworldUI, "in", .15f);
     }
     public void BackToHub(){
         if(playerLocation == "scrap buyer"){
@@ -328,6 +316,7 @@ public class UIManager : MonoBehaviour
         townHub.SetActive(true);
         AudioManager.AM.TransitionToTownExterior();
         playerLocation = "town hub";
+        DialogueManager.DM.ConversationEnded();
     }
     // for setting the time to a specific time in town, not used, current configuration uses set day/night on DayNight.cs
     public void Wait(){

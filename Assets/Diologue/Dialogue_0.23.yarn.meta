@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 26e5f1e9913bea64e95e6f7f86e85453
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: 
+  stringIDs: []
+  compilationStatus: 0
+  isSuccesfullyCompiled: 0
+  compilationErrorMessage: "Error on line 1120 at position 19:\nmismatched input
+    'w' expecting COMMAND_IF\r\n    Hasron: Oh, <<waitInline DialogueManager 3>>
+    yeah we totally should.\r\n                  ^"
+  baseLanguage: {instanceID: 0}
+  localizations: []

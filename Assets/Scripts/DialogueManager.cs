@@ -277,6 +277,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void ConversationEnded(){
+        //ContinueDialogue();
         DR.Stop();
         //Debug.Log("conversation ended");
         if(UIManager.UIM.playerLocation == "town hub"){
@@ -355,6 +356,18 @@ public class DialogueManager : MonoBehaviour
             UIManager.UIM.fillFuelButt.interactable = false;
         }
     }
+    [YarnCommand("setExitButtActive")]
+    public void setExitButtActive(string isObjActive){
+        if (GameObject.Find("Exit") != null){
+            GameObject activeExit = GameObject.Find("Exit");
+            if(isObjActive == "true"){
+                activeExit.GetComponent<Button>().interactable = true;
+            }
+            if(isObjActive == "false"){
+                activeExit.GetComponent<Button>().interactable = false;
+            }
+        }
+    }
     [YarnCommand("giveScanner")]
     public void giveScanner(){
         PlayerManager.PM.scannerActive =  true;
@@ -372,7 +385,7 @@ public class DialogueManager : MonoBehaviour
     public void ogdenVisited(){
         Director.Dir.ogdenVisited = true;
     }
-    [YarnCommand("ogdenVisited")]
+    [YarnCommand("chundrVisited")]
     public void chundrVisited(){
         Director.Dir.chundrVisited = true;
     }
@@ -388,6 +401,11 @@ public class DialogueManager : MonoBehaviour
         if(isTowReady == "false"){
             OverworldManager.OM.waitingOnDialogue = true;
         }
+    }
+    [YarnCommand("waitInline")]
+    public void waitInline(float waitTime){
+        ui.waitingInline = true;
+        ui.inlineWaitTime = waitTime;
     }
     
     /* 

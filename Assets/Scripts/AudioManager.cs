@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
 {
 
     public static AudioManager AM;
+    public DayNight DayNight;
 
     public AudioMixer masterMixer;
     [Header("Audio Clips")]
@@ -18,6 +19,7 @@ public class AudioManager : MonoBehaviour
     public List<NamedClip> miscUIClips;
     public List<NamedClip> playerClips;
     public List<AudioClip> ambientStings;
+    public List<AudioClip> ambientStingsNight;
     public List<AudioClip> musicClips;
     public List<AudioClip> rigHitClips;
     public AudioClip rigStart;
@@ -35,6 +37,7 @@ public class AudioManager : MonoBehaviour
    // public AudioSource AmbientAudio;
     public AudioSource AmbientAudioSting;
     public AudioSource AmbientTown;
+    public AudioSource AmbientNight;
     public AudioSource Music;
     public AudioSource RigStartStop;
     public AudioSource RigRunning;
@@ -45,6 +48,7 @@ public class AudioManager : MonoBehaviour
     public AudioMixerSnapshot townExterior;
     public AudioMixerSnapshot townInterior;
     public AudioMixerSnapshot overworldSnapshot;
+    public AudioMixerSnapshot nightAmbientSnapshot;
     public AudioMixerSnapshot pausedSnapshot;
     [Header("Other")]
     [Space(5)]
@@ -68,8 +72,9 @@ public class AudioManager : MonoBehaviour
     float startWaitTime;
     float currentTime;
     int secondsToWaitMusic;
-    float startWaitTimeMusic;
-    float currentTimeMusic;
+    public float startWaitTimeMusic;
+    public float currentTimeMusic;
+    public float musicTimer;
 
     [System.Serializable]
     public struct NamedClip{
@@ -86,7 +91,7 @@ public class AudioManager : MonoBehaviour
     {   // Initializing Ambient Audio Controller
         secondsToWait = Random.Range(90, 180);
         startWaitTime = Time.time;
-        secondsToWaitMusic = Random.Range(180, 420);
+        secondsToWaitMusic = Random.Range(360, 720); //420
         startWaitTimeMusic = Time.time;
         
     }
@@ -99,15 +104,24 @@ public class AudioManager : MonoBehaviour
     {
         currentTime = Time.time;
         // Ambient Audio Controller
-        if(Time.time - startWaitTime >= secondsToWait){
-            PlayRandomAmbient();
+        if(Time.time - startWaitTime >= secondsToWait){                 // Ambient Timer
+            if(DayNight.isDay){
+                PlayRandomAmbient();
+            }
+            else if(DayNight.isNight){
+                PlayRandomAmbientNight();
+            }
             secondsToWait = Random.Range(90, 180);
             startWaitTime = Time.time;
         }
-        if(Time.time - startWaitTimeMusic >= secondsToWaitMusic && Director.Dir.ogdenVisited){
-            PlayRandomSong();
-            secondsToWait = Random.Range(180, 420);
-            startWaitTimeMusic = Time.time;
+        if (Director.Dir.ogdenVisited || Director.Dir.chundrVisited){   // Musical Timer
+            musicTimer += Time.deltaTime;
+            if(musicTimer - startWaitTimeMusic >= secondsToWaitMusic){
+                PlayRandomSong();
+                secondsToWait = Random.Range(360, 720);
+                startWaitTimeMusic = Time.time;
+                Debug.Log("Playing random song"); 
+            }
         }
     }
 
@@ -173,7 +187,6 @@ public class AudioManager : MonoBehaviour
         RigHit.PlayOneShot(clip);
     }
 
-
 // AMBIENT
     // Snapshot Transitions
     public void TransitionToTownExterior(){
@@ -189,8 +202,14 @@ public class AudioManager : MonoBehaviour
     }
     public void TransitionToOverworld(){
         AmbientTown.SetScheduledEndTime(10);
-        overworldSnapshot.TransitionTo(10);
-        currentSnapShot = overworldSnapshot;
+        if(DayNight.isDay){
+            overworldSnapshot.TransitionTo(10);
+            currentSnapShot = overworldSnapshot;
+        }
+        else if(DayNight.isNight){
+            nightAmbientSnapshot.TransitionTo(10);
+            currentSnapShot = nightAmbientSnapshot;
+        }
     }
 
     bool paused = true;
@@ -209,27 +228,32 @@ public class AudioManager : MonoBehaviour
 
     public void PlayRandomAmbient(){
         int clipToPlay = Random.Range(0, ambientStings.Count);
-        // while (clipToPlay == clipToPlayLast){
-        //     clipToPlay = Random.Range(0, ambientStings.Count);
-        // }
-        // int clipToPlayLast = clipToPlay;
         AmbientAudioSting.PlayOneShot(ambientStings[clipToPlay]);
-        Debug.Log("Playing random sting" + ambientStings[clipToPlay].name);
-
-        // if(playStyle == "oneshot"){
-        //     AmbientAudio.PlayOneShot(clipToPlay);
-        // }
-        // else if(playStyle == "loop"){
-        //     AmbientAudio.loop = true;
-        //     AmbientAudio.clip = clipToPlay;
-        //     AmbientAudio.Play(0);
-        // }
-        
+        Debug.Log("Playing random day sting: " + ambientStings[clipToPlay].name);
     }
+    public void PlayRandomAmbientNight(){
+        int clipToPlay = Random.Range(0, ambientStingsNight.Count);
+        AmbientAudioSting.PlayOneShot(ambientStingsNight[clipToPlay]);
+        Debug.Log("Playing random night sting: " + ambientStingsNight[clipToPlay].name);
+    }
+    public void DayNightTransitions(string snapshotToSet){
+        Debug.Log("Transitioning to" + snapshotToSet);
+        if(snapshotToSet == "day"){
+            overworldSnapshot.TransitionTo(DayNight.transitionLength);
+            AmbientNight.Stop();
+        }
+        if(snapshotToSet == "night"){
+            AmbientNight.Play();
+            nightAmbientSnapshot.TransitionTo(DayNight.transitionLength);
+        }
+    }
+
+
+// MUSIC
     public void PlayRandomSong(){
         int clipToPlayMusic = Random.Range(0, musicClips.Count);
         Music.PlayOneShot(musicClips[clipToPlayMusic]);
-        Debug.Log("Playing track: " + musicClips[clipToPlayMusic].name);
+        Debug.Log("Playing track: " + musicClips[clipToPlayMusic].name + "  ||  Next song in " + secondsToWaitMusic/60 + " minutes.");
     }
 
 }

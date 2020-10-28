@@ -173,7 +173,7 @@ public class PlayerManager : MonoBehaviour
         playerScrap.Add(takenScrap);
         UpdateCurrentHaul();
         foreach(ScrapObject scrap in playerScrap){
-            Debug.Log("Player has: " + scrap.GetComponent<ScrapObject>().scrapName);
+//            Debug.Log("Player has: " + scrap.GetComponent<ScrapObject>().scrapName);
         }
         if(firstScrapTaken == false && Director.Dir.introCompleted){
             DialogueManager.DM.RunNode("tutorial-take-scrap");

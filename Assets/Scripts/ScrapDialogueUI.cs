@@ -29,6 +29,8 @@ namespace Yarn.Unity
         public string speakerName;
         public Line currentLine;
         public Line lastLine;
+        public bool waitingInline;
+        public float inlineWaitTime;
         
         void Awake(){
             sDUI = this;
@@ -64,7 +66,7 @@ namespace Yarn.Unity
             // ? is the same as below
             if(onLineStart != null){
                 onLineStart.Invoke();
-                Debug.Log("onLineStart invoked");
+                //Debug.Log("onLineStart invoked");
             }
             
             userRequestedNextLine = false;
@@ -85,8 +87,11 @@ namespace Yarn.Unity
                 var stringBuilder = new StringBuilder ();
 
                 foreach (char c in text) {
+                    if(waitingInline){
+                        yield return new WaitForSeconds(inlineWaitTime);
+                        waitingInline = false;
+                    }
                     stringBuilder.Append (c);
-
                     AudioManager.AM.PlayVoiceClip();
                     onLineUpdate?.Invoke(stringBuilder.ToString ());
                     if (userRequestedNextLine) {

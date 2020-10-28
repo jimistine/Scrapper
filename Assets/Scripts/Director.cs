@@ -60,6 +60,7 @@ public class Director : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartGame();
         DialogueRunner.onDialogueComplete.AddListener(LoadTownOnDialogueEnd);
 
         coverColor = screenCover.color;
@@ -107,7 +108,8 @@ public class Director : MonoBehaviour
         Debug.Log("Starting game");
         AudioManager.TransitionToOverworld();
         StartFadeCanvasGroup(screenCover.gameObject,"out", fadeDuration);
-        yield return new WaitForSeconds(fadeDuration + 3);
+        yield return new WaitForSeconds(3);
+        //yield return new WaitForSeconds(fadeDuration + 3);
         if(skipIntroDialogue){
             yield return null;;
         }
@@ -159,7 +161,12 @@ public class Director : MonoBehaviour
     }
     
     public void StartLeaveTown(){
-        StartCoroutine(LeaveTown());
+        if(chundrVisited == false){
+            DialogueManager.DM.RunNode("leaving-town-check");
+        }
+        else{
+            StartCoroutine(LeaveTown());
+        }
     }
     IEnumerator LeaveTown(){
         screenCover.color = myBlack;

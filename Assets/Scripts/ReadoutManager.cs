@@ -35,7 +35,7 @@ public class ReadoutManager : MonoBehaviour
             //Debug.Log("Never sold a " + newScrap);
             UIM.readoutValue.text = "Price: Unknown";
         }
-        Debug.Log("scprap image value: " + newScrap.image);
+//        Debug.Log("scprap image value: " + newScrap.image);
         UIM.readoutImage.sprite = (Sprite)scrapImages[newScrap.image];
         return null;
     }

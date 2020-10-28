@@ -132,19 +132,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Dazzak City public air tram car
-  description: The model of the car suggests it's relatively new. Why it's laying
-    in a valley of dunes is anyone's guess.
-  image: 1
-  size: 20
-  value: 1500
+  scrapName: Wotaki EX-9 armature
+  description: You figure the outpost might be able to use this. Any orbital barrier
+    needs a handful, and with so much scrap raining down, the outpost's barrier has
+    been working overtime.
+  image: 0
+  size: 3
+  value: 225
   material: Titanium
-  zoneA_rarity: 20
+  zoneA_rarity: 85
   zoneB_rarity: 0
   zoneC_rarity: 0
   zoneD_rarity: 0
   carriesComponents: 0
-  isBuried: 0
+  isBuried: 1
 --- !u!114 &8142259534611466276
 MonoBehaviour:
   m_ObjectHideFlags: 0

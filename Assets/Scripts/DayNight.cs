@@ -109,6 +109,7 @@ public class DayNight : MonoBehaviour
     IEnumerator Sunrise(){
         float elapsedTime = 0;
         Debug.Log("Sunrise starting");
+        AudioManager.AM.DayNightTransitions("day");
         while(elapsedTime < transitionLength){
             globalLight.intensity = Mathf.Lerp(0.015f, 1, elapsedTime/transitionLength);
             globalLight.color = Color.Lerp(moonLight, daylight, elapsedTime/transitionLength);
@@ -131,6 +132,7 @@ public class DayNight : MonoBehaviour
         float elapsedTime = 0;
         Debug.Log("Sunset starting");
         DialogueManager.DM.RunNode("getting-dark");
+        AudioManager.AM.DayNightTransitions("night");
         while(elapsedTime < transitionLength){
             globalLight.intensity = Mathf.Lerp(1f, 0.015f, elapsedTime/transitionLength);
             globalLight.color = Color.Lerp(daylight, moonLight, elapsedTime/transitionLength);
@@ -151,33 +153,49 @@ public class DayNight : MonoBehaviour
     }
 
     public void SetToNight(){
-        clockTime = 420 + (transitionLength/2);
-        isNight = true;
-        isDay = false;
-        setting = false;
-        rising = false;
-        globalLight.intensity = 0.015f;
-        globalLight.color = moonLight;
-        
-        daru.intensity = 0.015f;
-        daru.color = moonLight;
-        daru.transform.position = daruStart;
+        if(Director.Dir.chundrVisited == false){
+            return;
+        }
+        else{
+            if(rising){
+                StopCoroutine(Sunrise());
+            }
+            clockTime = 420 + (transitionLength/2);
+            isNight = true;
+            isDay = false;
+            setting = false;
+            rising = false;
+            globalLight.intensity = 0.015f;
+            globalLight.color = moonLight;
+            
+            daru.intensity = 0.015f;
+            daru.color = moonLight;
+            daru.transform.position = daruStart;
+        }
     }
     public void SetToDay(){
-        if(clockTime > (121 + (transitionLength/2))){
-            day += 1;
+        if(Director.Dir.chundrVisited == false){
+            return;
         }
-        clockTime = 121 + (transitionLength/2);
-        isNight = false;
-        isDay = true;
-        setting = false;
-        rising = false;
-        globalLight.intensity = 1;
-        globalLight.color = daylight;
-        
-        daru.intensity = 1;
-        daru.color = daylight;
-        daru.transform.position = daruNoon;
+        else{
+            if(clockTime > (121 + (transitionLength/2))){
+                day += 1;
+            }
+            if(setting){
+                StopCoroutine(Sunset());
+            }
+            clockTime = 121 + (transitionLength/2);
+            isNight = false;
+            isDay = true;
+            setting = false;
+            rising = false;
+            globalLight.intensity = 1;
+            globalLight.color = daylight;
+            
+            daru.intensity = 1;
+            daru.color = daylight;
+            daru.transform.position = daruNoon;
+        }
     }
         // DARU, THE SUN
         // XOLA, THE FIRST MOON OF TALACAN
