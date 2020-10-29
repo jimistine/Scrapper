@@ -301,8 +301,8 @@ position: 1789,491
         CH1-P: Thanks again, I'll keep that in mind. The sand was causing some problems earlier...
         Ogden: Yes, it does, doesn't it? And yet here we are.
         CH1-P: Here we are.
-        <<setExitButtActive DialogueManager true>>
     <<endif>> 
+<<setExitButtActive DialogueManager true>>
 <<ogdenVisited DialogueManager>> 
 <<else>>
    [[ogden-enter]]

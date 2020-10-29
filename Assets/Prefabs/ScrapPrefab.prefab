@@ -132,15 +132,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Wotaki EX-9 armature
-  description: You figure the outpost might be able to use this. Any orbital barrier
-    needs a handful, and with so much scrap raining down, the outpost's barrier has
-    been working overtime.
+  scrapName: K1 Processor Chip
+  description: If you've ever met someone from Galatan V you'll hear horror stories
+    about these things. The entire planetary government ran on them for about 200
+    standard years and their techs stopped being able to interface with them for
+    the latter 100.
   image: 0
-  size: 3
-  value: 225
-  material: Titanium
-  zoneA_rarity: 85
+  size: 1
+  value: 100
+  material: Platinum
+  zoneA_rarity: 40
   zoneB_rarity: 0
   zoneC_rarity: 0
   zoneD_rarity: 0

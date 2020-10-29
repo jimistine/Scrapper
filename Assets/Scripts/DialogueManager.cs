@@ -238,14 +238,14 @@ public class DialogueManager : MonoBehaviour
                 else{
                    // Debug.Log("running SUB dialogue");
                     int randomRoll = Random.Range(0, 4);
-                    //Debug.Log("Rolled: " + randomRoll);
+                    Debug.Log("Rolled: " + randomRoll);
                     if(randomRoll == 0){
                         DR.StartDialogue(nodeToRun);
                     }
                 }
             }
             else{
-                if(tagsCurrent.Contains("main")){
+                if(tagsCurrent.Contains("main") || tagsCurrent.Contains("world")){
                     return;
                 }
                 else{
@@ -256,7 +256,7 @@ public class DialogueManager : MonoBehaviour
         else{
             if(tags.Contains("sub")){
                 int randomRoll = Random.Range(0, 4);
-                //Debug.Log("Rolled: " + randomRoll);
+                Debug.Log("Rolled: " + randomRoll);
                 if(randomRoll == 0){
                     DR.StartDialogue(nodeToRun);
                 }
@@ -279,7 +279,7 @@ public class DialogueManager : MonoBehaviour
     public void ConversationEnded(){
         //ContinueDialogue();
         DR.Stop();
-        //Debug.Log("conversation ended");
+        Debug.Log("conversation ended");
         if(UIManager.UIM.playerLocation == "town hub"){
             activeSpeakerPanel.SetActive(false);
         }

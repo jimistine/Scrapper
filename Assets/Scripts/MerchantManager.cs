@@ -145,7 +145,7 @@ public class MerchantManager : MonoBehaviour
         //Director.Dir.StartFadeDip(0.5f, 0, 0.5f);
         if(PlayerManager.GetComponent<fuel>().currentFuelUnits <= 0 ){
             DialogueManager.DM.RunNode("ogden-towed");
-            UIManager.fuelMerchantReadout.text += "\n<size=75%>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " credits has been detucted from your account</size>";
+           // UIManager.fuelMerchantReadout.text += "\n<size=75%>A service fee of "+ (PlayerManager.playerCredits*towPriceModifier).ToString("#,#") + " credits has been detucted from your account</size>";
             PlayerManager.playerCredits -= PlayerManager.playerCredits*towPriceModifier;
             Director.Dir.totalCreditsSpent += PlayerManager.playerCredits*towPriceModifier;
         }

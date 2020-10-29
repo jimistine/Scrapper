@@ -244,6 +244,7 @@ position: 1789,491
 ---
 <<if visited("ogden-intro") is false>>
     <<setFuelButtActive DialogueManager false>>
+    <<setExitButtActive DialogueManager false>>
     <<if visited ("tutorial-out-of-fuel") is true>>
         Hasron: Hey thanks again for towing us in back there. Should have been keeping a closer eye on the reactor.
         Ogden: You are most welcome. These things happen from time to time.
@@ -301,6 +302,7 @@ position: 1789,491
         Ogden: Yes, it does, doesn't it? And yet here we are.
         CH1-P: Here we are.
     <<endif>> 
+<<setExitButtActive DialogueManager true>>
 <<ogdenVisited DialogueManager>> 
 <<else>>
    [[ogden-enter]]
@@ -418,9 +420,10 @@ position: 845,1013
 title: chundr
 tags: main merchant
 colorID: 0
-position: 2066,486
+position: 2065,484
 ---
 <<if visited("chundr") is false>> 
+    <<setExitButtActive DialogueManager false>>
     Chundr: Hey there. Welcome to Outpost SKJ-29.
     Chundr: You two must be our newest scrappers, hm?
     Hasron: That's right! It's good to meet you. I'm Hasron.
@@ -450,6 +453,7 @@ position: 2066,486
     Chundr: Of course. And say, if you don't make it to the 'Strom Race, we always have a good festival here to watch and celebrate.
     Chundr: And good luck out there.
     <<chundrVisited DialogueManager>> 
+    <<setExitButtActive DialogueManager true>>
 <<else>>
      [[chundr-enter]]
 <<endif>>
@@ -742,7 +746,7 @@ position: 1788,751
 <<elseif $ogdenPick == 3>>
     Ogden: I've set aside some fully saturated cassettes just for you.
 <<elseif $ogdenPick == 4>>
-    Ogden: Please take care with this deuterium, improper storage can lead to quite the mess.
+    Ogden: Just who I was hoping to see.
 <<elseif $ogdenPick == 5>>
     Ogden: Tell Chundr I say 'hello' next time you see him.
     Ogden: And that he still owes me a significant amount of credits for, well, he will know.
@@ -767,10 +771,10 @@ position: 251,520
     Hasron: So how does this thing work?
     CH1-P: You don't know?
     Hasron: It's been a while! 
+    <<introWaitingForAcceleration DialogueManager>> 
     CH1-P: Alright so you've got acceleration on W, and deceleration on S.
     Hasron: Ok, ok.
 <<endif>> 
-<<introWaitingForAcceleration DialogueManager>> 
 //set a flag true now to wait until they press w for the first time, then run 2-2
 ===
 title: intro-2-2
@@ -868,7 +872,7 @@ position: 1166,781
     Hasron: I think we're going to get along just fine with Mr. Chundr.
     CH1-P: I can't believe we needed a sctructure scanner this whole time.
     Hasron: I know. I really feel like I should have thought of that. Both of my uncles were scrappers.
-    Hasron: But they had these cool optical scanners that they would always carry around—
+    Hasron: But they had these cool optical scanners that they would always carry around-
     CH1-P: Like the one on the console here?
     Hasron: Yeah, kinda, but bigger. I just thought they would like stand on top of their rigs and look for scrap with those.
     CH1-P: I mean that makes sense. I guess.
@@ -903,13 +907,14 @@ position: 2073,741
     Hasron: Hey Chundr, how's the day going?
     Chundr: Well I can say it's a bit better seeing you all in here.
 <<endif>>
+<<chundrVisited DialogueManager>>
 ===
 title: left-town-ogden
 tags: main
 colorID: 0
 position: 532,509
 ---
-<<if visited ("left-town-ogden") is false>> 
+<<if visited("left-town-ogden") == false>> 
     Hasron: Odgen seemed nice.
     CH1-P: Mhm.
     Hasron: What's up?
@@ -930,7 +935,7 @@ position: 532,509
     Hasron: Yeah, of course.
     Hasron: Let me know if you ever, you know, like, need help with any of that.
     CH1-P: Sure thing.
-<<else>>
+<<elseif visited("left-town-ogden") == true>>
     [[left-town]]
 <<endif>>
 ===
@@ -1100,5 +1105,26 @@ position: 530,776
     Hasron: I'm just saying it could happen.
     CH1-P: This is the run, huh?
     Hasron: This is the run.
+<<endif>>
+===
+title: leaving-town-check
+tags: main
+colorID: 0
+position: 525,1025
+---
+<<set $leavingTownCheck += 1>>
+<<if $leavingTownCheck == 1>> 
+    Hasron: Hey I think we should check out the scrap buyer's place before we head out.
+    Hasron: Gonna be seeing a lot of them in the not so distant future.
+<<elseif $leavingTownCheck == 2>>
+    CH1-P: Wait weren't we gonna go see the scrap place?
+    Hasron: Oh, yeah we totally should.
+<<elseif $leavingTownCheck == 3>>
+    Hasron: What time is it??
+    CH1-P: Not sure, w-
+    Hasron: SCRAP TIME!!
+    CH1-P: Oh.
+    CH1-P: Would you look at that.
+    CH1-P: It's scrap time.
 <<endif>>
 ===

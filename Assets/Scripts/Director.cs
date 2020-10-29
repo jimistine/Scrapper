@@ -106,6 +106,7 @@ public class Director : MonoBehaviour
 
     IEnumerator StartGameRoutine(){
         Debug.Log("Starting game");
+        AudioManager.AM.InitTowTigAudio();
         AudioManager.TransitionToOverworld();
         StartFadeCanvasGroup(screenCover.gameObject,"out", fadeDuration);
         yield return new WaitForSeconds(3);
@@ -252,7 +253,9 @@ public class Director : MonoBehaviour
             alphaStart = 0;
             alphaEnd = 1;
             isGroupActive = true;
-            element.SetActive(true);    
+            if(element != null){
+                element.SetActive(true);    
+            }
         }
         else{
             alphaStart = 1;

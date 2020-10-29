@@ -53,12 +53,12 @@ public class SceneController : MonoBehaviour
         overworldLoaded?.Invoke();
     }
     public void StartLoadTown(){
-        if (DialogueManager.DM.isDialogueRunner1Running){
-            Director.Dir.StartWaitToEnterTown();
-        }
-        else{
-            StartCoroutine("LoadTown");
-        }
+        // if (DialogueManager.DM.isDialogueRunner1Running){
+        //     Director.Dir.StartWaitToEnterTown();
+        // }
+        // else{
+        StartCoroutine("LoadTown");
+       // }
     }
     public IEnumerator LoadTown(){
         SceneManager.LoadScene("Town", LoadSceneMode.Additive);

@@ -91,13 +91,13 @@ public class PlayerManager : MonoBehaviour
                 RigManager.RM.rigLights.SetActive(true);
             }
         }
-        if(Input.GetKeyDown(KeyCode.P)){
+        if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)){
             Debug.Log("pressed p");
             UIManager.TogglePause();
-            if(Director.Dir.gameStarted == false){
-                Debug.Log("calling dir start game");
-                Director.Dir.StartGame();
-            }
+            // if(Director.Dir.gameStarted == false){
+            //     Debug.Log("calling dir start game");
+            //     Director.Dir.StartGame();
+            // }
         }
         if(Input.GetKeyDown(KeyCode.I)||Input.GetKeyDown(KeyCode.E)){
             Debug.Log("pressed i");
@@ -134,7 +134,7 @@ public class PlayerManager : MonoBehaviour
                 else if(newScrap.scrapName == "Sha'ak-ji Holospace Generator"){
                     DialogueManager.DM.RunNode("holospace-generator");
                 }
-                else if(firstScrapFound == false && Director.Dir.introCompleted){
+                else if(firstScrapFound == false && Director.Dir.introCompleted && !DialogueManager.DM.isDialogueRunner1Running){
                     DialogueManager.DM.RunNode("tutorial-find-scrap");
                     firstScrapFound = true;
                 }
@@ -175,7 +175,7 @@ public class PlayerManager : MonoBehaviour
         foreach(ScrapObject scrap in playerScrap){
 //            Debug.Log("Player has: " + scrap.GetComponent<ScrapObject>().scrapName);
         }
-        if(firstScrapTaken == false && Director.Dir.introCompleted){
+        if(firstScrapTaken == false && Director.Dir.introCompleted && !DialogueManager.DM.isDialogueRunner1Running){
             DialogueManager.DM.RunNode("tutorial-take-scrap");
             firstScrapTaken = true;
         }

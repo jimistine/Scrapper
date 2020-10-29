@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
     public List<AudioClip> rigHitClips;
     public AudioClip rigStart;
     public AudioClip rigStop;
+    public AudioClip towRigStop;
     public float rigHitVolumeModifier;
     [Range(0.25f, 5f)]
     public float hitModulationMin;
@@ -42,6 +43,8 @@ public class AudioManager : MonoBehaviour
     public AudioSource RigStartStop;
     public AudioSource RigRunning;
     public AudioSource RigHit;
+    public AudioSource TowRigStartStop;
+    public AudioSource TowRigRunning;
     [Header("Snapshots")]
     [Space(5)]
     public AudioMixerSnapshot currentSnapShot;
@@ -99,6 +102,12 @@ public class AudioManager : MonoBehaviour
     void Update(){
         //masterMixer.SetFloat("RunningVolume", (PlayerManager.PM.GetComponent<ClickDrag>().currentSpeedActual));
         //masterMixer.SetFloat("RunningVolume", (PlayerManager.PM.GetComponent<ClickDrag>().currentSpeedActual * runningVolumeModifier) - 80);
+    }
+
+    public void InitTowTigAudio(){
+        TowRigStartStop = GameObject.Find("TowRigParent").GetComponentsInChildren<AudioSource>()[0];
+        TowRigRunning = GameObject.Find("TowRigParent").GetComponentsInChildren<AudioSource>()[1];
+        OverworldManager.OM.towRig.SetActive(false);
     }
     void FixedUpdate()
     {
@@ -164,7 +173,7 @@ public class AudioManager : MonoBehaviour
         voiceCounter++;
     }
 
-// RIG
+// RIGs
     public void PlayRigStart(){
         //Debug.Log("rig start");
         double startDuration = (double)RigStartStop.clip.samples / RigStartStop.clip.frequency;
@@ -185,6 +194,16 @@ public class AudioManager : MonoBehaviour
         RigHit.pitch = Random.Range(hitModulationMin, hitModulationMax);
         RigHit.volume = PlayerManager.PM.GetComponent<ClickDrag>().currentSpeedActual * rigHitVolumeModifier;
         RigHit.PlayOneShot(clip);
+    }
+    public void PlayTowRigStart(){
+        double startDuration = (double)TowRigStartStop.clip.samples / TowRigStartStop.clip.frequency;
+        TowRigStartStop.PlayScheduled(AudioSettings.dspTime);
+        TowRigRunning.PlayScheduled(AudioSettings.dspTime + startDuration);
+    }
+    public void PlayTowRigStop(){
+        TowRigStartStop.Stop();
+        TowRigRunning.Stop();
+        TowRigStartStop.PlayOneShot(towRigStop);
     }
 
 // AMBIENT
@@ -237,9 +256,13 @@ public class AudioManager : MonoBehaviour
         Debug.Log("Playing random night sting: " + ambientStingsNight[clipToPlay].name);
     }
     public void DayNightTransitions(string snapshotToSet){
-        Debug.Log("Transitioning to" + snapshotToSet);
+        StartCoroutine(DayNightTransitionsRoutine(snapshotToSet));
+    }
+    public IEnumerator DayNightTransitionsRoutine(string snapshotToSet){
+        Debug.Log("Transitioning to " + snapshotToSet);
         if(snapshotToSet == "day"){
             overworldSnapshot.TransitionTo(DayNight.transitionLength);
+            yield return new WaitForSeconds(DayNight.transitionLength + 2);
             AmbientNight.Stop();
         }
         if(snapshotToSet == "night"){

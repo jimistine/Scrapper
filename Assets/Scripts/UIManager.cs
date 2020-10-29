@@ -267,7 +267,7 @@ public class UIManager : MonoBehaviour
         zoomLevelReadout.text = currentZoom + "x";
     }
 
-    bool paused = true;
+    bool paused = false;
     public void TogglePause(){
         AudioManager.AM.TogglePausedSnapshot();
         if(paused == false){ // they pause the game

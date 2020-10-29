@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class OverworldManager : MonoBehaviour
 {
@@ -45,9 +47,15 @@ public class OverworldManager : MonoBehaviour
     {
         if(DayNight.isDay){
             worldLights.SetActive(false);
+            if(towRig.activeSelf){
+                towRig.GetComponentInChildren<Light2D>().enabled = false;
+            }
         }
         else{
             worldLights.SetActive(true);
+            if(towRig.activeSelf){
+                towRig.GetComponentInChildren<Light2D>().enabled = true;
+            }
         }
         //Debug.Log("Distance is: " + Vector3.Distance(PlayerManager.PM.gameObject.transform.position, town.transform.position));
         if(Vector3.Distance(PlayerManager.PM.gameObject.transform.position, town.transform.position) > 1.15f){
@@ -81,6 +89,7 @@ public class OverworldManager : MonoBehaviour
     }
     public IEnumerator SendTowRig(){
         Debug.Log("Tow rig sent");
+        AudioManager.AM.PlayTowRigStart();
         while(isMoving){
             distCovered = (Time.time - startTime) * speed;
             fractionOfJourney = distCovered / journeyLength;          
@@ -96,6 +105,7 @@ public class OverworldManager : MonoBehaviour
             }
             yield return null;
         }
+        AudioManager.AM.PlayTowRigStop();
         yield return new WaitForSeconds(1);
         goingOut = false;
         PlayerManager.PM.GetComponentInChildren<EdgeCollider2D>().enabled = false;
@@ -110,6 +120,7 @@ public class OverworldManager : MonoBehaviour
         overworldCamera.GetComponent<cameraFollow>().enabled = false;
         startTime = Time.time;
         
+        AudioManager.AM.PlayTowRigStart();
         while(isMoving){
             //elapsedTime += Time.deltaTime;
             distCovered = (Time.time - startTime) * speed;
@@ -130,6 +141,7 @@ public class OverworldManager : MonoBehaviour
             }
             yield return null;
         }
+        AudioManager.AM.PlayTowRigStop();
         Director.Dir.StartEnterTown();
         yield return new WaitForSeconds(0.5f);
         goingOut = true;
