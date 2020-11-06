@@ -50,7 +50,9 @@ public class UIManager : MonoBehaviour
 
     [Header("Overworld Readouts")]
     [Space(10)]
-    public GameObject onScrapPanel;
+    //public GameObject onScrapPanel;
+    public GameObject onScrapPanelPrefab;
+    public GameObject onScrapPanelParent;
     public GameObject recentScrap;
     public GameObject readoutPanel;
     public TextMeshProUGUI readoutName;
@@ -96,6 +98,9 @@ public class UIManager : MonoBehaviour
     public Button fillFuelButt;
     public TextMeshProUGUI fuelMerchantReadout;
     public TextMeshProUGUI fillFuelButtonText;
+
+    public UnityEngine.Events.UnityEvent leftScrap;
+
     int characterToTalk;
 
     void Awake(){
@@ -142,10 +147,10 @@ public class UIManager : MonoBehaviour
         if(fuelManager.currentFuelUnits == fuelManager.maxFuel){
             fillFuelButtonText.text = "Cassets full.";
         }
-        if(onScrapPanel.activeSelf){
-            Vector3 scrapPos = Camera.main.WorldToScreenPoint(recentScrap.transform.position);
-            onScrapPanel.transform.position = scrapPos;
-        }
+        // if(onScrapPanel.activeSelf){
+        //     Vector3 scrapPos = Camera.main.WorldToScreenPoint(recentScrap.transform.position);
+        //     onScrapPanel.transform.position = scrapPos;
+        // }
     }
     // HUD
     public void OpenHUDDetails(){
@@ -170,14 +175,25 @@ public class UIManager : MonoBehaviour
         newScrap.GetComponent<SpriteRenderer>().enabled = true;
         newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.5764706f,0.2431373f,0,1);
         scrapToTake = newScrap;
-        Director.Dir.StartFadeCanvasGroup(onScrapPanel, "in", 0.1f);
-        if(newScrap.isBuried == false){
-            onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = 
-                newScrap.scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + newScrap.size.ToString("#,#") + " m<sup>3</sup></size>";
+
+        
+        if(newScrap.isBuried == true){ // they have not yet scanned this piece
+            //newScrap.isBuried = false;
+            Vector3 scrapPos = Camera.main.WorldToScreenPoint(newScrap.transform.position);
+            GameObject onScrapPanel = (Instantiate(onScrapPanelPrefab, scrapPos, Quaternion.identity));
+            onScrapPanel.transform.SetParent(onScrapPanelParent.transform, false);
+            //onScrapPanel.transform.parent = newScrap.transform;
+            onScrapPanel.GetComponent<OnScrapPanelController>().panelScrap = newScrap;
+            onScrapPanel.GetComponent<OnScrapPanelController>().panelScrapGO = newScrap.gameObject;
+            // onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = "?";
+            // Director.Dir.StartFadeCanvasGroup(onScrapPanel, "in", 0.1f);
+            Debug.Log("made panel");
         }
-        else{
-            onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = "?";
-        }
+        // else{  // they have already scanned it
+        //     Director.Dir.StartFadeCanvasGroup(newScrap.transform.Find("onScrapPanel(Clone)").gameObject, "in", 0.1f);
+        //     newScrap.transform.Find("onScrapPanel(Clone)").GetComponentInChildren<TextMeshProUGUI>().text = 
+        //         newScrap.scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + newScrap.size.ToString("#,#") + " m<sup>3</sup></size>";
+        // }
         recentScrap = newScrap.gameObject;
         recentScrap.transform.position = newScrap.transform.position;
         return newScrap;
@@ -185,13 +201,13 @@ public class UIManager : MonoBehaviour
     public void OutOfRangeScrap(ScrapObject newScrap){
         //Debug.Log(newScrap.scrapName + " is now out of range");
         newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.6509434f,0.5183763f,0.4216803f,1);
-        Director.Dir.StartFadeCanvasGroup(onScrapPanel, "out", 0.15f);
+        //Director.Dir.StartFadeCanvasGroup(newScrap.transform.Find("onScrapPanel(Clone)").gameObject, "out", 2f, 2f);
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "out", 0.15f);
     }
 
     // 4. Player has clicked on scrap
     public void ShowReadout(GameObject scrap = default(GameObject)){ // this one is for clicking on the scrap itself
-        Director.Dir.StartFadeCanvasGroup(onScrapPanel, "out", 0.1f);
+        //Director.Dir.StartFadeCanvasGroup(scrap.transform.Find("onScrapPanel(Clone)").gameObject, "out", 0.1f);
         if(scrap != null){
             recentScrap = scrap;
         }
@@ -201,9 +217,9 @@ public class UIManager : MonoBehaviour
         recentScrap.GetComponent<ScrapObject>().isBuried = false;
        
     }
-    public void ShowReadoutButton(){ // and this one is for the on scrap panel. i hate it.
-        Director.Dir.StartFadeCanvasGroup(onScrapPanel, "out", 0.1f);
-        ReadoutManager.UpdateReadout(recentScrap.GetComponent<ScrapObject>());
+    public void ShowReadoutButton(GameObject scrap = default(GameObject)){ // and this one is for the on scrap panel. i hate it.
+        //Director.Dir.StartFadeCanvasGroup(recentScrap.transform.Find("onScrapPanel(Clone)").gameObject, "out", 0.1f);
+        ReadoutManager.UpdateReadout(scrap.GetComponent<ScrapObject>());
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "in", 0.05f);
         AudioManager.AM.PlayMiscUIClip("inspect");
         
@@ -235,9 +251,10 @@ public class UIManager : MonoBehaviour
         }
     }
     public void LeaveScrap(){
-        onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = 
-            recentScrap.GetComponent<ScrapObject>().scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + recentScrap.GetComponent<ScrapObject>().size.ToString("#,#") + " m<sup>3</sup></size>";
-        Director.Dir.StartFadeCanvasGroup(onScrapPanel, "in", 0.1f);
+        // recentScrap.transform.Find("onScrapPanel(Clone)").gameObject.GetComponentInChildren<TextMeshProUGUI>().text = 
+        //     recentScrap.GetComponent<ScrapObject>().scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + recentScrap.GetComponent<ScrapObject>().size.ToString("#,#") + " m<sup>3</sup></size>";
+        // Director.Dir.StartFadeCanvasGroup(recentScrap.transform.Find("onScrapPanel(Clone)").gameObject, "in", 0.1f);
+        leftScrap?.Invoke();      
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "out", 0.05f);
         AudioManager.AM.PlayMiscUIClip("dismiss");
         DialogueManager.DM.RunNode("scrap-leave");

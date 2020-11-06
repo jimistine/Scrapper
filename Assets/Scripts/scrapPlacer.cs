@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 
 [System.Serializable]
@@ -36,6 +37,8 @@ public class scrapPlacer : MonoBehaviour
    public float minDistance;
    public float spawningBoundX;
    public float spawningBoundY;
+   public Object[] scrapShadows;
+   public float scrapShadowScaler;
    public GameObject[] placedScrap;
 
    Rect spawningRect;
@@ -59,6 +62,7 @@ public class scrapPlacer : MonoBehaviour
     }
     
     void Start(){
+        scrapShadows = Resources.LoadAll("Sprites/Blobs", typeof(Sprite));
         SpawnScrap(totalSpawnableScrap);
         SpawnPlacedScrap();
         spawningRect = gameObject.GetComponent<RectTransform>().rect;
@@ -140,9 +144,17 @@ public class scrapPlacer : MonoBehaviour
                 }   
             }
             // spawn that $hit
-            GameObject copiedScrap = (Instantiate(sampleScrap, position, Quaternion.identity));
+            GameObject copiedScrap = (Instantiate(sampleScrap, position, Quaternion.Euler(0, 0, Random.Range(0f, 360f))));
             copiedScrap.transform.parent = gameObject.transform;
             copiedScrap.name = copiedScrap.GetComponent<ScrapObject>().scrapName;
+            // scale and swap the shadow sprite
+            float scrapScale = copiedScrap.GetComponent<ScrapObject>().size/scrapShadowScaler;
+            if(scrapScale > 5){scrapScale = 5;}
+            copiedScrap.transform.localScale = new Vector3(scrapScale, scrapScale, scrapScale);
+            int blobIndex = Random.Range(0, scrapShadows.Count());
+            copiedScrap.GetComponent<SpriteRenderer>().sprite = (Sprite)scrapShadows[blobIndex];
+            copiedScrap.GetComponentsInChildren<SpriteRenderer>()[1].sprite = (Sprite)scrapShadows[blobIndex];
+            Debug.Log("Scrap child name: "+ copiedScrap.GetComponentsInChildren<SpriteRenderer>()[1].gameObject.name);
             // and add a glow if it's this specific one.
             if(copiedScrap.name == "Chunk of raw cordonite"){
                 GameObject glowToAttach = (GameObject) Instantiate(scrapGlow, copiedScrap.transform.position, copiedScrap.transform.rotation);
