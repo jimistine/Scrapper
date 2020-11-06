@@ -20,6 +20,13 @@ public class PlayerManager : MonoBehaviour
     [Header("Rig Stats")]
     [Space(5)]
     public CircleCollider2D searchRadius;
+    public Color pulseColor;
+    public Color pulseColorFadeTarget;
+    //public CircleCollider2D pulseScanner;
+    public GameObject pulseScanner;
+    public float maxPulse;
+    public float pulseDuration;
+    public float pulseFadeDuration;
 
     [Header("Player Inventory")]
     [Space(5)]
@@ -82,6 +89,10 @@ public class PlayerManager : MonoBehaviour
                 AudioManager.ChangeZoom();
             }
         }
+        if(Input.GetKeyDown(KeyCode.LeftShift)){
+            StartCoroutine(ScannerPulse());
+            Debug.Log("scanning");
+        }
         if(Input.GetKeyDown(KeyCode.F)){
             AudioManager.ToggleHeadlights();
             if(RigManager.RM.rigLights.activeSelf == true){
@@ -94,10 +105,6 @@ public class PlayerManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)){
             Debug.Log("pressed p");
             UIManager.TogglePause();
-            // if(Director.Dir.gameStarted == false){
-            //     Debug.Log("calling dir start game");
-            //     Director.Dir.StartGame();
-            // }
         }
         if(Input.GetKeyDown(KeyCode.I)||Input.GetKeyDown(KeyCode.E)){
             Debug.Log("pressed i");
@@ -117,7 +124,31 @@ public class PlayerManager : MonoBehaviour
             //Debug.Log(Random.Range(0,3));
         }
     }
-    
+    IEnumerator ScannerPulse(){
+        Vector3 startScale = new Vector3(0.001f, 0.001f, 0.001f);
+        Debug.Log("start scale is: " + startScale.x);
+
+        float elapsedTime = 0;
+        Vector3 maxPulseVector = new Vector3( maxPulse,maxPulse, maxPulse);
+        while(elapsedTime < pulseDuration){
+            float t = elapsedTime/pulseDuration;
+            t = Mathf.Sin(t * Mathf.PI * 0.5f);
+            pulseScanner.transform.localScale = Vector3.Lerp(startScale, maxPulseVector, t);
+            pulseScanner.GetComponent<SpriteRenderer>().color = Color.Lerp(pulseColor, pulseColorFadeTarget, elapsedTime/pulseFadeDuration); 
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // elapsedTime = 0;
+        // while(elapsedTime < pulseFadeDuration){
+        //     elapsedTime += Time.deltaTime;
+        //     yield return null;
+        // }
+
+        Debug.Log("end scale is: " + pulseScanner.transform.localScale.x);
+        pulseScanner.GetComponent<SpriteRenderer>().color = pulseColor;
+        pulseScanner.transform.localScale = new Vector3 (startScale.x, startScale.y, startScale.z);
+    }
     void OnTriggerEnter2D(Collider2D other){
     // 1. Pop goes the scrap!  If our search radius hits the small EdgeCollider on the scrap, it pops
         if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(EdgeCollider2D) && scannerActive){
