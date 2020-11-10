@@ -160,6 +160,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactable: 0
+  waitToMarkOutOfRangeTime: 3
+  fadeDuration: 1.5
+  inRangeColor: {r: 0.5372549, g: 0.15686892, b: 0.003921555, a: 1}
+  outOfRangeColor: {r: 0.5377358, g: 0.27056205, b: 0.0033819196, a: 0.25882354}
 --- !u!212 &617055198158216929
 SpriteRenderer:
   m_ObjectHideFlags: 0

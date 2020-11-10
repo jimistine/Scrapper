@@ -186,17 +186,18 @@ public class PlayerManager : MonoBehaviour
         }
     }
     void OnTriggerExit2D(Collider2D other){ // Only consider out of range when we exit the larger collider on scrap
-        if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(CircleCollider2D) && scannerActive){
+        if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(CircleCollider2D) && scannerActive){    
             ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
-            other.gameObject.GetComponent<ProximityCheck>().IsInRange(false);
-            
+            if(other.gameObject.GetComponent<ProximityCheck>().interactable){
+                other.gameObject.GetComponent<ProximityCheck>().IsInRange(false);
+            }
             UIManager.OutOfRangeScrap(other.gameObject.GetComponent<ScrapObject>());
-            //UIManager.OutOfRangeScrap(newScrap);
         }
         if(other.gameObject.name == "Town"){
             UIManager.ActivateTownButton(false);
         }
     }
+   
    
     // 5. If they clicked Take (UIM) and they could fit it, take it
     public void TakeScrap(ScrapObject takenScrap){

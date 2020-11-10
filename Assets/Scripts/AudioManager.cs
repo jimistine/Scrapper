@@ -231,7 +231,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    bool paused = true;
+    bool paused = false;
     AudioMixerSnapshot storedSnapshot;
     public void TogglePausedSnapshot(){
         if(paused){

@@ -83,6 +83,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Scrap Buyer")]
     [Space(10)]
+    public TextMeshProUGUI scrapBuyerCredits;
     public GameObject sellScrapButt;
     public GameObject scrapBuyer;
     public ScrapObject scrapToTake;
@@ -94,6 +95,7 @@ public class UIManager : MonoBehaviour
     public List<GameObject> upgradeButtons = new List<GameObject>();
     [Header("Fuel Merchant")]
     [Space(10)]
+    public TextMeshProUGUI fuelMerchantCredits;
     public GameObject fuelMerchant;
     public Button fillFuelButt;
     public TextMeshProUGUI fuelMerchantReadout;
@@ -128,9 +130,17 @@ public class UIManager : MonoBehaviour
 
         if(PlayerManager.playerCredits == 0){
             creditText.text = "CREDITS           <color=#777777>————</color>  0 cr.";
+            if(TownUI != null){
+                scrapBuyerCredits.text = "Current Credits\n<b>0 cr.</b>";
+                fuelMerchantCredits.text = "Current Credits\n<b>0 cr.</b>";
+            }
         }
         else{
             creditText.text = "CREDITS           <color=#777777>————</color>  " + PlayerManager.playerCredits.ToString("#,#") + " cr.";
+            if(TownUI != null){
+                scrapBuyerCredits.text = "Current Credits\n<b>" + PlayerManager.playerCredits.ToString("#,#") + " cr.</b>";
+                fuelMerchantCredits.text = "Current Credits\n<b>" + PlayerManager.playerCredits.ToString("#,#") + " cr.</b>";
+            }
             //creditText.text = "Credits: " + PlayerManager.playerCredits.ToString("#,#") + " cr.";
         }
         if(PlayerManager.currentHaul != 0){
@@ -200,8 +210,7 @@ public class UIManager : MonoBehaviour
     }
     public void OutOfRangeScrap(ScrapObject newScrap){
         //Debug.Log(newScrap.scrapName + " is now out of range");
-        newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.6509434f,0.5183763f,0.4216803f,1);
-        //Director.Dir.StartFadeCanvasGroup(newScrap.transform.Find("onScrapPanel(Clone)").gameObject, "out", 2f, 2f);
+        //newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.6509434f,0.5183763f,0.4216803f,1);
         Director.Dir.StartFadeCanvasGroup(readoutPanel, "out", 0.15f);
     }
 
