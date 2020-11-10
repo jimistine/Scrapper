@@ -94,7 +94,7 @@ public class AudioManager : MonoBehaviour
     {   // Initializing Ambient Audio Controller
         secondsToWait = Random.Range(90, 180);
         startWaitTime = Time.time;
-        secondsToWaitMusic = Random.Range(360, 720); //420
+        secondsToWaitMusic = 60; //420
         startWaitTimeMusic = Time.time;
         
     }

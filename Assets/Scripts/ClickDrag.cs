@@ -19,6 +19,7 @@ public class ClickDrag : MonoBehaviour
     public bool accelerating;
     public bool breaking;
     public string moveType = "PointerSteer";
+    public ParticleSystem rigDust;
     Rigidbody2D  PlayerRB;
     Vector2 direction;
     Vector2 lastDirection;
@@ -48,12 +49,14 @@ public class ClickDrag : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.W)){
                 accelerating = true;
                 AudioManager.AM.PlayRigStart();
+                rigDust.Play();
                 StartCoroutine("Accelerate");
                 StartCoroutine("UpdateRotation");
             }
             if(Input.GetKeyUp(KeyCode.W)){
                 accelerating = false;
                 AudioManager.AM.PlayRigStop();
+                rigDust.Stop();
                 StopCoroutine("Accelerate");
                 StopCoroutine("UpdateRotation");
             }
@@ -78,11 +81,13 @@ public class ClickDrag : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.W)){
                 accelerating = true;
                 AudioManager.AM.PlayRigStart();
+                rigDust.Play();
                 StartCoroutine("Accelerate");
             }
             if(Input.GetKeyUp(KeyCode.W)){
                 StopCoroutine("Accelerate");
                 AudioManager.AM.PlayRigStop();
+                rigDust.Pause();
                 accelerating = false;
             }
             if(Input.GetKeyDown(KeyCode.S)){

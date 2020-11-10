@@ -125,6 +125,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
     IEnumerator ScannerPulse(){
+        AudioManager.PlayPlayerClip("scanner pulse");
         Vector3 startScale = new Vector3(0.001f, 0.001f, 0.001f);
         Debug.Log("start scale is: " + startScale.x);
 
