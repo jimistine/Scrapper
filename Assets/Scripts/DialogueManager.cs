@@ -171,7 +171,7 @@ public class DialogueManager : MonoBehaviour
         // time out panel after a beat once the line is there.
         // if the node being run has the sub tag, start the counter
         string tagsLine = string.Join(" ", DR.GetTagsForNode(DR.CurrentNodeName));
-        if(tagsLine.Contains("sub") || autoAdvanceOverWorldText == true){
+        if(tagsLine.Contains("sub") || (autoAdvanceOverWorldText == true && tagsLine.Contains("world"))){
             //Debug.Log("starting speaker panel timeout");
             StartCoroutine(TimeOutSpeakerPanel());
         }
@@ -183,6 +183,9 @@ public class DialogueManager : MonoBehaviour
         autoAdvanceOverWorldText = setting;
     }
     public IEnumerator TimeOutSpeakerPanel(){
+        while(Director.Dir.gamePaused){
+            yield return null;
+        }
         yield return new WaitForSeconds(2);
         ContinueDialogue();
     }

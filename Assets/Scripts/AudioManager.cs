@@ -123,7 +123,7 @@ public class AudioManager : MonoBehaviour
             secondsToWait = Random.Range(90, 180);
             startWaitTime = Time.time;
         }
-        if (Director.Dir.ogdenVisited || Director.Dir.chundrVisited){   // Musical Timer
+        if ((Director.Dir.ogdenVisited || Director.Dir.chundrVisited) && UIManager.UIM.playerLocation == "overworld"){   // Musical Timer
             musicTimer += Time.deltaTime;
             if(musicTimer - startWaitTimeMusic >= secondsToWaitMusic){
                 PlayRandomSong();

@@ -37,9 +37,11 @@ public class ClickDrag : MonoBehaviour
     void Update(){
         if(Input.GetKeyDown(KeyCode.Alpha1)){
             moveType = "PointerSteer";
+            AudioManager.AM.PlayRandomButton();
         }
         if(Input.GetKeyDown(KeyCode.Alpha2)){
             moveType = "WASD";
+            AudioManager.AM.PlayRandomButton();
         }
                                                              //Pointer
         if(moveEnabled && moveType == "PointerSteer"){
@@ -87,7 +89,7 @@ public class ClickDrag : MonoBehaviour
             if(Input.GetKeyUp(KeyCode.W)){
                 StopCoroutine("Accelerate");
                 AudioManager.AM.PlayRigStop();
-                rigDust.Pause();
+                rigDust.Stop();
                 accelerating = false;
             }
             if(Input.GetKeyDown(KeyCode.S)){
@@ -184,6 +186,7 @@ public class ClickDrag : MonoBehaviour
     }
     public IEnumerator OutOfFuel(){
         // once they run out, slow them down for ~drama~
+        rigDust.Stop();
         fuelModifier = fuel.noFuelSpeedModifier;
         moveEnabled = false;
         for (float i = currentSpeed; i > 0; i -= fuel.outOfFuelSlowRate){

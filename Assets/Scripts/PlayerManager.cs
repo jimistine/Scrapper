@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Experimental.Rendering.Universal;
+
 
 
 public class PlayerManager : MonoBehaviour
@@ -24,6 +26,7 @@ public class PlayerManager : MonoBehaviour
     public Color pulseColorFadeTarget;
     //public CircleCollider2D pulseScanner;
     public GameObject pulseScanner;
+    public Light2D pulseLight;
     public float maxPulse;
     public float pulseDuration;
     public float pulseFadeDuration;
@@ -44,6 +47,7 @@ public class PlayerManager : MonoBehaviour
     public int tickReadoutIndex;
 
     // Tutorial bools
+    public bool nearTown;
     public bool firstScrapFound;
     public bool firstScrapTaken;
 
@@ -90,8 +94,10 @@ public class PlayerManager : MonoBehaviour
             }
         }
         if(Input.GetKeyDown(KeyCode.LeftShift)){
-            StartCoroutine(ScannerPulse());
-            Debug.Log("scanning");
+            if(scannerActive){
+                StartCoroutine(ScannerPulse());
+                Debug.Log("scanning");
+            }
         }
         if(Input.GetKeyDown(KeyCode.F)){
             AudioManager.ToggleHeadlights();
@@ -134,6 +140,8 @@ public class PlayerManager : MonoBehaviour
         while(elapsedTime < pulseDuration){
             float t = elapsedTime/pulseDuration;
             t = Mathf.Sin(t * Mathf.PI * 0.5f);
+            pulseLight.pointLightOuterRadius = Mathf.Lerp(0, maxPulse * 2.5f, t);
+            pulseLight.intensity = Mathf.Lerp(1f, 0f, t);
             pulseScanner.transform.localScale = Vector3.Lerp(startScale, maxPulseVector, t);
             pulseScanner.GetComponent<SpriteRenderer>().color = Color.Lerp(pulseColor, pulseColorFadeTarget, elapsedTime/pulseFadeDuration); 
             elapsedTime += Time.deltaTime;
@@ -179,6 +187,8 @@ public class PlayerManager : MonoBehaviour
         }
         if(other.gameObject.name == "Town" && OverworldManager.OM.towRig.activeSelf == false){
             UIManager.ActivateTownButton(true);
+            Debug.Log("near town");
+            nearTown = true;
         }
     }
     void OnCollisionEnter2D(Collision2D other){
@@ -196,6 +206,8 @@ public class PlayerManager : MonoBehaviour
         }
         if(other.gameObject.name == "Town"){
             UIManager.ActivateTownButton(false);
+            Debug.Log("not near town");
+            nearTown = false;
         }
     }
    

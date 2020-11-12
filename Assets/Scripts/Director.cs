@@ -180,7 +180,7 @@ public class Director : MonoBehaviour
         OverworldManager.OM.overworldCamera.SetActive(true);
         UIManager.LeaveTown();
         StartFadeCanvasGroup(screenCover.gameObject, "out", 0.5f);
-        float timeToWait = Random.Range(2, 5);
+        float timeToWait = Random.Range(5, 15);
         yield return new WaitForSeconds(timeToWait);
         if(ogdenVisited){
             DialogueManager.DM.RunNode("left-town-ogden");
@@ -226,8 +226,9 @@ public class Director : MonoBehaviour
         }
 
         while(lerping){
-            
-            element.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(alphaStart, alphaEnd, elapsedTime/fadeTime);
+            if(element != null){
+                element.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(alphaStart, alphaEnd, elapsedTime/fadeTime);
+            }
 
             if(fadeTime < elapsedTime){
                 lerping = false;
@@ -264,8 +265,9 @@ public class Director : MonoBehaviour
         }
 
         while(lerping){
-            
-            element.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(alphaStart, alphaEnd, elapsedTime/fadeTime);
+            if(element != null){
+                element.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(alphaStart, alphaEnd, elapsedTime/fadeTime);
+            }
 
             if(fadeTime < elapsedTime){
                 lerping = false;

@@ -11,6 +11,7 @@ public class UpgradeManager : MonoBehaviour
     [Space(5)]
     public List<Upgrade> upgradesStarter = new List<Upgrade>();
     public List<Upgrade> upgrades = new List<Upgrade>();
+    public List<Color> pulseColors = new List<Color>();
 
     //public float priceModApplied;
     //public float effectModApplied; 
@@ -41,7 +42,9 @@ public class UpgradeManager : MonoBehaviour
             PlayerManager.maxHaul = upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue;
         }
         if(upgrade.type == "scanner"){
-            PlayerManager.searchRadius.radius = upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue;
+            PlayerManager.maxPulse = upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue;
+            PlayerManager.pulseColor = pulseColors[upgrade.upgradeLevel];
+            PlayerManager.pulseColorFadeTarget = new Color(PlayerManager.pulseColor.r, PlayerManager.pulseColor.g, PlayerManager.pulseColor.b, 0);
         }
         if(upgrade.type == "drone"){
             RigManager.RM.zoomLevels.Add(upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue);

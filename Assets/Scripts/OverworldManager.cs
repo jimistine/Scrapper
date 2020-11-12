@@ -56,11 +56,7 @@ public class OverworldManager : MonoBehaviour
             if(towRig.activeSelf){
                 towRig.GetComponentInChildren<Light2D>().enabled = true;
             }
-        }
-        //Debug.Log("Distance is: " + Vector3.Distance(PlayerManager.PM.gameObject.transform.position, town.transform.position));
-        if(Vector3.Distance(PlayerManager.PM.gameObject.transform.position, town.transform.position) > 1.15f){
-            UIManager.UIM.ActivateTownButton(false);
-        }
+        }        
     }
 
     public void SetUpTowRig(){ // called from fuel

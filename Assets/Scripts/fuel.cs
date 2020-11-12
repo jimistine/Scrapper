@@ -42,7 +42,7 @@ bool lowFuel;
         if( currentFuelPercent > 10f){
             lowFuel = false;
         }
-        if(currentFuelUnits <= 0 && canBeTowed){
+        if(currentFuelUnits <= 0 && canBeTowed && PlayerManager.PM.nearTown == false){
             canBeTowed = false;
             AudioManager.AM.PlayRigStop();
             ClickDrag.StartCoroutine("OutOfFuel");

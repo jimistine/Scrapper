@@ -314,9 +314,12 @@ public class UIManager : MonoBehaviour
     public void ActivateTownButton(bool isActive){
         if(isActive == true){
             Director.Dir.StartFadeCanvasGroup(enterTownButton.gameObject,"in", 0.25f);
+            enterTownButton.enabled = true;
         }
         else if(isActive == false){
+            Debug.Log("town butt false");
             Director.Dir.StartFadeCanvasGroup(enterTownButton.gameObject,"out", 0.25f);
+            enterTownButton.enabled = false;
         }
         //enterTownButton.gameObject.SetActive(isActive);
     }
@@ -386,7 +389,7 @@ public class UIManager : MonoBehaviour
         }
         if(upgrade.type == "scanner"){
             panelIndex = 3;
-            effectReadout = (PlayerManager.searchRadius.radius * 10).ToString("F") + " →" + (upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue * 10).ToString("F") + " meter radius";
+            effectReadout = (PlayerManager.maxPulse * 10).ToString("F") + " →" + (upgrade.upgradeItemValues[upgrade.upgradeLevel].effectValue * 10).ToString("F") + " meter radius";
             DialogueManager.DM.RunNode("scanner");
             statsParent.transform.Find("Search Radius").GetComponent<TextMeshProUGUI>().text = "Search Radius  <color=#777777>————</color>  " + (upgrade.upgradeItemValues[upgrade.upgradeLevel - 1].effectValue * 10).ToString("F") + "m";
         }
@@ -512,7 +515,7 @@ public class UIManager : MonoBehaviour
                 effectReadout = PlayerManager.maxHaul.ToString("#,#") + " → " + UpgradeManager.upgradesStarter[i].upgradeItemValues[0].effectValue.ToString("#,#") + "m<sup>3</sup> max haul";
             }
             else if(UpgradeManager.upgradesStarter[i].type == "scanner"){
-                effectReadout = (PlayerManager.searchRadius.radius * 10).ToString("F") + " → " + (UpgradeManager.upgradesStarter[i].upgradeItemValues[0].effectValue * 10).ToString("F") + " meter radius";
+                effectReadout = (PlayerManager.maxPulse * 10).ToString("F") + " → " + (UpgradeManager.upgradesStarter[i].upgradeItemValues[0].effectValue * 10).ToString("F") + " meter radius";
             }
             else if(UpgradeManager.upgradesStarter[i].type == "drone"){
                 zoomLevels = PlayerManager.gameObject.GetComponentInChildren<RigManager>().zoomLevels[0].ToString("N1") + "x ";
