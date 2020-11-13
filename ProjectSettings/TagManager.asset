@@ -10,10 +10,10 @@ TagManager:
   - Terrain
   - OverworldParent
   - ob
-  - Spawnable
   - placed
   - Lights
   - merchant
+  - Non-spawnable
   layers:
   - Default
   - TransparentFX

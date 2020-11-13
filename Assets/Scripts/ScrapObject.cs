@@ -13,13 +13,13 @@ public class ScrapObject : MonoBehaviour
     public int zoneA_rarity;
     public int zoneB_rarity;
     public int zoneC_rarity;
-    public int zoneD_rarity;
+    public float ID;
     public bool carriesComponents;
     public bool isBuried;
 
 
     public ScrapObject(string name, string desc, int img, float siz, int val, string mat, 
-                        int rarityA, int rarityB, int rarityC, int rarityD, bool components, bool buried)
+                        int rarityA, int rarityB, int rarityC, float id, bool components, bool buried)
         {
             scrapName = name;
             description = desc;
@@ -30,7 +30,7 @@ public class ScrapObject : MonoBehaviour
             zoneA_rarity = rarityA;
             zoneB_rarity = rarityB;
             zoneC_rarity = rarityC;
-            zoneD_rarity = rarityD;
+            ID = id;
             carriesComponents = components;
             isBuried = buried;
         }

@@ -70,6 +70,7 @@ public class UIManager : MonoBehaviour
     public GameObject pauseScreen;
     public GameObject scrapLog;
     public GameObject scrapLogItemPrefab;
+    public List<GameObject> pauseMenus = new List<GameObject>();
 
     
     [Header("Town")]
@@ -180,7 +181,7 @@ public class UIManager : MonoBehaviour
     }
 
     // 2. PlayerManager has found scrap 
-    public ScrapObject ShowScrap(ScrapObject newScrap){
+    public void ShowScrap(ScrapObject newScrap){
         //Debug.Log("Showing: " + newScrap.scrapName);
         newScrap.GetComponent<SpriteRenderer>().enabled = true;
         newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.5764706f,0.2431373f,0,1);
@@ -188,25 +189,24 @@ public class UIManager : MonoBehaviour
 
         
         if(newScrap.isBuried == true){ // they have not yet scanned this piece
+            recentScrap = newScrap.gameObject;
+            recentScrap.transform.position = newScrap.transform.position;
             //newScrap.isBuried = false;
+            foreach(OnScrapPanelController liveOnScrapPanel in onScrapPanelParent.GetComponentsInChildren<OnScrapPanelController>()){
+                if(newScrap.ID == liveOnScrapPanel.ID){
+                    liveOnScrapPanel.StartActivate();
+                    return;
+                }
+            }
             Vector3 scrapPos = Camera.main.WorldToScreenPoint(newScrap.transform.position);
             GameObject onScrapPanel = (Instantiate(onScrapPanelPrefab, scrapPos, Quaternion.identity));
+            onScrapPanel.GetComponent<OnScrapPanelController>().ID = newScrap.ID;
             onScrapPanel.transform.SetParent(onScrapPanelParent.transform, false);
-            //onScrapPanel.transform.parent = newScrap.transform;
             onScrapPanel.GetComponent<OnScrapPanelController>().panelScrap = newScrap;
             onScrapPanel.GetComponent<OnScrapPanelController>().panelScrapGO = newScrap.gameObject;
-            // onScrapPanel.GetComponentInChildren<TextMeshProUGUI>().text = "?";
-            // Director.Dir.StartFadeCanvasGroup(onScrapPanel, "in", 0.1f);
             Debug.Log("made panel");
         }
-        // else{  // they have already scanned it
-        //     Director.Dir.StartFadeCanvasGroup(newScrap.transform.Find("onScrapPanel(Clone)").gameObject, "in", 0.1f);
-        //     newScrap.transform.Find("onScrapPanel(Clone)").GetComponentInChildren<TextMeshProUGUI>().text = 
-        //         newScrap.scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + newScrap.size.ToString("#,#") + " m<sup>3</sup></size>";
-        // }
-        recentScrap = newScrap.gameObject;
-        recentScrap.transform.position = newScrap.transform.position;
-        return newScrap;
+        //return newScrap;
     }
     public void OutOfRangeScrap(ScrapObject newScrap){
         //Debug.Log(newScrap.scrapName + " is now out of range");
@@ -304,6 +304,11 @@ public class UIManager : MonoBehaviour
         }
         else{                // they unpause the game
             Director.Dir.StartFadeCanvasGroup(pauseScreen, "out", .15f);
+            foreach(GameObject menu in pauseMenus){
+                if(menu.activeSelf){
+                    menu.SetActive(false);
+                }
+            }
             paused = false;
             AudioManager.AM.PlayMiscUIClip("dismiss");
             Director.Dir.gamePaused = false;
@@ -459,6 +464,9 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateSellScrapButtText(){
         if(PlayerManager.playerScrap.Count != 0){
+            // if(Director.Dir.doubleScrapValue){
+            //     sellScrapButt.GetComponentInChildren<TextMeshProUGUI>().text = "Sell all scrap for " + (PlayerManager.evaluateCurrentHaul() * 2).ToString("#,#") + " credits";
+            // }
             sellScrapButt.GetComponentInChildren<TextMeshProUGUI>().text = "Sell all scrap for " + PlayerManager.evaluateCurrentHaul().ToString("#,#") + " credits";
         }
         else{

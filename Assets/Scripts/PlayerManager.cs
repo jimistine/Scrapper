@@ -68,20 +68,20 @@ public class PlayerManager : MonoBehaviour
     {        
         currentHaulPercent = (currentHaul/maxHaul) * 100;
 // INTERACTIONS
-        if (Input.GetMouseButtonDown(0)) {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+        // if (Input.GetMouseButtonDown(0)) {
+        //     Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //     Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+        //     RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
 
-            //3. If player clicked something, and that something was scrap, and it's in range, show the readout panel
-            if(hit.collider != null){
-                if (hit.collider.tag == "Scrap" && hit.collider.gameObject.GetComponent<ProximityCheck>().interactable == true) {
-                    GameObject newScrap = hit.collider.gameObject;
-                    UIManager.ShowReadout(newScrap);
-                    //UIManager.ShowReadout();
-                }
-            }    
-        }
+        //     //3. If player clicked something, and that something was scrap, and it's in range, show the readout panel
+        //     if(hit.collider != null){
+        //         if (hit.collider.tag == "Scrap" && hit.collider.gameObject.GetComponent<ProximityCheck>().interactable == true) {
+        //             GameObject newScrap = hit.collider.gameObject;
+        //             UIManager.ShowReadout(newScrap);
+        //             //UIManager.ShowReadout();
+        //         }
+        //     }    
+        // }
         if(Input.GetKeyDown(KeyCode.Q) && UIManager.tickReadout.activeSelf){
             Debug.Log("GetKey scrap index: "+ tickReadoutIndex);
             AudioManager.PlayPlayerClip("drop scrap");
@@ -119,7 +119,7 @@ public class PlayerManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)){
             DialogueManager.DM.ContinueDialogue();
         }
-        if(Input.GetKeyDown(KeyCode.R)){
+        if(Input.GetKeyDown(KeyCode.Backslash)){
             Debug.Log("restarting");
             SceneController.SC.RestartGame();
         }

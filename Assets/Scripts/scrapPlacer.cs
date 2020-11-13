@@ -50,6 +50,7 @@ public class scrapPlacer : MonoBehaviour
    float totalScrapValue;
    float totalScrapVolume;
    public GameObject[] currentLiveScrap;
+   
    RaycastHit2D scrapPosRay;
    Vector3 position;
    bool generatingPosition;
@@ -89,6 +90,18 @@ public class scrapPlacer : MonoBehaviour
         averageScrapValuePerM3 = totalScrapValue / totalScrapVolume;
     }
 
+    float GenerateScrapID(){
+        float newID = Random.Range(0f,100000f);
+        foreach(GameObject scrap in currentLiveScrap){
+            if(newID == scrap.GetComponent<ScrapObject>().ID){
+                while(newID == scrap.GetComponent<ScrapObject>().ID){
+                    newID = Random.Range(0f,100000f);  
+                }
+            }
+        }
+        return newID;
+    }
+
     void SpawnScrap(int scrapToSpawn){
         for(int j = 0; j < scrapToSpawn; j++){
             // find the highest weight of all scrap, that is, the most common
@@ -116,11 +129,11 @@ public class scrapPlacer : MonoBehaviour
             sampleScrap.GetComponent<ScrapObject>().zoneA_rarity = incomingScrap.zoneA_rarity;
             sampleScrap.GetComponent<ScrapObject>().zoneB_rarity = incomingScrap.zoneB_rarity;
             sampleScrap.GetComponent<ScrapObject>().zoneC_rarity = incomingScrap.zoneC_rarity;
-            sampleScrap.GetComponent<ScrapObject>().zoneD_rarity = incomingScrap.zoneD_rarity;
+            sampleScrap.GetComponent<ScrapObject>().ID = incomingScrap.ID;
             sampleScrap.GetComponent<ScrapObject>().carriesComponents = incomingScrap.carriesComponents;
             sampleScrap.GetComponent<ScrapObject>().isBuried = incomingScrap.isBuried;
 
-            // generate a position within the bounds of the map
+            // generate a position within the bounds of the map in a spawnable area
             generatingPosition = true;
             while(generatingPosition){
                 position = new Vector3(Random.Range(-spawningBoundX, spawningBoundX), Random.Range(-spawningBoundY, spawningBoundY), 0);
@@ -129,7 +142,7 @@ public class scrapPlacer : MonoBehaviour
                 if(scrapPosRay.collider == null){
                     generatingPosition = false;
                 }
-                else if(scrapPosRay.collider.tag == "ob"){
+                else if(scrapPosRay.collider.tag == "ob" || scrapPosRay.collider.tag == "Non-spawnable"){
                     generatingPosition = true;
                 }
             }
@@ -147,6 +160,7 @@ public class scrapPlacer : MonoBehaviour
             GameObject copiedScrap = (Instantiate(sampleScrap, position, Quaternion.Euler(0, 0, Random.Range(0f, 360f))));
             copiedScrap.transform.parent = gameObject.transform;
             copiedScrap.name = copiedScrap.GetComponent<ScrapObject>().scrapName;
+            copiedScrap.GetComponent<ScrapObject>().ID = GenerateScrapID();
             // scale and swap the shadow sprite
             float scrapScale = copiedScrap.GetComponent<ScrapObject>().size/scrapShadowScaler;
             if(scrapScale > 5){scrapScale = 5;}
@@ -155,6 +169,10 @@ public class scrapPlacer : MonoBehaviour
             copiedScrap.GetComponent<SpriteRenderer>().sprite = (Sprite)scrapShadows[blobIndex];
             copiedScrap.GetComponentsInChildren<SpriteRenderer>()[1].sprite = (Sprite)scrapShadows[blobIndex];
             Debug.Log("Scrap child name: "+ copiedScrap.GetComponentsInChildren<SpriteRenderer>()[1].gameObject.name);
+            //double value if we want
+            if(Director.Dir.doubleScrapValue){
+                copiedScrap.GetComponent<ScrapObject>().value *= 2; 
+            }
             // and add a glow if it's this specific one.
             if(copiedScrap.name == "Chunk of raw cordonite"){
                 GameObject glowToAttach = (GameObject) Instantiate(scrapGlow, copiedScrap.transform.position, copiedScrap.transform.rotation);
@@ -200,7 +218,7 @@ public class scrapPlacer : MonoBehaviour
             rareScrap.GetComponent<ScrapObject>().zoneA_rarity = incomingScrap.zoneA_rarity;
             rareScrap.GetComponent<ScrapObject>().zoneB_rarity = incomingScrap.zoneB_rarity;
             rareScrap.GetComponent<ScrapObject>().zoneC_rarity = incomingScrap.zoneC_rarity;
-            rareScrap.GetComponent<ScrapObject>().zoneD_rarity = incomingScrap.zoneD_rarity;
+            rareScrap.GetComponent<ScrapObject>().ID = incomingScrap.ID;
             rareScrap.GetComponent<ScrapObject>().carriesComponents = incomingScrap.carriesComponents;
             rareScrap.GetComponent<ScrapObject>().isBuried = incomingScrap.isBuried;
 
@@ -227,7 +245,7 @@ public class scrapPlacer : MonoBehaviour
             droppedScrapObj.GetComponent<ScrapObject>().zoneA_rarity = droppedScrap.zoneA_rarity;
             droppedScrapObj.GetComponent<ScrapObject>().zoneB_rarity = droppedScrap.zoneB_rarity;
             droppedScrapObj.GetComponent<ScrapObject>().zoneC_rarity = droppedScrap.zoneC_rarity;
-            droppedScrapObj.GetComponent<ScrapObject>().zoneD_rarity = droppedScrap.zoneD_rarity;
+            droppedScrapObj.GetComponent<ScrapObject>().ID = droppedScrap.ID;
             droppedScrapObj.GetComponent<ScrapObject>().carriesComponents = droppedScrap.carriesComponents;
             droppedScrapObj.GetComponent<ScrapObject>().isBuried = false;
             droppedScrapObj.SetActive(true);

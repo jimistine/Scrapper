@@ -87,6 +87,9 @@ public class MerchantManager : MonoBehaviour
     public void SellAllScrap(){
         if(PlayerManager.playerScrap.Count != 0){
             foreach(ScrapObject scrap in PlayerManager.playerScrap){
+                // if(Director.Dir.doubleScrapValue == true){
+                //     scrapValue += scrap.value * 2;
+                // }
                 scrapValue += scrap.value;
                 if(SoldScrap.Exists(x => x.scrapName == scrap.scrapName) == false){
                     SoldScrap.Add(scrap);

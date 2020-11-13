@@ -11,6 +11,7 @@ public class OnScrapPanelController : MonoBehaviour
     public ScrapObject panelScrap;
     public GameObject panelContainer;
     public bool isActive;
+    public float ID;
 
 
 
@@ -41,8 +42,10 @@ public class OnScrapPanelController : MonoBehaviour
         UIManager.UIM.ShowReadoutButton(panelScrapGO);
         StartCoroutine(Deactivate());
     }
-    void StartActivate(){
-        StartCoroutine(Activate());
+    public void StartActivate(){
+        if(panelScrapGO.GetComponent<ProximityCheck>().interactable == true){
+            StartCoroutine(Activate());
+        }
     }
     IEnumerator Activate(){
         Director.Dir.StartFadeCanvasGroup(panelContainer, "in", 0.15f);

@@ -11,7 +11,7 @@ public class Scrap
     public int zoneB_rarity;
     public int zoneA_rarity;
     public int zoneC_rarity;
-    public int zoneD_rarity;
+    public float ID;
     public bool carriesComponents;
     public bool isBuried;
 }

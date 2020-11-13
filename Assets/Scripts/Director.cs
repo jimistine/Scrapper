@@ -39,6 +39,8 @@ public class Director : MonoBehaviour
     [Space(10)]
     public bool skipIntroDialogue;
     public bool lotsOfCredits;
+    public float playerStartCredits;
+    public bool doubleScrapValue;
     public bool scannerActive;
     public bool lowFuel;
     public bool nearTown;
@@ -70,7 +72,7 @@ public class Director : MonoBehaviour
             PlayerManager.PM.playerCredits = 1000000;
         }
         else{
-            PlayerManager.PM.playerCredits = 497;
+            PlayerManager.PM.playerCredits = playerStartCredits;
         }
         if(lowFuel){
             PlayerManager.PM.GetComponent<fuel>().currentFuelUnits = 10;
@@ -239,7 +241,9 @@ public class Director : MonoBehaviour
             //Debug.Log("fading " + element + " " + targetVisibility);
             yield return null;
         }
-        element.SetActive(isGroupActive);    
+        if(element != null){
+            element.SetActive(isGroupActive);    
+        }
     }
     public IEnumerator FadeCanvasGroup(GameObject element, string targetVisibility, float delayTime, float fadeTime){
         yield return new WaitForSeconds(delayTime);
@@ -278,7 +282,9 @@ public class Director : MonoBehaviour
             //Debug.Log("fading " + element + " " + targetVisibility);
             yield return null;
         }
-        element.SetActive(isGroupActive);    
+        if(element != null){
+            element.SetActive(isGroupActive);    
+        }
     }
     public void QuitGame(){
         Application.Quit();
