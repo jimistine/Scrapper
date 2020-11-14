@@ -36,6 +36,8 @@ public class Director : MonoBehaviour
     public bool chundrVisited;
     public bool outOfFuelCompleted;
     public bool showTip_1;
+    public bool showTip_2;
+    public GameObject tip_2;
     [Header("Debugging")]
     [Space(10)]
     public bool skipIntroDialogue;
@@ -189,6 +191,9 @@ public class Director : MonoBehaviour
         yield return new WaitForSeconds(timeToWait);
         if(ogdenVisited){
             DialogueManager.DM.RunNode("left-town-ogden");
+        }
+        if(showTip_2){
+            StartFadeCanvasGroup(tip_2, "in", 0.5f);
         }
     }
 

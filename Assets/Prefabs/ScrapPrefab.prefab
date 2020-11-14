@@ -133,20 +133,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0c471fc57f92143bf372759c1fe239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrapName: Gargantuan Drifter vessel
-  description: Drifters are well known for their lack of propulsion, which makes
-    it odd that a vessel with so much drifter iconography is sporting three racks
-    of ion thrusters and a heavy cannon.
-  image: 2
-  size: 50
-  value: 2500
-  material: Aluminum
-  zoneA_rarity: 45
+  scrapName: Spartak Lite Drone
+  description: Discontinued only a few weeks after they hit the market because of
+    a "feature" that sent the AI after their competitor's machines. A rare find,
+    but be careful reactivating it around other drones.
+  image: 0
+  size: 5
+  value: 750
+  material: Titanium
+  zoneA_rarity: 90
   zoneB_rarity: 0
   zoneC_rarity: 0
-  ID: 55
+  ID: 38882.906
   carriesComponents: 0
-  isBuried: 1
+  isBuried: 0
 --- !u!114 &8142259534611466276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactable: 0
   fading: 0
+  minDistance: 0
   waitToMarkOutOfRangeTime: 3
   lightFadeDuration: 5
   fadeOutDuration: 3

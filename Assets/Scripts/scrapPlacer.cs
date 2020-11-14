@@ -193,19 +193,27 @@ public class scrapPlacer : MonoBehaviour
 
     public void SpawnPlacedScrap(){
         placedScrap = GameObject.FindGameObjectsWithTag("placed");
+
         foreach(GameObject placedObj in placedScrap){
-        // find the highest weight of all scrap, that is, the most common
-            int maxWeight = JsonReader.scrapInJson.allScrap.Max(x => x.zoneA_rarity);
-            // pick a number somwhere inbetween max and 0
-            randomScrapPick = Random.Range(0, maxWeight);
-            // shuffle the array so everyone gets a chance
-            RandomExtensions.Shuffle(shuffleRandom, JsonReader.scrapInJson.allScrap);
-            // iterate through all the scrap in our list and pick the first one that's weighted higher than 
-            //   our random value and exit the loop.
-            foreach(Scrap scrap in JsonReader.scrapInJson.allScrap){
-                if(scrap.zoneA_rarity >= randomScrapPick && scrap.zoneA_rarity <= 45){
-                    incomingScrap = scrap;
-                    break;
+
+            if(placedObj.name == "Chunk of raw cordonite"){
+                incomingScrap = System.Array.Find(JsonReader.scrapInJson.allScrap, x => x.scrapName == "Chunk of raw cordonite");
+                Debug.Log("Found chunk of cordonite.");
+            }
+            else{
+                // find the highest weight of all scrap, that is, the most common
+                int maxWeight = JsonReader.scrapInJson.allScrap.Max(x => x.zoneA_rarity);
+                // pick a number somwhere inbetween max and 0
+                randomScrapPick = Random.Range(0, maxWeight);
+                // shuffle the array so everyone gets a chance
+                RandomExtensions.Shuffle(shuffleRandom, JsonReader.scrapInJson.allScrap);
+                // iterate through all the scrap in our list and pick the first one that's weighted higher than 
+                //   our random value and our rarity threshold of 45 and exit the loop.
+                foreach(Scrap scrap in JsonReader.scrapInJson.allScrap){
+                    if(scrap.zoneA_rarity >= randomScrapPick && scrap.zoneA_rarity <= 45){
+                        incomingScrap = scrap;
+                        break;
+                    }
                 }
             }
             // transfer that sweet sweet data to prefab
@@ -237,8 +245,8 @@ public class scrapPlacer : MonoBehaviour
                 GameObject glowToAttach = (GameObject) Instantiate(scrapGlow, placedScrap.transform.position, placedScrap.transform.rotation);
                 glowToAttach.transform.parent = placedScrap.transform;
             }
-            }
         }
+    }
 
     public void SpawnDroppedScrap(ScrapObject droppedScrap){
             Debug.Log("Dropping a " + droppedScrap.scrapName);

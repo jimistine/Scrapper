@@ -55,18 +55,21 @@ MonoBehaviour:
   upgradeItemValues:
   - flavorName: Kion Glass 1-01
     flavorDesc: Slot this onto your observer drone and you'll get a better lay of
-      the land with the press of a button.
+      the land with the press of a button.  <i><color=#FBC1A9><size=75%>Right-click
+      to use.</size><i></color>
     effectValue: 4.5
     price: 1500
   - flavorName: Ground Ta'lith Crystal
     flavorDesc: Shaped by hand on Ta'lith IX, this these crystals have been used
-      in everything from war-beam configuration to hobbyist baking.
+      in everything from war-beam configuration to hobbyist baking.  <i><color=#FBC1A9><size=75%>Right-click
+      to use.</size><i></color>
     effectValue: 6.75
     price: 2500
   - flavorName: Fractal booster
     flavorDesc: Cold, clinical, and it produces the sharpest image yet known to sentient
       life. Something so clean and delicate seems out of place among the grease-slick
-      metal and cracked glass of the scrap shop.
+      metal and cracked glass of the scrap shop.  <i><color=#FBC1A9><size=75%>Right-click
+      to use.</size><i></color>
     effectValue: 8.5
     price: 5000
   - flavorName: SOLD OUT

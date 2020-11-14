@@ -143,7 +143,9 @@ public class DialogueManager : MonoBehaviour
             else{
                 activeSpeakerPanel = characters.Find(x => x.characterName == ui.speakerName).characterPanel;
             }
-            Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel,"in", 0.1f);
+            if(activeSpeakerPanel != null){
+                Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel,"in", 0.1f);
+            }
         }
         if(UIManager.UIM.playerLocation == "overworld" && activeSpeakerPanel.tag == "merchant"){
             activeSpeakerPanel = characters.Find(x => x.characterName == ui.speakerName).characterPanel; 

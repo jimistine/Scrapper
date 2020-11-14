@@ -54,17 +54,19 @@ MonoBehaviour:
   upgradeLevelMax: 3
   upgradeItemValues:
   - flavorName: Wider Eye
-    flavorDesc: A wider search radius is all most scrappers ever ask for.
+    flavorDesc: A wider search radius is all most scrappers ever ask for.  <i><color=#FBC1A9><size=75%>Press
+      shift to use.</size><i></color>
     effectValue: 1.5
     price: 2400
   - flavorName: Goltan Sensor Nine
     flavorDesc: The ninth and final of Goltan's famous scanners, this piece of tech
       has been called the scrapper's bloodhound. What exactly a bloodhound is, however,
-      remains a mystery.
+      remains a mystery.  <i><color=#FBC1A9><size=75%>Press shift to use.</size><i></color>
     effectValue: 1.75
     price: 3200
   - flavorName: Sunder Echo
-    flavorDesc: The Echo will find much that should never have been found.
+    flavorDesc: The Echo will find much that should never have been found.  <i><color=#FBC1A9><size=75%>Press
+      shift to use.</size><i></color>
     effectValue: 2
     price: 5000
   - flavorName: SOLD OUT

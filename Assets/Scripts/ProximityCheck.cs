@@ -42,7 +42,7 @@ public class ProximityCheck : MonoBehaviour
         }
         if(Vector3.Distance(PlayerManager.PM.gameObject.transform.position, gameObject.transform.position) <= GetComponent<CircleCollider2D>().radius){
             interactable = true;
-            Debug.Log("Distance from interactable scrap: " + Vector3.Distance(PlayerManager.PM.gameObject.transform.position, gameObject.transform.position));
+            //Debug.Log("Distance from interactable scrap: " + Vector3.Distance(PlayerManager.PM.gameObject.transform.position, gameObject.transform.position));
         }
         else{
             interactable = false;
@@ -83,7 +83,7 @@ public class ProximityCheck : MonoBehaviour
 
             // What do we do when the player gets close?
             if(other.gameObject.name == "Player"){
-                Debug.Log("Player trigger entered.");
+                Debug.Log("Player trigger found: " + gameObject.name);
                 interactable = true;
                 UIManager.UIM.ShowScrap(gameObject.GetComponent<ScrapObject>());
 
