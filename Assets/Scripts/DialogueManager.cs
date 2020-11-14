@@ -217,14 +217,17 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void RunNode(string nodeToRun){
-
+        var tags = "";
         // tage a look at those tags
-        var tags = string.Join(" ", DR.GetTagsForNode(nodeToRun));
+        if(DR.GetTagsForNode(nodeToRun) != null){
+            tags = string.Join(" ", DR.GetTagsForNode(nodeToRun));
+        }
         if(DR.CurrentNodeName != null){
             //Debug.Log("Got tags");
             var tagsCurrent = string.Join(" ", DR.GetTagsForNode(DR.CurrentNodeName));
             if(tags.Contains("main")){ // MAIN is never interrupted and interrupts anything else, including Main
                 //Debug.Log("running MAIN dialogue");
+                DR.Stop();
                 DR.StartDialogue(nodeToRun);
             }
             else if(tags.Contains("world")){ // WORLD is only interrupted by Main and World, only interrupts Sub and World
@@ -233,6 +236,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else{
                     //Debug.Log("running WORLD dialogue");
+                    DR.Stop();
                     DR.StartDialogue(nodeToRun); 
                 }
             }
@@ -245,6 +249,7 @@ public class DialogueManager : MonoBehaviour
                     int randomRoll = Random.Range(0, 4);
                     Debug.Log("Rolled: " + randomRoll);
                     if(randomRoll == 0){
+                        DR.Stop();
                         DR.StartDialogue(nodeToRun);
                     }
                 }
