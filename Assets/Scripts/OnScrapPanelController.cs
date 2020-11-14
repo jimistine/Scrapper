@@ -30,7 +30,8 @@ public class OnScrapPanelController : MonoBehaviour
             isActive = true;
         }
         if(panelScrapGO.GetComponent<ProximityCheck>().interactable == false && isActive == true){
-            StartCoroutine(Deactivate());
+            StartCoroutine(Deactivate(1.5f));
+            Debug.Log("Deactivated via update");
             isActive = false;
         }
         if(panelScrapGO.activeSelf == false){
@@ -40,7 +41,8 @@ public class OnScrapPanelController : MonoBehaviour
 
     public void CallShowReadoutButton(){
         UIManager.UIM.ShowReadoutButton(panelScrapGO);
-        StartCoroutine(Deactivate());
+        Debug.Log("Deactivated via show readout");
+        StartCoroutine(Deactivate(0f));
     }
     public void StartActivate(){
         if(panelScrapGO.GetComponent<ProximityCheck>().interactable == true){
@@ -49,20 +51,20 @@ public class OnScrapPanelController : MonoBehaviour
     }
     IEnumerator Activate(){
         Director.Dir.StartFadeCanvasGroup(panelContainer, "in", 0.15f);
-        if(panelScrap.isBuried == true){ // they have not yet scanned this piece
+        if(panelScrap.isBuried == true){ // they have not yet inspected this piece
             //panelScrap.isBuried = false;
             gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "?";
-            Debug.Log("Showing: " + panelScrap.scrapName);
+            //Debug.Log("Showing: " + panelScrap.scrapName);
         }
-        else{  // they have already scanned it
+        else{  // they have already inspected it
             Director.Dir.StartFadeCanvasGroup(panelContainer, "in", 0.15f);
             gameObject.GetComponentInChildren<TextMeshProUGUI>().text = 
                 panelScrap.scrapName + "<size=60%><color=#798478> | <color=#FF752A>" + panelScrap.size.ToString("#,#") + " m<sup>3</sup></size>";
         }
         yield return null;
     }
-    IEnumerator Deactivate(){
-        yield return new WaitForSeconds(2);
+    IEnumerator Deactivate(float timeToWait){
+        yield return new WaitForSeconds(timeToWait);
         Director.Dir.StartFadeCanvasGroup(panelContainer, "out", 0.15f);
         
     }

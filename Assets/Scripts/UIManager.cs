@@ -184,7 +184,7 @@ public class UIManager : MonoBehaviour
     public void ShowScrap(ScrapObject newScrap){
         //Debug.Log("Showing: " + newScrap.scrapName);
         newScrap.GetComponent<SpriteRenderer>().enabled = true;
-        newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.5764706f,0.2431373f,0,1);
+        // newScrap.GetComponent<SpriteRenderer>().color = new Vector4 (0.5764706f,0.2431373f,0,1);
         scrapToTake = newScrap;
 
         

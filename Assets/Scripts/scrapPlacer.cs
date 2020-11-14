@@ -167,8 +167,8 @@ public class scrapPlacer : MonoBehaviour
             copiedScrap.transform.localScale = new Vector3(scrapScale, scrapScale, scrapScale);
             int blobIndex = Random.Range(0, scrapShadows.Count());
             copiedScrap.GetComponent<SpriteRenderer>().sprite = (Sprite)scrapShadows[blobIndex];
-            copiedScrap.GetComponentsInChildren<SpriteRenderer>()[1].sprite = (Sprite)scrapShadows[blobIndex];
-            Debug.Log("Scrap child name: "+ copiedScrap.GetComponentsInChildren<SpriteRenderer>()[1].gameObject.name);
+            //copiedScrap.GetComponentsInChildren<SpriteRenderer>()[1].sprite = (Sprite)scrapShadows[blobIndex];
+            //Debug.Log("Scrap child name: "+ copiedScrap.GetComponentsInChildren<SpriteRenderer>()[1].gameObject.name);
             //double value if we want
             if(Director.Dir.doubleScrapValue){
                 copiedScrap.GetComponent<ScrapObject>().value *= 2; 
@@ -225,6 +225,14 @@ public class scrapPlacer : MonoBehaviour
             GameObject placedScrap = (Instantiate(rareScrap, placedObj.transform.position, Quaternion.identity));
             placedScrap.transform.parent = gameObject.transform;
             placedScrap.name = placedScrap.GetComponent<ScrapObject>().scrapName;
+            placedScrap.GetComponent<ScrapObject>().ID = GenerateScrapID();
+            // scale and swap the shadow sprite
+            float scrapScale = placedScrap.GetComponent<ScrapObject>().size/scrapShadowScaler;
+            if(scrapScale > 5){scrapScale = 5;}
+            placedScrap.transform.localScale = new Vector3(scrapScale, scrapScale, scrapScale);
+            int blobIndex = Random.Range(0, scrapShadows.Count());
+            placedScrap.GetComponent<SpriteRenderer>().sprite = (Sprite)scrapShadows[blobIndex];
+            
             if(placedScrap.name == "Chunk of raw cordonite"){
                 GameObject glowToAttach = (GameObject) Instantiate(scrapGlow, placedScrap.transform.position, placedScrap.transform.rotation);
                 glowToAttach.transform.parent = placedScrap.transform;

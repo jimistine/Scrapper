@@ -17,6 +17,7 @@ public class Director : MonoBehaviour
     public UIManager UIManager;
     public Timer Timer;
     public Image screenCover;
+    public Image screenCover1;
     public bool waitingToEnterTown;
     public float fadeDuration;
     [Header("Colors")]
@@ -110,6 +111,8 @@ public class Director : MonoBehaviour
         Debug.Log("Starting game");
         AudioManager.AM.InitTowTigAudio();
         AudioManager.TransitionToOverworld();
+        yield return new WaitForSeconds(1);
+        StartFadeCanvasGroup(screenCover1.gameObject,"out", fadeDuration);
         StartFadeCanvasGroup(screenCover.gameObject,"out", fadeDuration);
         yield return new WaitForSeconds(3);
         //yield return new WaitForSeconds(fadeDuration + 3);

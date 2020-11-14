@@ -93,10 +93,10 @@ public class PlayerManager : MonoBehaviour
                 AudioManager.ChangeZoom();
             }
         }
-        if(Input.GetKeyDown(KeyCode.LeftShift)){
+        if(Input.GetKeyDown(KeyCode.LeftShift)||Input.GetKeyDown(KeyCode.RightShift)){
             if(scannerActive){
                 StartCoroutine(ScannerPulse());
-                Debug.Log("scanning");
+                //Debug.Log("scanning");
             }
         }
         if(Input.GetKeyDown(KeyCode.F)){
@@ -131,9 +131,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
     IEnumerator ScannerPulse(){
+        pulseScanner.SetActive(true);
         AudioManager.PlayPlayerClip("scanner pulse");
         Vector3 startScale = new Vector3(0.001f, 0.001f, 0.001f);
-        Debug.Log("start scale is: " + startScale.x);
+        //Debug.Log("start scale is: " + startScale.x);
 
         float elapsedTime = 0;
         Vector3 maxPulseVector = new Vector3( maxPulse,maxPulse, maxPulse);
@@ -148,48 +149,43 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
 
-        // elapsedTime = 0;
-        // while(elapsedTime < pulseFadeDuration){
-        //     elapsedTime += Time.deltaTime;
-        //     yield return null;
-        // }
-
-        Debug.Log("end scale is: " + pulseScanner.transform.localScale.x);
+        //Debug.Log("end scale is: " + pulseScanner.transform.localScale.x);
         pulseScanner.GetComponent<SpriteRenderer>().color = pulseColor;
         pulseScanner.transform.localScale = new Vector3 (startScale.x, startScale.y, startScale.z);
+        pulseScanner.SetActive(false);
     }
     void OnTriggerEnter2D(Collider2D other){
     // 1. Pop goes the scrap!  If our search radius hits the small EdgeCollider on the scrap, it pops
-        if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(EdgeCollider2D) && scannerActive){
-            ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
-            other.gameObject.GetComponent<ProximityCheck>().IsInRange(true);
-            if(other.gameObject.GetComponent<SpriteRenderer>().enabled == false){
-                AudioManager.PlayPlayerClip("found scrap");
-                if(newScrap.scrapName == "Land speeder (unknown)"){
-                    DialogueManager.DM.RunNode("land-speeder");
-                }
-                else if(newScrap.scrapName == "Chunk of raw cordonite"){
-                    DialogueManager.DM.RunNode("chunk-of-raw-cordonite");
-                }
-                else if(newScrap.scrapName == "Sha'ak-ji Holospace Generator"){
-                    DialogueManager.DM.RunNode("holospace-generator");
-                }
-                else if(firstScrapFound == false && Director.Dir.introCompleted && !DialogueManager.DM.isDialogueRunner1Running){
-                    DialogueManager.DM.RunNode("tutorial-find-scrap");
-                    firstScrapFound = true;
-                }
-                else{
-                    DialogueManager.DM.RunNode("scrap-find");
-                }
-                Debug.Log("Found scrap");
-            }
-            UIManager.ShowScrap(newScrap);
+        if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(EdgeCollider2D) && scannerActive && this.gameObject.name == "Player"){
+            //ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
+            //other.gameObject.GetComponent<ProximityCheck>().IsInRange(true);
+            //AudioManager.PlayPlayerClip("found scrap");
+            // if(other.gameObject.GetComponent<SpriteRenderer>().enabled == false){
+            //     if(newScrap.scrapName == "Land speeder (unknown)"){
+            //         DialogueManager.DM.RunNode("land-speeder");
+            //     }
+            //     else if(newScrap.scrapName == "Chunk of raw cordonite"){
+            //         DialogueManager.DM.RunNode("chunk-of-raw-cordonite");
+            //     }
+            //     else if(newScrap.scrapName == "Sha'ak-ji Holospace Generator"){
+            //         DialogueManager.DM.RunNode("holospace-generator");
+            //     }
+            //     else if(firstScrapFound == false && Director.Dir.introCompleted && !DialogueManager.DM.isDialogueRunner1Running){
+            //         DialogueManager.DM.RunNode("tutorial-find-scrap");
+            //         firstScrapFound = true;
+            //     }
+            //     else{
+            //         DialogueManager.DM.RunNode("scrap-find");
+            //     }
+            //     Debug.Log("Found scrap");
+            // }
+            // UIManager.ShowScrap(newScrap);
         }
-        if(other.gameObject.name == "Town" && OverworldManager.OM.towRig.activeSelf == false){
-            UIManager.ActivateTownButton(true);
-            Debug.Log("near town");
-            nearTown = true;
-        }
+        // if(other.gameObject.name == "Town" && OverworldManager.OM.towRig.activeSelf == false){
+        //     UIManager.ActivateTownButton(true);
+        //     Debug.Log("near town");
+        //     nearTown = true;
+        // }
     }
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag == "ob"){
@@ -197,18 +193,18 @@ public class PlayerManager : MonoBehaviour
         }
     }
     void OnTriggerExit2D(Collider2D other){ // Only consider out of range when we exit the larger collider on scrap
-        if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(CircleCollider2D) && scannerActive){    
-            ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
-            if(other.gameObject.GetComponent<ProximityCheck>().interactable){
-                other.gameObject.GetComponent<ProximityCheck>().IsInRange(false);
-            }
-            UIManager.OutOfRangeScrap(other.gameObject.GetComponent<ScrapObject>());
-        }
-        if(other.gameObject.name == "Town"){
-            UIManager.ActivateTownButton(false);
-            Debug.Log("not near town");
-            nearTown = false;
-        }
+        // if(other.gameObject.tag == "Scrap" && other.GetType() == typeof(CircleCollider2D) && scannerActive){    
+        //     ScrapObject newScrap = other.gameObject.GetComponent<ScrapObject>();
+        //      if(other.gameObject.GetComponent<ProximityCheck>().interactable){
+        //          other.gameObject.GetComponent<ProximityCheck>().IsInRange(false);
+        //      }
+        //     UIManager.OutOfRangeScrap(other.gameObject.GetComponent<ScrapObject>());
+        // }
+        // if(other.gameObject.name == "Town" && gameObject.name == "Player"){
+        //     UIManager.ActivateTownButton(false);
+        //     Debug.Log("not near town");
+        //     nearTown = false;
+        // }
     }
    
    

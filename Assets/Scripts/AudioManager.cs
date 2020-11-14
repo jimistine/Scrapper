@@ -92,6 +92,7 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   // Initializing Ambient Audio Controller
+        overworldSnapshot.TransitionTo(3);
         secondsToWait = Random.Range(90, 180);
         startWaitTime = Time.time;
         secondsToWaitMusic = 60; //420
