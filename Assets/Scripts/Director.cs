@@ -113,7 +113,7 @@ public class Director : MonoBehaviour
         AudioManager.TransitionToOverworld();
         yield return new WaitForSeconds(1);
         StartFadeCanvasGroup(screenCover1.gameObject,"out", fadeDuration);
-        StartFadeCanvasGroup(screenCover.gameObject,"out", fadeDuration);
+        StartFadeCanvasGroup2(screenCover.gameObject,"out", fadeDuration);
         yield return new WaitForSeconds(3);
         //yield return new WaitForSeconds(fadeDuration + 3);
         if(skipIntroDialogue){
@@ -206,6 +206,9 @@ public class Director : MonoBehaviour
     }
 
     public void StartFadeCanvasGroup(GameObject element, string targetVisibility, float fadeTime){
+        StartCoroutine(FadeCanvasGroup( element,  targetVisibility, fadeTime));
+    }
+    public void StartFadeCanvasGroup2(GameObject element, string targetVisibility, float fadeTime){
         StartCoroutine(FadeCanvasGroup( element,  targetVisibility, fadeTime));
     }
     public void StartFadeCanvasGroup(GameObject element, string targetVisibility, float delayTime, float fadeTime){

@@ -83,7 +83,6 @@ public class ProximityCheck : MonoBehaviour
 
             // What do we do when the player gets close?
             if(other.gameObject.name == "Player"){
-                playerFound = true;
                 Debug.Log("Player trigger entered.");
                 interactable = true;
                 UIManager.UIM.ShowScrap(gameObject.GetComponent<ScrapObject>());
@@ -106,6 +105,7 @@ public class ProximityCheck : MonoBehaviour
                         DialogueManager.DM.RunNode("scrap-find");
                     }   
                 }
+                playerFound = true;
             }
             else if(other.gameObject.name == "Scanner"){// What do we do when the scanner finds the scrap?
                 AudioManager.AM.PlayPlayerClip("found scrap");
