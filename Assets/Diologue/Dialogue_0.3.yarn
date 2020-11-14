@@ -263,6 +263,7 @@ position: 1789,491
         Ogden: Of course. Should you need additional desalination methods I have perfected a few over the years. 
         CH1-P: Thanks again, I'll keep that in mind. The sand was causing some problems earlier...
         Ogden: Yes, it does, doesn't it? And yet here we are.
+        <<setExitButtActive DialogueManager true>>
         CH1-P: Here we are.
     <<else>> 
         Ogden: Hello.
@@ -292,6 +293,7 @@ position: 1789,491
         Ogden: Yes, it does, doesn't it? And yet here we are.
         CH1-P: Here we are.
         CH1-P: Anyway, we should be going. So long.
+        <<setExitButtActive DialogueManager true>>
         Ogden: Until Next time.
     <<endif>> 
 <<setExitButtActive DialogueManager true>>
@@ -758,7 +760,7 @@ position: 251,520
     Hasron: Are you sure you want me to take over the piloting?
     CH1-P: Yeah my eye is starting to lock up from the sand I think.
     Hasron: Oh I didn't realize. It's the um...
-    CH1-P: Robotic one, yeah. From the sand.
+    CH1-P: Robotic one, yeah.
     Hasron: Yeah. Ok.
     Hasron: So how does this thing work?
     <<introWaitingForAcceleration DialogueManager>> 

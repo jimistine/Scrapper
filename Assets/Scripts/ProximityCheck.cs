@@ -36,16 +36,18 @@ public class ProximityCheck : MonoBehaviour
         scrapLight = gameObject.GetComponent<Light2D>();
     }
     void Update(){
-        if(interactable){
-            StopCoroutine(FadeScrap());
-            gameObject.GetComponent<SpriteRenderer>().color = inRangeColor;
-        }
-        if(Vector3.Distance(PlayerManager.PM.gameObject.transform.position, gameObject.transform.position) <= GetComponent<CircleCollider2D>().radius){
-            interactable = true;
-            //Debug.Log("Distance from interactable scrap: " + Vector3.Distance(PlayerManager.PM.gameObject.transform.position, gameObject.transform.position));
-        }
-        else{
-            interactable = false;
+        if(PlayerManager.PM.scannerActive){
+            if(interactable){
+                StopCoroutine(FadeScrap());
+                gameObject.GetComponent<SpriteRenderer>().color = inRangeColor;
+            }
+            if(Vector3.Distance(PlayerManager.PM.gameObject.transform.position, gameObject.transform.position) <= GetComponent<CircleCollider2D>().radius){
+                interactable = true;
+                //Debug.Log("Distance from interactable scrap: " + Vector3.Distance(PlayerManager.PM.gameObject.transform.position, gameObject.transform.position));
+            }
+            else{
+                interactable = false;
+            }
         }
     }
 
@@ -120,11 +122,11 @@ public class ProximityCheck : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other){
         // Only once the player's smaller collider has left
-        if(other.GetType()==typeof(EdgeCollider2D) && interactable == true){
+        if(other.GetType()==typeof(EdgeCollider2D) && interactable == true && PlayerManager.PM.scannerActive){
             interactable = false;
            // UIManager.UIM.OutOfRangeScrap(gameObject.GetComponent<ScrapObject>());
         }
-        if(!fading && gameObject.activeSelf){
+        if(!fading && gameObject.activeSelf && PlayerManager.PM.scannerActive){
             StopCoroutine(FadeScrap());
             StartCoroutine(FadeScrap());
         }
