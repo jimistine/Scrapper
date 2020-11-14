@@ -168,12 +168,10 @@ public class DialogueManager : MonoBehaviour
     }
     public void FinishedDisplayingText(){
         // Show the continue or period icon if there is or isn't more dialogue repectively
-
-
         // time out panel after a beat once the line is there.
         // if the node being run has the sub tag, start the counter
         string tagsLine = string.Join(" ", DR.GetTagsForNode(DR.CurrentNodeName));
-        if(tagsLine.Contains("sub") || (autoAdvanceOverWorldText == true && tagsLine.Contains("world"))){
+        if(tagsLine.Contains("sub") || (autoAdvanceOverWorldText == true)){
             //Debug.Log("starting speaker panel timeout");
             StartCoroutine(TimeOutSpeakerPanel());
         }
@@ -188,7 +186,7 @@ public class DialogueManager : MonoBehaviour
         while(Director.Dir.gamePaused){
             yield return null;
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         ContinueDialogue();
     }
 

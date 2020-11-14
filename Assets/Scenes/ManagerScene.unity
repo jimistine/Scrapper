@@ -6540,10 +6540,10 @@ RectTransform:
   m_Father: {fileID: 634241481}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 217, y: -10.44}
-  m_SizeDelta: {x: 79.6, y: 20.88}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &300659088
 MonoBehaviour:
@@ -13029,10 +13029,10 @@ RectTransform:
   m_Father: {fileID: 634241481}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 301.59998, y: -10.44}
-  m_SizeDelta: {x: 79.6, y: 20.88}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &673380458
 MonoBehaviour:
@@ -18378,10 +18378,10 @@ RectTransform:
   m_Father: {fileID: 634241481}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 386.19998, y: -10.44}
-  m_SizeDelta: {x: 79.6, y: 20.88}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &882307732
 MonoBehaviour:
@@ -18874,6 +18874,88 @@ SpriteRenderer:
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 7.86, y: 7.86}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &912151096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 912151097}
+  - component: {fileID: 912151098}
+  m_Layer: 0
+  m_Name: PlacedScrap (55)
+  m_TagString: placed
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &912151097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912151096}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 91.893, y: -17.763, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1974013208}
+  m_RootOrder: 53
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &912151098
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912151096}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 4294967295
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1805345993
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 0, g: 1, b: 0.29654503, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -31205,31 +31287,39 @@ MonoBehaviour:
     to hard  reset. Restarting also re-seeds the overworld with different scrap in
     different places.\r\n\r\n<b>Credit Where It's Due</b>\r\nART\r\n-<indent=15><color=#EB8258>Kyle
     Shekinah-Roark</color>, kylesr.com</indent>\r\n\r\nMUISC \r\n-<indent=15><color=#EB8258>Jeff
-    Brice</color>, jeffbricemusic.com</indent>\r\n\r\nSOUND EFFECTS\r<size=75%>\n-<indent=15>Various
+    Brice</color>, jeffbricemusic.com</indent>\r\n\r\nSOUND EFFECTS<size=75%>\r\n-<indent=15>Various
     sfx by <color=#EB8258>Phil Michalski</color>, pmsfx.com</indent>\r\n-<indent=15>\"The
     Incredible Sounds of the Falcon Heavy Launch (BINAURAL AUDIO IMMERSION) - Smarter
     Every Day 189\" by <color=#EB8258>Smarter Every Day</color> via Youtube</indent>
     \r\n-<indent=15>\"axe chops into thin wood masonite trailer rv walls +metal grill
-    hits and debris and tearing.wav\" by <color=#EB8258>kyles</color> via freesound.org</indent>\r\n\r</size>\nAMBIENT
-    AUDIO\r <size=75%>\n-<indent=15>\"Desert at Night\" by <color=#EB8258>kangaroovindaloo</color>
-    via freesound.org\r</indent>\n-<indent=15>\"Desert binaural Wind.WAV\" by <color=#EB8258>Benbojangles</color>
+    hits and debris and tearing.wav\" by <color=#EB8258>kyles</color> via freesound.org</indent>\r\n</size>\r\nAMBIENT
+    AUDIO <size=75%>\r\n-<indent=15>\"Desert at Night\" by <color=#EB8258>kangaroovindaloo</color>
+    via freesound.org</indent>\r\n-<indent=15>\"Desert binaural Wind.WAV\" by <color=#EB8258>Benbojangles</color>
     via freesound.org</indent>\r\n-<indent=15>\"Scrap metal dealer in South East
     London\" by <color=#EB8258>OleTerbijn</color> via freesound.org</indent>\r\n-<indent=15>\"Wind
     blowing in some metal door (Storage Boxes)\" by <color=#EB8258>felix.blume</color>
     via freesound.org</indent>\r\n-<indent=15>\"swirling winter wind gusty grains
     sand.flac\" by <color=#EB8258>kyles</color> via freesound.org</indent>\r\n-<indent=15>\"After
     dark in Arizona.mp3\" by <color=#EB8258>Marnie.Devereux</color> via freesound.org</indent>\r\n-<indent=15>\"Crickets
-    At Night - Raw sound\" by <color=#EB8258>Defelozedd94</color> via freesound.org</indent>\r\n\r</size>\n\r\n<b><size=125%>NEW
-    FEATURES</size></b>\r\n<b><color=#FAF8D4>October 28, 2020</color></b>\r\n<b>UI
-    Overhaul</b>\r\n-<indent=15>Just about all the UI got updated and is now a lot
-    more dynamic overall.</indent>\r\n-<indent=15>There's a pause menu now, and even
-    better, a fullscreen button in the standalone (downloadable) version.</indent>\r\n-<indent=15>Along
-    with the pause menu is the Scrap Log to keep track of all your finds, something
-    I've been wanting to add for a while.</indent>\r\n\r\n<b>Sound Design Updates</b>\r\n-<indent=15>Whole
-    bunch of new sound effects are in!</indent>\r\n-<indent=15>Your rig sounds a
-    little less like a broken fan.</indent>\r\n-<indent=15>There are a handful of
-    songs added as well by the great Jeff Brice.</indent>\r\n-<indent=15>The night
-    finally has it's own sonic landscape to explore.</indent>\r\n\r\n-<indent=15>Lots
+    At Night - Raw sound\" by <color=#EB8258>Defelozedd94</color> via freesound.org</indent>\r\n</size>\r\n\r\n<b><size=125%>NEW
+    FEATURES</size></b>\r\n<b><color=#FAF8D4>November 14, 2020</color></b>\r\n<b>Lil
+    Bit of Everything</b>\r\nThese past few weeks have been a wild ride, but I've
+    managed to make quite a few updates all the same.\r\n-<indent=15>The incredible
+    Kyle Shekinah-Roark has given us Chundr and Ogden in all their visual glory!</indent>\r\n-<indent=15>Scanning
+    - Scanning got a big overhaul in that now you actually have to scan things actively
+    rather than just hope you run over things. And it lights up!</indent>\r\n-<indent=15>The
+    Scrap Loop also got a lot fixes and upgrades as scrap now looks like scrap on
+    the map and scales according to its, well, scale,</indent>\r\n-<indent=15>There's
+    a title screen! I think it's pretty nice!</indent>\r\n\r\n<b><color=#FAF8D4>October
+    28, 2020</color></b>\r\n<b>UI Overhaul</b>\r\n-<indent=15>Just about all the
+    UI got updated and is now a lot more dynamic overall.</indent>\r\n-<indent=15>There's
+    a pause menu now, and even better, a fullscreen button in the standalone (downloadable)
+    version.</indent>\r\n-<indent=15>Along with the pause menu is the Scrap Log to
+    keep track of all your finds, something I've been wanting to add for a while.</indent>\r\n\r\n<b>Sound
+    Design Updates</b>\r\n-<indent=15>Whole bunch of new sound effects are in!</indent>\r\n-<indent=15>Your
+    rig sounds a little less like a broken fan.</indent>\r\n-<indent=15>There are
+    a handful of songs added as well by the great Jeff Brice.</indent>\r\n-<indent=15>The
+    night finally has it's own sonic landscape to explore.</indent>\r\n\r\n-<indent=15>Lots
     of bugs and smaller changes were made as well, and I'm sure plenty more have
     been introduced.</indent>\r\n\r\n<b><color=#FAF8D4>October 20, 2020</color></b>\r\n<b>All
     new level design</b>\r\n-<indent=15>There's a lot more to be found now in the
@@ -31271,7 +31361,7 @@ MonoBehaviour:
     with scrap fallen from the interstellar highways above. They want to see a galaxy-wide
     race called the Maelstrom Cup, which is in 10 days. Tickets to get them there
     and into the event are 49,999 credits each. Your goal is to make enough for one
-    or both to go.\r\n\r\n<b><align=center><color=#EB8258>'P' or 'Esc.' to unpause</color></b>\r\n"
+    or both to go.\r\n\r\n<b><align=center><color=#EB8258>'P' or 'Esc.' to unpause</color></b>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7778e75be2525ee4eadfa53d2935124b, type: 2}
   m_sharedMaterial: {fileID: 408805319170150748, guid: 7778e75be2525ee4eadfa53d2935124b, type: 2}
@@ -32337,10 +32427,10 @@ RectTransform:
   m_Father: {fileID: 634241481}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 132.4, y: -10.44}
-  m_SizeDelta: {x: 79.6, y: 20.88}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1560916719
 MonoBehaviour:
@@ -39298,10 +39388,10 @@ RectTransform:
   m_Father: {fileID: 634241481}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 47.8, y: -25.019999}
-  m_SizeDelta: {x: 79.6, y: 20.88}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1867799753
 MonoBehaviour:
@@ -40466,6 +40556,7 @@ Transform:
   - {fileID: 1736111174}
   - {fileID: 1481555756}
   - {fileID: 792077121}
+  - {fileID: 912151097}
   m_Father: {fileID: 1005310150}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -44026,19 +44117,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 47.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10.44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 79.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 20.88
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchorMin.x
@@ -44046,7 +44137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -44054,7 +44145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_Pivot.x

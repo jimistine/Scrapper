@@ -268,5 +268,14 @@ public class scrapPlacer : MonoBehaviour
             Instantiate(droppedScrapObj, PlayerManager.PM.gameObject.transform.position, Quaternion.identity);
             //droppedScrap.transform.parent = PlayerManager.PM.gameObject.transform;
             droppedScrap.transform.parent = gameObject.transform;
+
+            droppedScrap.gameObject.name = droppedScrap.GetComponent<ScrapObject>().scrapName;
+            droppedScrap.ID = GenerateScrapID();
+            // scale and swap the shadow sprite
+            float scrapScale = droppedScrap.size/scrapShadowScaler;
+            if(scrapScale > 5){scrapScale = 5;}
+            droppedScrap.gameObject.transform.localScale = new Vector3(scrapScale, scrapScale, scrapScale);
+            int blobIndex = Random.Range(0, scrapShadows.Count());
+            droppedScrap.gameObject.GetComponent<SpriteRenderer>().sprite = (Sprite)scrapShadows[blobIndex];
     }
  }

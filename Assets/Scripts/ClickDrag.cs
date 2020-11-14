@@ -186,13 +186,14 @@ public class ClickDrag : MonoBehaviour
     }
     public IEnumerator OutOfFuel(){
         // once they run out, slow them down for ~drama~
-        rigDust.Stop();
+        //rigDust.Stop();
         fuelModifier = fuel.noFuelSpeedModifier;
-        moveEnabled = false;
-        for (float i = currentSpeed; i > 0; i -= fuel.outOfFuelSlowRate){
-            Debug.Log("Running out!");
-            yield return new WaitForSeconds(.01f);
-        }
-        OverworldManager.OM.SetUpTowRig();
+        yield return null;
+        // moveEnabled = false;
+        // for (float i = currentSpeed; i > 0; i -= fuel.outOfFuelSlowRate){
+        //     Debug.Log("Running out!");
+        //     yield return new WaitForSeconds(.01f);
+        // }
+        // OverworldManager.OM.SetUpTowRig();
     }
 }
