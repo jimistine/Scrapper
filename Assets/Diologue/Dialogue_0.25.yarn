@@ -235,7 +235,7 @@ position: 1789,491
 ---
 <<if visited("ogden-intro") is false>>
     <<setFuelButtActive DialogueManager false>>
-    <<setExitButtActive DialogueManager false>>
+    //<<setExitButtActive DialogueManager false>>
     <<if visited ("tutorial-out-of-fuel") is true>>
         Hasron: Hey thanks again for towing us in back there. Should have been keeping a closer eye on the reactor.
         Ogden: You are most welcome. These things happen from time to time.
@@ -757,6 +757,7 @@ colorID: 0
 position: 251,520
 ---
 <<if visited("intro-2-1") is false>>
+    <<set $day = checkDay()>>
     Hasron: Are you sure you want me to take over the piloting?
     CH1-P: Yeah my eye is starting to lock up from the sand I think.
     Hasron: Oh I didn't realize. It's the um...

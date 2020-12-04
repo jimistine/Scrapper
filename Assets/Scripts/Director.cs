@@ -27,8 +27,9 @@ public class Director : MonoBehaviour
     [Header("General")]
     [Space(10)]
     public bool gamePaused;
-    [Header("Tutorial")]
+    [Header("Progress")]
     [Space(10)]
+    public int ticketsPurchased;
     public bool gameStarted;
     public bool waitingForAcceleration;
     public bool introCompleted;

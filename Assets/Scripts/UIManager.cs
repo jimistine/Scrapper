@@ -446,7 +446,7 @@ public class UIManager : MonoBehaviour
         townHub.SetActive(false);
         scrapBuyer.SetActive(true);
         playerLocation = "scrap buyer";
-        DialogueManager.DM.RunNode("chundr");
+        DialogueManager.DM.RunNode("chundr-enter");
         UpdateSellScrapButtText();
     }
     public void cantSellScrap(){
@@ -496,7 +496,7 @@ public class UIManager : MonoBehaviour
         townHub.SetActive(false);
         fuelMerchant.SetActive(true);
         playerLocation = "fuel merchant";
-        DialogueManager.DM.RunNode("ogden-intro");
+        DialogueManager.DM.RunNode("ogden-enter");
         MerchantManager.EnterFuelMerchant();
     }
     public void BoughtFuel(){

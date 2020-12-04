@@ -44,7 +44,7 @@ bool lowFuel;
         }
         if(currentFuelUnits <= 0 && canBeTowed && PlayerManager.PM.nearTown == false){
             canBeTowed = false;
-            //AudioManager.AM.PlayRigStop();
+            AudioManager.AM.PlayRigStop();
             ClickDrag.StartCoroutine("OutOfFuel");
         }
         else if(currentFuelUnits > 0){

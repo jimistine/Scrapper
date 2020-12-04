@@ -104,21 +104,32 @@ public class scrapPlacer : MonoBehaviour
 
     void SpawnScrap(int scrapToSpawn){
         for(int j = 0; j < scrapToSpawn; j++){
-            // find the highest weight of all scrap, that is, the most common
-            int maxWeight = JsonReader.scrapInJson.allScrap.Max(x => x.zoneA_rarity);
-            // pick a number somwhere inbetween that max and 0
-            randomScrapPick = Random.Range(0, maxWeight);
-            // shuffle the array so everyone gets a chance
-            RandomExtensions.Shuffle(shuffleRandom, JsonReader.scrapInJson.allScrap);
-            // iterate through all the scrap in our list and pick the first one that's weighted higher than 
-            //   our random value and exit the loop.
-            foreach(Scrap scrap in JsonReader.scrapInJson.allScrap){
-                if(scrap.zoneA_rarity >= randomScrapPick){
-                    incomingScrap = scrap;
-                    //Debug.Log("Spawning scrap: " + incomingScrap.scrapName);
-                    break;
+
+        // to gaurentee at least one of each piece is spawned
+            // Count all the unique scrap items
+            int numUniqueScrap = JsonReader.scrapInJson.allScrap.Count();
+            // If the count is <= that number, spawn the scrap at the index equal to the current count
+            if (j < numUniqueScrap){
+                incomingScrap = JsonReader.scrapInJson.allScrap[j];
+            }
+            // else, do the weighted spawn thing like normal
+            else{
+                // find the highest weight of all scrap, that is, the most common
+                int maxWeight = JsonReader.scrapInJson.allScrap.Max(x => x.zoneA_rarity);
+                // pick a number somwhere inbetween that max and 0
+                randomScrapPick = Random.Range(0, maxWeight);
+                // shuffle the array so everyone gets a chance
+                RandomExtensions.Shuffle(shuffleRandom, JsonReader.scrapInJson.allScrap);
+                // iterate through all the scrap in our list and pick the first one that's weighted higher than 
+                //   our random value and exit the loop.
+                foreach(Scrap scrap in JsonReader.scrapInJson.allScrap){
+                    if(scrap.zoneA_rarity >= randomScrapPick){
+                        incomingScrap = scrap;
+                        break;
+                    }
                 }
             }
+            Debug.Log("Spawning scrap: " + incomingScrap.scrapName);
             // transfer that sweet sweet data to prefab
             sampleScrap.GetComponent<ScrapObject>().scrapName = incomingScrap.scrapName;
             sampleScrap.GetComponent<ScrapObject>().description = incomingScrap.description;
@@ -212,6 +223,7 @@ public class scrapPlacer : MonoBehaviour
                 foreach(Scrap scrap in JsonReader.scrapInJson.allScrap){
                     if(scrap.zoneA_rarity >= randomScrapPick && scrap.zoneA_rarity <= 45){
                         incomingScrap = scrap;
+                        Debug.Log("Spawning placed scrap: " + incomingScrap.scrapName);
                         break;
                     }
                 }

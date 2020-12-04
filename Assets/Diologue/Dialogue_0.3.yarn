@@ -231,7 +231,7 @@ position: 1459,1688
 title: ogden-intro
 tags: main merchant
 colorID: 0
-position: 1789,491
+position: 1792,510
 ---
 <<if visited("ogden-intro") is false>>
     <<setFuelButtActive DialogueManager false>>
@@ -296,10 +296,10 @@ position: 1789,491
         <<setExitButtActive DialogueManager true>>
         Ogden: Until Next time.
     <<endif>> 
-<<setExitButtActive DialogueManager true>>
-<<ogdenVisited DialogueManager>> 
 <<else>>
-   [[ogden-enter]]
+    <<setExitButtActive DialogueManager true>>
+    <<ogdenVisited DialogueManager>> 
+   [[ogden-random]]
 <<endif>>
 ===
 title: chunk-of-raw-cordonite
@@ -412,12 +412,12 @@ position: 845,1013
     <<set $holospace_generator to 2>> 
 <<endif>>
 ===
-title: chundr
+title: chundr-intro
 tags: main merchant
 colorID: 0
-position: 2065,484
+position: 2388,500
 ---
-<<if visited("chundr") is false>> 
+<<if visited("chundr-intro") is false>> 
     <<setExitButtActive DialogueManager false>>
     Chundr: Hey there. Welcome to Outpost SKJ-29.
     Chundr: You two must be our newest scrappers, hm?
@@ -451,13 +451,13 @@ position: 2065,484
     <<chundrVisited DialogueManager>> 
     <<setExitButtActive DialogueManager true>>
 <<else>>
-     [[chundr-enter]]
+     [[chundr-random]]
 <<endif>>
 ===
 title: engine
 tags: merchant
 colorID: 0
-position: 2078,1005
+position: 2401,1021
 ---
 <<if visited("engine") is false>>
     Chundr: Careful installing that engine, ok? Churn isn't exactly known for their safety standards and I bought that thing off of a scrapper I hadn't seen before.
@@ -507,7 +507,7 @@ position: 1462,1226
 title: reactor
 tags: merchant
 colorID: 0
-position: 2092,1263
+position: 2415,1279
 ---
 <<if visited("reactor") is false>>
     Chundr: That should let you get a good bit further out before you're out of fuel.
@@ -527,7 +527,7 @@ position: 2092,1263
 title: storage-bay
 tags: merchant
 colorID: 0
-position: 2099,1491
+position: 2422,1507
 ---
 <<if visited("storage-bay") is false>>
     Chundr: Once went on vacation to a place called Rundoth bay. 
@@ -549,7 +549,7 @@ position: 2099,1491
 title: scanner
 tags: merchant
 colorID: 0
-position: 2092,1724
+position: 2415,1740
 ---
 <<if visited("scanner") is false>>
     Chundr: I think the name speaks for itself.
@@ -569,7 +569,7 @@ position: 2092,1724
 title: drone
 tags: merchant
 colorID: 0
-position: 2098,1961
+position: 2421,1977
 ---
 <<if visited("drone") is false>>
     Chundr: Kion glass is some of the sturdiest stuff out there, I'm sure that'll help you quite a bit out in the wastes.
@@ -588,7 +588,7 @@ position: 2098,1961
 title: chundr-cant-afford
 tags: merchant
 colorID: 0
-position: 2089,2186
+position: 2412,2202
 ---
 <<set $chundrCantAffordPick = random("chundr-cant-afford", 3)>>
 
@@ -623,7 +623,7 @@ position: 1796,1006
 title: cant-sell-scrap
 tags: merchant
 colorID: 0
-position: 2094,2417
+position: 2417,2433
 ---
 <<set $cantSellScrap = random("cant-sell-scrap", 3)>>
 
@@ -700,7 +700,7 @@ position: 1793,2180
 title: sold-all-scrap
 tags: merchant
 colorID: 0
-position: 2087,2664
+position: 2410,2680
 ---
 <<set $soldAllScrap = random("sold-all-scrap", 7)>>
 
@@ -723,7 +723,7 @@ position: 2087,2664
 
 <<endif>>
 ===
-title: ogden-enter
+title: ogden-random
 tags: merchant
 colorID: 0
 position: 1788,751
@@ -757,6 +757,7 @@ colorID: 0
 position: 251,520
 ---
 <<if visited("intro-2-1") is false>>
+    <<set $day = checkDay()>>
     Hasron: Are you sure you want me to take over the piloting?
     CH1-P: Yeah my eye is starting to lock up from the sand I think.
     Hasron: Oh I didn't realize. It's the um...
@@ -865,10 +866,10 @@ position: 1166,781
     Hasron: Ok, ok. Let's just hope this scanner works. Can't say the free gear I've gotten in the past has had the best track record.
 <<endif>>
 ===
-title: chundr-enter
+title: chundr-random
 tags: merchant
 colorID: 0
-position: 2073,741
+position: 2396,757
 ---
 <<set $chundrPick = random("chundr", 7)>>
 
@@ -1101,4 +1102,132 @@ position: 525,1025
     CH1-P: Would you look at that.
     CH1-P: It's scrap time.
 <<endif>>
+===
+title: ogden-enter
+tags: main merchant
+colorID: 0
+position: 1937,229
+---
+<<set $day = checkDay()>>
+<<set $tickets = checkTickets()>> 
+<<if visited("ogden-intro") is false>>
+    [[ogden-intro]]
+<<elseif $tickets == 1 && visited("ogden-tickets1") is false>>
+    [[ogden-tickets1]]
+<<elseif $tickets == 2 && visited("ogden-tickets2") is false>>
+    [[ogden-tickets2]]
+<<elseif $day == 3 && visited("ogden-day3") is false>>
+    [[ogden-day3]]
+<<elseif $day == 6 && visited("ogden-day6") is false>>
+    [[ogden-day6]]
+<<elseif $day == 10 && visited("ogden-day10") is false>>
+    [[ogden-day10]]
+<<else>>
+    [[ogden-random]]
+<<endif>>
+===
+title: ogden-day3
+tags: merchant
+colorID: 0
+position: 2103,1008
+---
+Ogden: Hello again, how have you been finding your time in the wastes?
+Hasron: It's going ok. Still a long way to go.
+Hasron: But they weren't kidding when they said this place was full of scrap. Surprising no one else is really here.
+Ogden: The Outpost falls in and out of favor within the scrapping world. One rumor of rare treasures is all it will take to flood the basin with scrappers.
+CH1-P: Well let's hope they can wait another week.
+===
+title: ogden-day6
+tags: merchant
+colorID: 0
+position: 2106,1246
+---
+Ogden: You are halfway to your deadline, correct?
+CH1-P: Yep. It's coming up fast.
+Ogden: These things always do, don't they?
+===
+title: ogden-day10
+tags: merchant
+colorID: 0
+position: 2102,1510
+---
+Hasron: Today's the day!
+Ogden: So it is!
+===
+title: chundr-enter
+tags: main merchant
+colorID: 0
+position: 2543,260
+---
+<<set $day = checkDay()>>
+<<set $tickets = checkTickets()>> 
+<<if visited("chundr-intro") is false>>
+    [[chundr-intro]]
+<<elseif $tickets == 1 && visited("chundr-tickets1") is false>>
+    [[chundr-tickets1]]
+<<elseif $tickets == 2 && visited("chundr-tickets2") is false>>
+    [[chundr-tickets2]]
+<<elseif $day == 3 && visited("chundr-day3") is false>>
+    [[chundr-day3]]
+<<elseif $day == 6 && visited("chundr-day6") is false>>
+    [[chundr-day6]]
+<<elseif $day == 9 && visited("chundr-day9") is false>>
+    [[chundr-day9]]
+<<else>>
+    [[chundr-random]]
+<<endif>>
+===
+title: chundr-day3
+tags: merchant
+colorID: 0
+position: 2700,1038
+---
+Empty Text
+===
+title: chundr-day6
+tags: merchant
+colorID: 0
+position: 2694,1285
+---
+Empty Text
+===
+title: chundr-day9
+tags: merchant
+colorID: 0
+position: 2690,1506
+---
+Empty Text
+===
+title: ogden-tickets1
+tags: merchant
+colorID: 0
+position: 2099,503
+---
+Hasron: One down!
+Ogden: Come again?
+CH1-P: We bought one of the tickets!
+Ogden: That is very good!
+Ogden: Who will get it if it remains the only one?
+Hasron: We'll cross that bridge when we get there...
+===
+title: ogden-tickets2
+tags: merchant
+colorID: 0
+position: 2096,757
+---
+Empty Text
+===
+title: chundr-tickets1
+tags: merchant
+colorID: 0
+position: 2692,496
+---
+Empty Text
+===
+title: chundr-tickets2
+tags: merchant
+colorID: 0
+position: 2697,756
+---
+Empty Text
 ===

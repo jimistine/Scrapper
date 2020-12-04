@@ -94,6 +94,12 @@ public class DialogueManager : MonoBehaviour
             //Debug.Log("Random line number is: " + numberToReturn);
             return numberToReturn;
         });
+        DR.AddFunction("checkDay", 0, delegate(Yarn.Value[] parameters){
+            return Director.Dir.Timer.day;
+        });
+        DR.AddFunction("checkTickets", 0, delegate(Yarn.Value[] parameters){
+            return Director.Dir.ticketsPurchased;
+        });
         
 
     }
