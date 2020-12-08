@@ -1231,3 +1231,52 @@ position: 2697,756
 ---
 Empty Text
 ===
+title: wrong-ticket
+tags: main
+colorID: 0
+position: 3048,765
+---
+Empty Text
+===
+title: bought-first-ticket
+tags: 
+colorID: 0
+position: 3047,1033
+---
+Empty Text
+===
+title: bought-second-ticket
+tags: 
+colorID: 0
+position: 3050,1312
+---
+Empty Text
+===
+title: cant-afford-single-ticket
+tags: 
+colorID: 0
+position: 3044,1779
+---
+Empty Text
+===
+title: cant-afford-both-tickets
+tags: 
+colorID: 0
+position: 3040,2006
+---
+Empty Text
+===
+title: bought-both-tickets
+tags: 
+colorID: 0
+position: 3050,1557
+---
+Empty Text
+===
+title: open-terminal
+tags: 
+colorID: 0
+position: 3046,492
+---
+Empty Text
+===
