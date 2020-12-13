@@ -38,6 +38,7 @@ public class DialogueManager : MonoBehaviour
     public List<Yarn.Line> lineQueue = new List<Yarn.Line>();
     public List<string> lineQueueIDs = new List<string>();
     public Yarn.Line queuedLine;
+    public GameObject activeExit;
     
     [Header("Images")]
     [Space(10)]
@@ -295,7 +296,8 @@ public class DialogueManager : MonoBehaviour
         DR.Stop();
         Debug.Log("conversation ended");
         if(UIManager.UIM.playerLocation == "town hub"){
-            activeSpeakerPanel.SetActive(false);
+            //activeSpeakerPanel.SetActive(false);
+            Director.Dir.StartFadeCanvasGroup(activeSpeakerPanel, "out", 0.25f);
         }
         else{
             if(UIManager.UIM.playerLocation != "overworld"){
@@ -373,7 +375,8 @@ public class DialogueManager : MonoBehaviour
     [YarnCommand("setExitButtActive")]
     public void setExitButtActive(string isObjActive){
         if (GameObject.Find("Exit") != null){
-            GameObject activeExit = GameObject.Find("Exit");
+            activeExit = GameObject.Find("Exit");
+            Debug.Log("Exit is: " + activeExit.name);
             if(isObjActive == "true"){
                 activeExit.GetComponent<Button>().interactable = true;
             }

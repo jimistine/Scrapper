@@ -14,6 +14,7 @@ TagManager:
   - Lights
   - merchant
   - Non-spawnable
+  - Spawnable
   layers:
   - Default
   - TransparentFX
@@ -54,11 +55,14 @@ TagManager:
   - name: Ground
     uniqueID: 3649570701
     locked: 0
-  - name: Obstacle
-    uniqueID: 2489621303
-    locked: 0
   - name: Player
     uniqueID: 1414768697
+    locked: 0
+  - name: Shadow
+    uniqueID: 2968513219
+    locked: 0
+  - name: Obstacle
+    uniqueID: 2489621303
     locked: 0
   - name: ScrapBuried
     uniqueID: 3791022989

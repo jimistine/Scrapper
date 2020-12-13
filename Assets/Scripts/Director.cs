@@ -144,6 +144,9 @@ public class Director : MonoBehaviour
         }
     }
     public void StartEnterTown(){
+        if(AudioManager.AM.RigRunning.isPlaying){
+            AudioManager.AM.PlayRigStop();
+        }
         if(DialogueManager.DM.isDialogueRunner1Running){
             StartWaitToEnterTown();
         }
@@ -180,7 +183,7 @@ public class Director : MonoBehaviour
     IEnumerator LeaveTown(){
         screenCover.color = myBlack;
         StartFadeCanvasGroup(screenCover.gameObject, "in", 0.5f);
-        DialogueManager.DM.ConversationEnded();
+        //DialogueManager.DM.ConversationEnded();
         yield return new WaitForSeconds(0.5f);
         AudioManager.AM.TransitionToOverworld();
         SceneController.StartLeaveTown();

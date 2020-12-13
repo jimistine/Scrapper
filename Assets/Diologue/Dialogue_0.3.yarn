@@ -1,7 +1,7 @@
 title: intro-2-3
 tags: main
 colorID: 0
-position: 249,1024
+position: 204,1059
 ---
 <<if visited("intro-2-3") is false>> 
     CH1-P: Are you sure this road will get us to the outpost?
@@ -30,7 +30,7 @@ position: 249,1024
 title: close-to-town
 tags: world
 colorID: 0
-position: 242,1283
+position: 197,1318
 ---
 <<if visited("close-to-town") is false>> 
     CH1-P: Well I'll be damned, we made it.
@@ -67,7 +67,7 @@ position: -399,518
 title: scrap-find
 tags: sub
 colorID: 0
-position: 1470,507
+position: 1425,542
 ---
 <<set $scrapFindPick = random("scrap-find", 15)>>
 
@@ -112,7 +112,7 @@ position: 1470,507
 title: scrap-take
 tags: sub
 colorID: 0
-position: 1466,741
+position: 1421,776
 ---
 <<set $scraptakepick = random("scrap-take", 7)>>
 
@@ -140,7 +140,7 @@ position: 1466,741
 title: scrap-leave
 tags: sub
 colorID: 0
-position: 1466,988
+position: 1421,1023
 ---
 <<set $scrapLeavePick = random("scrap-take", 7)>>
 
@@ -168,7 +168,7 @@ position: 1466,988
 title: fuel-running-low
 tags: sub
 colorID: 0
-position: 1461,1467
+position: 1416,1502
 ---
 <<set $fuelRunningLowPick = random("fuel-running-low", 7)>>
 
@@ -196,7 +196,7 @@ position: 1461,1467
 title: fuel-out
 tags: sub
 colorID: 0
-position: 1459,1688
+position: 1414,1723
 ---
 <<set $fuelOutPick = random("fuel-out", 7)>>
 <<if $fuelOutPick == 0>>
@@ -235,7 +235,7 @@ position: 1792,510
 ---
 <<if visited("ogden-intro") is false>>
     <<setFuelButtActive DialogueManager false>>
-    <<setExitButtActive DialogueManager false>>
+    //<<setExitButtActive DialogueManager false>>
     <<if visited ("tutorial-out-of-fuel") is true>>
         Hasron: Hey thanks again for towing us in back there. Should have been keeping a closer eye on the reactor.
         Ogden: You are most welcome. These things happen from time to time.
@@ -305,7 +305,7 @@ position: 1792,510
 title: chunk-of-raw-cordonite
 tags: world
 colorID: 0
-position: 856,522
+position: 811,557
 ---
 <<if visited("chunk-of-raw-cordonite") is false>>
     Hasron: What the hell is that?
@@ -342,7 +342,7 @@ position: 856,522
 title: land-speeder
 tags: world
 colorID: 0
-position: 847,774
+position: 802,809
 ---
 <<if visited("land-speeder") is false>>
     Hasron: Void take me that speeder is BUSTED.
@@ -367,7 +367,7 @@ position: 847,774
 title: holospace-generator
 tags: world
 colorID: 0
-position: 845,1013
+position: 800,1048
 ---
 <<if visited("holospace-generator") is false>>
     Hasron: Wooaaahhh.
@@ -415,7 +415,7 @@ position: 845,1013
 title: chundr-intro
 tags: main merchant
 colorID: 0
-position: 2388,500
+position: 2449,485
 ---
 <<if visited("chundr-intro") is false>> 
     <<setExitButtActive DialogueManager false>>
@@ -457,7 +457,7 @@ position: 2388,500
 title: engine
 tags: merchant
 colorID: 0
-position: 2401,1021
+position: 2462,1006
 ---
 <<if visited("engine") is false>>
     Chundr: Careful installing that engine, ok? Churn isn't exactly known for their safety standards and I bought that thing off of a scrapper I hadn't seen before.
@@ -482,7 +482,7 @@ position: 2401,1021
 title: scrap-wont-fit
 tags: sub
 colorID: 0
-position: 1462,1226
+position: 1417,1261
 ---
 <<set $wontFitPick = random("scrap-wont-fit", 7)>>
 
@@ -507,7 +507,7 @@ position: 1462,1226
 title: reactor
 tags: merchant
 colorID: 0
-position: 2415,1279
+position: 2476,1264
 ---
 <<if visited("reactor") is false>>
     Chundr: That should let you get a good bit further out before you're out of fuel.
@@ -527,7 +527,7 @@ position: 2415,1279
 title: storage-bay
 tags: merchant
 colorID: 0
-position: 2422,1507
+position: 2483,1492
 ---
 <<if visited("storage-bay") is false>>
     Chundr: Once went on vacation to a place called Rundoth bay. 
@@ -549,7 +549,7 @@ position: 2422,1507
 title: scanner
 tags: merchant
 colorID: 0
-position: 2415,1740
+position: 2476,1725
 ---
 <<if visited("scanner") is false>>
     Chundr: I think the name speaks for itself.
@@ -569,7 +569,7 @@ position: 2415,1740
 title: drone
 tags: merchant
 colorID: 0
-position: 2421,1977
+position: 2482,1962
 ---
 <<if visited("drone") is false>>
     Chundr: Kion glass is some of the sturdiest stuff out there, I'm sure that'll help you quite a bit out in the wastes.
@@ -588,7 +588,7 @@ position: 2421,1977
 title: chundr-cant-afford
 tags: merchant
 colorID: 0
-position: 2412,2202
+position: 2473,2187
 ---
 <<set $chundrCantAffordPick = random("chundr-cant-afford", 3)>>
 
@@ -623,7 +623,7 @@ position: 1796,1006
 title: cant-sell-scrap
 tags: merchant
 colorID: 0
-position: 2417,2433
+position: 2478,2418
 ---
 <<set $cantSellScrap = random("cant-sell-scrap", 3)>>
 
@@ -700,7 +700,7 @@ position: 1793,2180
 title: sold-all-scrap
 tags: merchant
 colorID: 0
-position: 2410,2680
+position: 2471,2665
 ---
 <<set $soldAllScrap = random("sold-all-scrap", 7)>>
 
@@ -754,7 +754,7 @@ position: 1788,751
 title: intro-2-1
 tags: main
 colorID: 0
-position: 251,520
+position: 206,555
 ---
 <<if visited("intro-2-1") is false>>
     <<set $day = checkDay()>>
@@ -773,7 +773,7 @@ position: 251,520
 title: intro-2-2
 tags: main
 colorID: 0
-position: 244,755
+position: 199,790
 ---
 <<if visited ("intro-2-2") is false>> 
     <<wait 2>> 
@@ -797,7 +797,7 @@ position: 244,755
 title: tutorial-find-scrap
 tags: world
 colorID: 0
-position: 1164,517
+position: 1119,552
 ---
 <<if visited("tutorial-find-scrap") is false>>
     Hasron: Hey I think that's some of that fabled scrap!
@@ -809,7 +809,7 @@ position: 1164,517
 title: getting-dark
 tags: world
 colorID: 0
-position: 835,1262
+position: 790,1297
 ---
 <<wait 5>> 
 <<if visited("getting-dark") is false>> 
@@ -848,7 +848,7 @@ position: 835,1262
 title: tutorial-take-scrap
 tags: world
 colorID: 0
-position: 1166,781
+position: 1121,816
 ---
 <<if visited("tutorial-take-scrap") is false>>
     Hasron: Loaded up and ready for scrappin'!
@@ -869,7 +869,7 @@ position: 1166,781
 title: chundr-random
 tags: merchant
 colorID: 0
-position: 2396,757
+position: 2457,742
 ---
 <<set $chundrPick = random("chundr", 7)>>
 
@@ -897,7 +897,7 @@ position: 2396,757
 title: left-town-ogden
 tags: main
 colorID: 0
-position: 532,509
+position: 487,544
 ---
 <<if visited("left-town-ogden") == false>> 
     Hasron: Odgen seemed nice.
@@ -919,7 +919,7 @@ position: 532,509
 title: tutorial-out-of-fuel
 tags: main
 colorID: 0
-position: 1182,1021
+position: 1137,1056
 ---
 <<if visited ("tutorial-out-of-fuel") is false>>
     <<towReady DialogueManager false>> 
@@ -971,7 +971,7 @@ position: 1182,1021
 title: tutorial-out-of-fuel-2
 tags: main
 colorID: 0
-position: 1175,1251
+position: 1130,1286
 ---
 <<if visited("ogden-intro" is false) && visited("chundr") is false>>
     Ogden: Hello there!
@@ -1034,7 +1034,7 @@ position: 1797,1731
 title: left-town
 tags: main
 colorID: 0
-position: 530,776
+position: 485,811
 ---
 <<set $leftTownCount += 1>>
 <<if $leftTownCount == 1>> 
@@ -1085,7 +1085,7 @@ position: 530,776
 title: leaving-town-check
 tags: main
 colorID: 0
-position: 525,1025
+position: 480,1060
 ---
 <<set $leavingTownCheck += 1>>
 <<if $leavingTownCheck == 1>> 
@@ -1116,11 +1116,11 @@ position: 1937,229
     [[ogden-tickets1]]
 <<elseif $tickets == 2 && visited("ogden-tickets2") is false>>
     [[ogden-tickets2]]
-<<elseif $day == 3 && visited("ogden-day3") is false>>
+<<elseif $day == 3 && visited("ogden-day3") is false && $tickets != 2>>
     [[ogden-day3]]
-<<elseif $day == 6 && visited("ogden-day6") is false>>
+<<elseif $day == 6 && visited("ogden-day6") is false && $tickets != 2>>
     [[ogden-day6]]
-<<elseif $day == 10 && visited("ogden-day10") is false>>
+<<elseif $day == 10 && visited("ogden-day10") is false && $tickets != 2>>
     [[ogden-day10]]
 <<else>>
     [[ogden-random]]
@@ -1129,35 +1129,57 @@ position: 1937,229
 title: ogden-day3
 tags: merchant
 colorID: 0
-position: 2103,1008
+position: 2099,1006
 ---
-Ogden: Hello again, how have you been finding your time in the wastes?
-Hasron: It's going ok. Still a long way to go.
-Hasron: But they weren't kidding when they said this place was full of scrap. Surprising no one else is really here.
-Ogden: The Outpost falls in and out of favor within the scrapping world. One rumor of rare treasures is all it will take to flood the basin with scrappers.
-CH1-P: Well let's hope they can wait another week.
+<<if visited("ogden-day3") is false>> 
+    Ogden: Hello again, how have you been finding your time in the wastes?
+    Hasron: It's going ok. Still a long way to go.
+    Hasron: But they weren't kidding when they said this place was full of scrap. Surprising no one else is really here.
+    Ogden: The Outpost falls in and out of favor within the scrapping world. One rumor of rare treasures is all it will take to flood the basin with scrappers.
+    CH1-P: Well let's hope they can wait another week.
+<<endif>>
 ===
 title: ogden-day6
 tags: merchant
 colorID: 0
 position: 2106,1246
 ---
-Ogden: You are halfway to your deadline, correct?
-CH1-P: Yep. It's coming up fast.
-Ogden: These things always do, don't they?
+<<if visited("ogden-day6") is false>> 
+    Ogden: You are halfway to your deadline, correct?
+    CH1-P: Yep. It's coming up fast.
+    Ogden: These things always do, don't they?
+    <<set $tickets = checkTickets()>> 
+    <<if $tickets == 0>>
+        Hasron: Here's hoping we can get at least one ticket today or tomorrow, but we're pushing it.
+    <<elseif $tickets == 1>> 
+        CH1-P: Yeah, just hoping we can get the other ticket today or tomorrow.
+    <<endif>> 
+<<endif>>
 ===
 title: ogden-day10
 tags: merchant
 colorID: 0
 position: 2102,1510
 ---
-Hasron: Today's the day!
-Ogden: So it is!
+<<if visited("ogden-day10") is false>> 
+    Ogden: Today is the last day in the Basin for you two, correct?
+    <<set $tickets = checkTickets()>> 
+    <<if $tickets == 0>>
+        Hasron: Or the first of many more...
+        Hasron: We still don't have any tickets...
+        Ogden: I see. Well I hope you find something special out there soon.
+    <<elseif $tickets == 1>> 
+        CH1-P: For one of us, anyway.
+        Ogden: Still only the one ticket, then?
+        Hasron: Unless we come up with the credits ASAP, yeah we're in trouble. 
+        Ogden: I see. Well I hope you find something special out there soon.
+    <<endif>> 
+<<endif>>
 ===
 title: chundr-enter
 tags: main merchant
 colorID: 0
-position: 2543,260
+position: 2606,245
 ---
 <<set $day = checkDay()>>
 <<set $tickets = checkTickets()>> 
@@ -1167,9 +1189,9 @@ position: 2543,260
     [[chundr-tickets1]]
 <<elseif $tickets == 2 && visited("chundr-tickets2") is false>>
     [[chundr-tickets2]]
-<<elseif $day == 3 && visited("chundr-day3") is false>>
+<<elseif $day == 3 && visited("chundr-day3") is false && $tickets != 2>>
     [[chundr-day3]]
-<<elseif $day == 6 && visited("chundr-day6") is false>>
+<<elseif $day == 6 && visited("chundr-day6") is false && $tickets != 2>>
     [[chundr-day6]]
 <<elseif $day == 9 && visited("chundr-day9") is false>>
     [[chundr-day9]]
@@ -1180,103 +1202,353 @@ position: 2543,260
 title: chundr-day3
 tags: merchant
 colorID: 0
-position: 2700,1038
+position: 2761,1023
 ---
-Empty Text
+<<if visited("chundr-day3") is false>>
+    Chundr: How's it been going out there?
+    CH1-P: Well we're making some progress I guess.
+    <<set $tickets = checkTickets()>> 
+    <<if $tickets == 0>>
+        Hasron: Still no tickets yet, but we're saving up what we can.
+        Chundr: Sounds like a solid ay to go about it, but hey it takes money to make money, right?
+        Hasron: Something like that. Anyway we should get a move on.
+        Chundr: Alright, you know where I'll be.
+    <<elseif $tickets == 1>>
+        Hasron: Yeah, one ticket down already!
+        Chundr: That's great, kid. I'm sure you'll both make it.
+        Chundr: Now, what'll it be?
+    <<endif>>
+<<endif>>
 ===
 title: chundr-day6
 tags: merchant
 colorID: 0
-position: 2694,1285
+position: 2755,1270
 ---
-Empty Text
+<<if visited("chundr-day6") is false>> 
+    Chundr: Hey it's getting on in the week isn't it?
+    Hasron: Yeah it's been flying past.
+    Chundr: Have to be honest I had pretty much stopped keeping track of time until you two got here.
+    CH1-P: Really?
+    Chundr: Oh yeah, seasons don't really change, and aside from the Strom Race we don't have a lot to mark the time by.
+    Hasron: Do you like, know what year it is though?
+    Chundr: Not in standard, no.
+    Hasron: Wow.
+    CH1-P: ...do you...want to know?
+    Chundr: ...
+    Chundr: Hmm...
+    Chundr: You know? I don't think I do. But thanks for asking.
+    CH1-P: Yeah no problem. We'll try and keep it secret.
+    <<set $tickets = checkTickets()>> 
+    <<if $tickets == 0>>
+        Chundr: You do that, and good luck getting those tickets.
+    <<elseif $tickets == 1>> 
+        Chundr: You do that, and good luck getting that ticket.
+    <<endif>> 
+    Hasron: Thanks, we're gonna need it...
+<<endif>>
 ===
 title: chundr-day9
 tags: merchant
 colorID: 0
-position: 2690,1506
+position: 2751,1491
 ---
-Empty Text
+<<if visited("chundr-day9") is false>>
+    Chundr: Almost there, huh?
+    CH1-P: Yeah, last day's tomorrow.
+    Chundr: How's it coming, then?
+    <<set $ticketsDay9 = checkTickets()>> 
+    <<if $ticketsDay9 == 0>> 
+        Hasron: Not super great.
+        Chundr: No tickets yet?
+        Hasron: Not a one.
+        <<if visited("open-terminal") is true>>
+            CH1-P: And they're sold out of round-trip tickets so they jacked up the price of one way to be fifty-thousand anyway.
+            Chundr: Bastards.
+        <<else>>
+            CH1-P: Here's hoping they don't sell out either...
+        <<endif>> 
+    <<elseif $ticketsDay9 == 1>>
+        Hasron: Well, we've got one ticket in the bag, but that's still only half way.
+        CH1-P: And they're sold out of round-trip tickets so they jacked up the price of one way to be fifty-thousand anyway.
+        Chundr: Bastards.
+    <<elseif $ticketsDay9 == 2>> 
+        Hasron: Well we have both tickets, just making the final rounds to make sure we didn't miss anything good.
+        CH1-P: I was also wondering if you could look after the rig while we're gone?
+        CH1-P: We'll lock it up at the ports, keys'll be in the filter shaft third from the right.
+        Chundr: Hey no problem, very sweet of you to think I'd need the keys.
+        Chundr: It'll be safe with me, don't you worry. Been a while since the outpost was raided, anyway.
+        CH1-P: Cool...
+        Hasron: Well, we should be going. Thanks for all the help, Chundr.
+        Chundr: You got it. Here's hoping it's a good race this time round.
+    <<endif>> 
+<<endif>>
 ===
 title: ogden-tickets1
 tags: merchant
 colorID: 0
 position: 2099,503
 ---
-Hasron: One down!
-Ogden: Come again?
-CH1-P: We bought one of the tickets!
-Ogden: That is very good!
-Ogden: Who will get it if it remains the only one?
-Hasron: We'll cross that bridge when we get there...
+<<if visited("ogden-tickets1") is false>> 
+    Hasron: One down!
+    Ogden: Come again?
+    CH1-P: We bought one of the tickets!
+    Ogden: That is very good!
+    Ogden: Who will get it if it remains the only one?
+    CH1-P: ...
+    Hasron: We'll cross that bridge when we get there...
+    Ogden: I see. I hope it will prove sturdy.
+<<endif>>
 ===
 title: ogden-tickets2
 tags: merchant
 colorID: 0
 position: 2096,757
 ---
-Empty Text
+<<if visited("ogden-tickets2") is false>>
+    Hasron: Hi Ogden.
+    Ogden: Hello.
+    Hasron: We did it.
+    Ogden: Well done! So you will be leaving, then?
+    CH1-P: Yep. Wish we could say we'll be back soon, but they only had one-way tickets left.
+    Ogden: I see. That is unfortunate. You will be missed.
+    Hasron: Thanks, Ogden, we're gonna miss this place too.
+    Ogden: Please allow me to give you this parting gift.
+    <<fillFuel DialogueManager>> 
+    <<setFuelButtActive DialogueManager true>>
+    CH1-P: You're too kind.
+    Ogden: It is the least that I can do. Travel safely.
+    Hasron: So long, Ogden.
+<<endif>>
 ===
 title: chundr-tickets1
 tags: merchant
 colorID: 0
-position: 2692,496
+position: 2751,479
 ---
-Empty Text
+<<if visited("chundr-tickets1") is false>>
+    Chundr: Got something good? You two look happy.
+    Hasron: We got the first ticket!
+    Chundr: Nice! But good luck stowing away on one of those transport shuttles on one ticket. I've known a few to try and it has not gone well...
+    CH1-P: Noted.
+    Chundr: Now, what'll it be?
+<<endif>>
 ===
 title: chundr-tickets2
 tags: merchant
 colorID: 0
-position: 2697,756
+position: 2758,741
 ---
-Empty Text
+<<if visited("chundr-tickets2") is false>>
+    CH1-P: Hi, Chundr.
+    Chundr: Hey there, what's up?
+    Hasron: We did it. Just got the second ticket!
+    Chundr: Congrats!
+    Chundr: But I guess that means this is goodbye, huh?
+    CH1-P: Afraid so. Thanks for making this possible, Chundr.
+    Chundr: Hey don't that me, you all did the heavy lifting.
+    Chundr: Travel safe, alright?
+    Hasron: Will do.
+<<endif>>
 ===
 title: wrong-ticket
-tags: main
+tags: world
 colorID: 0
-position: 3048,765
+position: 3141,764
 ---
-Empty Text
+<<set $whichTicketCheck += 1>>
+<<if $whichTicketCheck == 1>> 
+    CH1-P: Wait not that one.
+<<elseif $whichTicketCheck == 2>>
+    Hasron: I never want to go to the core. Ever!
+    CH1-P: What why not?
+    Hasron: They outlawed street-racing!
+    CH1-P: Fair enough.
+<<elseif $whichTicketCheck == 3>>
+    CH1-P: Street-racing or no, we really should get the Maelstrom Cup packages.
+<<endif>>
 ===
 title: bought-first-ticket
-tags: 
+tags: main
 colorID: 0
-position: 3047,1033
+position: 3142,1031
 ---
-Empty Text
+<<if visited("bought-first-ticket") is false>> 
+    CH1-P: Wow.
+    Hasron: What?
+    CH1-P: That's the most credits I've ever blown at once.
+    Hasron: Really? Even after your operations?
+    CH1-P: Worked most of those off. Have YOU spent this much at once??
+    Hasron: Oh yeah loads of times.
+    Hasron: Well, technically no.
+    Hasron: But I've committed to paying plenty of folks way more than fifty thousand.
+    CH1-P: What??!
+    Hasron: It's fine, it's fine, don't worry about it. Pretty sure they think I'm dead anyway.
+    CH1-P: ...
+<<endif>>
 ===
 title: bought-second-ticket
-tags: 
+tags: main
 colorID: 0
-position: 3050,1312
+position: 3146,1313
 ---
-Empty Text
+<<if visited("bought-second-ticket") is false>>
+    Hasron: And there it is.
+    CH1-P: Two one-way tickets to Maelstrom Cup. Can you believe it?
+    Hasron: Not really...
+    Hasron: Pretty nervous actually.
+    CH1-P: Hey, it's gonna be fun. Of course your first time off-planet will be a bit scary.
+    CH1-P: But knowing you, you'll get used to it in no time.
+    Hasron: Yeah. I'm sure you're right.
+    Hasron: Anyway we should probably re-fuel and sell any scrap we have in the rig. Say our good-byes and all that.
+    CH1-P: And then blow the rest of our credits at Safe House??
+    Hasron: All you, CH1-P. Just make sure you don't black out again for me, ok?
+    CH1-P: Easier said than done with the stuff they serve around here...
+<<endif>>
 ===
 title: cant-afford-single-ticket
-tags: 
+tags: main
 colorID: 0
-position: 3044,1779
+position: 3140,1780
 ---
-Empty Text
+<<set $cantAffordTicket += 1>>
+<<if $cantAffordTicket == 1>>
+    Hasron: Aww man, doen't look like we have enough credits yet.
+<<elseif $cantAffordTicket == 2>>
+    Hasron: Still not enough in the bank.
+<<elseif $cantAffordTicket == 3>>
+    CH1-P: Looks like we're gonna have to sell more scrap.
+    Hasron: Or stop drinking so much slab...
+<<endif>>
 ===
 title: cant-afford-both-tickets
-tags: 
+tags: main
 colorID: 0
-position: 3040,2006
+position: 3136,2007
 ---
-Empty Text
+<<set $cantAffordTickets += 1>>
+<<if $cantAffordTickets == 1>>
+    CH1-P: Ah wait, doen't look like we can afford both at the same time.
+<<elseif $cantAffordTickets == 2>>
+    Hasron: Still not baller enough to get both at once.
+<<elseif $cantAffordTickets == 3>>
+    CH1-P: Yeah maybe one at a time would be easier.
+<<endif>>
 ===
 title: bought-both-tickets
-tags: 
+tags: main
 colorID: 0
-position: 3050,1557
+position: 3146,1558
 ---
-Empty Text
+<<if visited ("bought-both-tickets") is false>>
+    CH1-P: Wow.
+    Hasron: What?
+    CH1-P: That's the most credits I've ever blown at once.
+    Hasron: Really? Even after your operations?
+    CH1-P: Worked most of those off. Have YOU spent this much at once??
+    Hasron: Oh yeah loads of times.
+    Hasron: Well, technically no.
+    Hasron: But I've committed to paying plenty of folks way more than a hundered thousand.
+    CH1-P: What??!
+    Hasron: It's fine, it's fine, don't worry about it. Pretty sure they think I'm dead anyway.
+    CH1-P: ...
+    CH1-P: Well it seems like now's a good time to be leaving the planet for the first time, huh?
+    Hasron: Very much so.
+    Hasron: Let's go say our goodbyes, yeah?
+<<endif>>
 ===
 title: open-terminal
-tags: 
+tags: world
 colorID: 0
-position: 3046,492
+position: 3141,488
 ---
-Empty Text
+<<if visited("open-terminal") is false>> 
+    <<wait 2>>
+    CH1-P: Has I thought you said the round trip tickets were fifty-thousand?
+    Hasron: What? Yeah they were!
+    Hasron: And now they're sold out??
+    CH1-P: Bastards must have jacked up the price when they started to run out.
+    Hasron: I don't know about you, but I'm still going, round trip or not.
+    CH1-P: Right there with you. We'll figure something out.
+<<else>>
+    Hasron: Let's take a look here.
+<<endif>>
+===
+title: way-out
+tags: main
+colorID: 0
+position: 3416,484
+---
+<<if visited("way-out") is false>> 
+    CH1-P: Alright, so it's out the same way we came in.
+    CH1-P: You know the way, right?
+    Hasron: CH1-P there are literally only two roads out here.
+    CH1-P: Hey it never hurts to ask!
+    <<setPanelVisibility DialogueManager CH1-P false>>
+    <<wait 3>> 
+    Hasron: Hey CH1-P?
+    CH1-P: Yeah?
+    Hasron: You hear all the stuff about the Juniker system?
+    CH1-P: What, that they bribed the Council to host the 'Strom Race? That happens like every time.
+    Hasron: Oh, well not just that then. Apparently Junkier was a hub for organic sapient development.
+    CH1-P: Huh. But not anymore? 
+    Hasron: Nope. Not sure why, they'd always been pretty hush hush about everything.
+    Hasron: Now people are suspicious about them wanting all this attention so suddenly.
+    CH1-P: Well, out with the science, in with the tourism?
+    Hasron: Probably. But it's still curious. I've always wondered if that's where I came from.
+    CH1-P: Come again?
+    Hasron: Yeah havn't we talked about this?
+    CH1-P: Uh. No. Definitely not.
+    Hasron: Oh. Well you know. I'm a designed organic sapient, Juniker used to design organic sapients, so...
+    CH1-P: Dude I had no idea! I mean I knew you weren't human, but I never really put two and two together.
+    Hasron: Well, now you have. Trying not to get my hopes up, but it's hard not to.
+    CH1-P: Of course. I can't blame you. I don't think anyone would.
+<<endif>>
+===
+title: already-have-tickets
+tags: world
+colorID: 0
+position: 3135,2226
+---
+<<set $alreadyHaveTickets += 1>>
+<<if $alreadyHaveTickets == 1>>
+    CH1-P: Hey hold on we already have both tickets.
+<<elseif $alreadyHaveTickets == 2>>
+    Hasron: Oh wait, yeah we don't need any more of these.
+<<elseif $alreadyHaveTickets == 3>>
+    CH1-P: No need to shell out credits for more tickets than we need.
+<<endif>>
+===
+title: already-have-ticket
+tags: world
+colorID: 0
+position: 3132,2443
+---
+<<set $alreadyHaveTicket += 1>>
+<<if $alreadyHaveTicket == 1>>
+    CH1-P: Hey hold on we probably shouldn't get two.
+    Hasron: Oh yeah, woops.
+<<elseif $alreadyHaveTicket == 2>>
+    Hasron: Hey we've already got one ticket, right?
+<<elseif $alreadyHaveTicket == 3>>
+    CH1-P: We're already one ticket down, we should just buy one if we can.
+<<endif>>
+===
+title: cant-leave
+tags: world
+colorID: 0
+position: 3414,766
+---
+<<set $tickets = checkTickets()>>
+<<if $tickets != 2>> 
+    <<set $cantLeave += 1>>
+    <<if $cantLeave == 1>>
+        Hasron: Oh wait, I think this is the way we came in.
+    <<elseif $cantLeave == 2>>
+        Hasron: Yeah definitely don't want this canyon yet.
+    <<elseif $cantLeave == 3>>
+        CH1-P: I really don't think this is the right way.
+        Hasron: Oh, yeah you're totally right.
+    <<endif>>
+<<endif>>
 ===

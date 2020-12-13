@@ -16,6 +16,8 @@ public class OverworldManager : MonoBehaviour
     [Space(5)]
     public DayNight DayNight;
     public GameObject worldLights;
+    public GameObject exitWall;
+    public GameObject exitTrigger;
     [Header("Tow Rig")]
     [Space(5)]
     public GameObject towRig;
@@ -56,7 +58,10 @@ public class OverworldManager : MonoBehaviour
             if(towRig.activeSelf){
                 towRig.GetComponentInChildren<Light2D>().enabled = true;
             }
-        }        
+        }     
+        if(Director.Dir.ticketsPurchased == 2){
+            exitWall.SetActive(false);
+        }   
     }
 
     public void SetUpTowRig(){ // called from fuel
