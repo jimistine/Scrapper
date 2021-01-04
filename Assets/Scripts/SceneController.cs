@@ -72,6 +72,15 @@ public class SceneController : MonoBehaviour
         SceneManager.UnloadSceneAsync("Town");
         yield return null;
     }
+    public void StartEndGame(){
+        StartCoroutine("EndGame");
+        overworldLoaded?.Invoke();
+    }
+    public IEnumerator EndGame(){
+        SceneManager.UnloadSceneAsync("OverworldScene");
+        SceneManager.LoadScene("GameOver", LoadSceneMode.Additive);
+        yield return null;
+    }
     public void RestartGame(){
         Debug.Log("Restarting game");
         SceneManager.LoadScene("ManagerScene");

@@ -129,7 +129,7 @@ public class scrapPlacer : MonoBehaviour
                     }
                 }
             }
-            Debug.Log("Spawning scrap: " + incomingScrap.scrapName);
+            //Debug.Log("Spawning scrap: " + incomingScrap.scrapName);
             // transfer that sweet sweet data to prefab
             sampleScrap.GetComponent<ScrapObject>().scrapName = incomingScrap.scrapName;
             sampleScrap.GetComponent<ScrapObject>().description = incomingScrap.description;

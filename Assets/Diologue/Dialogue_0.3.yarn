@@ -1537,7 +1537,7 @@ position: 3132,2443
 title: cant-leave
 tags: world
 colorID: 0
-position: 3414,766
+position: 3411,765
 ---
 <<set $tickets = checkTickets()>>
 <<if $tickets != 2>> 
@@ -1551,4 +1551,76 @@ position: 3414,766
         Hasron: Oh, yeah you're totally right.
     <<endif>>
 <<endif>>
+===
+title: exit-one-ticket
+tags: main
+colorID: 0
+position: 3420,1307
+---
+<<if visited("exit-one-ticket") is false>> 
+Hasron: One ticket.
+Hasron: What are we supposed to do with one ticket?
+CH1-P: Well. WE can't really do anything, can we?
+Hasron: Take it.
+CH1-P: What?
+CH1-P: No way. Nope.
+CH1-P: It's yours.
+Hasron: But...I really don't think I'm ready to travel the galaxy alone.
+CH1-P: I'd beg to differ. But if you're not ready...
+CH1-P: Well I bet we could get a pretty good price for this ticket at the port in Cantial.
+Hasron: And then what?
+CH1-P: Well I guess we see how far those credits take us.
+Hasron: Yeah...
+Hasron: Yeah that might work.
+Hasron: But if we're doing this, there's no time to lose.
+Hasron: Punch it.
+<<readyToEnd DialogueManager>>
+===
+title: exit-two-tickets
+tags: main
+colorID: 0
+position: 3409,1554
+---
+<<if visited ("exit-two-tickets") is false>> 
+CH1-P: Can you believe it?
+Hasron: What? That we just made a hundred thousand credits in less than ten days?
+Hasron: And that we have two one-way tickets to the best race ever to run?
+Hasron: Yeah checks out to me.
+CH1-P: You're gonna lose it when we take off.
+Hasron: Oh absolutely. And probably at like a dozen other points in the trip.
+CH1-P: Think you'll ever come back?
+Hasron: You know...
+Hasron: I don't think I will.
+Hasron: Not if I can help it anyway.
+Hasron: You?
+CH1-P: I don't think I would have spent more than a few hours on this dusty rock if you weren't here.
+CH1-P: So, ah, no.
+CH1-P: But who knows?
+CH1-P: Maybe the race will be here some day.
+Hasron: Well then let's get in the racing spirit, eh?
+CH1-P: I like the sound of that.
+Hasron: Punch it!
+<<readyToEnd DialogueManager>>
+===
+title: exit-no-tickets
+tags: main
+colorID: 0
+position: 3415,1028
+---
+<<if visited("exit-no-tickets") is false>> 
+CH1-P: Ahh...damn.
+Hasron: You can say that again.
+Hasron: I knew it would be tough to make it in ten days but...
+<<setPanelVisibility DialogueManager Hasron false>>
+<<wait 2>> 
+<<setPanelVisibility DialogueManager Hasron true>>
+Hasron: What do we do now?
+CH1-P: You still want to get off this rock?
+Hasron: More than anything.
+CH1-P: Well race or no, I think you're ready to see the galaxy.
+Hasron: But is the galaxy ready for us??
+CH1-P: Only one way to find out.
+CH1-P: Let's head for the space port in Cantial and see what where these credits can take us.
+
+<<readyToEnd DialogueManager>>
 ===

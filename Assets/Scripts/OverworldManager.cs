@@ -12,6 +12,7 @@ public class OverworldManager : MonoBehaviour
     [Header("General")]
     [Space(5)]
     public GameObject overworldCamera;
+    public GameObject overworldScreenCover;
     [Header("Environment")]
     [Space(5)]
     public DayNight DayNight;

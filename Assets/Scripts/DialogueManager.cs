@@ -419,6 +419,10 @@ public class DialogueManager : MonoBehaviour
             OverworldManager.OM.waitingOnDialogue = true;
         }
     }
+    [YarnCommand("readyToEnd")]
+    public void readyToEnd(){
+        Director.Dir.readyToEnd = true;
+    }
     [YarnCommand("waitInline")]
     public void waitInline(float waitTime){
         ui.waitingInline = true;

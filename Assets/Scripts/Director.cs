@@ -18,6 +18,7 @@ public class Director : MonoBehaviour
     public Timer Timer;
     public Image screenCover;
     public Image screenCover1;
+    public GameObject worldScreenCover;
     public bool waitingToEnterTown;
     public float fadeDuration;
     [Header("Colors")]
@@ -39,6 +40,8 @@ public class Director : MonoBehaviour
     public bool showTip_1;
     public bool showTip_2;
     public GameObject tip_2;
+    public bool endStarted;
+    public bool readyToEnd;
     [Header("Debugging")]
     [Space(10)]
     public bool skipIntroDialogue;
@@ -61,6 +64,12 @@ public class Director : MonoBehaviour
 
     void Awake(){
         Dir = this;
+    }
+
+    void Update(){
+        if(Timer.day == 11 && !endStarted){
+            StartExitCanyon();
+        }
     }
 
     // Start is called before the first frame update
@@ -109,7 +118,6 @@ public class Director : MonoBehaviour
         gameStarted = true;
         StartCoroutine("StartGameRoutine");
     }
-
     IEnumerator StartGameRoutine(){
         Debug.Log("Starting game");
         AudioManager.AM.InitTowTigAudio();
@@ -126,6 +134,47 @@ public class Director : MonoBehaviour
             DialogueManager.RunNode("intro-2-1");
             Debug.Log("sending intro node");
         }
+    }
+
+    public void StartExitCanyon(){
+        StartCoroutine("ExitCanyon");
+        endStarted = true;
+    }
+    IEnumerator ExitCanyon(){
+        Debug.Log("Ending game");
+
+        if(ticketsPurchased == 0){
+            DialogueManager.RunNode("exit-no-tickets");
+        }
+        if(ticketsPurchased == 1){
+            DialogueManager.RunNode("exit-one-ticket");
+        }
+        if(ticketsPurchased == 2){
+            DialogueManager.RunNode("exit-two-tickets");
+        }
+        yield return new WaitForSeconds(1);
+        worldScreenCover = OverworldManager.OM.overworldScreenCover;
+        StartFadeCanvasGroup(worldScreenCover, "in", 3);
+        AudioManager.pausedSnapshot.TransitionTo(2);
+        yield return new WaitForSeconds(2);
+
+        PlayerManager.PM.SetPlayerMovement(false);
+        
+        while(readyToEnd == false){
+            yield return null;
+        }
+        if(ticketsPurchased == 0){
+            StartFadeCanvasGroup(screenCover.gameObject,"in", fadeDuration);
+            AudioManager.TransistionToSoloMusic(2);
+            AudioManager.PlaySong("Homeostasis");
+            yield return new WaitForSeconds(fadeDuration);
+        }
+        else{
+            AudioManager.TransistionToSoloMusic(0);
+            AudioManager.PlaySong("Homeostasis");
+        }
+        UIManager.playerLocation = "GameOver";
+        SceneController.SC.StartEndGame();
     }
 
     public void StartWaitToEnterTown(){
@@ -198,6 +247,9 @@ public class Director : MonoBehaviour
         }
         if(showTip_2){
             StartFadeCanvasGroup(tip_2, "in", 0.5f);
+        }
+        if(ticketsPurchased == 2){
+            DialogueManager.RunNode("way-out");
         }
     }
 

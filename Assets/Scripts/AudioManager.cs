@@ -53,6 +53,8 @@ public class AudioManager : MonoBehaviour
     public AudioMixerSnapshot overworldSnapshot;
     public AudioMixerSnapshot nightAmbientSnapshot;
     public AudioMixerSnapshot pausedSnapshot;
+    public AudioMixerSnapshot musicSolo;
+    public AudioMixerSnapshot fadedOutAll;
     [Header("Other")]
     [Space(5)]
     public float startRunningAdjustment;
@@ -209,6 +211,12 @@ public class AudioManager : MonoBehaviour
 
 // AMBIENT
     // Snapshot Transitions
+    public void TransitionToFaddedOut(float fadeTime){
+        fadedOutAll.TransitionTo(fadeTime);
+    }
+    public void TransistionToSoloMusic(float transitionTime){
+        musicSolo.TransitionTo(transitionTime);
+    }
     public void TransitionToTownExterior(){
         if(AmbientTown.isPlaying == false){
             AmbientTown.Play();
@@ -278,6 +286,15 @@ public class AudioManager : MonoBehaviour
         int clipToPlayMusic = Random.Range(0, musicClips.Count);
         Music.PlayOneShot(musicClips[clipToPlayMusic]);
         Debug.Log("Playing track: " + musicClips[clipToPlayMusic].name + "  ||  Next song in " + secondsToWaitMusic/60 + " minutes.");
+    }
+    public void PlaySong(string songName){
+        Music.Stop();
+        if(songName == "Homeostasis"){
+            Music.clip = musicClips[1];
+            Music.Play();
+            Music.loop = true;
+        }
+
     }
 
 }
