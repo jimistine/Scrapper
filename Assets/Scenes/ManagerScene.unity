@@ -6962,10 +6962,10 @@ RectTransform:
   m_Father: {fileID: 634241481}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 217, y: -10.44}
+  m_SizeDelta: {x: 79.6, y: 20.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &300659088
 MonoBehaviour:
@@ -15433,10 +15433,10 @@ RectTransform:
   m_Father: {fileID: 634241481}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 301.59998, y: -10.44}
+  m_SizeDelta: {x: 79.6, y: 20.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &673380458
 MonoBehaviour:
@@ -21851,10 +21851,10 @@ RectTransform:
   m_Father: {fileID: 634241481}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 386.19998, y: -10.44}
+  m_SizeDelta: {x: 79.6, y: 20.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &882307732
 MonoBehaviour:
@@ -27408,7 +27408,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000059127808, y: 0.000061035}
-  m_SizeDelta: {x: -19.911865, y: 3230.3435}
+  m_SizeDelta: {x: -19.911865, y: 6373.374}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1077139173
 GameObject:
@@ -36066,7 +36066,7 @@ RectTransform:
   m_Father: {fileID: 1532633199}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.80008364}
+  m_AnchorMin: {x: 0, y: 0.89867246}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -36304,8 +36304,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.100006, y: -0.0025634766}
-  m_SizeDelta: {x: 615.9072, y: 3230.339}
+  m_AnchoredPosition: {x: -17.100006, y: -0.0012207031}
+  m_SizeDelta: {x: 615.9072, y: 6373.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1534649992
 MonoBehaviour:
@@ -36348,24 +36348,32 @@ MonoBehaviour:
     sand.flac\" by <color=#EB8258>kyles</color> via freesound.org</indent>\r\n-<indent=15>\"After
     dark in Arizona.mp3\" by <color=#EB8258>Marnie.Devereux</color> via freesound.org</indent>\r\n-<indent=15>\"Crickets
     At Night - Raw sound\" by <color=#EB8258>Defelozedd94</color> via freesound.org</indent>\r\n</size>\r\n\r\n<b><size=125%>NEW
-    FEATURES</size></b>\r\n<b><color=#FAF8D4>November 14, 2020</color></b>\r\n<b>Lil
-    Bit of Everything</b>\r\nThese past few weeks have been a wild ride, but I've
-    managed to make quite a few updates all the same.\r\n-<indent=15>The incredible
-    Kyle Shekinah-Roark has given us Chundr and Ogden in all their visual glory!</indent>\r\n-<indent=15>Scanning
-    - Scanning got a big overhaul in that now you actually have to scan things actively
-    rather than just hope you run over things. And it lights up!</indent>\r\n-<indent=15>The
-    Scrap Loop also got a lot fixes and upgrades as scrap now looks like scrap on
-    the map and scales according to its, well, scale,</indent>\r\n-<indent=15>There's
-    a title screen! I think it's pretty nice!</indent>\r\n\r\n<b><color=#FAF8D4>October
-    28, 2020</color></b>\r\n<b>UI Overhaul</b>\r\n-<indent=15>Just about all the
-    UI got updated and is now a lot more dynamic overall.</indent>\r\n-<indent=15>There's
-    a pause menu now, and even better, a fullscreen button in the standalone (downloadable)
-    version.</indent>\r\n-<indent=15>Along with the pause menu is the Scrap Log to
-    keep track of all your finds, something I've been wanting to add for a while.</indent>\r\n\r\n<b>Sound
-    Design Updates</b>\r\n-<indent=15>Whole bunch of new sound effects are in!</indent>\r\n-<indent=15>Your
-    rig sounds a little less like a broken fan.</indent>\r\n-<indent=15>There are
-    a handful of songs added as well by the great Jeff Brice.</indent>\r\n-<indent=15>The
-    night finally has it's own sonic landscape to explore.</indent>\r\n\r\n-<indent=15>Lots
+    FEATURES</size></b>\r\n<b><color=#FAF8D4>January 4, 2021</color></b>\r\n<b>Wrapping
+    Up</b>\r\nIt's been a long short year, and here at the end of it I'm proud of
+    how far Canyons has come.\r\n-<indent=15>In this update I've added a number of
+    new conversations that unfold throughout the latter half of the game.</indent>\r\n-<indent=15>You
+    can finally buy tickets off planet! The primary goal of the game is to save up
+    enough credits to buy twp tickets for your characters, and the town hub can at
+    last fulfill that goal.</indent>\r\n-<indent=15>To that end, there is an ending!
+    While there is still work to be done, it feels good to have a win-screen :-)</indent>\r\n\r\n<b><color=#FAF8D4>November
+    14, 2020</color></b>\r\n<b>Lil Bit of Everything</b>\r\nThese past few weeks
+    have been a wild ride, but I've managed to make quite a few updates all the same.\r\n-<indent=15>The
+    incredible Kyle Shekinah-Roark has given us Chundr and Ogden in all their visual
+    glory!</indent>\r\n-<indent=15>Scanning - Scanning got a big overhaul in that
+    now you actually have to scan things actively rather than just hope you run over
+    things. And it lights up!</indent>\r\n-<indent=15>The Scrap Loop also got a lot
+    fixes and upgrades as scrap now looks like scrap on the map and scales according
+    to its, well, scale,</indent>\r\n-<indent=15>There's a title screen! I think
+    it's pretty nice!</indent>\r\n\r\n<b><color=#FAF8D4>October 28, 2020</color></b>\r\n<b>UI
+    Overhaul</b>\r\n-<indent=15>Just about all the UI got updated and is now a lot
+    more dynamic overall.</indent>\r\n-<indent=15>There's a pause menu now, and even
+    better, a fullscreen button in the standalone (downloadable) version.</indent>\r\n-<indent=15>Along
+    with the pause menu is the Scrap Log to keep track of all your finds, something
+    I've been wanting to add for a while.</indent>\r\n\r\n<b>Sound Design Updates</b>\r\n-<indent=15>Whole
+    bunch of new sound effects are in!</indent>\r\n-<indent=15>Your rig sounds a
+    little less like a broken fan.</indent>\r\n-<indent=15>There are a handful of
+    songs added as well by the great Jeff Brice.</indent>\r\n-<indent=15>The night
+    finally has it's own sonic landscape to explore.</indent>\r\n\r\n-<indent=15>Lots
     of bugs and smaller changes were made as well, and I'm sure plenty more have
     been introduced.</indent>\r\n\r\n<b><color=#FAF8D4>October 20, 2020</color></b>\r\n<b>All
     new level design</b>\r\n-<indent=15>There's a lot more to be found now in the
@@ -37473,10 +37481,10 @@ RectTransform:
   m_Father: {fileID: 634241481}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 132.4, y: -10.44}
+  m_SizeDelta: {x: 79.6, y: 20.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1560916719
 MonoBehaviour:
@@ -38001,7 +38009,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1523567910}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.19991632
+  m_Size: 0.10132755
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -45346,10 +45354,10 @@ RectTransform:
   m_Father: {fileID: 634241481}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 47.8, y: -25.019999}
+  m_SizeDelta: {x: 79.6, y: 20.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1867799753
 MonoBehaviour:
@@ -45954,22 +45962,22 @@ MonoBehaviour:
   ticketsPurchased: 0
   gameStarted: 0
   waitingForAcceleration: 0
-  introCompleted: 1
-  ogdenVisited: 1
-  chundrVisited: 1
+  introCompleted: 0
+  ogdenVisited: 0
+  chundrVisited: 0
   outOfFuelCompleted: 0
   showTip_1: 1
   showTip_2: 1
   tip_2: {fileID: 1061501016}
   endStarted: 0
   readyToEnd: 0
-  skipIntroDialogue: 1
-  lotsOfCredits: 1
+  skipIntroDialogue: 0
+  lotsOfCredits: 0
   playerStartCredits: 5256
-  doubleScrapValue: 0
+  doubleScrapValue: 1
   scannerActive: 0
   lowFuel: 0
-  nearTown: 1
+  nearTown: 0
   totalCreditsEarned: 0
   totalCreditsSpent: 0
   Sales: []
@@ -51776,19 +51784,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 47.8
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -10.44
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 79.6
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20.88
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchorMin.x
@@ -51796,7 +51804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -51804,7 +51812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8133525005966160734, guid: 85de919718a8a9045bc006ad4afd4f2a, type: 3}
       propertyPath: m_Pivot.x
